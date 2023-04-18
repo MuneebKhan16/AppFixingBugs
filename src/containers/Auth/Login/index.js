@@ -1,6 +1,6 @@
-import React, {Component,useEffect} from 'react';
-import {View, Text,  Image,TouchableOpacity, Dimensions, Animated,} from 'react-native';
-import {Colors, NavService} from '../../../config';
+import React, { Component, useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, Dimensions, Animated, } from 'react-native';
+import { Colors, NavService } from '../../../config';
 import CustomBackground from '../../../components/CustomBackground';
 import CustomTextInput from '../../../components/CustomTextInput';
 import CustomButton from '../../../components/CustomButton';
@@ -14,8 +14,13 @@ import { styles } from './Login_Style';
 
 
 class Login extends Component {
-  
-  
+  ForgetPassword =  () => {
+    NavService.navigate("ForgetPassword")
+  }
+  Signup = () => {
+    NavService.navigate("Signup")
+  }
+
   state = {
     email: 'daina@gog.com',
     password: 'Abcd@1234',
@@ -50,95 +55,74 @@ class Login extends Component {
         visibilityTime: 3000,
       });
     }
-    else{
-      login(email,password)
+    else {
+      login(email, password)
     }
   };
-    render() {
-    const {email, password} = this.state;
+  render() {
+    const { email, password } = this.state;
     return (
       <AppBackground profile={false} back={true} title={"Login"} >
         <CustomBackground>
-        <View
-          style={styles.maincontainer}>
           <View
-            style={styles.container}>
-            <ProfileTextInput
-            heading="Email Address"
-              value={email}
-              onChangeText={text => this.setState({email: text})}
-              label={'Email'}
-              icon={Icons.email}
-            />
-            <ProfileTextInput
-            heading="Password"
-              value={password}
-              onChangeText={text => this.setState({password: text})}
-              icon={Icons.password}
+            style={styles.maincontainer}>
+            <View
+              style={styles.container}>
+              <ProfileTextInput
+                heading="Email Address"
+                value={email}
+                onChangeText={text => this.setState({ email: text })}
+                label={'Email'}
+                icon={Icons.email}
+              />
+              <ProfileTextInput
+                heading="Password"
+                value={password}
+                onChangeText={text => this.setState({ password: text })}
+                icon={Icons.password}
 
-              secureTextEntry={
-                this.state.visible ? false : true
-              }
-              label={'Password'}
-            />
-            <TouchableOpacity
-            onPress={()=>{
-              NavService.navigate("ForgetPassword");
-            }}
-            style={{
-              alignSelf:"center",
-              marginTop:20
-            }} >
-              <Text style={{
-                fontSize: 16,
-                color: Colors.black,
-              
-            textDecorationLine:'underline',
-              
-              }} >Forgot Password?</Text>
-            </TouchableOpacity>
-            <CustomButton
-              buttonStyle={{
-                marginTop: '10%',
-              }}
-              title="Login"
-              onPress={this.onSubmit}
+                secureTextEntry={
+                  this.state.visible ? false : true
+                }
+                label={'Password'}
+              />
+              <TouchableOpacity
+                onPress={this.ForgetPassword}
+                style={styles.touchable} >
+                <Text style={{
+                  fontSize: 16,
+                  color: Colors.black,
 
-            />
+                  textDecorationLine: 'underline',
+
+                }} >Forgot Password?</Text>
+              </TouchableOpacity>
+              <CustomButton
+                buttonStyle={styles.btn}
+                title="Login"
+                onPress={this.onSubmit}
+
+              />
+            </View>
           </View>
-        </View>
-        <View style={{
-            // top: Dimensions.get("window").height / 1
-            position:'absolute',
-            bottom:15,
-            alignSelf:'center'
-          }} >
-          <Text
-            style={{
-              fontSize: 15,
-              fontWeight: '400',
-              color: Colors.white,
-            }}>
-            Don't have an account?{' '}
+          <View style={styles.btm} >
             <Text
-              onPress={() => NavService.navigate('Signup')}
-              style={{
-                fontWeight: '600',
-                color: Colors.white,
-                fontSize: 15,
-                textDecorationLine: 'underline',
-              }}>
-              Signup 
+              style={styles.btmtxt}>
+              Don't have an account?{' '}
+              <Text
+                onPress={this.Signup}
+                style={styles.heading}>
+                Signup
+              </Text>
             </Text>
-          </Text>
           </View>
         </CustomBackground>
-     </AppBackground> 
+      </AppBackground>
     );
   }
 }
 
-export default Login;
+export default React.memo(Login);
 
 
 

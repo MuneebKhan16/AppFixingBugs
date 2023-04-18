@@ -17,6 +17,28 @@ export const styles = StyleSheet.create({
         borderColor: Colors.white,
         paddingHorizontal: 10,
         paddingVertical: 15
-    }
-
+    },
+touchable:{
+    alignSelf:"center",
+    marginTop:20
+  },
+  btn:{
+    marginTop: '10%',
+  },
+  btm:{
+    position: 'absolute',
+    bottom: 15,
+    alignSelf: 'center'
+  },
+  btmtxt:{
+    fontSize: 15,
+    fontWeight: '400',
+    color: Colors.white,
+  },
+  heading:{
+    fontWeight: '600',
+    color: Colors.white,
+    fontSize: 15,
+    textDecorationLine: 'underline',
+  }
 })

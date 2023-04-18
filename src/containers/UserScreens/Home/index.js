@@ -142,4 +142,4 @@ const mapStateToProp = ({ reducer: { user } }) => {
   return { user };
 };
 
-export default connect(mapStateToProp)(Home);
+export default connect(mapStateToProp)(React.memo(Home));

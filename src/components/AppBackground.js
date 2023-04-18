@@ -55,7 +55,7 @@ export function AppBackground({
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
         style={{
-          marginTop: getStatusBarHeight(),
+          marginTop: getStatusBarHeight() + 20,
           flexDirection: 'row',
           width: '100%',
           justifyContent: 'center',
@@ -313,12 +313,13 @@ export function AppBackground({
     <ImageBackground source={Images.bg} style={{ flex: 1 }}>
       <View
         style={{
-          marginTop: getStatusBarHeight(),
+          marginTop: getStatusBarHeight() + 20,
           flexDirection: 'row',
           width: '100%',
           justifyContent: 'center',
           alignItems: 'center',
           marginBottom: 10,
+
         }}>
         <>
           {back && (
@@ -330,11 +331,12 @@ export function AppBackground({
                 alignItems: 'center',
                 // backgroundColor: Colors.white,
                 borderRadius: 10,
-                left: 10,
+                left: 15,
                 // width: 35,
                 // height: 35,
                 padding: 5,
                 justifyContent: 'center',
+                paddingRight:50
               }}>
               <Image
                 source={Icons.back}
@@ -352,7 +354,7 @@ export function AppBackground({
               style={{
                 color: Colors.white,
                 fontWeight: '600',
-                fontSize: 18,
+                fontSize: 20,
               }}>
               {title}
             </Text>

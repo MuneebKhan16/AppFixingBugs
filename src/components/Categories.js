@@ -14,16 +14,18 @@ import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
 import Images from '../assets/Images';
-const Categories = props => {
+const Categories = (props) => {
 
+
+  console.log('props',props)
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-  const { category, image, onPress, name, info } = props;
+  const { category, image, onPress, name, info ,title} = props;
   return (
     <TouchableOpacity
-      onPress={onPress}
+    onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}
     >
@@ -31,21 +33,7 @@ const Categories = props => {
         source={Images.background1}
         style={styles.imgbg}
         imageStyle={styles.bg}>
-        <Modal isVisible={isModalVisible}>
-          <View style={styles.modal}>
-            <Text style={styles.title}>Category</Text> </View>
-          <View style={styles.category}>
-            <View>
-              <Text style={styles.detail}>mas</Text>
-            </View>
-          </View>
-          <CustomButton
-            buttonStyle={styles.mdlbtn}
-            title="Close"
-            onPress={toggleModal}
-          />
-        </Modal>
-        <TouchableOpacity
+             <TouchableOpacity
           onPress={toggleModal}
           activeOpacity={0.5}
           style={styles.icon} >
@@ -58,9 +46,24 @@ const Categories = props => {
 
 
         </TouchableOpacity>
+        <Modal isVisible={isModalVisible}>
+          <View style={styles.modal}>
+            <Text style={styles.title}>{name}</Text> </View>
+          <View style={styles.category}>
+            <View>
+              <Text style={styles.detail}>{info}</Text>
+            </View>
+          </View>
+          <CustomButton
+            buttonStyle={styles.mdlbtn}
+            title="Close"
+            onPress={toggleModal}
+          />
+        </Modal>
+     
         <Text
           style={styles.ctg}>
-          scrable
+         {title}
         </Text>
       </ImageBackground>
     </TouchableOpacity>

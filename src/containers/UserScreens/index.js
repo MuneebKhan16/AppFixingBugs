@@ -10,13 +10,13 @@ import {Colors} from '../../config';
 import {ImageBackground} from 'react-native';
 import Images from '../../assets/Images';
 //Screens
-import PreLogin from './Pre-Login';
-import Login from './Login';
-import Signup from './Signup';
-import ForgetPassword from './ForgetPassword';
-import OTP from './OTP';
-import ResetPassword from './ResetPassword';
-import CompleteProfile from './CompleteProfile';
+import PreLogin from '../Auth/Login';
+import Login from '../Auth/Login';
+import Signup from '../Auth/Login';
+import ForgetPassword from '../Auth/Login';
+import OTP from '../Auth/Login';
+import ResetPassword from '../Auth/Login';
+import CompleteProfile from '../Auth/Login';
 //LocalEvent
 import Edit from './Edit';
 import Home from './Home';
@@ -25,10 +25,8 @@ import TermsConditions from './TermsConditions';
 import PrivacyPolicy from './PrivacyPolicy';
 import Settings from './Settings';
 import Notification from './Notification';
-import ChangePassword from './ChangePassword';
 import ChatList from './ChatList';
 import ChatScreen from './ChatScreen';
-import CardDetails from './CardDetails';
 import Featured from './Featured';
 import Event from './Event';
 import Review from './Review';
@@ -175,11 +173,7 @@ const ScreenStack = () => {
           component={SettingsStack}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="CardDetails"
-          component={CardDetails}
-          options={{headerShown: false}}
-        />
+      
         <Stack.Screen
           name="Edit"
           component={Edit}
