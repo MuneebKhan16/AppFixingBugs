@@ -5,57 +5,38 @@ import Images from '../../../assets/Images';
 import Posts from '../../../components/Posts';
 import { Colors } from '../../../config';
 import Icons from '../../../assets/Icons';
+import { styles } from './eventreview_style';
 const EventReview = () => {
   return (
     <AppBackground back home>
-      <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30 }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <Image
           source={Images.background3}
-          style={{ width: '100%', height: 180, }}
+          style={styles.imgbg}
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-          <Text style={{ color: Colors.black, fontWeight: 'bold', fontSize: 18 }}>
+        <View style={styles.titlehdr}>
+          <Text style={styles.title}>
             Event Name .
           </Text>
-          <Text style={{ fontSize: 16 }}>25-12-2002</Text>
+          <Text style={styles.date}>25-12-2002</Text>
         </View>
-        <Text style={{ fontWeight: '600', marginTop: 10 }}>
+        <Text style={styles.subtitle}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry
         </Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-          <View style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 10,
-            width: 30,
-            height: 38,
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 10,
-          }}>
+        <View style={styles.markericn}>
+          <View style={styles.markericnhdr}>
             <Image
               source={Icons.marker}
-              style={{
-                width: 22,
-                height: 22,
-                resizeMode: 'contain',
-              }}
+              style={styles.marker}
             />
           </View>
-          <Text style={{ color: Colors.black, fontWeight: '700' }}>
-            {' '}
+          <Text style={styles.subcontent}>
             909 berkeley Ave, Trenton
           </Text>
         </View>
         <Text
-          style={{
-            marginVertical: 5,
-            fontSize: 18,
-            color: Colors.black,
-            fontWeight: 'bold',
-            marginLeft: 5,
-          }}>
+          style={styles.heading}>
           Ratings & Posts
         </Text>
         <Posts />
@@ -65,6 +46,5 @@ const EventReview = () => {
   );
 };
 
-export default EventReview;
+export default React.memo(EventReview);
 
-const styles = StyleSheet.create({});

@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import Images from '../assets/Images';
 import { Colors, NavService } from '../config';
 import Icons from '../assets/Icons';
 import StarRating from 'react-native-star-rating';
 import { useSelector } from 'react-redux';
-import RNBounceable from '@freakycoder/react-native-bounceable';
 
 const Mainprofile = props => {
   const profile_Data = useSelector((state) => state.reducer.user);
@@ -18,6 +16,7 @@ const Mainprofile = props => {
         alignItems: center ? 'center' : null,
         flexDirection: row ? 'row' : null,
         marginLeft: 5,
+        marginTop:15
       }}>
       {top ? (
         <View style={styles.container}>
@@ -32,8 +31,8 @@ const Mainprofile = props => {
           <Image
            source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
             style={{
-              width: inc ? 50 : 60,
-              height: inc ? 50 : 60,
+              width: inc ? 50 : 70,
+              height: inc ? 50 : 70,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
@@ -61,7 +60,8 @@ const Mainprofile = props => {
             fontSize: txt ? 20 : 17,
             fontWeight: '700',
             color: Colors.black,
-            fontFamily: 'serif'
+            fontFamily: 'serif',
+            textAlign: row ? null : 'center'
           }}>
           {props?.name}
         </Text>
@@ -82,7 +82,7 @@ const Mainprofile = props => {
               fontSize: size ? 18 : 17,
               color: Colors.black,
               fontWeight:'600',
-              fontFamily: 'serif'
+              fontFamily: 'serif',
             }}>
             {props?.subtitle}
           </Text>
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     height: 25,
     justifyContent: 'center',
     borderRadius: 40,
-    top:-18,
-    left:35,
+    top:-25,
+    left:43,
     backgroundColor:Colors.purple
     
   },

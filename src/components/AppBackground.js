@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
   usertouchable:{
     position: 'absolute',
     alignItems: 'center',
-    left: 25,
+    left: 20,
     justifyContent: 'center',
     top: 3,
     paddingRight: 30,
