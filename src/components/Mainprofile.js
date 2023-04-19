@@ -19,28 +19,14 @@ const Mainprofile = props => {
         alignItems: center ? 'center' : null,
         flexDirection: row ? 'row' : null,
         marginLeft: 5,
-        marginTop: 25,
+        marginTop: 20,
       }}>
       {top ? (
-        <View style={{
-          alignItems: 'center',
-          width: 80,
-          height: 80,
-          justifyContent: 'center',
-          borderRadius: 40,
-          borderWidth: 2,
-          borderColor: Colors.purple,
-
-        }}>
+        <View style={styles.container}>
         <Image
           source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
           resizeMode='center'
-          style={{
-            width: 75,
-            height: 75,
-            borderRadius:40
-           
-          }}
+          style={styles.pic}
         />
         </View>
       ) : (
@@ -48,37 +34,22 @@ const Mainprofile = props => {
           <Image
            source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
             style={{
-              width: inc ? 50 : 100,
-              height: inc ? 50 : 100,
+              width: inc ? 50 : 80,
+              height: inc ? 50 : 80,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
             }}
           />
           {edit ? (
-            <RNBounceable
+            <TouchableOpacity
               onPress={() => NavService.navigate('EditProfile')}
-              style={{
-                backgroundColor: Colors.purple,
-                padding: 8,
-                alignItems: 'center',
-                bottom: 5,
-                position: 'absolute',
-                right: 0,
-                width: 30,
-                height: 30,
-                justifyContent: 'center',
-                borderRadius: 40,
-              }}>
+              style={styles.profilepic}>
               <Image
                 source={Icons.edit}
-                style={{
-                  width: 15,
-                  height: 15,
-                  resizeMode: 'contain',
-                }}
+                style={styles.edit}
               />
-            </RNBounceable>
+            </TouchableOpacity>
           ) : null}
         </View>
       )}
@@ -90,9 +61,10 @@ const Mainprofile = props => {
         <Text
           style={{
             textAlign: txt ? 'center' : null,
-            fontSize: txt ? 18 : 16,
-            fontWeight: '700',
+            fontSize: txt ? 20 : 17,
+            fontWeight: 'bold',
             color: Colors.black,
+            fontFamily: 'serif'
           }}>
           {props?.name}
         </Text>
@@ -110,8 +82,10 @@ const Mainprofile = props => {
         ) : (
           <Text
             style={{
-              fontSize: size ? 14 : 18,
+              fontSize: size ? 18 : 17,
               color: Colors.black,
+              fontWeight:'700',
+              fontFamily: 'serif'
             }}>
             {props?.subtitle}
           </Text>
@@ -119,20 +93,13 @@ const Mainprofile = props => {
       </View>
       {inc ? (
         <View
-          style={{
-            flexDirection: 'row',
-            right: 4,
-            height: 50,
-            alignItems: 'center',
-            borderRadius: 10,
-            position: 'absolute',
-          }}>
+          style={styles.mark}>
           <Image
             source={Icons.marker}
             resizeMode="center"
-            style={{ width: 25, height: 30, right: 5 }}
+            style={styles.marker}
           />
-          <Text style={{ fontSize: 18, color: Colors.black }}>
+          <Text style={styles.location}>
             {props.location}
           </Text>
         </View>
@@ -143,4 +110,48 @@ const Mainprofile = props => {
 
 export default Mainprofile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container:{
+    alignItems: 'center',
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: Colors.purple,
+  },
+  pic:{
+    width: 75,
+    height: 75,
+    borderRadius:40 
+  },
+  profilepic:{
+    backgroundColor: Colors.purple,
+    padding: 8,
+    alignItems: 'center',
+    bottom: 5,
+    position: 'absolute',
+    right: 0,
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    borderRadius: 40,
+  },
+  edit:{
+    width: 15,
+    height: 15,
+    resizeMode: 'contain',
+  },
+  mark:{
+    
+    flexDirection: 'row',
+    right: 8,
+    height: 50,
+    alignItems: 'center',
+    borderRadius: 10,
+    position: 'absolute',
+    
+  },
+  marker:{ width: 30, height: 30,  },
+  location:{ fontSize: 16, color: Colors.black, fontFamily: 'serif',fontWeight:'600' }
+});

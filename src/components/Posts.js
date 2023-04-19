@@ -32,9 +32,10 @@ const Posts = ({UserPost,profile_Data}) => {
             <View
               style={{
                 flexDirection: 'row',
-                height: 45,
+                height: 50,
                 alignItems:'center',
                 marginTop:10,
+                marginLeft:10
               }}>
               <Image
                 source={{ uri : `${BaseUrl}${data.user.profile_picture}` }  }
@@ -43,7 +44,7 @@ const Posts = ({UserPost,profile_Data}) => {
                   width: 45,
                   alignSelf: 'center',
                   borderRadius: 60,
-                borderWidth:1,
+                borderWidth:2,
                 borderColor:Colors.purple
 
                 }}
@@ -53,7 +54,10 @@ const Posts = ({UserPost,profile_Data}) => {
                 <Text
                   style={{
                     color: Colors.black,
-                    fontWeight: '600',
+                    fontWeight: 'bold',
+                    fontFamily: 'serif',
+                   fontSize:18
+
                   }}>
                   {data.user.name}
                 </Text>
@@ -96,7 +100,8 @@ const Posts = ({UserPost,profile_Data}) => {
                 fontWeight: '700',
                 color: '#000',
                 marginLeft: 8,
-                marginTop:10
+                marginTop:10,
+                fontFamily: 'serif',
               }}>
               {"#"+" "+data.tags}
             </Text>
