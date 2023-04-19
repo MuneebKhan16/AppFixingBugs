@@ -1,10 +1,11 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Post } from '../config/Dummydata/Dummydata';
 import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
-const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
+import  ImageURL  from '../config/Common'
 const Posts = ({ UserPost, profile_Data }) => {
   const [starCount, setStarCount] = useState(1);
 
@@ -28,7 +29,7 @@ const Posts = ({ UserPost, profile_Data }) => {
                 <View
                   style={styles.maincontainer}>
                   <Image
-                    source={{ uri: `${BaseUrl}${data.user.profile_picture}` }}
+                    source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                     style={styles.container}
                     resizeMode="center"
                   />

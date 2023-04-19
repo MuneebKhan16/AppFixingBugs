@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Post } from '../config/Dummydata/Dummydata';
@@ -9,11 +10,13 @@ const Posts = ({ UserPost, event_id }) => {
   const [starCount, setStarCount] = useState(1);
 
   const ConvertTimeStamp = (date) => {
-    const data = new Date(date);
-    const hours = data.getHours();
-    const minutes = data.getMinutes();
-    const readable = hours + " " + "Hours" + ':' + minutes + " " + "Minutes" + " " + "ago";
-    return readable;
+
+    const start = new Date(date);
+    const now = new Date();
+    const timeDiff = now.getTime() - start.getTime();
+    const hoursDiff = timeDiff / (1000 * 60 * 60);
+    const durationString = `${hoursDiff.toFixed(0)} hours ago`;
+  return durationString;
   }
 
   console.log("UserPost123", UserPost, event_id)
