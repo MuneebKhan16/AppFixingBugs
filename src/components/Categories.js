@@ -41,8 +41,7 @@ const Categories = props => {
         </TouchableOpacity>
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
-            <Text style={styles.title}>{name}</Text>{' '}
-          </View>
+            <Text style={styles.title}>{name}</Text> </View>
           <View style={styles.category}>
             <View>
               <Text style={styles.detail}>{info}</Text>
@@ -65,10 +64,10 @@ export default Categories;
 
 const styles = StyleSheet.create({
   touchable: {
-    marginHorizontal: 28,
+    marginHorizontal: 20,
   },
   imgbg: {
-    height: 160,
+    height: 200,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {height: 3, width: 3},

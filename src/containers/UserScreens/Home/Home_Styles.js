@@ -5,17 +5,20 @@ import { Colors, NavService, Shadows } from '../../../config';
 export const styles = StyleSheet.create({
     header:
     {
-        fontSize: 18,
+        fontSize: 25,
         fontWeight: 'bold',
         color: Colors.black,
-        marginLeft: 25,
+        marginLeft: 20,
+        fontFamily: 'serif'
     },
     maincontainer: {
-        marginLeft: 25,
-        height: 170,
+        marginLeft: 15,
+        height: 185,
+        width:'100%',
+        paddingRight:25
     },
     imgbackground: {
-        width: 330 / 3,
+        width: 335 / 3,
         height: 150,
         marginTop: 10,
         borderRadius: 10,
@@ -41,7 +44,8 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         color: Colors.white,
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
+        fontFamily: 'serif'
       },
       modalcontainer:{
         backgroundColor: '#ffffff',
@@ -71,6 +75,8 @@ export const styles = StyleSheet.create({
       },
       tch:{
         marginHorizontal: 5,
+        flex:1,
+        flexDirection:'row',
       },
       imgbg:{ borderRadius: 10 }
 })
