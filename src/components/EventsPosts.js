@@ -5,7 +5,8 @@ import { Post } from '../config/Dummydata/Dummydata';
 import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
-const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
+import  ImageURL  from '../config//Common'
+
 const Posts = ({ UserPost, event_id }) => {
   const [starCount, setStarCount] = useState(1);
 
@@ -33,7 +34,7 @@ const Posts = ({ UserPost, event_id }) => {
                 <View
                   style={styles.container}>
                   <Image
-                    source={{ uri: `${BaseUrl}${data.user.profile_picture}` }}
+                    source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                     style={styles.pic}
                     resizeMode="center"
                   />
@@ -63,7 +64,7 @@ const Posts = ({ UserPost, event_id }) => {
                   </Text>
                 </View>
                 <Image
-                  source={{ uri: `${BaseUrl}${data.rating_image}` }}
+                  source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
                   resizeMode="stretch"
                   style={styles.rating}
                 />

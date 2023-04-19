@@ -57,7 +57,7 @@ const Posts = ({ UserPost, profile_Data }) => {
                 <View style={{ marginTop: 10 }}>
 
                   <Image
-                    source={{ uri: `${BaseUrl}${data.rating_image}` }}
+                    source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
                     resizeMode="stretch"
                     style={styles.img}
                   />
