@@ -25,15 +25,16 @@ class Post extends Component {
     starCount: 1,
     isChecked: false
   };
-  handleCheckboxChange = () =>
-    this.setState({ isChecked: !this.state.isChecked });
-  }
   constructor(props) {
     super(props);
     this.actionSheetStateRef = createRef();
   }
 
-  onStarRatingPress(rating) {
+  handleCheckboxChange = () => {
+    this.setState({ isChecked: !this.state.isChecked });
+  }
+
+  onStarRatingPress(rating){
     this.setState({
       starCount: rating
     });
