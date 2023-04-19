@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import moment from 'moment';
 import React, { Component } from 'react';
 import {
