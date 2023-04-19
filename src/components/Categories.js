@@ -8,10 +8,10 @@ import {
   View,
   ImageBackground,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Colors} from '../config';
-import  ImageURL  from '../config/Common';
-const {width} = Dimensions.get('window');
+import React, { useState } from 'react';
+import { Colors } from '../config';
+import ImageURL from '../config/Common';
+const { width } = Dimensions.get('window');
 import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
@@ -19,18 +19,21 @@ import Images from '../assets/Images';
 const Categories = props => {
   const { categories } = props;
   const [isModalVisible, setModalVisible] = useState(false);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
+    console.log("isModalVisible",isModalVisible)
   };
-  const {category, image, onPress, name, info, title} = props;
-  console.log("categories",categories)
+
+  const { category, image, onPress, name, info, title } = props;
+  console.log("categories", categories)
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}>
       <ImageBackground
-        source={{uri : `${ImageURL?.ImageURL}${categories?.category_image}`} }
+        source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
         imageStyle={styles.bg}>
         <TouchableOpacity
@@ -38,25 +41,26 @@ const Categories = props => {
           activeOpacity={0.5}
           style={styles.icon}>
           <View>
-            <Image source={Icons.privacyPolicy} style={styles.policy} />
+            <Image source={Icons.privacyPolicy} style={styles.policy} onPress={onPress} />
           </View>
         </TouchableOpacity>
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
-            <Text style={styles.title}>{name}</Text> </View>
-          <View style={styles.category}>
+            <Text style={styles.title}>{categories?.title}</Text> 
+          </View>
+           <View style={styles.category}>
             <View>
-              <Text style={styles.detail}>{info}</Text>
+              <Text style={styles.detail}>{categories?.category_info}</Text>
             </View>
           </View>
           <CustomButton
             buttonStyle={styles.mdlbtn}
             title="Close"
             onPress={toggleModal}
-          />
+          /> 
         </Modal>
 
-        <Text style={styles.ctg}>{title}</Text>
+        <Text style={styles.ctg}>{categories?.title}</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
@@ -72,13 +76,13 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 20,
     shadowColor: '#000',
-    shadowOffset: {height: 3, width: 3},
+    shadowOffset: { height: 3, width: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 0.5,
     marginTop: 15,
   },
-  bg: {borderRadius: 10},
-  title: {fontSize: 18, color: Colors.white, fontWeight: 'bold'},
+  bg: { borderRadius: 10 },
+  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold' },
   modal: {
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  detail: {color: Colors.white, fontWeight: '700', fontSize: 16},
+  detail: { color: Colors.white, fontWeight: '700', fontSize: 16 },
   mdlbtn: {
     alignSelf: 'center',
     marginTop: 50,

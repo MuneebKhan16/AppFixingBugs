@@ -105,11 +105,11 @@ export class Home extends Component {
           </View>
           {
             category &&
-            category.length > 0 ?
+            category?.length > 0 ?
             (
               category?.map((data,index) => {
                 return(
-                  <Categories key={index} categories={data} onPress={() => NavService.navigate('Event', categoryid)} />
+                  <Categories key={index} categories={data} onPress={() => NavService.navigate('Event', data?.category_id)} />
                 )
               })
             ) :

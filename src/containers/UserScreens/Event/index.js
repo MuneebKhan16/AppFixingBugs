@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   StyleSheet,
   Text,
@@ -15,30 +16,18 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import { useSelector } from 'react-redux';
 import Icons from '../../../assets/Icons';
 import { styles } from './event_style';
+import  ImageURL  from '../../../config/Common'
 const Event = (props) => {
 
-
-  const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
   const api_token = useSelector(state => state?.reducer?.user.api_token);
 
   const [cat, Setcat] = useState([]);
-  const id = props.route.params;
-
-  const Id = id.filter((data) => {
-    if (data.category_id !== null) {
-      return data.category_id;
-    } else {
-      console.log("loading")
-    }
-  })
+  const id = props?.route?.params;
 
   useEffect(() => {
-    categoryevents(api_token, Id)
+    categoryevents(api_token, id)
       .then((res) => Setcat(res?.Data))
   }, [])
-
-
-  console.log("catcatcat", cat)
 
   return (
     <AppBackground title={'Events'} home back filter>
@@ -63,7 +52,7 @@ const Event = (props) => {
             </View>
             <RNBounceable onPress={() => NavService.navigate('Review', item)}>
               <ImageBackground
-                source={{ uri: `${BaseUrl}${item.event_image}` }}
+                source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
                 style={styles.img}
                 imageStyle={{ borderRadius: 10 }}>
                 <View style={styles.loccontainer}>
