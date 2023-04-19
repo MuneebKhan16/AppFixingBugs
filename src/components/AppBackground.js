@@ -6,7 +6,8 @@ import {
   Image,
   ImageBackground,
   Animated,
-  Button
+  Button,
+  StyleSheet
 } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Icons from '../assets/Icons';
@@ -54,31 +55,17 @@ export function AppBackground({
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
-        style={{
-          marginTop: getStatusBarHeight() + 20,
-          flexDirection: 'row',
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+        style={styles.maincontainer}>
         <>
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={onPress}
-            style={{
-              position: 'absolute',
-              alignItems: 'center',
-              left: 25,
-              // width: 35,
-              // height: 35,
-              justifyContent: 'center',
-              top: 3,
-            }}>
+            style={styles.usertouchable}>
             <Image
               source={back ? Icons.back : null}
               style={{
-                width: 20,
-                height: 20,
+                width: 24,
+                height: 24,
                 resizeMode: 'contain',
                 tintColor: Colors.purple,
               }}
@@ -90,7 +77,7 @@ export function AppBackground({
               style={{
                 color: Colors.black,
                 fontWeight: 'bold',
-                fontSize: 18,
+                fontSize: 20,
               }}>
               {title}
             </Text>
@@ -104,7 +91,6 @@ export function AppBackground({
               style={{
                 right: 25,
                 position: 'absolute',
-                //
                 height: 40,
                 alignItems: 'center',
                 marginTop: 10,
@@ -312,48 +298,29 @@ export function AppBackground({
   ) : (
     <ImageBackground source={Images.bg} style={{ flex: 1 }}>
       <View
-        style={{
-          marginTop: getStatusBarHeight() + 20,
-          flexDirection: 'row',
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: 10,
-
-        }}>
+        style={styles.maincontainer}>
         <>
           {back && (
-            <RNBounceable
+            <TouchableOpacity
               activeOpacity={0.8}
               onPress={onPress}
-              style={{
-                position: 'absolute',
-                alignItems: 'center',
-                // backgroundColor: Colors.white,
-                borderRadius: 10,
-                left: 15,
-                // width: 35,
-                // height: 35,
-                padding: 5,
-                justifyContent: 'center',
-                paddingRight:50
-              }}>
+              style={styles.authtouchable}>
               <Image
                 source={Icons.back}
                 style={{
-                  width: 16,
-                  height: 16,
+                  width: 20,
+                  height: 20,
                   resizeMode: 'contain',
                   tintColor: Colors.white,
                 }}
               />
-            </RNBounceable>
+            </TouchableOpacity>
           )}
           <View>
             <Text
               style={{
                 color: Colors.white,
-                fontWeight: '600',
+                fontWeight: 'bold',
                 fontSize: 20,
               }}>
               {title}
@@ -428,3 +395,32 @@ export function AppBackground({
 }
 
 export default AppBackground;
+
+
+const styles = StyleSheet.create({
+  maincontainer:{
+    marginTop: getStatusBarHeight() + 20,
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+     marginBottom: 10,
+  },
+  usertouchable:{
+    position: 'absolute',
+    alignItems: 'center',
+    left: 25,
+    justifyContent: 'center',
+    top: 3,
+    paddingRight: 30,
+  },
+  authtouchable:{
+    position: 'absolute',
+    alignItems: 'center',
+    borderRadius: 10,
+    left: 15,
+    padding: 5,
+    justifyContent: 'center',
+    paddingRight: 50
+  }
+})

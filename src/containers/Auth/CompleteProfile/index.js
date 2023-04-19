@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React, { useEffect,useCallback } from 'react';
 import CustomBackground from '../../../components/CustomBackground';
-import CustomCards from '../../../components/CustomCards';
 import AppBackground from '../../../components/AppBackground';
 import Images from '../../../assets/Images';
 import { ColorSpace } from 'react-native-reanimated';

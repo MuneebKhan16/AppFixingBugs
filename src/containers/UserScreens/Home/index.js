@@ -4,7 +4,6 @@ import {
   Text,
   View,
   ScrollView,
-  Image,
   FlatList,
   Dimensions,
   ImageBackground,
@@ -28,13 +27,14 @@ import Images from '../../../assets/Images';
 import { Get_All_Categories, localevents } from '../../../redux/APIs/index'
 import Icons from '../../../assets/Icons';
 import { styles } from './Home_Styles';
+import FastImage from 'react-native-fast-image';
 
 export class Home extends Component {
 
   Featured = () => {
     NavService.navigate('Featured')
   }
- 
+
   state = {
     popUp: true,
     location: false,
@@ -80,7 +80,7 @@ export class Home extends Component {
               data={feature}
               horizontal
               renderItem={({ item, index }) => (
-                <RNBounceable
+                <TouchableOpacity
                   onPress={this.Featured}
                   style={styles.tch}>
                   <ImageBackground
@@ -88,7 +88,7 @@ export class Home extends Component {
                     style={styles.imgbackground}
                     imageStyle={styles.imgbg}>
                     <View style={styles.icnstrempty}>
-                      <Image
+                      <FastImage
                         source={Icons.starEmpty}
                         style={styles.starempty}
                       />
@@ -98,7 +98,7 @@ export class Home extends Component {
                       {item.event_title}
                     </Text>
                   </ImageBackground>
-                </RNBounceable>
+                </TouchableOpacity>
               )}
             />
           </View>
