@@ -40,6 +40,11 @@ class Post extends Component {
     });
   }
 
+
+  handlesubmit = () => {
+    const { userImage , selectedImage , toggleCheckBox , toggleCheckBox2 , toggleCheckBox3} = this.state;
+  }
+
   render() {
     const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
       this.state;
@@ -176,6 +181,8 @@ class Post extends Component {
             <CustomButton
               title={'Post'}
               buttonStyle={{ alignSelf: 'center', marginTop: 50 }}
+              onPress={() => NavService.navigate('Review')}
+              buttonStyle={styles.btn}
               onPress={() => NavService.navigate('Review')}
             />
           </View>
