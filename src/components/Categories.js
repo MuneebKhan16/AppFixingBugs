@@ -62,7 +62,7 @@ const Categories = props => {
   );
 };
 
-export default Categories;
+export default React.memo(Categories);
 
 const styles = StyleSheet.create({
   touchable: {

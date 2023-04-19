@@ -395,7 +395,7 @@ export function AppBackground({
   );
 }
 
-export default AppBackground;
+export default React.memo(AppBackground);
 
 
 const styles = StyleSheet.create({

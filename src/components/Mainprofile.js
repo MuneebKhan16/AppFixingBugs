@@ -12,14 +12,12 @@ const Mainprofile = props => {
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
   const [starCount, setStarCount] = React.useState(1);
   const { name, subtitle, center, row, top, star, edit, inc, size, txt,location } = props;
-  console.log("jjjjj",starCount)
   return (
     <View
       style={{
         alignItems: center ? 'center' : null,
         flexDirection: row ? 'row' : null,
         marginLeft: 5,
-        marginTop: 20,
       }}>
       {top ? (
         <View style={styles.container}>
@@ -30,18 +28,18 @@ const Mainprofile = props => {
         />
         </View>
       ) : (
-        <View>
+        <View >
           <Image
            source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
             style={{
-              width: inc ? 50 : 80,
-              height: inc ? 50 : 80,
+              width: inc ? 50 : 60,
+              height: inc ? 50 : 60,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
             }}
           />
-          {edit ? (
+             {edit ? (
             <TouchableOpacity
               onPress={() => NavService.navigate('EditProfile')}
               style={styles.profilepic}>
@@ -56,13 +54,12 @@ const Mainprofile = props => {
       <View
         style={{
           marginLeft: row ? 10 : null,
-          marginTop: top ? 10 : null,
+          marginBottom:row ? 15 :null
         }}>
         <Text
           style={{
-            textAlign: txt ? 'center' : null,
             fontSize: txt ? 20 : 17,
-            fontWeight: 'bold',
+            fontWeight: '700',
             color: Colors.black,
             fontFamily: 'serif'
           }}>
@@ -84,7 +81,7 @@ const Mainprofile = props => {
             style={{
               fontSize: size ? 18 : 17,
               color: Colors.black,
-              fontWeight:'700',
+              fontWeight:'600',
               fontFamily: 'serif'
             }}>
             {props?.subtitle}
@@ -119,27 +116,28 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 2,
     borderColor: Colors.purple,
+
   },
   pic:{
     width: 75,
     height: 75,
-    borderRadius:40 
+    borderRadius:40 ,
   },
   profilepic:{
-    backgroundColor: Colors.purple,
-    padding: 8,
+    padding: 12,
     alignItems: 'center',
-    bottom: 5,
-    position: 'absolute',
-    right: 0,
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     justifyContent: 'center',
     borderRadius: 40,
+    top:-18,
+    left:35,
+    backgroundColor:Colors.purple
+    
   },
   edit:{
-    width: 15,
-    height: 15,
+    width: 12,
+    height: 12,
     resizeMode: 'contain',
   },
   mark:{

@@ -5,7 +5,7 @@ import { Colors, NavService, Shadows } from '../../../config';
 export const styles = StyleSheet.create({
     header:
     {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         color: Colors.black,
         marginLeft: 20,
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         color: Colors.white,
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 14,
         fontFamily: 'serif'
       },
       modalcontainer:{

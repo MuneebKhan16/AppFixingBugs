@@ -11,58 +11,25 @@ const ChatComponent = props => {
   return (
     <RNBounceable
       onPress={onPress}
-      style={{
-        width: '100%',
-        // height: 70,
-        padding: 3,
-        flexDirection: 'row',
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.grey,
-        marginVertical: 10,
-      }}>
+      style={styles.maincontainer}>
       <View
-        style={{
-          flex: 2,
-          height:55,
-          justifyContent:'center'
-        }}>
+        style={styles.container}>
         <Image
-          style={{
-            height: 55,
-            width: 45,
-            alignSelf: 'center',
-            borderRadius: 60,
-
-          }}
+          style={styles.img}
           source={image}
         />
       </View>
       <View
         style={{
           flex: 8,
-         
         }}>
         <Text
-          style={{
-            flex: 2.5,
-            // paddingBottom: 6,
-            fontSize: 16,
-            fontWeight: '800',
-            color: Colors.black,
-            paddingLeft: 4,
-            marginBottom: 2
-          }}>
+          style={styles.txt}>
           {name}
         </Text>
         <Text
           numberOfLines={2}
-          style={{
-            flex: 7.5,
-            paddingLeft: 4,
-            maxWidth: 280,
-            color: Colors.darkGray,
-            marginBottom: 10
-          }}>
+          style={styles.msg}>
           {msg}
         </Text>
       </View>
@@ -72,4 +39,41 @@ const ChatComponent = props => {
 
 export default ChatComponent;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  maincontainer:{
+    width: '100%',
+    padding: 3,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.grey,
+    marginVertical: 10,
+  },
+  container:{
+    flex: 2,
+    height:55,
+    justifyContent:'center'
+  },
+  img:{
+    height: 55,
+    width: 45,
+    alignSelf: 'center',
+    borderRadius: 60,
+
+  },
+  txt:{
+    flex: 2.5,
+    // paddingBottom: 6,
+    fontSize: 16,
+    fontWeight: '800',
+    color: Colors.black,
+    paddingLeft: 4,
+    marginBottom: 2
+  },
+  msg:{
+    flex: 7.5,
+    paddingLeft: 4,
+    maxWidth: 280,
+    color: Colors.darkGray,
+    marginBottom: 10
+  }
+});

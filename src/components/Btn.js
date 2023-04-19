@@ -6,17 +6,13 @@ const Btn = () => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={{marginVertical:10}}>
+    <View style={styles.maincontainer}>
       <Text
-        style={{
-          fontWeight: '600',
-          fontSize: 18,
-          color: Colors.black,
-        }}>
+        style={styles.content}>
         Geolocation
       </Text>
 
-      <View style={{position: 'absolute', right: 1}}>
+      <View style={styles.swich}>
         <Switch
           trackColor={{false: Colors.darkGray, true: Colors.purple}}
           thumbColor={isEnabled ? Colors.white : '#f4f3f4'}
@@ -30,6 +26,14 @@ const Btn = () => {
   );
 };
 
-export default Btn;
+export default React.memo(Btn);
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+ content:{
+  fontWeight: 'bold',
+  fontSize: 18,
+  color: Colors.black,
+  fontFamily: 'serif',
+},
+swich:{position: 'absolute', right: 1}
+});
