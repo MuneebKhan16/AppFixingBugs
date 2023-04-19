@@ -41,10 +41,11 @@ export default Profile = props => {
           <Text
             style={{
               marginTop: 20,
-              fontSize: 18,
+              fontSize: 20,
               color: Colors.black,
-              fontWeight: '600',
-              marginLeft:10
+              fontWeight: 'bold',
+              marginLeft:10,
+              fontFamily: 'serif'
             }}>
             Post History
           </Text>

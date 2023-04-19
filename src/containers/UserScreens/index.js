@@ -308,11 +308,7 @@ const SettingsStack = () => {
           component={PrivacyPolicy}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="ChangePassword"
-          component={ChangePassword}
-          options={{headerShown: false}}
-        />
+      
            <Stack.Screen
           name="Aboutthecreator"
           component={Aboutthecreator}

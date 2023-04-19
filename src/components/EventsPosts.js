@@ -26,42 +26,20 @@ const Posts = ({ UserPost, event_id }) => {
           if (data?.event_id === event_id) {
             return (
               <View
-                style={{
-                  borderTopWidth: 2,
-                  borderTopColor: Colors.grey,
-                  marginTop: 10,
-
-                }}>
+                style={styles.mainprofile}>
                 <View
-                  style={{
-                    flexDirection: 'row',
-                    height: 45,
-                    alignItems: 'center',
-                    marginTop: 10,
-                    marginRight: 10
-
-                  }}>
+                  style={styles.container}>
                   <Image
                     source={{ uri: `${BaseUrl}${data.user.profile_picture}` }}
-                    style={{
-                      height: 50,
-                      width: 45,
-                      borderWidth:1,
-                      borderRadius:20,
-                    }}
+                    style={styles.pic}
                     resizeMode="center"
                   />
-                  <View style={{}}>
+                  <View>
                     <Text
-                      style={{
-                        color: Colors.black,
-                        fontWeight: '600',
-                        marginLeft:10
-
-                      }}>
+                      style={styles.name}>
                       {data.user.name}
                     </Text>
-                    <View style={{ marginLeft:10}}>
+                    <View style={{ marginLeft: 10 }}>
 
                       <StarRating
                         fullStar={Icons.starFilled}
@@ -77,33 +55,18 @@ const Posts = ({ UserPost, event_id }) => {
                     </View>
                   </View>
                   <Text
-                    style={{
-                      position: 'absolute',
-                      right: 0,
-                      color: Colors.black,
-                      fontWeight: '600',
-                    }}>
+                    style={styles.time}>
                     {ConvertTimeStamp(data.created_at)}
                   </Text>
                 </View>
                 <Image
                   source={{ uri: `${BaseUrl}${data.rating_image}` }}
                   resizeMode="stretch"
-                  style={{
-                    width: '100%',
-                    borderRadius: 20,
-                    marginTop: 10,
-                    height: 150,
-                  }}
+                  style={styles.rating}
                 />
 
                 <Text
-                  style={{
-                    fontWeight: '700',
-                    color: '#000',
-                    marginLeft: 5,
-                    marginTop: 10
-                  }}>
+                  style={styles.tags}>
                   {"#" + " " + data.tags}
                 </Text>
               </View>
@@ -121,4 +84,54 @@ const Posts = ({ UserPost, event_id }) => {
 
 export default Posts;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  mainprofile: {
+    borderTopWidth: 0.8,
+    borderTopColor: Colors.grey,
+    marginTop: 10,
+  },
+  container: {
+    flexDirection: 'row',
+    height: 50,
+    alignItems: 'center',
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    marginBottom: 10
+  },
+  pic: {
+    height: 45,
+    width: 45,
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: Colors.purple
+  },
+  time: {
+    position: 'absolute',
+    right: 0,
+    color: Colors.black,
+    fontWeight: '700',
+    fontFamily: 'serif'
+  },
+  name: {
+    color: Colors.black,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    fontFamily: 'serif',
+
+  },
+  rating: {
+    width: '100%',
+    borderRadius: 20,
+    marginTop: 10,
+    height: 180,
+  },
+  tags: {
+    fontWeight: 'bold',
+    color: '#000',
+    marginLeft: 12,
+    marginTop: 10,
+    fontFamily: 'serif',
+    fontSize: 16
+  }
+});
