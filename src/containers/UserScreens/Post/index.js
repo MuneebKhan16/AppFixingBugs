@@ -39,6 +39,12 @@ class Post extends Component {
     });
   }
 
+  EventCreated(){
+    NavService.navigate('Review')
+    const { userImage ,selectedImage , toggleCheckBox , toggleCheckBox2 , toggleCheckBox3  } = this.state;
+    console.log("postsss" , userImage ,selectedImage , toggleCheckBox , toggleCheckBox2 , toggleCheckBox3)
+  }
+
   render() {
     const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
       this.state;
@@ -70,23 +76,6 @@ class Post extends Component {
               selectedStar={(rating) => this.onStarRatingPress(rating)}
             />
           </View>
-          <ActionSheet
-            ref={this.actionSheetStateRef}
-            containerStyle={{ backgroundColor: 'transparent' }}>
-            <View style={styles.action}>
-
-              <TouchableOpacity
-                onPress={() => actionSheetStateRef.current.hide()}
-                style={styles.touchable}>
-                <Text
-                  style={styles.cancel}>
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </ActionSheet>
-
-
           <View
             style={styles.profile}>
             <View style={{ marginBottom: 30 }}>
@@ -150,7 +139,7 @@ class Post extends Component {
             <CustomButton
               title={'Post'}
               buttonStyle={styles.btn}
-              onPress={() => NavService.navigate('Home')}
+              onPress={() => this.EventCreated() }
             />
           </View>
         </ScrollView>
