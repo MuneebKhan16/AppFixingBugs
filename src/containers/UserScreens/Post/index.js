@@ -149,7 +149,7 @@ class Post extends Component {
             <CustomButton
               title={'Post'}
               buttonStyle={styles.btn}
-              onPress={() => NavService.navigate('Home')}
+              onPress={() => NavService.navigate('Review')}
             />
           </View>
         </ScrollView>
