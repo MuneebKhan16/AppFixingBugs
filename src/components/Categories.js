@@ -10,25 +10,27 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Colors} from '../config';
+import  ImageURL  from '../config/Common';
 const {width} = Dimensions.get('window');
 import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
 import Images from '../assets/Images';
 const Categories = props => {
-  console.log('props', props);
+  const { categories } = props;
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
   const {category, image, onPress, name, info, title} = props;
+  console.log("categories",categories)
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}>
       <ImageBackground
-        source={Images.background1}
+        source={{uri : `${ImageURL?.ImageURL}${categories?.category_image}`} }
         style={styles.imgbg}
         imageStyle={styles.bg}>
         <TouchableOpacity

@@ -10,6 +10,7 @@ import {
   ImageBackground,
   TextInput,
   Alert,
+  Image,
   TouchableOpacity,
   StyleSheet
 } from 'react-native';
@@ -28,7 +29,7 @@ import Images from '../../../assets/Images';
 import { Get_All_Categories, localevents } from '../../../redux/APIs/index'
 import Icons from '../../../assets/Icons';
 import { styles } from './Home_Styles';
-import FastImage from 'react-native-fast-image';
+import  ImageURL  from '../../../config/Common'
 
 export class Home extends Component {
 
@@ -46,24 +47,23 @@ export class Home extends Component {
     categoryid: null,
     feature: []
   };
+
   componentDidMount() {
     SplashScreen.hide();
-  }
-  async componentDidMount() {
     const userData = this.props?.user?.api_token;
-    Get_All_Categories().then((res) => this.setState({ category: res.Data }));
+    Get_All_Categories().then((res) => this.setState({ category: res?.Data }));
     Get_All_Categories().then((res) => this.setState({ categoryid: res.Data.filter((data) => data?.category_id) }));
-    localevents(userData).then((res) => this.setState({ feature: res?.Data?.featured }))
+    localevents(userData).then((res) => this.setState({ feature: res?.Data?.featured }));
   }
+
   render() {
     const { popUp, location, date, category, categoryid, feature } = this.state;
-    const userImage = this.props?.user?.image;
-    const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
+    const userImage = this?.props?.user?.image;
+  
 
     const togglePopUp = () => {
       this.setState(previousState => ({ popUp: !previousState?.popUp }));
     };
-
 
     return (
       <AppBackground notification marginHorizontal title={'Home'} home>
@@ -85,11 +85,11 @@ export class Home extends Component {
                   onPress={this.Featured}
                   style={styles.tch}>
                   <ImageBackground
-                    source={{ uri: `${BaseUrl}${item.event_image}` }}
+                    source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
                     style={styles.imgbackground}
                     imageStyle={styles.imgbg}>
                     <View style={styles.icnstrempty}>
-                      <FastImage
+                      <Image
                         source={Icons.starEmpty}
                         style={styles.starempty}
                       />
@@ -103,7 +103,23 @@ export class Home extends Component {
               )}
             />
           </View>
-          <Categories categories={category} onPress={() => NavService.navigate('Event', categoryid)} />
+          {
+            category &&
+            category.length > 0 ?
+            (
+              category?.map((data,index) => {
+                return(
+                  <Categories key={index} categories={data} onPress={() => NavService.navigate('Event', categoryid)} />
+                )
+              })
+            ) :
+            (
+              <View>
+                <Text>No Category Found</Text>
+              </View>
+            )
+          }
+          
         </ScrollView>
         <Modal
           isVisible={popUp}
