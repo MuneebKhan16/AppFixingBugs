@@ -24,3 +24,7 @@ export function productOffergiven(data) {
 export function logoutUser() {
   dispatch({type: 'LOGOUT'});
 }
+
+export function addReviews(data){
+  dispatch({type: 'AddReviews', payload: data});
+}

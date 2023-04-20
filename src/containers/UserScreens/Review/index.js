@@ -61,7 +61,7 @@ const Review = (props) => {
       <CustomButton
         buttonStyle={{ alignSelf: 'center' }}
         title="Rate & Post"
-        onPress={() => NavService.navigate('Post')}
+        onPress={() => NavService.navigate('Post' ,id)}
       />
     </AppBackground>
   );

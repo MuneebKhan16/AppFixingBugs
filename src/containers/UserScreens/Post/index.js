@@ -43,34 +43,40 @@ class Post extends Component {
     });
   }
 
+  
+
   handleReview = (name) => {
     const { isChecked } = this.state;
     isChecked[name] = !isChecked[name];
     this.setState({ isChecked });
-    console.log(isChecked)
     return isChecked
-    // NavService.navigate('Review')
   }
 
   handleSubmit = () => {
+
     const tag = this.handleReview();
+    const tar = this.state.starCount;
     const yups = Object.keys(tag).map(data => data)
+    console.log("8888",  yups.pop() , '9999') 
+    // console.log("this.props.user?.state",this.props.user)
+    const user_id = this?.props?.user?.id
+    const user_type = this?.props?.user?.user_type || 'customer'
+    const rating = tar
     const tags = yups.pop()
-    console.log("8888", yups.pop()) 
-    console.log("this.props.user?.state",this.props)
-    post_reviews()
-    // const payload = {
-    //   user_id : ,
-    //   user_type : ,
-    //   review_image : ,
-    //   tags : 
-    //   rating : 
-    //   review :
-    // }
+    const rating_image = this.state.selectedImage.path.replace('file:///data/user/0/com.outsidee/cache/','')
+    const review = 'null'
+    const event_id = this?.props?.route?.params;
+    
+    if(user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null){
+      post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id)
+      
+    }
+
   }
 
 
   render() {
+    
     const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
       this.state;
     const { user } = this.props
@@ -92,10 +98,8 @@ class Post extends Component {
 
             <StarRating
               fullStar={Icons.starFilled}
-              // halfStar={Icons.star_half}
               emptyStar={Icons.starEmpty}
               starSize={14}
-              disabled={false}
               maxStars={5}
               rating={this.state.starCount}
               selectedStar={(rating) => this.onStarRatingPress(rating)}
