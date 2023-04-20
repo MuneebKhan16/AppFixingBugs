@@ -11,9 +11,9 @@ const PickerCompone = () => {
           style={{
             backgroundColor: '#ededed',
             marginTop: 10,
-            width: '98%',
+            width: 300,
             paddingLeft: 15,
-            borderRadius: 10,
+            borderRadius: 20,
           }}
           color={Colors.grey}
           selectedValue={selectedLanguage}

@@ -22,7 +22,7 @@ const EventHome = () => {
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home>
-      <View style={{ marginBottom: 10, marginTop: 10 }}>
+      <View style={styles.container}>
 
         <FlatList
           data={Evntdata}

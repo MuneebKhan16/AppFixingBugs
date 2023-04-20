@@ -39,7 +39,7 @@ class Post extends Component {
   }
 
   render() {
-    const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
+    const { userImage, selectedImage, } =
       this.state;
     const { user } = this.props
 

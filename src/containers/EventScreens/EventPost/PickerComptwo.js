@@ -11,7 +11,7 @@ const PickerComptwo = () => {
           style={{
             backgroundColor: '#ededed',
             marginTop: 10,
-            width: '98%',
+            width: 300,
             paddingLeft: 15,
             borderRadius: 10,
           }}

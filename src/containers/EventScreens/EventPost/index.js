@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, { useState, Component } from 'react';
+import React, { useState, Component ,createRef} from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
 import { Colors, NavService } from '../../../config';
@@ -17,6 +17,8 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
 import Modal from 'react-native-modal';
+import ActionSheet from 'react-native-actions-sheet';
+import ProfileImage from '../../../components/ProfileImage';
 
 export class EventPost extends Component {
   state = {
@@ -28,63 +30,40 @@ export class EventPost extends Component {
     title: '',
     dec: '',
     location: '',
+    state: this.props.user?.state,
+    userImage: this.props.user?.image,
+    selectedImage: null,
+
 
   };
+  constructor(props) {
+    super(props);
+    this.actionSheetStateRef = createRef();
+  }
+
   render() {
-    const { popUp, location, date, isVisible, selectedId, title, dec, } = this.state;
+    const { popUp, location, date, isVisible, selectedId, title, dec, userImage, selectedImage, } = this.state;
     const togglePopUp = () => {
       this.setState(previousState => ({ popUp: !previousState?.popUp }));
     };
+    const { user } = this.props
+
     return (
       <AppBackground title={'Events'} home back>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View
-            style={{
-              width: '100%',
-              borderWidth: 2,
-              borderColor: Colors.purple,
-              alignSelf: 'center',
-              height: 180,
-              borderRadius: 20,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: 30,
-            }}>
-            <CustomImagePicker>
-              <RNBounceable style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 10,
-              }}>
-                <Image
-                  source={Icons.upload}
-                  style={{
-                    width: 22,
-                    height: 22,
-                    resizeMode: 'contain',
-                  }}
-                />
-                <Text
-                  style={{
-                    marginLeft: 5,
-                    fontSize: 16,
-                    color: Colors.darkGray,
-                  }}>
-                  Upload
-                </Text>
-              </RNBounceable>
-            </CustomImagePicker>
-          </View>
+           <View style={{ flex: 1, height: '100%',  }}>
+        <ScrollView showsVerticalScrollIndicator={false}  >
+      
           <TextInput
             style={{
               backgroundColor: '#ededed',
               marginTop: 10,
-              width: '98%',
+              width:300,
               paddingLeft: 15,
               borderRadius: 10,
-              height: 50
+              height: 50,
             }}
-            value={title}
+            onChangeText={(title) => this.setState({ title })}
+            value={this.state.title}
             placeholder="Title"
           />
           <PickerCompone />
@@ -93,21 +72,22 @@ export class EventPost extends Component {
             style={{
               backgroundColor: '#ededed',
               marginTop: 10,
-              width: '98%',
+              width: 300,
               paddingLeft: 15,
               borderRadius: 10,
               flexDirection: 'row',
               alignItems: 'center',
               height: 50
             }}>
-            <TextInput value={location} placeholder="Location" style={{ width: '90%' }} />
+            <TextInput onChangeText={(location) => this.setState({ location })}
+              value={this.state.location} placeholder="Location" style={{ width: '90%' }} />
             <Image source={Icons.marker} style={{ width: 15, height: 18, position: 'absolute', right: 10, tintColor: '#434343' }} />
           </View>
           <View
             style={{
               height: 150,
               backgroundColor: '#ededed',
-              width: '98%',
+              width: 300,
               borderRadius: 10,
               marginTop: 10
             }}>
@@ -115,7 +95,8 @@ export class EventPost extends Component {
               placeholder="Description"
               multiline={true}
               style={{ maxHeight: 150, marginLeft: 10, marginTop: 10 }}
-              value={dec}
+              onChangeText={(dec) => this.setState({ dec })}
+              value={this.state.dec}
             />
           </View>
           <PickerComptwo />
@@ -124,13 +105,17 @@ export class EventPost extends Component {
             buttonStyle={{
               marginTop: 10,
               alignSelf: 'center',
+top:20,
+              width:300
             }}
             title="Post"
             onPress={() => NavService.goBack()}
           // onPress={() => NavService.reset(0, [{name: 'CompleteProfile'}])}
           />
+          
         </ScrollView>
-        <Modal
+          </View>
+        {/* <Modal
           isVisible={popUp}
           style={{ margin: 0, padding: 0 }}
           backdropOpacity={0.7}
@@ -141,7 +126,7 @@ export class EventPost extends Component {
           </View>
           <View style={{ backgroundColor: Colors.purple, paddingHorizontal: 8, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, width: '90%', alignSelf: 'center', padding: 20, alignItems: 'center', justifyContent: 'center' }}>
             <View>
-              <Text style={{ color: Colors.white, fontWeight: '700', fontSize: 16 ,lineHeight:28,paddingHorizontal:10}}>
+              <Text style={{ color: Colors.white, fontWeight: '700', fontSize: 16, lineHeight: 28, paddingHorizontal: 10 }}>
                 1-Name of Location (mandatory){'\n'}
                 2-Official Address (mandatory){'\n'}
                 3-Clear Photo of Building (mandatory){'\n'}
@@ -166,7 +151,7 @@ export class EventPost extends Component {
             onPress={togglePopUp}
           />
 
-        </Modal>
+        </Modal> */}
       </AppBackground>
     )
   }
@@ -174,3 +159,20 @@ export class EventPost extends Component {
 
 export default EventPost
 
+
+const styles = StyleSheet.create({
+  cancel: {
+    color: 'rgb(0,88,200)',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  action: { padding: 10, paddingBottom: 20 },
+  picker: {
+    width: 60,
+    height: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: -90,
+  },
+})
