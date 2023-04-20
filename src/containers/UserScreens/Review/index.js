@@ -63,7 +63,7 @@ const post = () => {
       <CustomButton
         buttonStyle={styles.self}
         title="Rate & Post"
-        onPress={post}
+        onPress={() => NavService.navigate('Post' ,id)}
       />
     </AppBackground>
   );

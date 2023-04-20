@@ -7,8 +7,9 @@ import getApi from '../RequestTypes/get';
 import * as EmailValidator from 'email-validator';
 import { Keyboard } from 'react-native';
 import { Platform } from 'react-native';
-import { saveUser , saveToken } from '../actions';
+import { saveUser, saveToken, addReviews } from '../actions';
 import { cleanSingle } from 'react-native-image-crop-picker';
+
 
 var passwordValidator = require('password-validator');
 var schema = new passwordValidator();
@@ -28,7 +29,7 @@ export function loaderStop() {
 
 // Common APIs
 
-export async function Get_All_Categories(api_token){
+export async function Get_All_Categories(api_token) {
   const data = await getApi('categories');
   return data;
 }
@@ -66,7 +67,7 @@ export async function socialSignin(access_token, provider) {
 }
 
 export async function login(email, password, setLogin) {
-  try{
+  try {
     if (!email && !password)
       return Toast.show({
         text1: 'Please enter all info',
@@ -85,36 +86,36 @@ export async function login(email, password, setLogin) {
         type: 'error',
         visibilityTime: 3000,
       });
-  
+
     const params = {
       email,
       password
     };
-  
+
     const data = await postApi('signin', params, false)
-    
-  if(data?.status == 1){
-    NavService.reset(0, [{ name: 'CompleteProfile' }]);
-    Toast.show({
-      text1: data?.message,
-      type: 'success',
-      visibilityTime: 5000,
-    });
-    dispatch(saveUser(data?.Data));
-    
-    return { api_token : data?.Data?.api_token }
-  }
-  else if(data?.status == 0){
+
+    if (data?.status == 1) {
+      NavService.reset(0, [{ name: 'CompleteProfile' }]);
+      Toast.show({
+        text1: data?.message,
+        type: 'success',
+        visibilityTime: 5000,
+      });
+      dispatch(saveUser(data?.Data));
+
+      return { api_token: data?.Data?.api_token }
+    }
+    else if (data?.status == 0) {
       Toast.show({
         text1: data.message,
         type: 'error',
         visibilityTime: 5000,
       });
-  } 
-  
-  }catch(err){
+    }
+
+  } catch (err) {
     return Toast.show({
-      text:"Error exist",
+      text: "Error exist",
       type: 'error',
       visibilityTime: 3000,
     })
@@ -154,19 +155,19 @@ export async function signup(
     password,
     confirm_password,
   };
-console.log('params',params)
+  console.log('params', params)
   const data = await postApi('signup', params);
-  console.log("chcecking",data);
-  if(data?.status == 1){
-    NavService.reset(0, [{name: 'CompleteProfile'}])
+  console.log("chcecking", data);
+  if (data?.status == 1) {
+    NavService.reset(0, [{ name: 'CompleteProfile' }])
     Toast.show({
       text1: data.message,
       type: 'success',
       visibilityTime: 5000,
     });
   }
-  else if(data?.status === 0){
-    console.log("sta",data)
+  else if (data?.status === 0) {
+    console.log("sta", data)
     Toast.show({
       text1: `${data.message.email}`,
       type: 'error',
@@ -205,7 +206,7 @@ export async function resendVerifyCode(user_id) {
   await postApi('resend-otp', params);
 }
 
-export async function forget_password(email,otp) {
+export async function forget_password(email, otp) {
 
   if (!email)
     return Toast.show({
@@ -228,8 +229,8 @@ export async function forget_password(email,otp) {
 
   const data = await postApi('forget-password', params);
 
-  if( data.status === 1){
-    NavService.navigate('ForgetPasswordOTP', { email});
+  if (data.status === 1) {
+    NavService.navigate('ForgetPasswordOTP', { email });
     Toast.show({
       text1: data.message,
       type: 'success',
@@ -237,9 +238,9 @@ export async function forget_password(email,otp) {
     });
     return data.otp
   }
-  else if(data.status === 0){
+  else if (data.status === 0) {
     Toast.show({
-      text1:data.message,
+      text1: data.message,
       type: 'error',
       visibilityTime: 5000,
     });
@@ -249,7 +250,7 @@ export async function forget_password(email,otp) {
 }
 
 export async function verifyForgetPasswordCode(otp) {
-  console.log("iiii",otp)
+  console.log("iiii", otp)
   // if (!otp)
   //   return Toast.show({
   //     text1: 'Please enter the code',
@@ -267,9 +268,9 @@ export async function verifyForgetPasswordCode(otp) {
     otp,
     // email,
   };
-  console.log("otpchecked",params)
-  const data = await postApi('forget-password',params);
-  console.log("eeeee",data.Data.otp)
+  console.log("otpchecked", params)
+  const data = await postApi('forget-password', params);
+  console.log("eeeee", data.Data.otp)
   if (data?.status == 1) {
     Keyboard.dismiss;
     setTimeout(() => {
@@ -286,7 +287,7 @@ export async function resendForgetPasswordCode(email) {
   await postApi('forgot-password-resend-otp', params);
 }
 
-export async function resetPassword(password, confirmPassword, email,otp) {
+export async function resetPassword(password, confirmPassword, email, otp) {
   if (!confirmPassword || !password)
     return Toast.show({
       text1: 'Please enter all info',
@@ -407,37 +408,48 @@ export async function getPolicies(type) {
   return response.data;
 }
 
-export async function localevents(api_token){
+export async function localevents(api_token) {
   const data = await getApi('local-events');
   return data;
-  }
+}
 
-export async function categoryevents(api_token,category_id){
+export async function categoryevents(api_token, category_id) {
   const params = { category_id }
   const data = await postApi('category-events', params);
   return data;
 }
 
-export async function get_reviews_event(){
+export async function get_reviews_event() {
   const data = await getApi('getreviews');
   return data;
 }
 
-export async function post_reviews(){
-
+export async function post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id) {
 
   const params = new FormData();
-  params.append("user_id" , user_id);
-  params.append("user_type" , user_type);
-  params.append("review_image" , review_image);
-  params.append("tags" , tags);
-  params.append("rating" , rating);
-  params.append("review" , review);
+  params.append("user_id", user_id);
+  params.append("user_type", user_type || 'customer');
+  params.append("rating_image", rating_image);
+  params.append("tags", tags);
+  params.append("rating", rating);
+  params.append("review", review || 'miss');
+  params.append("event_id", event_id);
 
+  let y = params._parts.flat([2]).map(data => data)
+  const obj = {};
+  for (let i = 0; i < y.length; i += 2) {
+    const key = y[i];
+    let value = y[i + 1];
+    if (value === 'null') {
+      value = null;
+    }
+    obj[key] = value;
+  }
 
-  const data = await postApi('add-rating',params);
-  
-  console.log('98',data)
+  const data = await postApi('add-rating', obj);
+  if(data.status == 1){
+    NavService.navigate('Review')
+  }
 
 }
 //Core Module APIs
