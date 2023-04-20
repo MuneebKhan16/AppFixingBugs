@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { Component, createRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { Colors, NavService } from '../../../config';
+import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import ActionSheet from 'react-native-actions-sheet';
@@ -12,38 +12,63 @@ import { connect } from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
+import { styles } from './post_styles';
+import { post_reviews} from '../../../redux/APIs'
 
-
+const Checkbox = {
+  first: false,
+  second: false,
+  third: false
+};
 class Post extends Component {
   state = {
     state: this.props.user?.state,
     userImage: this.props.user?.image,
     selectedImage: null,
-    toggleCheckBox: false,
-    toggleCheckBox2: false,
-    toggleCheckBox3: false,
     starCount: 1,
-    isChecked: false
+    isChecked: Checkbox,
+
   };
   constructor(props) {
     super(props);
     this.actionSheetStateRef = createRef();
   }
-
   handleCheckboxChange = () => {
     this.setState({ isChecked: !this.state.isChecked });
   }
 
-  onStarRatingPress(rating){
+  onStarRatingPress(rating) {
     this.setState({
       starCount: rating
     });
   }
 
-
-  handlesubmit = () => {
-    const { userImage , selectedImage , toggleCheckBox , toggleCheckBox2 , toggleCheckBox3} = this.state;
+  handleReview = (name) => {
+    const { isChecked } = this.state;
+    isChecked[name] = !isChecked[name];
+    this.setState({ isChecked });
+    console.log(isChecked)
+    return isChecked
+    // NavService.navigate('Review')
   }
+
+  handleSubmit = () => {
+    const tag = this.handleReview();
+    const yups = Object.keys(tag).map(data => data)
+    const tags = yups.pop()
+    console.log("8888", yups.pop()) 
+    console.log("this.props.user?.state",this.props)
+    post_reviews()
+    // const payload = {
+    //   user_id : ,
+    //   user_type : ,
+    //   review_image : ,
+    //   tags : 
+    //   rating : 
+    //   review :
+    // }
+  }
+
 
   render() {
     const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
@@ -56,11 +81,7 @@ class Post extends Component {
           bounces={false}
           showsVerticalScrollIndicator={false}
           style={{ flex: 1 }}
-          contentContainerStyle={{
-            alignItems: 'center',
-            flexGrow: 1,
-            marginTop: 30
-          }}>
+          contentContainerStyle={styles.content}>
           <Mainprofile
             txt
             center
@@ -83,22 +104,13 @@ class Post extends Component {
           <ActionSheet
             ref={this.actionSheetStateRef}
             containerStyle={{ backgroundColor: 'transparent' }}>
-            <View style={{ padding: 10, paddingBottom: 20 }}>
+            <View style={styles.action}>
 
               <TouchableOpacity
                 onPress={() => actionSheetStateRef.current.hide()}
-                style={{
-                  backgroundColor: 'white',
-                  borderRadius: 10,
-                  paddingVertical: 12,
-                  alignItems: 'center',
-                }}>
+                style={styles.touchable}>
                 <Text
-                  style={{
-                    color: 'rgb(0,88,200)',
-                    fontSize: 18,
-                    fontWeight: '600',
-                  }}>
+                  style={styles.cancel}>
                   Cancel
                 </Text>
               </TouchableOpacity>
@@ -107,26 +119,14 @@ class Post extends Component {
 
 
           <View
-            style={{
-              alignItems: 'center',
-              flex: 1,
-              paddingHorizontal: 40,
-            }}>
+            style={styles.profile}>
             <View style={{ marginBottom: 30 }}>
               <ProfileImage
                 name={user?.name}
                 imageUri={selectedImage ? selectedImage.path : userImage}
               />
               <View
-                style={{
-                  width: 60,
-                  height: 35,
-                  // borderRadius: 35 / 2,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginTop: -90
-                }}>
+                style={styles.picker}>
                 <CustomImagePicker
                   onImageChange={(path, mime) => {
                     console.log('path', path);
@@ -138,41 +138,41 @@ class Post extends Component {
                       source={Icons.upload}
                       style={{ width: 20, height: 20, resizeMode: 'contain' }}
                     />
-                    <Text style={{ fontWeight: 'bold' }}>Upload</Text>
+                    <Text style={styles.upload}>Upload</Text>
                   </View>
                 </CustomImagePicker>
               </View>
             </View>
             <View style={{ alignSelf: 'center' }}>
-              <View style={{ marginVertical: 10, flexDirection: 'row', marginTop: 100 }}>
 
+              <View style={styles.box}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked}
-                  onValueChange={(newValue) => this.setState({ isChecked: newValue })}
+                  value={this.state.isChecked.first}
+                  onValueChange={() => this.handleReview('ItsLit')}
                   tintColors={{ true: Colors.purple, false: 'grey' }}
                 />
                 <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsLit</Text>
 
               </View>
-              <View style={{ marginVertical: 10, flexDirection: 'row', }}>
 
+
+              <View style={styles.check}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked1}
-                  onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
+                  value={this.state.isChecked.second}
+                  onValueChange={() => this.handleReview('ItsAVibe')}
                   tintColors={{ true: Colors.purple, false: 'grey' }}
                 />
                 <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsAVibe</Text>
-
               </View>
-              <View style={{ marginVertical: 10, flexDirection: 'row', }}>
 
+              <View style={styles.check}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked2}
-                  onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
-                  tintColors={{ true: Colors.purple, false: 'grey' }}
+                  value={this.state.isChecked.third}
+                  onValueChange={() => this.handleReview('NeedsCompany')}
+                  tintColors={{ true: Colors.purple, false: 'green' }}
                 />
                 <Text style={{ fontSize: 25, marginLeft: 10 }}>NeedsCompany</Text>
 
@@ -180,10 +180,8 @@ class Post extends Component {
             </View>
             <CustomButton
               title={'Post'}
-              buttonStyle={{ alignSelf: 'center', marginTop: 50 }}
-              onPress={() => NavService.navigate('Review')}
               buttonStyle={styles.btn}
-              onPress={() => NavService.navigate('Review')}
+              onPress={this.handleSubmit}
             />
           </View>
         </ScrollView>
@@ -192,54 +190,6 @@ class Post extends Component {
   }
 }
 
-const ActionSheetCommponent = ({
-  title = '',
-  dataset = [],
-  onPress = () => { },
-}) => {
-  return (
-    <View
-      style={{
-        backgroundColor: 'rgba(241,241,241,0.9)',
-        borderRadius: 10,
-        marginBottom: 10,
-        overflow: 'hidden',
-      }}>
-      <View
-        style={{
-          borderBottomWidth: 1.5,
-          borderBottomColor: '#ccc',
-          paddingVertical: 10,
-        }}>
-        <Text
-          style={{
-            color: 'rgb(0,88,200)',
-            textAlign: 'center',
-            fontSize: 18,
-            fontWeight: '500',
-          }}>
-          {title}
-        </Text>
-      </View>
-      <ScrollView style={{ maxHeight: 200 }} showsVerticalScrollIndicator={false}>
-        {dataset.map((item, index) => {
-          return (
-            <TouchableOpacity
-              onPress={() => onPress(item)}
-              style={{
-                paddingVertical: 12,
-                alignItems: 'center',
-                borderBottomWidth: 1.5,
-                borderBottomColor: '#ccc',
-              }}>
-
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
-  );
-};
 
 function mapState({ reducer: { user } }) {
   return {

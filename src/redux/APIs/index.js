@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { NavService } from '../../config';
 import Toast from 'react-native-toast-message';
 import { store } from '../index';
@@ -428,13 +429,15 @@ export async function post_reviews(){
   const params = new FormData();
   params.append("user_id" , user_id);
   params.append("user_type" , user_type);
-  params.append("rating_image" , rating_image);
-  params.append("event_id" , event_id);
+  params.append("review_image" , review_image);
   params.append("tags" , tags);
+  params.append("rating" , rating);
+  params.append("review" , review);
 
 
   const data = await postApi('add-rating',params);
   
+  console.log('98',data)
 
 }
 //Core Module APIs
