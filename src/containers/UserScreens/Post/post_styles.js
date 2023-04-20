@@ -37,5 +37,13 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       flexGrow: 1,
       marginTop: 30
-    }
+    },
+    flex:{flex:1},
+    top:{ marginBottom: 20 },
+    backbg:{ backgroundColor: 'transparent' },
+    btm:{ marginBottom: 30 },
+    item:{ alignItems: 'center' },
+    uploadimg:{ width: 20, height: 20, resizeMode: 'contain' },
+    center:{ alignSelf: 'center' },
+    txt:{ fontSize: 25, marginLeft: 10 }
   })

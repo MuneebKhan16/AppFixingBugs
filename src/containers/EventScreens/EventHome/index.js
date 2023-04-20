@@ -14,6 +14,7 @@ import AppBackground from '../../../components/AppBackground';
 import { Evntdata } from '../../../config/Dummydata/Dummydata';
 import { Colors, NavService } from '../../../config';
 import { styles } from './eventhome_style';
+import FastImage from 'react-native-fast-image'
 const EventHome = () => {
 
   const EventReview = () => {
@@ -23,7 +24,6 @@ const EventHome = () => {
   return (
     <AppBackground profile marginHorizontal title={'Home'} home>
       <View style={styles.container}>
-
         <FlatList
           data={Evntdata}
           showsVerticalScrollIndicator={false}
@@ -36,7 +36,7 @@ const EventHome = () => {
                 </Text>
                 <View
                   style={styles.rev}>
-                  <Image source={item.rating} style={styles.review} />
+                  <FastImage source={item.rating} style={styles.review} />
                   <Text
                     style={styles.txt}>
                     {item.review}
@@ -48,9 +48,9 @@ const EventHome = () => {
                 <ImageBackground
                   source={item.background}
                   style={styles.imgback}
-                  imageStyle={{ borderRadius: 10 }} >
+                  imageStyle={styles.img} >
                   <View style={styles.loc}>
-                    <Image source={item.location} resizeMode="contain" style={styles.location} />
+                    <FastImage source={item.location} resizeMode="contain" style={styles.location} />
                     <Text style={styles.loctxt}>{' '}{item.loc}</Text>
                   </View>
                 </ImageBackground>

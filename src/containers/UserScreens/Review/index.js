@@ -26,22 +26,24 @@ const Review = (props) => {
   useEffect(() => {
     get_reviews_event(profile_Data.api_token).then((res) => setUserPost(res.Data));
   }, [])
-
+const post = () => {
+  NavService.navigate('Post')
+} 
   return (
     <AppBackground title={'Events'} home back chat>
-      <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 30 }}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
         <Swiper
-          style={{ height: 200, borderRadius: 15 }}
+          style={styles.swiper}
           showsButtons={false}
-          buttonWrapperStyle={{ Color: '#fff' }}>
+          buttonWrapperStyle={styles.clr}>
           <View style={styles.slide1}>
             <Image
               source={{ uri: `${BaseUrl}${event_image}` }}
-              style={{ borderRadius: 20, width: '100%', height: '100%' }}
+              style={styles.img}
             />
           </View>
         </Swiper>
-        <View style={{ marginTop: 5 }}>
+        <View style={styles.topmerge}>
           <Mainprofile
             center
             name={user?.name}
@@ -59,13 +61,13 @@ const Review = (props) => {
         <EventsPosts event_id={id} UserPost={UserPost} />
       </ScrollView>
       <CustomButton
-        buttonStyle={{ alignSelf: 'center' }}
+        buttonStyle={styles.self}
         title="Rate & Post"
-        onPress={() => NavService.navigate('Post')}
+        onPress={post}
       />
     </AppBackground>
   );
 };
 
-export default Review;
+export default React.memo(Review);
 

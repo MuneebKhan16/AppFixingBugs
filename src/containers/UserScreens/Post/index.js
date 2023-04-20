@@ -13,7 +13,7 @@ import CheckBox from '@react-native-community/checkbox';
 import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
-import { post_reviews} from '../../../redux/APIs'
+import { post_reviews } from '../../../redux/APIs'
 
 const Checkbox = {
   first: false,
@@ -56,17 +56,9 @@ class Post extends Component {
     const tag = this.handleReview();
     const yups = Object.keys(tag).map(data => data)
     const tags = yups.pop()
-    console.log("8888", yups.pop()) 
-    console.log("this.props.user?.state",this.props)
+    console.log("8888", yups.pop())
+    console.log("this.props.user?.state", this.props)
     post_reviews()
-    // const payload = {
-    //   user_id : ,
-    //   user_type : ,
-    //   review_image : ,
-    //   tags : 
-    //   rating : 
-    //   review :
-    // }
   }
 
 
@@ -80,7 +72,7 @@ class Post extends Component {
         <ScrollView
           bounces={false}
           showsVerticalScrollIndicator={false}
-          style={{ flex: 1 }}
+          style={styles.flex}
           contentContainerStyle={styles.content}>
           <Mainprofile
             txt
@@ -88,7 +80,7 @@ class Post extends Component {
             top
             name={user.name}
           />
-          <View style={{ marginBottom: 20 }}>
+          <View style={styles.top}>
 
             <StarRating
               fullStar={Icons.starFilled}
@@ -103,7 +95,7 @@ class Post extends Component {
           </View>
           <ActionSheet
             ref={this.actionSheetStateRef}
-            containerStyle={{ backgroundColor: 'transparent' }}>
+            containerStyle={styles.backbg}>
             <View style={styles.action}>
 
               <TouchableOpacity
@@ -120,7 +112,7 @@ class Post extends Component {
 
           <View
             style={styles.profile}>
-            <View style={{ marginBottom: 30 }}>
+            <View style={styles.btm}>
               <ProfileImage
                 name={user?.name}
                 imageUri={selectedImage ? selectedImage.path : userImage}
@@ -132,18 +124,18 @@ class Post extends Component {
                     console.log('path', path);
                     this.setState({ selectedImage: { path, mime } });
                   }}>
-                  <View style={{ alignItems: 'center' }}>
+                  <View style={styles.item}>
 
                     <Image
                       source={Icons.upload}
-                      style={{ width: 20, height: 20, resizeMode: 'contain' }}
+                      style={styles.uploadimg}
                     />
                     <Text style={styles.upload}>Upload</Text>
                   </View>
                 </CustomImagePicker>
               </View>
             </View>
-            <View style={{ alignSelf: 'center' }}>
+            <View style={styles.center}>
 
               <View style={styles.box}>
                 <CheckBox
@@ -152,7 +144,7 @@ class Post extends Component {
                   onValueChange={() => this.handleReview('ItsLit')}
                   tintColors={{ true: Colors.purple, false: 'grey' }}
                 />
-                <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsLit</Text>
+                <Text style={styles.txt}>ItsLit</Text>
 
               </View>
 
@@ -164,7 +156,7 @@ class Post extends Component {
                   onValueChange={() => this.handleReview('ItsAVibe')}
                   tintColors={{ true: Colors.purple, false: 'grey' }}
                 />
-                <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsAVibe</Text>
+                <Text style={styles.txt}>ItsAVibe</Text>
               </View>
 
               <View style={styles.check}>
@@ -174,7 +166,7 @@ class Post extends Component {
                   onValueChange={() => this.handleReview('NeedsCompany')}
                   tintColors={{ true: Colors.purple, false: 'green' }}
                 />
-                <Text style={{ fontSize: 25, marginLeft: 10 }}>NeedsCompany</Text>
+                <Text style={styles.txt}>NeedsCompany</Text>
 
               </View>
             </View>

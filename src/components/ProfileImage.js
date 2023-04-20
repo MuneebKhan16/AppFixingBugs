@@ -15,7 +15,7 @@ const ProfileImage = ({size = 150, imageUri, name = ' ', style}) => {
             borderRadius:10,
             borderColor:Colors.purple,
             borderWidth:3,
-            alignSelf:"center"
+            alignSelf:"center",
             
           },
           style,
@@ -37,17 +37,6 @@ const ProfileImage = ({size = 150, imageUri, name = ' ', style}) => {
         },
         style,
       ]}>
-      {/* <Text
-        numberOfLines={1}
-        style={{
-          color: Colors.primary,
-          fontSize: size * 0.75,
-          fontWeight: '800',
-          width: '100%',
-          textAlign: 'center',
-        }}>
-        {name[0].toUpperCase()}
-      </Text> */}
     </View>
   );
 };

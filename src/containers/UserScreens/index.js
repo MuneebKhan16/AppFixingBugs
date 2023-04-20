@@ -18,13 +18,11 @@ import OTP from '../Auth/Login';
 import ResetPassword from '../Auth/Login';
 import CompleteProfile from '../Auth/Login';
 //LocalEvent
-import Edit from './Edit';
 import Home from './Home';
 import Profile from './Profile';
 import TermsConditions from './TermsConditions';
 import PrivacyPolicy from './PrivacyPolicy';
 import Settings from './Settings';
-import Notification from './Notification';
 import ChatList from './ChatList';
 import ChatScreen from './ChatScreen';
 import Featured from './Featured';
@@ -35,7 +33,6 @@ import Aboutthecreator from './AbouttheCreator';
 // EventScreens
 import EventHome from '../EventScreens/EventHome';
 import EventProfile from '../EventScreens/EventProfile';
-import EditProfile from './EditProfile';
 import EventSetting from '../EventScreens/EventSetting';
 import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
@@ -153,11 +150,7 @@ const ScreenStack = () => {
           component={TermsConditions}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="Notification"
-          component={Notification}
-          options={{headerShown: false}}
-        />
+       
         <Stack.Screen
           name="Event"
           component={Event}
@@ -174,11 +167,7 @@ const ScreenStack = () => {
           options={{headerShown: false}}
         />
       
-        <Stack.Screen
-          name="Edit"
-          component={Edit}
-          options={{headerShown: false}}
-        />
+      
         <Stack.Screen
           name="Review"
           component={Review}
@@ -248,11 +237,7 @@ const EventScreenStack = () => {
           component={EventProfile}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="EditProfile"
-          component={EditProfile}
-          options={{headerShown: false}}
-        />
+       
         <Stack.Screen
           name="EventSetting"
           component={EventSetting}
