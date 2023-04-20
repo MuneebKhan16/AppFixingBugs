@@ -1,19 +1,23 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Post } from '../config/Dummydata/Dummydata';
 import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
-const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
+import  ImageURL  from '../config//Common'
+
 const Posts = ({ UserPost, event_id }) => {
   const [starCount, setStarCount] = useState(1);
 
   const ConvertTimeStamp = (date) => {
-    const data = new Date(date);
-    const hours = data.getHours();
-    const minutes = data.getMinutes();
-    const readable = hours + " " + "Hours" + ':' + minutes + " " + "Minutes" + " " + "ago";
-    return readable;
+
+    const start = new Date(date);
+    const now = new Date();
+    const timeDiff = now.getTime() - start.getTime();
+    const hoursDiff = timeDiff / (1000 * 60 * 60);
+    const durationString = `${hoursDiff.toFixed(0)} hours ago`;
+  return durationString;
   }
 
   console.log("UserPost123", UserPost, event_id)
@@ -30,7 +34,7 @@ const Posts = ({ UserPost, event_id }) => {
                 <View
                   style={styles.container}>
                   <Image
-                    source={{ uri: `${BaseUrl}${data.user.profile_picture}` }}
+                    source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                     style={styles.pic}
                     resizeMode="center"
                   />
@@ -60,7 +64,7 @@ const Posts = ({ UserPost, event_id }) => {
                   </Text>
                 </View>
                 <Image
-                  source={{ uri: `${BaseUrl}${data.rating_image}` }}
+                  source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
                   resizeMode="stretch"
                   style={styles.rating}
                 />

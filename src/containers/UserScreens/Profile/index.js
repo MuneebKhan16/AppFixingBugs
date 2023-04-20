@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import moment from 'moment';
 import React, {Component, useRef, useState , useEffect} from 'react';
 import {
@@ -17,7 +18,7 @@ import { useSelector } from 'react-redux';
 import { get_reviews_event } from '../../../redux/APIs/index'
 const {width, height} = Dimensions.get('window');
 
-export default Profile = props => {
+const Profile = props => {
   const [UserPost , setUserPost] = useState([]);
   const profile_Data = useSelector((state) => state.reducer.user)
   console.log(profile_Data)
@@ -56,3 +57,5 @@ export default Profile = props => {
     </AppBackground>
   );
 };
+
+export default Profile

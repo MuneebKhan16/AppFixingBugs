@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 import React, { Component, createRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image ,StyleSheet} from 'react-native';
 import { Colors, NavService } from '../../../config';
+import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import ActionSheet from 'react-native-actions-sheet';
@@ -12,24 +13,28 @@ import CheckBox from '@react-native-community/checkbox';
 import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
+import { post_reviews} from '../../../redux/APIs'
 
+const Checkbox = {
+  first: false,
+  second: false,
+  third: false
+};
 class Post extends Component {
   state = {
     state: this.props.user?.state,
     userImage: this.props.user?.image,
     selectedImage: null,
-    toggleCheckBox: false,
-    toggleCheckBox2: false,
-    toggleCheckBox3: false,
     starCount: 1,
-    isChecked: false
+    isChecked: Checkbox,
+
   };
-  handleCheckboxChange = () => {
-    this.setState({ isChecked: !this.state.isChecked });
-  }
   constructor(props) {
     super(props);
     this.actionSheetStateRef = createRef();
+  }
+  handleCheckboxChange = () => {
+    this.setState({ isChecked: !this.state.isChecked });
   }
 
   onStarRatingPress(rating) {
@@ -37,6 +42,33 @@ class Post extends Component {
       starCount: rating
     });
   }
+
+  handleReview = (name) => {
+    const { isChecked } = this.state;
+    isChecked[name] = !isChecked[name];
+    this.setState({ isChecked });
+    console.log(isChecked)
+    return isChecked
+    // NavService.navigate('Review')
+  }
+
+  handleSubmit = () => {
+    const tag = this.handleReview();
+    const yups = Object.keys(tag).map(data => data)
+    const tags = yups.pop()
+    console.log("8888", yups.pop()) 
+    console.log("this.props.user?.state",this.props)
+    post_reviews()
+    // const payload = {
+    //   user_id : ,
+    //   user_type : ,
+    //   review_image : ,
+    //   tags : 
+    //   rating : 
+    //   review :
+    // }
+  }
+
 
   render() {
     const { userImage, selectedImage, } =
@@ -112,44 +144,44 @@ class Post extends Component {
               </View>
             </View>
             <View style={{ alignSelf: 'center' }}>
-              <View style={styles.box}>
 
+              <View style={styles.box}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked}
-                  onValueChange={(newValue) => this.setState({ isChecked: newValue })}
+                  value={this.state.isChecked.first}
+                  onValueChange={() => this.handleReview('ItsLit')}
                   tintColors={{ true: Colors.purple, false: 'grey' }}
                 />
                 <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsLit</Text>
 
               </View>
-              <View style={styles.check}>
 
+
+              <View style={styles.check}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked1}
-                  onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
+                  value={this.state.isChecked.second}
+                  onValueChange={() => this.handleReview('ItsAVibe')}
                   tintColors={{ true: Colors.purple, false: 'grey' }}
                 />
                 <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsAVibe</Text>
-
               </View>
-              <View style={styles.check}>
 
+              <View style={styles.check}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked2}
-                  onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
-                  tintColors={{ true: Colors.purple, false: 'grey' }}
+                  value={this.state.isChecked.third}
+                  onValueChange={() => this.handleReview('NeedsCompany')}
+                  tintColors={{ true: Colors.purple, false: 'green' }}
                 />
-                <Text style={styles.tags}>NeedsCompany</Text>
+                <Text style={{ fontSize: 25, marginLeft: 10 }}>NeedsCompany</Text>
 
               </View>
             </View>
             <CustomButton
               title={'Post'}
               buttonStyle={styles.btn}
-              onPress={() => NavService.navigate('Review')}
+              onPress={this.handleSubmit}
             />
           </View>
         </ScrollView>
@@ -166,5 +198,3 @@ function mapState({ reducer: { user } }) {
 }
 
 export default connect(mapState)(Post);
-
-
