@@ -14,7 +14,6 @@ import AppBackground from '../../../components/AppBackground';
 import { Evntdata } from '../../../config/Dummydata/Dummydata';
 import { Colors, NavService } from '../../../config';
 import { styles } from './eventhome_style';
-import FastImage from 'react-native-fast-image'
 const EventHome = () => {
 
   const EventReview = () => {
@@ -36,7 +35,7 @@ const EventHome = () => {
                 </Text>
                 <View
                   style={styles.rev}>
-                  <FastImage source={item.rating} style={styles.review} />
+                  <Image source={item.rating} style={styles.review} />
                   <Text
                     style={styles.txt}>
                     {item.review}
@@ -50,7 +49,7 @@ const EventHome = () => {
                   style={styles.imgback}
                   imageStyle={styles.img} >
                   <View style={styles.loc}>
-                    <FastImage source={item.location} resizeMode="contain" style={styles.location} />
+                    <Image source={item.location} resizeMode="contain" style={styles.location} />
                     <Text style={styles.loctxt}>{' '}{item.loc}</Text>
                   </View>
                 </ImageBackground>

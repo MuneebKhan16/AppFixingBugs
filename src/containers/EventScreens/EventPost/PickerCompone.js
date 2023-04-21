@@ -20,8 +20,10 @@ const PickerCompone = () => {
           onValueChange={(itemValue, itemIndex) =>
             setSelectedLanguage(itemValue)
           }>
-          <Picker.Item label="Type" value="Type" color={'black'} style={{ fontWeight: 'bold' }} />
+          <Picker.Item label="Category" value="Category" color={'black'} style={{ fontWeight: 'bold' }} />
           <Picker.Item label="event" value="event" color={'black'} style={{ fontWeight: 'bold' }} />
+          <Picker.Item label="local" value="local" color={'black'} style={{ fontWeight: 'bold' }} />
+
         </Picker> 
   )
 }

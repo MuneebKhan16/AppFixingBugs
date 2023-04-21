@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, Text, Image, TouchableOpacity } from 'react-native';
+import { Dimensions, Text, Image, TouchableOpacity,StyleSheet } from 'react-native';
 import { Colors, Shadows } from '../config';
 const { width } = Dimensions.get('screen');
 import Icons from '../assets/Icons';
