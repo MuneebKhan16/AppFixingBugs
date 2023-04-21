@@ -14,8 +14,8 @@ import AppBackground from '../../../components/AppBackground';
 import { Evntdata } from '../../../config/Dummydata/Dummydata';
 import { Colors, NavService } from '../../../config';
 import { styles } from './eventhome_style';
-const EventHome = () => {
-
+const EventHome = (props) => {
+console.log("props",props)
   const EventReview = () => {
     NavService.navigate('EventReview')
   };

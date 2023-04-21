@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
-import {View, TextInput, Image} from 'react-native';
+import {View, TextInput, Image ,StyleSheet} from 'react-native';
 import Icons from '../assets/Icons';
 import {Colors, Shadows} from '../config';
 

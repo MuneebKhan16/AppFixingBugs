@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import TabbarComp from '../../TabbarComp';
 import TabbarComponent from '../../TabbarComponent';
@@ -212,7 +213,8 @@ const TabStackComp = () => {
   );
 };
 
-const EventScreenStack = () => {
+const EventScreenStack = (props) => {
+  console.log("kkkk",props)
   return (
     <ImageBackground source={Images.bg} style={{flex: 1}}>
       <Stack.Navigator

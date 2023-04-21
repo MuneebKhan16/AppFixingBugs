@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   StyleSheet,
   View,
@@ -6,7 +7,7 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native';
-import React, { useState, Component, createRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
 import { Colors, NavService } from '../../../config';
@@ -18,114 +19,135 @@ import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
 import { styles } from './eventpost_styles';
-export class EventPost extends Component {
-  state = {
-    popUp: true,
-    location: false,
-    date: false,
-    isVisible: false,
-    selectedId: '',
-    title: '',
-    dec: '',
-    location: '',
-    state: this.props.user?.state,
-    userImage: this.props.user?.image,
-    selectedImage: null,
+import { post_events, Get_All_Categories } from '../../../redux/APIs';
+import { useSelector } from 'react-redux';
+const EventPost = (props) => {
+  const { user } = props
+  const actionSheetStateRef = useRef();
+  const [popUp, setPopUp] = useState(true);
+  const [location, setLocation] = useState('');
+  const [date, setDate] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [selectedId, setSelectedId] = useState('');
+  const [title, setTitle] = useState('');
+  const [dec, setDec] = useState('');
+  const [state, setState] = useState(user?.state);
+  const [userImage, setUserImage] = useState(user?.image);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [Categorys, setCategorys] = useState(null);
+  const [selectedData, setSelectedData] = useState(null);
 
 
-  };
-  constructor(props) {
-    super(props);
-    this.actionSheetStateRef = createRef();
-  }
 
-  render() {
-    const { popUp, userImage, selectedImage, } =
-      this.state;
-    const { user } = this.props
-
-    const togglePopUp = () => {
-      this.setState(previousState => ({ popUp: !previousState?.popUp }));
+const users = useSelector((state) => state.reducer.user)
+  useEffect(() => {
+    const getCategorys = async () => {
+      const category = await Get_All_Categories();
+      setCategorys(category.Data);
     };
+    getCategorys();
+  }, []);
 
-    const goback = () => {
-      NavService.goBack()
-    }
+  const togglePopUp = () => {
+    setPopUp((previousState) => previousState?.popUp);
+  };
 
+  const goback = () => {
+    NavService.goBack();
+  };
+
+
+  const handlesubmit = () => {
+    const event_title = title;
+    const event_type = 'local';
+    const event_description = dec;
+    const event_image = selectedImage?.path;
+    const user_id = users?.id;
+    const category_id = selectedData?.category_id;
+    const event_location = location;
+
+    post_events(
+      event_title,
+      event_type,
+      event_description,
+      event_image,
+      user_id,
+      category_id,
+      event_location
+    );
+  };
     return (
       <AppBackground title={'Events'} home back>
-        <View style={styles.contanier}>
-          <ActionSheet
-            ref={this.actionSheetStateRef}
-            containerStyle={styles.sheet}>
-            <View style={styles.action}>
-
-              <TouchableOpacity
-                onPress={() => actionSheetStateRef.current.hide()}
-                style={styles.touchable}>
-                <Text
-                  style={styles.cancel}>
-                  Cancel
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </ActionSheet>
-          <View style={styles.user}>
-            <ProfileImage
-              name={user?.name}
-              imageUri={selectedImage ? selectedImage.path : userImage}
-            />
-            <View
-              style={styles.picker}>
-              <CustomImagePicker
-                onImageChange={(path, mime) => {
-                  console.log('path', path);
-                  this.setState({ selectedImage: { path, mime } });
-                }}>
-                <View style={styles.mime}>
-
-                  <Image
-                    source={Icons.upload}
-                    style={styles.upload}
-                  />
-                  <Text style={styles.upload}>Upload</Text>
-                </View>
-              </CustomImagePicker>
-            </View>
-          </View>
-          <View style={styles.top}>
-            <TextInput
-              style={styles.maincontainer}
-              onChangeText={(title) => this.setState({ title })}
-              value={this.state.title}
-              placeholder="Title"
-            />
-            <PickerCompone />
-            <View
-              style={styles.location}>
-              <TextInput onChangeText={(location) => this.setState({ location })}
-                value={this.state.location} placeholder="Location" style={styles.loc} />
-              <Image source={Icons.marker} style={styles.marker} />
-            </View>
-            <View
-              style={styles.descp}>
-              <TextInput
-                placeholder="Description"
-                multiline={true}
-                style={styles.description}
-                onChangeText={(dec) => this.setState({ dec })}
-                value={this.state.dec}
-              />
-            </View>
-            <PickerComptwo />
-            <CustomButton
-              buttonStyle={styles.btn}
-              title="Post"
-              onPress={goback}
-            />
-          </View>
-
+        <View style={styles.container}>
+      <ActionSheet
+        ref={actionSheetStateRef}
+        containerStyle={styles.sheet}
+      >
+        <View style={styles.action}>
+          <TouchableOpacity
+            onPress={() => actionSheetStateRef.current.hide()}
+            style={styles.touchable}
+          >
+            <Text style={styles.cancel}>Cancel</Text>
+          </TouchableOpacity>
         </View>
+      </ActionSheet>
+      <View style={styles.user}>
+        <ProfileImage
+          name={user?.name}
+          imageUri={selectedImage ? selectedImage.path : userImage}
+        />
+        <View style={styles.picker}>
+          <CustomImagePicker
+            onImageChange={(path, mime) => {
+              console.log('path', path);
+              setSelectedImage({ path, mime });
+            }}
+          >
+            <View style={styles.mime}>
+              <Image
+                source={Icons.upload}
+                style={styles.upload}
+              />
+              <Text style={styles.upload}>Upload</Text>
+            </View>
+          </CustomImagePicker>
+        </View>
+      </View>
+      <View style={styles.top}>
+        <TextInput
+          style={styles.maincontainer}
+          onChangeText={(title) => setTitle(title)}
+          value={title}
+          placeholder="Title"
+        />
+        <PickerCompone categories={Categorys}  setSelectedData={setSelectedData}  />
+        <View style={styles.location}>
+          <TextInput
+            onChangeText={(location) => setLocation(location)}
+            value={location}
+            placeholder="Location"
+            style={styles.loc}
+          />
+          <Image source={Icons.marker} style={styles.marker} />
+        </View>
+        <View style={styles.descp}>
+          <TextInput
+            placeholder="Descriptions"
+            multiline={true}
+            style={styles.description}
+            onChangeText={(dec) => setDec(dec)}
+            value={dec}
+          />
+        </View>
+        <PickerComptwo />
+        <CustomButton
+          buttonStyle={styles.btn}
+          title="Posts"
+          onPress={handlesubmit}
+        />
+      </View>
+    </View>
 
         {/* Modal */}
 
@@ -159,14 +181,13 @@ export class EventPost extends Component {
               marginTop: 50
             }}
             title="Close"
-            onPress={togglePopUp}
+            onPress={() => togglePopUp()}
           />
 
         </Modal>
       </AppBackground>
     )
   }
-}
 
 export default React.memo(EventPost)
 

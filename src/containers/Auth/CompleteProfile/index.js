@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import {
   View,
   Text,
@@ -15,13 +17,14 @@ import { Colors } from 'react-native-paper';
 import { NavService } from '../../../config';
 import { useSelector } from 'react-redux'
 
-const index = () => {
-
+const index = (props) => {
+  const {Data} = props?.route?.params;
+  console.log("pppp",Data)
   const ScreenStack = useCallback(() => {
     NavService.navigate('ScreenStack')
   },[])
   const EventStack = useCallback(() => {
-    NavService.navigate('EventScreenStack')
+    NavService.navigate('EventScreenStack',Data)
   },[])
   return (
     <AppBackground back={false} profile={false} title={'User Selection'}>

@@ -95,7 +95,8 @@ export async function login(email, password, setLogin) {
     const data = await postApi('signin', params, false)
 
     if (data?.status == 1) {
-      NavService.reset(0, [{ name: 'CompleteProfile' }]);
+      // NavService.navigate(0, [{ name: 'CompleteProfile' , data }]);
+      NavService.navigate('CompleteProfile' ,data)
       Toast.show({
         text1: data?.message,
         type: 'success',
@@ -450,6 +451,34 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
     NavService.navigate('Review')
   }
 
+}
+
+export async function post_events(event_title,event_type,event_description,event_image,user_id,category_id,event_location){
+  const params = new FormData();
+  params.append("event_title" , event_title)
+  params.append("event_type" , event_type)
+  params.append("event_description" , event_description)
+  params.append("event_image" , event_image)
+  params.append("user_id" , user_id)
+  params.append("category_id" , category_id)
+  params.append("event_location" , event_location)
+
+  let payload = params._parts.flat([2]).map(data => data)
+  const obj = {};
+  for (let i = 0; i < payload.length; i += 2) {
+    const key = payload[i];
+    let value = payload[i + 1];
+    if (value === 'null') {
+      value = null;
+    }
+    obj[key] = value;
+  }
+  // console.log("lllll",obj);
+  const data = await postApi('add-event',obj)
+  console.log(data)
+  if(data.status == 1){
+    NavService.navigate('EventHome')
+  }
 }
 //Core Module APIs
 
