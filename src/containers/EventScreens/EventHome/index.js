@@ -22,8 +22,7 @@ const EventHome = () => {
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home>
-      <View style={{ marginBottom: 10, marginTop: 10 }}>
-
+      <View style={styles.container}>
         <FlatList
           data={Evntdata}
           showsVerticalScrollIndicator={false}
@@ -48,7 +47,7 @@ const EventHome = () => {
                 <ImageBackground
                   source={item.background}
                   style={styles.imgback}
-                  imageStyle={{ borderRadius: 10 }} >
+                  imageStyle={styles.img} >
                   <View style={styles.loc}>
                     <Image source={item.location} resizeMode="contain" style={styles.location} />
                     <Text style={styles.loctxt}>{' '}{item.loc}</Text>

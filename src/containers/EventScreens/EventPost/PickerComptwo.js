@@ -11,7 +11,7 @@ const PickerComptwo = () => {
           style={{
             backgroundColor: '#ededed',
             marginTop: 10,
-            width: '98%',
+            width: 300,
             paddingLeft: 15,
             borderRadius: 10,
           }}
@@ -23,6 +23,11 @@ const PickerComptwo = () => {
           <Picker.Item
             label="Event Type (i.e Recurring)"
             value="Event Type (i.e Recurring)"
+            color={'black'} style={{ fontWeight: 'bold' }}
+          />
+           <Picker.Item
+            label="local"
+            value="local"
             color={'black'} style={{ fontWeight: 'bold' }}
           />
           <Picker.Item label="event" value="event" color={'black'} style={{ fontWeight: 'bold' }} />

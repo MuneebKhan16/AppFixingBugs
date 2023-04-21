@@ -11,17 +11,19 @@ const PickerCompone = () => {
           style={{
             backgroundColor: '#ededed',
             marginTop: 10,
-            width: '98%',
+            width: 300,
             paddingLeft: 15,
-            borderRadius: 10,
+            borderRadius: 20,
           }}
           color={Colors.grey}
           selectedValue={selectedLanguage}
           onValueChange={(itemValue, itemIndex) =>
             setSelectedLanguage(itemValue)
           }>
-          <Picker.Item label="Type" value="Type" color={'black'} style={{ fontWeight: 'bold' }} />
+          <Picker.Item label="Category" value="Category" color={'black'} style={{ fontWeight: 'bold' }} />
           <Picker.Item label="event" value="event" color={'black'} style={{ fontWeight: 'bold' }} />
+          <Picker.Item label="local" value="local" color={'black'} style={{ fontWeight: 'bold' }} />
+
         </Picker> 
   )
 }

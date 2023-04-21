@@ -317,7 +317,6 @@ export async function resetPassword(password, confirmPassword, email, otp) {
   console.log('data', params)
 
   if (data?.status == 1) {
-    // NavService.reset(0, [{ name: 'Auth' }]);
     Toast.show({
       text1: data.message,
       type: 'success',

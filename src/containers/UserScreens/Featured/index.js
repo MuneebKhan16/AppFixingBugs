@@ -50,7 +50,7 @@ const Featured = () => {
               <ImageBackground
                 source={{ uri: `${BaseUrl}${item.event_image}` }}
                 style={styles.img}
-                imageStyle={{ borderRadius: 10 }}>
+                imageStyle={styles.border}>
                 <View style={styles.imgbg}>
                   <Image
                     source={Icons.starEmpty}
