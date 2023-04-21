@@ -55,10 +55,11 @@ class Post extends Component {
   handleSubmit = () => {
     const tag = this.handleReview();
     const yups = Object.keys(tag).map(data => data)
-    const tags = yups.pop()
-    console.log("8888", yups.pop()) 
-    console.log("this.props.user?.state",this.props)
-    post_reviews()
+    ;
+   
+    console.log("8888",yups) 
+    console.log("this.props.user?.state")
+    // post_reviews()
     // const payload = {
     //   user_id : ,
     //   user_type : ,
