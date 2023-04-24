@@ -1,5 +1,5 @@
+/* eslint-disable prettier/prettier */
 import {
-  StyleSheet,
   Text,
   View,
   FlatList,
@@ -9,48 +9,71 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useState , useEffect } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import { Evntdata } from '../../../config/Dummydata/Dummydata';
 import { Colors, NavService } from '../../../config';
 import { styles } from './eventhome_style';
+import { useSelector } from 'react-redux'
+import  ImageURL from '../../../config/Common'
+import { show_eventCreater_event } from '../../../redux/APIs'
+import Icons from '../../../assets/Icons'
+
 const EventHome = (props) => {
-console.log("props",props)
-  const EventReview = () => {
-    NavService.navigate('EventReview')
+
+  const [showEvents , SetshowEvents] =useState([]);
+
+  const user_id = useSelector((state) => state?.reducer?.user?.id);
+  
+  const Event_data = async () => {
+    const events = await show_eventCreater_event(user_id);
+    SetshowEvents(events.events)
+  }
+  
+  useEffect(() => {
+    
+    Event_data();
+
+  },[])
+
+    console.log("showEvents",showEvents)
+
+  const EventReview = (item) => {
+
+    NavService.navigate('EventReview' , item)
   };
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home>
       <View style={styles.container}>
         <FlatList
-          data={Evntdata}
+          data={showEvents}
           showsVerticalScrollIndicator={false}
           renderItem={({ item, index }) => (
             <View style={styles.maincontainer}>
               <View style={styles.content}>
                 <Text
                   style={styles.title}>
-                  {item.title}
+                  {item?.event_title}
                 </Text>
                 <View
                   style={styles.rev}>
-                  <Image source={item.rating} style={styles.review} />
+                  <Image source={Icons.starFilled} style={styles.review} />
                   <Text
                     style={styles.txt}>
-                    {item.review}
+                    {item?.review == null ? 0 : item?.review}{" "} Reviews
                   </Text>
                 </View>
               </View>
-              <TouchableOpacity onPress={EventReview}>
+              <TouchableOpacity onPress={() => EventReview(item) }>
 
                 <ImageBackground
-                  source={item.background}
+                  source={{ uri : `${ImageURL?.ImageURL}${ item?.event_image} `}}
                   style={styles.imgback}
                   imageStyle={styles.img} >
                   <View style={styles.loc}>
-                    <Image source={item.location} resizeMode="contain" style={styles.location} />
-                    <Text style={styles.loctxt}>{' '}{item.loc}</Text>
+                    <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                    <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
                   </View>
                 </ImageBackground>
               </TouchableOpacity>

@@ -6,7 +6,7 @@ import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config//Common'
-
+// check
 const Posts = ({ UserPost, event_id }) => {
   const [starCount, setStarCount] = useState(1);
 
@@ -20,7 +20,7 @@ const Posts = ({ UserPost, event_id }) => {
     return durationString;
   }
 
-  console.log("UserPost123", UserPost, event_id)
+  console.log("UserPost12356", event_id)
   return (
 
 

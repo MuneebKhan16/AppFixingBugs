@@ -18,13 +18,12 @@ import { NavService } from '../../../config';
 import { useSelector } from 'react-redux'
 
 const index = (props) => {
-  const {Data} = props?.route?.params;
-  console.log("pppp",Data)
+  
   const ScreenStack = useCallback(() => {
     NavService.navigate('ScreenStack')
   },[])
   const EventStack = useCallback(() => {
-    NavService.navigate('EventScreenStack',Data)
+    NavService.navigate('EventScreenStack')
   },[])
   return (
     <AppBackground back={false} profile={false} title={'User Selection'}>

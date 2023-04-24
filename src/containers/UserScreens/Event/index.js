@@ -31,7 +31,7 @@ const Event = (props) => {
   }, [])
 
   return (
-    <AppBackground title={'Eventsaaaa'} home back filter>
+    <AppBackground title={'Events'} home back filter>
       <FlatList
         data={cat}
         showsVerticalScrollIndicator={false}

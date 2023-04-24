@@ -449,8 +449,9 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
   const data = await postApi('add-rating', obj);
   if(data.status == 1){
     NavService.navigate('Review')
+    return data;
   }
-
+  return data;
 }
 
 export async function post_events(event_title,event_type,event_description,event_image,user_id,category_id,event_location){
@@ -478,7 +479,19 @@ export async function post_events(event_title,event_type,event_description,event
   console.log(data)
   if(data.status == 1){
     NavService.navigate('EventHome')
+    return data;
   }
+}
+
+export async function show_eventCreater_event(user_id){
+ const body = new FormData();
+ body.append('user_id',user_id);
+
+ const data = await postApi('all-events',body);
+ if(data.status == 1){
+  NavService.navigate('EventHome')
+  return data?.Data;
+}
 }
 //Core Module APIs
 
