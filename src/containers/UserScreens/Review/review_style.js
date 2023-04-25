@@ -30,5 +30,11 @@ export const styles = StyleSheet.create({
       marginTop: 30,
       fontFamily: 'serif',
       marginLeft:13
-    }
+    },
+    top:{ marginTop: 30 },
+    swiper:{ height: 200, borderRadius: 15 },
+    topmerge:{ marginTop: 5 },
+    img:{ borderRadius: 20, width: '100%', height: '100%' },
+    self:{ alignSelf: 'center' },
+    clr:{ Color: '#fff' }
   });

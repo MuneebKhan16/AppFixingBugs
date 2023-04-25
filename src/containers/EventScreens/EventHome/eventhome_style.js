@@ -23,6 +23,8 @@ export const styles = StyleSheet.create({
     imgback:{ width: '100%', height: 170, marginTop: 10 },
     loc:{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 8, left: 5, },
     location:{ tintColor: Colors.white, width: 25, height: 25 },
-    loctxt:{ color: Colors.white, fontWeight: 'bold', fontFamily: 'serif' }
+    loctxt:{ color: Colors.white, fontWeight: 'bold', fontFamily: 'serif' },
+    container:{ marginBottom: 10, marginTop: 10 },
+    img:{ borderRadius: 10 }
   });
   

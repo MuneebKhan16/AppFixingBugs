@@ -13,45 +13,21 @@ import MicroChat from '../../../components/microChat';
 import Images from '../../../assets/Images';
 import CustomChatBox from '../../../components/CustomChatBox';
 import CustomSender from '../../../components/CustomSender';
-
-const Message = [
-  {
-    image: Images.avatar,
-    msg: 'loreum spam is working on different devices on daily basese',
-    date: '02:48 PM',
-  },
-  {
-    image: Images.avatar,
-    msg: 'loreum spam is working on different devices on daily basese',
-    date: '02:48 PM',
-  },
-];
-
+import { styles } from './chatscreen_style';
+import { Message } from './Dummydata';
 const index = () => {
   return (
     <AppBackground title={"Chats"} back profile={false} home>
       <SafeAreaView
-        style={{
-          flex: 1,
-         
-        }}
-        >
+        style={styles.flex}
+      >
         <View
-          style={{
-            flex: 1,
-            marginTop: 30,
-            alignItems: 'center',
-           
-          }}>
+          style={styles.container}>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={Message}
-            style={{
-              width: Dimensions.get('window').width - 20 ,
-              // backgroundColor:"blue",
-              // flex:1
-            }}
-            renderItem={({item}) => (
+            style={styles.msg}
+            renderItem={({ item }) => (
               <>
                 <MicroChat msg={item.msg} image={item.image} date={item.date} />
                 <CustomChatBox
@@ -71,6 +47,5 @@ const index = () => {
   );
 };
 
-export default index;
+export default React.memo(index);
 
-const styles = StyleSheet.create({});

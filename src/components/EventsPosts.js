@@ -5,8 +5,8 @@ import { Post } from '../config/Dummydata/Dummydata';
 import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
-import  ImageURL  from '../config//Common'
-
+import ImageURL from '../config//Common'
+// check
 const Posts = ({ UserPost, event_id }) => {
   const [starCount, setStarCount] = useState(1);
 
@@ -17,10 +17,10 @@ const Posts = ({ UserPost, event_id }) => {
     const timeDiff = now.getTime() - start.getTime();
     const hoursDiff = timeDiff / (1000 * 60 * 60);
     const durationString = `${hoursDiff.toFixed(0)} hours ago`;
-  return durationString;
+    return durationString;
   }
 
-  console.log("UserPost123", UserPost, event_id)
+  console.log("UserPost12356", event_id)
   return (
 
 

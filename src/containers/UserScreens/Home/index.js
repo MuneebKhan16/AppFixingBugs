@@ -29,7 +29,7 @@ import Images from '../../../assets/Images';
 import { Get_All_Categories, localevents } from '../../../redux/APIs/index'
 import Icons from '../../../assets/Icons';
 import { styles } from './Home_Styles';
-import  ImageURL  from '../../../config/Common'
+import ImageURL from '../../../config/Common'
 
 export class Home extends Component {
 
@@ -59,7 +59,7 @@ export class Home extends Component {
   render() {
     const { popUp, location, date, category, categoryid, feature } = this.state;
     const userImage = this?.props?.user?.image;
-  
+
 
     const togglePopUp = () => {
       this.setState(previousState => ({ popUp: !previousState?.popUp }));
@@ -105,21 +105,21 @@ export class Home extends Component {
           </View>
           {
             category &&
-            category?.length > 0 ?
-            (
-              category?.map((data,index) => {
-                return(
-                  <Categories key={index} categories={data} onPress={() => NavService.navigate('Event', data?.category_id)} />
-                )
-              })
-            ) :
-            (
-              <View>
-                <Text>No Category Found</Text>
-              </View>
-            )
+              category?.length > 0 ?
+              (
+                category?.map((data, index) => {
+                  return (
+                    <Categories key={index} categories={data} onPress={() => NavService.navigate('Event', data?.category_id)} />
+                  )
+                })
+              ) :
+              (
+                <View>
+                  <Text>No Category Found</Text>
+                </View>
+              )
           }
-          
+
         </ScrollView>
         <Modal
           isVisible={popUp}

@@ -16,22 +16,8 @@ const Heading = props => {
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
     <View
-      style={{
-        marginTop: 20,
-        borderBottomWidth: 2,
-        borderBottomColor: Colors.grey,
-        width: '90%',
-        alignSelf: 'center',
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}>
-      <View style={{
-        width: 38,
-        height: 38,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-      }}>
+      style={styles.container}>
+      <View style={styles.content}>
         <Image
           source={props?.icon}
           style={{
@@ -45,12 +31,7 @@ const Heading = props => {
       </View>
       <TouchableOpacity onPress={() => NavService.navigate(props?.onpress)}>
         <Text
-          style={{
-            marginLeft: 10,
-            fontWeight: '600',
-            fontSize: 18,
-            color: Colors.black,
-          }}>
+          style={styles.name}>
           {props?.name}
         </Text>
       </TouchableOpacity>
@@ -71,4 +52,27 @@ const Heading = props => {
 
 export default Heading;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    borderBottomWidth: 2,
+    borderBottomColor: Colors.grey,
+    width: '90%',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  content: {
+    width: 38,
+    height: 38,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  name: {
+    marginLeft: 10,
+    fontWeight: '600',
+    fontSize: 18,
+    color: Colors.black,
+  }
+});

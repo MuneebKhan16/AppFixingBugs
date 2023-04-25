@@ -48,6 +48,7 @@ export const styles = StyleSheet.create({
       height: 22,
       resizeMode: 'contain',
     },
-    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' }
+    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' },
+    border:{ borderRadius: 10 }
   });
   

@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import {
   View,
   Text,
@@ -15,8 +17,8 @@ import { Colors } from 'react-native-paper';
 import { NavService } from '../../../config';
 import { useSelector } from 'react-redux'
 
-const index = () => {
-
+const index = (props) => {
+  
   const ScreenStack = useCallback(() => {
     NavService.navigate('ScreenStack')
   },[])

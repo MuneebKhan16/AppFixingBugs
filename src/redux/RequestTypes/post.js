@@ -41,7 +41,7 @@ export default async function postApi(
         ? Toast.show({
             text1: response.data.message,
             type: 'success',
-            visibilityTime: 5000,
+            visibilityTime: 2000,
           })
         : null;
     }

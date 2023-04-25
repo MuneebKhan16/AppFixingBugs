@@ -8,16 +8,15 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+  StyleSheet
 } from 'react-native';
 import AppBackground from '../../../components/AppBackground';
-import {Colors, NavService} from '../../../config';
-import CustomButton from '../../../components/CustomButton';
 import Mainprofile from '../../../components/Mainprofile';
 import Posts from '../../../components/Posts';
 import { useSelector } from 'react-redux';
 import { get_reviews_event } from '../../../redux/APIs/index'
 const {width, height} = Dimensions.get('window');
-
+import { styles } from './profile_style';
 const Profile = props => {
   const [UserPost , setUserPost] = useState([]);
   const profile_Data = useSelector((state) => state.reducer.user)
@@ -30,8 +29,8 @@ const Profile = props => {
     <AppBackground title={'User Profiles'} home setting>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{marginBottom: 5}}>
-        <View style={{marginTop: 10}}>
+        style={styles.btm}>
+        <View style={styles.top}>
           <Mainprofile
             center
             row
@@ -40,14 +39,7 @@ const Profile = props => {
             edit
           />
           <Text
-            style={{
-              marginTop: 20,
-              fontSize: 20,
-              color: Colors.black,
-              fontWeight: 'bold',
-              marginLeft:10,
-              fontFamily: 'serif'
-            }}>
+            style={StyleSheet.post}>
             Post History
           </Text>
             <Posts UserPost={UserPost} profile_Data={profile_Data} />
@@ -58,4 +50,4 @@ const Profile = props => {
   );
 };
 
-export default Profile
+export default React.memo(Profile)

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Component, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Dimensions, Animated, } from 'react-native';
 import { Colors, NavService } from '../../../config';

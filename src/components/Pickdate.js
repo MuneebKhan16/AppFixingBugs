@@ -39,39 +39,20 @@ const Pickdate = () => {
     <>
       <View style={styles.container}>
         <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            borderWidth: 1,
-            marginVertical: 10,
-            paddingLeft: 5,
-            borderRadius: 10,
-          }}>
+          style={styles.content}>
           <TouchableOpacity
             onPress={showDatePicker}
-            style={{ width: 260, flexDirection: 'row', alignItems: 'center', height: 45, }}>
-            <View style={{
-              width: 38,
-              height: 38,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 10,
-            }}>
+            style={styles.touchable}>
+            <View style={styles.datepicker}>
               <Image
                 source={Icons.date}
 
-                style={{
-                  width: 22,
-                  height: 22,
-                  resizeMode: 'contain',
-                }}
+                style={styles.img}
               />
 
             </View>
             <Text
               style={styles.textInput}
-            // value={getDate()}
-            // placeholder="Date..."
             >
               {getDate()}
             </Text>
@@ -95,4 +76,25 @@ const styles = StyleSheet.create({
     width: 232,
     marginLeft: 10
   },
+  content: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    marginVertical: 10,
+    paddingLeft: 5,
+    borderRadius: 10,
+  },
+  touchable: { width: 260, flexDirection: 'row', alignItems: 'center', height: 45, },
+  datepicker: {
+    width: 38,
+    height: 38,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  img: {
+    width: 22,
+    height: 22,
+    resizeMode: 'contain',
+  }
 });

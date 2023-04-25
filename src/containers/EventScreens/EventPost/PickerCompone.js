@@ -1,31 +1,56 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native'
-import React,{useState} from 'react'
+import React, { useState , useEffect } from 'react'
 import { Picker } from '@react-native-picker/picker';
 import { Colors } from '../../../config';
-const PickerCompone = () => {
-      const [selectedLanguage, setSelectedLanguage] = useState();
-  const [selectedPicker, setSelectedPicker] = useState();
+const PickerCompone = (props) => {
+  const { categories ,setSelectedData } = props
+  console.log('object', categories)
 
+  const [selectedLanguage, setSelectedLanguage] = useState();
+  const [selectedPicker, setSelectedPicker] = useState(categories);
+
+  const handletransfer = () => {
+    setSelectedData(selectedLanguage)
+  }
+
+  useEffect(() => {
+    handletransfer()
+  },[selectedLanguage])
+
+console.log("selectedLanguage",selectedLanguage , selectedPicker)
+
+  
   return (
     <Picker
-          style={{
-            backgroundColor: '#ededed',
-            marginTop: 10,
-            width: '98%',
-            paddingLeft: 15,
-            borderRadius: 10,
-          }}
-          color={Colors.grey}
-          selectedValue={selectedLanguage}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedLanguage(itemValue)
-          }>
-          <Picker.Item label="Type" value="Type" color={'black'} style={{ fontWeight: 'bold' }} />
-          <Picker.Item label="event" value="event" color={'black'} style={{ fontWeight: 'bold' }} />
-        </Picker> 
+      style={styles.container}
+      color={Colors.grey}
+      selectedValue={selectedLanguage}
+      onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
+    >
+      <Picker.Item label='Select an options' value='null' color={'black'} style={{ fontWeight: 'bold' }} />
+      {
+        categories?.map((data) => {
+          return(
+            <Picker.Item  key={data.category_id} label={data.title} value={data || data.title} color={'black'} style={{ fontWeight: 'bold' }} />
+
+          )
+        } )
+      }
+      
+      
+    </Picker>
   )
 }
 
 export default PickerCompone
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#ededed',
+    marginTop: 10,
+    width: 300,
+    paddingLeft: 15,
+    borderRadius: 20,
+  }
+})

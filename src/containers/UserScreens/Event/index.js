@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import Icons from '../../../assets/Icons';
 import { styles } from './event_style';
 import  ImageURL  from '../../../config/Common'
+
 const Event = (props) => {
 
   const api_token = useSelector(state => state?.reducer?.user.api_token);
@@ -30,12 +31,12 @@ const Event = (props) => {
   }, [])
 
   return (
-    <AppBackground title={'Eventsaaaa'} home back filter>
+    <AppBackground title={'Events'} home back filter>
       <FlatList
         data={cat}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
-          <View style={{ marginTop: 30 }}>
+          <View style={styles.top}>
             <View style={styles.container}>
               <Text
                 style={styles.title}>
@@ -54,14 +55,13 @@ const Event = (props) => {
               <ImageBackground
                 source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
                 style={styles.img}
-                imageStyle={{ borderRadius: 10 }}>
+                imageStyle={styles.border}>
                 <View style={styles.loccontainer}>
                   <View style={styles.locsub}>
                     <Image source={Icons.location} resizeMode="contain" style={styles.location} />
                   </View>
                   <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
                 </View>
-
               </ImageBackground>
 
             </RNBounceable>

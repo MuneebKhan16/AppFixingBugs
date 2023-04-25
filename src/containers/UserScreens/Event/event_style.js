@@ -32,6 +32,8 @@ export const styles = StyleSheet.create({
       tintColor: Colors.white, width: 24,
       height: 24,
     },
-    loctxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' }
+    loctxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' },
+    top:{ marginTop: 30 },
+    border:{ borderRadius: 10 }
   });
   
