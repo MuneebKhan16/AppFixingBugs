@@ -9,20 +9,24 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
+
 import React, { useState , useEffect } from 'react';
 import AppBackground from '../../../components/AppBackground';
-import { Evntdata } from '../../../config/Dummydata/Dummydata';
-import { Colors, NavService } from '../../../config';
+import { NavService } from '../../../config';
 import { styles } from './eventhome_style';
 import { useSelector } from 'react-redux'
 import  ImageURL from '../../../config/Common'
 import { show_eventCreater_event } from '../../../redux/APIs'
 import Icons from '../../../assets/Icons'
 
+
+
 const EventHome = (props) => {
 
+  
   const [showEvents , SetshowEvents] =useState([]);
-
+  
+  
   const user_id = useSelector((state) => state?.reducer?.user?.id);
   
   const Event_data = async () => {
@@ -36,7 +40,7 @@ const EventHome = (props) => {
 
   },[])
 
-    console.log("showEvents",showEvents)
+  
 
   const EventReview = (item) => {
 
@@ -45,43 +49,43 @@ const EventHome = (props) => {
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home>
-      <View style={styles.container}>
-        <FlatList
-          data={showEvents}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, index }) => (
-            <View style={styles.maincontainer}>
-              <View style={styles.content}>
-                <Text
-                  style={styles.title}>
-                  {item?.event_title}
-                </Text>
-                <View
-                  style={styles.rev}>
-                  <Image source={Icons.starFilled} style={styles.review} />
+        <View style={styles.container}>
+          <FlatList
+            data={showEvents}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item, index }) => (
+              <View style={styles.maincontainer}>
+                <View style={styles.content}>
                   <Text
-                    style={styles.txt}>
-                    {item?.review == null ? 0 : item?.review}{" "} Reviews
+                    style={styles.title}>
+                    {item?.event_title}
                   </Text>
-                </View>
-              </View>
-              <TouchableOpacity onPress={() => EventReview(item) }>
-
-                <ImageBackground
-                  source={{ uri : `${ImageURL?.ImageURL}${ item?.event_image} `}}
-                  style={styles.imgback}
-                  imageStyle={styles.img} >
-                  <View style={styles.loc}>
-                    <Image source={Icons.location} resizeMode="contain" style={styles.location} />
-                    <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                  <View
+                    style={styles.rev}>
+                    <Image source={Icons.starFilled} style={styles.review} />
+                    <Text
+                      style={styles.txt}>
+                      {item?.review == null ? 0 : item?.review}{" "} Reviews
+                    </Text>
                   </View>
-                </ImageBackground>
-              </TouchableOpacity>
-            </View>
-          )}
-        />
-      </View>
-    </AppBackground>
+                </View>
+                <TouchableOpacity onPress={() => EventReview(item) }>
+
+                  <ImageBackground
+                    source={{ uri : `${ImageURL?.ImageURL}${ item?.event_image} `}}
+                    style={styles.imgback}
+                    imageStyle={styles.img} >
+                    <View style={styles.loc}>
+                      <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                      <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                    </View>
+                  </ImageBackground>
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        </View>
+      </AppBackground>
   );
 };
 
