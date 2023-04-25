@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {Component,useEffect} from 'react';
 import {View, Text, Image, ScrollView, TouchableOpacity,Animated} from 'react-native';
 import {Colors, NavService} from '../../../config';
@@ -28,7 +29,7 @@ const FadeInView = props => {
         anim.stopAnimation(({Value}) => console.log('Final Value: ' + Value)),
       2000,
     );
-  }, []);
+  },[]);
   return (
     <View style={{}}>
       <Animated.View
@@ -49,52 +50,59 @@ class App extends Component {
     visible1: false,
     visible2: false,
   };
-  onSubmit = () => {
-    const {password,  confirmPassword,otp,email} = this.state;
-    if (!password && ! confirmPassword) {
-      Toast.show({
-        text1: 'Please enter all fields',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    } 
   
-
-    else if (!password) {
-      Toast.show({
-        text1: 'Password is required',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
-    else if (!schema.validate(password)) {
-      Toast.show({
-        text1: 'Password not valid (Use atleast one UpperCase Letter, one number and one special character',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
-    // else if (confirmPassword) {
-    //   Toast.show({
-    //     text1: 'Confirm password is required',
-    //     type: 'error',
-    //     visibilityTime: 3000,
-    //   });
-    // } 
-    else if (password !==  confirmPassword) {
-      Toast.show({
-        text1: 'Password and confirm password must be same',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    } else {
-      resetPassword(password,confirmPassword,otp,email)
-
-    }
-  };
+    onSubmit = () => {
+    console.log('kjol')
+      const {password,  confirmPassword,otp,email} = this.state;
+      if (!password && ! confirmPassword) {
+        Toast.show({
+          text1: 'Please enter all fields',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      } 
+    
+  
+      else if (!password) {
+        Toast.show({
+          text1: 'Password is required',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      }
+      else if (!schema.validate(password)) {
+        Toast.show({
+          text1: 'Password not valid (Use atleast one UpperCase Letter, one number and one special character',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      }
+      // else if (confirmPassword) {
+      //   Toast.show({
+      //     text1: 'Confirm password is required',
+      //     type: 'error',
+      //     visibilityTime: 3000,
+      //   });
+      // } 
+      else if (password !==  confirmPassword) {
+        Toast.show({
+          text1: 'Password and confirm password must be same',
+          type: 'error',
+          visibilityTime: 3000,
+        });
+      } else {
+        const email = this?.props?.route?.params?.email
+        const otp = this?.props?.route?.params?.otp
+        const password = this.state.password
+        resetPassword(password,otp,email)
+  
+      }
+    };
   render() {
-    const {password, confirmPassword} = this.state;
 
+    const {password, confirmPassword} = this.state;
+ console.log('reset password' , this.props.route.params.email , password , this.props.route.params.otp  )
+        
     return (
       <AppBackground back profile={false} title={'Reset Password'}>
         <CustomBackground>
@@ -138,7 +146,6 @@ class App extends Component {
                   marginTop: '10%',
                 }}
                 title="CONTINUE"
-                // onPress={() => NavService.navigate('Login')}
               onPress={this.onSubmit}
 
               />

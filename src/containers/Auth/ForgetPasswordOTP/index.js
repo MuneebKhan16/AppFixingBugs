@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Component, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, Animated, Button, StyleSheet } from 'react-native';
 import { Colors, NavService } from '../../../config';
@@ -7,6 +8,7 @@ import Icons from '../../../assets/Icons';
 import AppBackground from '../../../components/AppBackground';
 import OTPTextInput from '@twotalltotems/react-native-otp-input';
 import {styles} from '../ForgetPasswordOTP/otp_style'
+import Toast from 'react-native-toast-message'
 class OTP extends Component {
   ResetPassword = () => {
     NavService.navigate('ResetPassword')
@@ -52,12 +54,14 @@ class OTP extends Component {
       else if (screen == 'forgot') {
         NavService.navigate('ChangePassword', { screen: 'forgot' });
       }
-      Toast.show(ToastSuccess('OTP verified'));
+      Toast.show('OTP verified');
     } else {
-      Toast.show(ToastError('Invalid OTP verification code.'));
+      Toast.show('Invalid OTP verification code.');
     }
   };
+  
   render() {
+
     const { timerCode, resend, code } = this.state;
     const { user_id } = this.props.route.params;
     return (
@@ -108,7 +112,7 @@ class OTP extends Component {
                     marginTop: 50
                   }}
                   title="Verify"
-                  onPress={async () =>  this.ResetPassword}
+                  onPress={async () =>  NavService.navigate('ResetPassword' , this.props.route.params)}
                 />
               </View>
             </View>

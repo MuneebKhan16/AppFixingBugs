@@ -207,7 +207,7 @@ export async function resendVerifyCode(user_id) {
   await postApi('resend-otp', params);
 }
 
-export async function forget_password(email, otp) {
+export async function forget_password(email) {
 
   if (!email)
     return Toast.show({
@@ -229,9 +229,9 @@ export async function forget_password(email, otp) {
 
 
   const data = await postApi('forget-password', params);
-
+  console.log('forgetone',data)
   if (data.status === 1) {
-    NavService.navigate('ForgetPasswordOTP', { email });
+    NavService.navigate('ForgetPasswordOTP',  data );
     Toast.show({
       text1: data.message,
       type: 'success',
@@ -288,29 +288,29 @@ export async function resendForgetPasswordCode(email) {
   await postApi('forgot-password-resend-otp', params);
 }
 
-export async function resetPassword(password, confirmPassword, email, otp) {
-  if (!confirmPassword || !password)
-    return Toast.show({
-      text1: 'Please enter all info',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  if (!schema.validate(password))
-    return Toast.show({
-      text1: 'Password not valid (Use atleast eight character)',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  if (password !== confirmPassword)
-    return Toast.show({
-      text1: 'Passwords does not match',
-      type: 'error',
-      visibilityTime: 3000,
-    });
+export async function resetPassword(password,otp,email) {
+  // if (!confirmPassword || !password)
+  //   return Toast.show({
+  //     text1: 'Please enter all info',
+  //     type: 'error',
+  //     visibilityTime: 3000,
+  //   });
+  // if (!schema.validate(password))
+  //   return Toast.show({
+  //     text1: 'Password not valid (Use atleast eight character)',
+  //     type: 'error',
+  //     visibilityTime: 3000,
+  //   });
+  // if (password !== confirmPassword)
+  //   return Toast.show({
+  //     text1: 'Passwords does not match',
+  //     type: 'error',
+  //     visibilityTime: 3000,
+  //   });
 
   const params = {
     email,
-    password: password,
+    password,
     otp
   };
 
@@ -321,8 +321,9 @@ export async function resetPassword(password, confirmPassword, email, otp) {
     Toast.show({
       text1: data.message,
       type: 'success',
-      visibilityTime: 5000,
+      visibilityTime: 2000,
     });
+     NavService.navigate('Login')
   }
 }
 
