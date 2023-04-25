@@ -25,7 +25,7 @@ const Review = (props) => {
 
   useEffect(() => {
     get_reviews_event(profile_Data.api_token).then((res) => setUserPost(res.Data));
-  }, [])
+  },[])
 
   return (
     <AppBackground title={'Events'} home back chat>
