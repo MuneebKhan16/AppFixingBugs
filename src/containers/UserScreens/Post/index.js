@@ -64,7 +64,7 @@ class Post extends Component {
     const user_type = this?.props?.user?.user_type || 'customer'
     const rating = tar
     const tags = yups.pop()
-    const rating_image = this.state.selectedImage
+    const rating_image = { uri: this.state.selectedImage?.path, name: `rating`, type: this.state.selectedImage?.mime }
     const review = 'null'
     const event_id = this?.props?.route?.params;
     

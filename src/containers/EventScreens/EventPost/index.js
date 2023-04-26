@@ -61,7 +61,7 @@ const users = useSelector((state) => state.reducer.user)
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
-    const event_image = selectedImage?.path;
+    const event_image =  { uri: selectedImage?.path, name: `rating`, type: selectedImage?.mime } 
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;

@@ -430,15 +430,19 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
   const params = new FormData();
   params.append("user_id", user_id);
   params.append("user_type", user_type || 'customer');
-  params.append("rating_image", { uri: rating_image.path, name: `rating${Date.now()}.${rating_image?.mime?.slice(rating_image?.mime?.lastIndexOf('/') + 1,)} `, type: rating_image?.mime });
+  params.append("rating_image", rating_image);
   params.append("tags", tags);
   params.append("rating", rating);
   params.append("review", review || 'miss');
   params.append("event_id", event_id);
+  console.log('params',params)
 
-  const data = await postApi('add-rating', params);
+  const data = await postApi('add-rating' ,params);
+  console.log('ikolo0000',data)
+
+
   if (data.status == 1) {
-    NavService.navigate('Event')
+    NavService.navigate('Event',data)
     return data;
   }
   return data;
@@ -454,21 +458,11 @@ export async function post_events(event_title, event_type, event_description, ev
   params.append("category_id", category_id)
   params.append("event_location", event_location)
 
-  let payload = params._parts.flat([2]).map(data => data)
-  const obj = {};
-  for (let i = 0; i < payload.length; i += 2) {
-    const key = payload[i];
-    let value = payload[i + 1];
-    if (value === 'null') {
-      value = null;
-    }
-    obj[key] = value;
-  }
-  // console.log("lllll",obj);
-  const data = await postApi('add-event', obj)
+
+  const data = await postApi('add-event', params)
   console.log(data)
   if (data.status == 1) {
-    NavService.navigate('EventHome')
+    NavService.navigate('EventHome',data)
     return data;
   }
 }
