@@ -96,7 +96,7 @@ export async function login(email, password, setLogin) {
 
     if (data?.status == 1) {
       // NavService.navigate(0, [{ name: 'CompleteProfile' , data }]);
-      NavService.navigate('CompleteProfile' ,data)
+      NavService.navigate('CompleteProfile', data)
       Toast.show({
         text1: data?.message,
         type: 'success',
@@ -223,8 +223,9 @@ export async function forget_password(email) {
 
 
   const data = await postApi('forget-password', params);
+  console.log('forgetone', data)
   if (data.status === 1) {
-    NavService.navigate('ForgetPasswordOTP',  data );
+    NavService.navigate('ForgetPasswordOTP', data);
     Toast.show({
       text1: data.message,
       type: 'success',
@@ -265,7 +266,25 @@ export async function resendForgetPasswordCode(email) {
   await postApi('forgot-password-resend-otp', params);
 }
 
-export async function resetPassword(password,otp,email) {
+export async function resetPassword(password, otp, email) {
+  // if (!confirmPassword || !password)
+  //   return Toast.show({
+  //     text1: 'Please enter all info',
+  //     type: 'error',
+  //     visibilityTime: 3000,
+  //   });
+  // if (!schema.validate(password))
+  //   return Toast.show({
+  //     text1: 'Password not valid (Use atleast eight character)',
+  //     type: 'error',
+  //     visibilityTime: 3000,
+  //   });
+  // if (password !== confirmPassword)
+  //   return Toast.show({
+  //     text1: 'Passwords does not match',
+  //     type: 'error',
+  //     visibilityTime: 3000,
+  //   });
 
   const params = {
     email,
@@ -281,7 +300,7 @@ export async function resetPassword(password,otp,email) {
       type: 'success',
       visibilityTime: 2000,
     });
-     NavService.navigate('Login')
+    NavService.navigate('Login')
   }
 }
 
@@ -382,45 +401,34 @@ export async function get_reviews_event() {
   return data;
 }
 
-export async function post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id) {
-
+export async function post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id) {
+  
   const params = new FormData();
   params.append("user_id", user_id);
   params.append("user_type", user_type || 'customer');
-  params.append("rating_image", { uri: rating_image.path,  type: rating_image.mime, name : 'name'  });
+  params.append("rating_image", { uri: rating_image.path, name: `rating${Date.now()}.${rating_image?.mime?.slice(rating_image?.mime?.lastIndexOf('/') + 1,)} `, type: rating_image?.mime });
   params.append("tags", tags);
   params.append("rating", rating);
   params.append("review", review || 'miss');
   params.append("event_id", event_id);
 
-  let y = params._parts.flat([2]).map(data => data)
-  const obj = {};
-  for (let i = 0; i < y.length; i += 2) {
-    const key = y[i];
-    let value = y[i + 1];
-    if (value === 'null') {
-      value = null;
-    }
-    obj[key] = value;
-  }
-  console.log("oooo",obj)
-  const data = await postApi('add-rating', obj);
-  if(data.status == 1){
-    NavService.navigate('Review')
+  const data = await postApi('add-rating', params);
+  if (data.status == 1) {
+    NavService.navigate('Event')
     return data;
   }
   return data;
 }
 
-export async function post_events(event_title,event_type,event_description,event_image,user_id,category_id,event_location){
+export async function post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location) {
   const params = new FormData();
-  params.append("event_title" , event_title)
-  params.append("event_type" , event_type)
-  params.append("event_description" , event_description)
-  params.append("event_image" , event_image)
-  params.append("user_id" , user_id)
-  params.append("category_id" , category_id)
-  params.append("event_location" , event_location)
+  params.append("event_title", event_title)
+  params.append("event_type", event_type)
+  params.append("event_description", event_description)
+  params.append("event_image", event_image)
+  params.append("user_id", user_id)
+  params.append("category_id", category_id)
+  params.append("event_location", event_location)
 
   let payload = params._parts.flat([2]).map(data => data)
   const obj = {};
@@ -432,22 +440,24 @@ export async function post_events(event_title,event_type,event_description,event
     }
     obj[key] = value;
   }
-  const data = await postApi('add-event',obj)
-  if(data.status == 1){
+  // console.log("lllll",obj);
+  const data = await postApi('add-event', obj)
+  console.log(data)
+  if (data.status == 1) {
     NavService.navigate('EventHome')
     return data;
   }
 }
 
-export async function show_eventCreater_event(user_id){
- const body = new FormData();
- body.append('user_id',user_id);
+export async function show_eventCreater_event(user_id) {
+  const body = new FormData();
+  body.append('user_id', user_id);
 
- const data = await postApi('all-events',body);
- if(data.status == 1){
-  NavService.navigate('EventHome')
-  return data?.Data;
-}
+  const data = await postApi('all-events', body);
+  if (data.status == 1) {
+    NavService.navigate('EventHome')
+    return data?.Data;
+  }
 }
 
 

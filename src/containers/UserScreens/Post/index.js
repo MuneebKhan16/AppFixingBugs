@@ -65,11 +65,11 @@ class Post extends Component {
     const rating_image = this.state.selectedImage
     const review = 'null'
     const event_id = this?.props?.route?.params;
-
-    if (user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null) {
-      console.log('object', user_id, user_type, rating_image, tags, rating, review, event_id)
-      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
-
+    
+    if(user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null){
+      console.log('object',user_id,user_type,rating_image,tags,rating,review,event_id)
+       post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id)
+      
     }
 
   }
