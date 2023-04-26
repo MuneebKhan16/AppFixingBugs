@@ -406,15 +406,16 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
   const params = new FormData();
   params.append("user_id", user_id);
   params.append("user_type", user_type || 'customer');
-  params.append("rating_image", { uri: rating_image.path, name: `rating${Date.now()}.${rating_image?.mime?.slice(rating_image?.mime?.lastIndexOf('/') + 1,)} `, type: rating_image?.mime });
+  params.append("rating_image", { uri: rating_image?.path, name: `rating${Date.now()}.${rating_image?.mime?.slice(rating_image?.mime?.lastIndexOf('/') + 1,)} `, type: rating_image?.mime });
   params.append("tags", tags);
   params.append("rating", rating);
   params.append("review", review || 'miss');
   params.append("event_id", event_id);
-
+console.log("7890",params)
   const data = await postApi('add-rating', params);
+  console.log("kol",data)
   if (data.status == 1) {
-    NavService.navigate('Event')
+    // NavService.navigate('Event')
     return data;
   }
   return data;
