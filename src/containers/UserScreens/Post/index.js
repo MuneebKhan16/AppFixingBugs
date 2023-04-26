@@ -44,7 +44,7 @@ class Post extends Component {
     });
   }
 
-  
+
 
   handleReview = (name) => {
     const { isChecked } = this.state;
@@ -65,18 +65,18 @@ class Post extends Component {
     const rating_image = this.state.selectedImage
     const review = 'null'
     const event_id = this?.props?.route?.params;
-    
-    if(user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null){
-      console.log('object',user_id,user_type,rating_image,tags,rating,review,event_id)
-      post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id)
-      
+
+    if (user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null) {
+      console.log('object', user_id, user_type, rating_image, tags, rating, review, event_id)
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
     }
 
   }
 
 
   render() {
-    
+
     const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
       this.state;
     const { user } = this.props
@@ -120,8 +120,6 @@ class Post extends Component {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-
-
           <View
             style={styles.profile}>
             <View style={styles.btm}>
@@ -136,7 +134,6 @@ class Post extends Component {
                     this.setState({ selectedImage: { path, mime } });
                   }}>
                   <View style={styles.item}>
-
                     <Image
                       source={Icons.upload}
                       style={styles.uploadimg}
@@ -172,7 +169,6 @@ class Post extends Component {
 
               <View style={styles.check}>
                 <CheckBox
-                  disabled={false}
                   value={this.state.isChecked.third}
                   onValueChange={() => this.handleReview('NeedsCompany')}
                   tintColors={{ true: Colors.purple, false: 'green' }}

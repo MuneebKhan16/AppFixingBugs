@@ -24,13 +24,13 @@ class Login extends Component {
       Toast.show({
         text1: 'Please enter email address',
         type: 'error',
-        visibilityTime: 3000,
+        visibilityTime: 2000,
       });
     } else if (!EmailValidator.validate(email)) {
       Toast.show({
         text1: 'Please enter a valid email address',
         type: 'error',
-        visibilityTime: 3000,
+        visibilityTime: 2000,
       });
     } else {
       forget_password(email)

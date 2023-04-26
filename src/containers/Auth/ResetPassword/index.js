@@ -50,7 +50,7 @@ class App extends Component {
         Toast.show({
           text1: 'Password and confirm password must be same',
           type: 'error',
-          visibilityTime: 3000,
+          visibilityTime: 1500,
         });
       } else {
         const email = this?.props?.route?.params?.email

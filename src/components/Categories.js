@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   bg: { borderRadius: 10 },
-  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold' },
+  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', fontFamily: 'serif' },
   modal: {
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  detail: { color: Colors.white, fontWeight: '700', fontSize: 16 },
+  detail: { color: Colors.white, fontWeight: '700', fontSize: 16, fontFamily: 'serif' },
   mdlbtn: {
     alignSelf: 'center',
     marginTop: 50,
@@ -123,5 +123,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: 20,
+    fontFamily: 'serif'
   },
 });
