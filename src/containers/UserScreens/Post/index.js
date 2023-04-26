@@ -14,6 +14,7 @@ import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
 import { post_reviews } from '../../../redux/APIs'
+import ImagePicker from 'react-native-image-crop-picker';
 
 const Checkbox = {
   first: false,
@@ -61,11 +62,12 @@ class Post extends Component {
     const user_type = this?.props?.user?.user_type || 'customer'
     const rating = tar
     const tags = yups.pop()
-    const rating_image = this.state.selectedImage.path;
+    const rating_image = this.state.selectedImage
     const review = 'null'
     const event_id = this?.props?.route?.params;
     
     if(user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null){
+      console.log('object',user_id,user_type,rating_image,tags,rating,review,event_id)
       post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id)
       
     }

@@ -79,7 +79,7 @@ const Review = (props) => {
       </ScrollView>
       <CustomButton
         buttonStyle={styles.self}
-        title="Rate & Post"
+        title="Rate & Posts"
         onPress={() => NavService.navigate('Post' ,id)}
       />
     </AppBackground>

@@ -382,12 +382,12 @@ export async function get_reviews_event() {
   return data;
 }
 
-export async function post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id) {
+export async function post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id) {
 
   const params = new FormData();
   params.append("user_id", user_id);
   params.append("user_type", user_type || 'customer');
-  params.append("rating_image", rating_image);
+  params.append("rating_image", { uri: rating_image.path,  type: rating_image.mime, name : 'name'  });
   params.append("tags", tags);
   params.append("rating", rating);
   params.append("review", review || 'miss');
@@ -403,7 +403,7 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
     }
     obj[key] = value;
   }
-
+  console.log("oooo",obj)
   const data = await postApi('add-rating', obj);
   if(data.status == 1){
     NavService.navigate('Review')
