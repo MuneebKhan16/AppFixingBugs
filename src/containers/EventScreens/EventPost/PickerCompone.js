@@ -5,7 +5,6 @@ import { Picker } from '@react-native-picker/picker';
 import { Colors } from '../../../config';
 const PickerCompone = (props) => {
   const { categories ,setSelectedData } = props
-  console.log('object', categories)
 
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [selectedPicker, setSelectedPicker] = useState(categories);
@@ -18,7 +17,6 @@ const PickerCompone = (props) => {
     handletransfer()
   },[selectedLanguage])
 
-console.log("selectedLanguage",selectedLanguage , selectedPicker)
 
   
   return (

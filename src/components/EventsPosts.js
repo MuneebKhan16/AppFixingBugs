@@ -20,7 +20,6 @@ const Posts = ({ UserPost, event_id }) => {
     return durationString;
   }
 
-  console.log("UserPost12356", event_id)
   return (
 
 

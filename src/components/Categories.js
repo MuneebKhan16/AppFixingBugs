@@ -22,11 +22,9 @@ const Categories = props => {
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
-    console.log("isModalVisible",isModalVisible)
   };
 
   const { category, image, onPress, name, info, title } = props;
-  console.log("categories", categories)
   return (
     <TouchableOpacity
       onPress={onPress}

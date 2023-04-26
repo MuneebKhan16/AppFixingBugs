@@ -57,8 +57,6 @@ class Post extends Component {
     const tag = this.handleReview();
     const tar = this.state.starCount;
     const yups = Object.keys(tag).map(data => data)
-    console.log("8888",  yups.pop() , '9999') 
-    // console.log("this.props.user?.state",this.props.user)
     const user_id = this?.props?.user?.id
     const user_type = this?.props?.user?.user_type || 'customer'
     const rating = tar
@@ -133,7 +131,6 @@ class Post extends Component {
                 style={styles.picker}>
                 <CustomImagePicker
                   onImageChange={(path, mime) => {
-                    console.log('path', path);
                     this.setState({ selectedImage: { path, mime } });
                   }}>
                   <View style={styles.item}>

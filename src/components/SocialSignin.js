@@ -48,7 +48,6 @@ const Facebook = () => {
 
           await socialSignin(userAuth, 'facebook');
         } catch (error) {
-          console.log(error);
           Toast.show({
             text1: 'Unable to sign in with Facebook',
             type: 'error',
@@ -75,7 +74,6 @@ const Apple = async () => {
     const credentialState = await Auth()?.signInWithCredential(appleCredential);
     await socialSignin(credentialState, 'apple');
   } catch (error) {
-    console.log(error);
     Toast.show({
       text1: 'Unable to sign in with Apple',
       type: 'error',

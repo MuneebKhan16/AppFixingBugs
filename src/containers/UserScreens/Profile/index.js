@@ -20,7 +20,6 @@ import { styles } from './profile_style';
 const Profile = props => {
   const [UserPost , setUserPost] = useState([]);
   const profile_Data = useSelector((state) => state.reducer.user)
-  console.log(profile_Data)
   useEffect(() => {
     get_reviews_event(profile_Data.api_token).then((res) => setUserPost(res.Data));
   },[])

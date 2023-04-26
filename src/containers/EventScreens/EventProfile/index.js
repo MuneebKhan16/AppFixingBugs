@@ -28,7 +28,6 @@ const EventProfile = () => {
     return dates?.toLocaleDateString();
   }
 
-  console.log('userData',  showEvents)
   return (
 
       <AppBackground gear title={'User Profile'} home back>
