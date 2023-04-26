@@ -31,6 +31,8 @@ const EventHome = (props) => {
   
   const Event_data = async () => {
     const events = await show_eventCreater_event(user_id);
+    
+  console.log('showEvents',events,user_id)
     SetshowEvents(events.events)
   }
   
@@ -40,7 +42,6 @@ const EventHome = (props) => {
 
   },[])
 
-  
 
   const EventReview = (item) => {
 
@@ -65,7 +66,7 @@ const EventHome = (props) => {
                     <Image source={Icons.starFilled} style={styles.review} />
                     <Text
                       style={styles.txt}>
-                      {item?.review == null ? 0 : item?.review}{" "} Reviews
+                      {item?.rating_avg.map((data) => data.rating_count) || 0 }{" "} Reviews
                     </Text>
                   </View>
                 </View>
