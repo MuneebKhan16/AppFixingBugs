@@ -100,7 +100,6 @@ const users = useSelector((state) => state.reducer.user)
         <View style={styles.picker}>
           <CustomImagePicker
             onImageChange={(path, mime) => {
-              console.log('path', path);
               setSelectedImage({ path, mime });
             }}
           >

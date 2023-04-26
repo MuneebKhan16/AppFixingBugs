@@ -33,7 +33,6 @@ const Review = (props) => {
   
       })
       .catch((error) => {
-        console.log("Error is comming")
   
       })
   }

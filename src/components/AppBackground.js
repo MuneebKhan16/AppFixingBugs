@@ -52,7 +52,6 @@ export function AppBackground({
     setModalVisible(!isModalVisible);
   };
   const [location, setLocation] = useState();
-  //  console.log("==========="+ route.name)
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View

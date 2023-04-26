@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
       width: 300
     },
     sheet: { backgroundColor: 'transparent' },
-    top: { marginTop: 60 },
+    top: { marginTop: 60 ,alignSelf:'center'},
     user: { marginTop: 40 },
     mime: { alignItems: 'center' },
     upload: { width: 40, height: 20, resizeMode: 'contain', },

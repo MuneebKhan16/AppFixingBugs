@@ -156,9 +156,7 @@ export async function signup(
     password,
     confirm_password,
   };
-  console.log('params', params)
   const data = await postApi('signup', params);
-  console.log("chcecking", data);
   if (data?.status == 1) {
     NavService.reset(0, [{ name: 'CompleteProfile' }])
     Toast.show({
@@ -168,7 +166,6 @@ export async function signup(
     });
   }
   else if (data?.status === 0) {
-    console.log("sta", data)
     Toast.show({
       text1: `${data.message.email}`,
       type: 'error',
@@ -186,9 +183,6 @@ export async function verifyCode(otp, user_id) {
 
   const data = await postApi('verification', params);
 
-  console.log('====================================');
-  console.log(data);
-  console.log('====================================');
 
   if (data?.status == 1) {
     dispatch({
@@ -251,27 +245,11 @@ export async function forget_password(email) {
 }
 
 export async function verifyForgetPasswordCode(otp) {
-  console.log("iiii", otp)
-  // if (!otp)
-  //   return Toast.show({
-  //     text1: 'Please enter the code',
-  //     type: 'error',
-  //     visibilityTime: 3000,
-  //   });
-  // if (otp.length < 6)
-  //   return Toast.show({
-  //     text1: 'Code length should be 6 characters',
-  //     type: 'error',
-  //     visibilityTime: 3000,
-  //   });
 
   const params = {
     otp,
-    // email,
   };
-  console.log("otpchecked", params)
   const data = await postApi('forget-password', params);
-  console.log("eeeee", data.Data.otp)
   if (data?.status == 1) {
     Keyboard.dismiss;
     setTimeout(() => {
@@ -315,7 +293,6 @@ export async function resetPassword(password, otp, email) {
   };
 
   const data = await postApi('update-password', params);
-  console.log('data', params)
 
   if (data?.status == 1) {
     Toast.show({
@@ -401,7 +378,6 @@ export async function updateProfile(
     NavService.goBack();
   }
 
-  console.log(data);
 }
 
 export async function getPolicies(type) {

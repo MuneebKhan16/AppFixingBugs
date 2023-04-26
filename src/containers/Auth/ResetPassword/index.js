@@ -12,36 +12,6 @@ import { resetPassword } from '../../../redux/APIs';
 import { schema } from '../../../config/validation';
 import Toast from 'react-native-toast-message';
 
-const FadeInView = props => {
-  const anim = new Animated.Value(0);
-  const duration = 2000;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(anim, {
-        toValue: -15,
-        duration: duration,
-        useNativeDriver: true,
-      }),
-    ).start();
-    setTimeout(
-      () =>
-        anim.stopAnimation(({Value}) => console.log('Final Value: ' + Value)),
-      2000,
-    );
-  },[]);
-  return (
-    <View style={{}}>
-      <Animated.View
-        style={{
-          ...props.style,
-          transform: [{translateY: anim}],
-        }}>
-        {props.children}
-      </Animated.View>
-    </View>
-  );
-};
 
 class App extends Component {
   state = {
@@ -52,7 +22,6 @@ class App extends Component {
   };
   
     onSubmit = () => {
-    console.log('kjol')
       const {password,  confirmPassword,otp,email} = this.state;
       if (!password && ! confirmPassword) {
         Toast.show({
@@ -77,18 +46,11 @@ class App extends Component {
           visibilityTime: 1500,
         });
       }
-      // else if (confirmPassword) {
-      //   Toast.show({
-      //     text1: 'Confirm password is required',
-      //     type: 'error',
-      //     visibilityTime: 3000,
-      //   });
-      // } 
       else if (password !==  confirmPassword) {
         Toast.show({
           text1: 'Password and confirm password must be same',
           type: 'error',
-          visibilityTime: 3000,
+          visibilityTime: 1500,
         });
       } else {
         const email = this?.props?.route?.params?.email
@@ -101,7 +63,6 @@ class App extends Component {
   render() {
 
     const {password, confirmPassword} = this.state;
- console.log('reset password' , this.props.route.params.email , password , this.props.route.params.otp  )
         
     return (
       <AppBackground back profile={false} title={'Reset Password'}>
@@ -113,7 +74,7 @@ class App extends Component {
               width: '90%',
               top: -15,
             }}>
-            <FadeInView
+            <View
               style={{
                 alignItems: 'center',
                 width: '100%',
@@ -149,7 +110,7 @@ class App extends Component {
               onPress={this.onSubmit}
 
               />
-            </FadeInView>
+            </View>
           </View>
         </CustomBackground>
       </AppBackground>

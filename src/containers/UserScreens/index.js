@@ -214,7 +214,6 @@ const TabStackComp = () => {
 };
 
 const EventScreenStack = (props) => {
-  console.log("kkkk",props)
   return (
     <ImageBackground source={Images.bg} style={{flex: 1}}>
       <Stack.Navigator
