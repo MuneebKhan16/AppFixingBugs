@@ -286,6 +286,8 @@ export async function resetPassword(password, otp, email) {
   //     visibilityTime: 3000,
   //   });
 
+
+  
   const params = {
     email,
     password,
