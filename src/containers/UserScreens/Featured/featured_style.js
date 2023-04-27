@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
       fontSize: 18,
       color: Colors.black,
       fontWeight: '700',
-      fontFamily: 'serif'
+      fontFamily: 'serif',
+      textTransform: 'capitalize',
     },
     empty: {
       width: 22,
@@ -48,7 +49,7 @@ export const styles = StyleSheet.create({
       height: 22,
       resizeMode: 'contain',
     },
-    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' },
+    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif', textTransform: 'capitalize', },
     border:{ borderRadius: 10 }
   });
   

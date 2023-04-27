@@ -8,9 +8,6 @@ export default function CustomTextInput(props) {
   const {containerStyle, types} = props;
   return (
     <View style={{width: '100%', marginTop: 20}}>
-      {/* <Text style={{color: 'black', fontWeight: '600', fontSize: 14}}>
-        {placeholder}
-      </Text> */}
       <View
         style={[
           {

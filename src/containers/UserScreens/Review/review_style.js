@@ -29,7 +29,8 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginTop: 30,
       fontFamily: 'serif',
-      marginLeft:13
+      marginLeft:13,
+      textTransform: 'capitalize',
     },
     top:{ marginTop: 30 },
     swiper:{ height: 200, borderRadius: 15 },

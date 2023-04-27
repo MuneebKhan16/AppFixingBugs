@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     color: Colors.black,
     fontWeight: 'bold',
     fontFamily: 'serif',
-    fontSize: 18
+    fontSize: 18,
+    textTransform: 'capitalize',
   },
   date: {
     position: 'absolute',
@@ -124,6 +125,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginTop: 10,
     fontFamily: 'serif',
+    textTransform: 'capitalize',
   },
   maincontent: {
     borderTopWidth: 2,

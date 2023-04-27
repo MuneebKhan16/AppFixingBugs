@@ -31,6 +31,7 @@ import Icons from '../../../assets/Icons';
 import { styles } from './Home_Styles';
 import ImageURL from '../../../config/Common'
 
+
 export class Home extends Component {
 
   Featured = () => {
@@ -45,7 +46,9 @@ export class Home extends Component {
     selectedId: '',
     category: [],
     categoryid: null,
-    feature: []
+    feature: [],
+    text: '',
+    isFocused: false,
   };
 
   componentDidMount() {
@@ -56,7 +59,7 @@ export class Home extends Component {
     localevents(userData).then((res) => this.setState({ feature: res?.Data?.featured }));
   }
   render() {
-    const { popUp, location, date, category, categoryid, feature } = this.state;
+    const { popUp, location, date, category, categoryid, feature, text, isFocused } = this.state;
     const userImage = this?.props?.user?.image;
 
 
@@ -65,7 +68,7 @@ export class Home extends Component {
     };
 
     return (
-      <AppBackground notification marginHorizontal title={'Home'} home>
+      <AppBackground marginHorizontal title={'Home'} home>
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.scrlcontainer}>
@@ -128,26 +131,33 @@ export class Home extends Component {
           <View
             style={styles.modalcontainer}>
             <View>
-              <View
-                style={styles.mdlmaincontainer}>
+              <Text style={styles.mdltxt}>Please enter the location</Text>
+
+              <Btn />
+              <View style={styles.mdltxtheader}>
+                <Image source={Icons.marker} resizeMode='contain' style={styles.mdlimg} />
                 <TextInput
-                  style={styles.lcntxtinput}
-                  value={location}
-                  placeholder="Please enter the location"
+                  style={styles.txtinputadrs}
+                  placeholder="Address"
+                  secureTextEntry={!isFocused}
+                  onFocus={() => this.setState({ isFocused: true })}
+                  onBlur={() => this.setState({ isFocused: false })}
+                  onChangeText={text => this.setState({ text })}
+
+                  value={text}
                   placeholderTextColor={Colors.black}
-                  placeholderTextStyle={styles.txtinput}
+
                 />
               </View>
-              <Btn />
-              <Pickdate />
-              <Pickdate />
             </View>
+            <Pickdate />
             <CustomButton
               onPress={togglePopUp}
               buttonStyle={styles.btnstyle}
               title="Continue"
             />
           </View>
+
         </Modal>
       </AppBackground>
     );

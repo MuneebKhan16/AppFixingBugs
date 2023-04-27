@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
         color: Colors.black,
         fontWeight: 'bold',
         marginLeft:10,
-        fontFamily: 'serif'
+        fontFamily: 'serif',
+        textTransform: 'capitalize',
       },
       btm:{marginBottom: 5},
       top:{marginTop: 10}

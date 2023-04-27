@@ -30,10 +30,11 @@ export default React.memo(Btn);
 
 const styles = StyleSheet.create({
  content:{
-  fontWeight: 'bold',
-  fontSize: 18,
+  fontWeight: '700',
+  fontSize: 20,
   color: Colors.black,
-  fontFamily: 'serif',
+   textTransform: 'capitalize',
+   left:5
 },
-swich:{position: 'absolute', right: 1}
+swich:{position: 'absolute', right: 2}
 });

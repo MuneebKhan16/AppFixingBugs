@@ -33,10 +33,12 @@ export const styles = StyleSheet.create({
       container: {
         textAlign: 'center',
         color: Colors.white,
-        fontSize: 16,
+        fontSize: 18,
         marginVertical: 20,
+        fontWeight:'bold',
+        fontFamily: 'serif', textTransform: 'capitalize',
       },
-      otp: { width: '80%', height: 100 },
+      otp: { width: '80%', height: 80 ,},
       boders: {
         alignItems: 'center',
         justifyContent: 'center',

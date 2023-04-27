@@ -4,7 +4,7 @@ import { Colors, NavService } from '../../../config';
 
 export const styles = StyleSheet.create({
     container: { flexDirection: 'row', alignItems: 'center', },
-    title: { fontSize: 18, color: Colors.black, fontWeight: 'bold', fontFamily: 'serif', marginLeft: 5 },
+    title: { fontSize: 18, color: Colors.black, fontWeight: 'bold', fontFamily: 'serif', marginLeft: 5 , textTransform: 'capitalize',},
     filled: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
       fontSize: 18,
       color: Colors.black,
       fontWeight: 'bold',
-      fontFamily: 'serif'
+      fontFamily: 'serif',
+      textTransform: 'capitalize',
     },
     img: { width: '100%', height: 180, marginTop: 10 },
     loccontainer: { flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 5, },
@@ -32,7 +33,7 @@ export const styles = StyleSheet.create({
       tintColor: Colors.white, width: 24,
       height: 24,
     },
-    loctxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' },
+    loctxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif', textTransform: 'capitalize', },
     top:{ marginTop: 30 },
     border:{ borderRadius: 10 }
   });

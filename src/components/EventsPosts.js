@@ -114,13 +114,15 @@ const styles = StyleSheet.create({
     right: 0,
     color: Colors.black,
     fontWeight: '700',
-    fontFamily: 'serif'
+    fontFamily: 'serif',
+    textTransform: 'capitalize',
   },
   name: {
     color: Colors.black,
     fontWeight: 'bold',
     marginLeft: 10,
     fontFamily: 'serif',
+    textTransform: 'capitalize',
 
   },
   rating: {
@@ -135,6 +137,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginTop: 10,
     fontFamily: 'serif',
-    fontSize: 16
+    fontSize: 16,
+    textTransform: 'capitalize',
   }
 });

@@ -60,5 +60,5 @@ export const styles = StyleSheet.create({
     posting: { backgroundColor: Colors.purple, borderTopLeftRadius: 10, borderTopRightRadius: 10, alignItems: 'center', paddingTop: 10, width: '90%', alignSelf: 'center' },
     requriment: { fontSize: 18, color: Colors.white, fontWeight: 'bold' },
     category: { backgroundColor: Colors.purple, paddingHorizontal: 8, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, width: '90%', alignSelf: 'center', padding: 20, alignItems: 'center', justifyContent: 'center' },
-    modaltxt: { color: Colors.white, fontWeight: '700', fontSize: 16, lineHeight: 28, paddingHorizontal: 10 ,fontFamily: 'serif'},
+    modaltxt: { color: Colors.white, fontWeight: '700', fontSize: 16, lineHeight: 28, paddingHorizontal: 10 ,fontFamily: 'serif', textTransform: 'capitalize',},
   })

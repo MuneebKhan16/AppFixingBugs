@@ -9,36 +9,37 @@ const Mainprofile = props => {
   const profile_Data = useSelector((state) => state.reducer.user);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
   const [starCount, setStarCount] = React.useState(1);
-  const { name, subtitle, center, row, top, star, edit, inc, size, txt,location } = props;
+  const { name, subtitle, center, row, top, star, edit, inc, size, txt, location } = props;
   return (
     <View
       style={{
         alignItems: center ? 'center' : null,
         flexDirection: row ? 'row' : null,
         marginLeft: 5,
-        marginTop:15
+        marginTop: 15
       }}>
       {top ? (
         <View style={styles.container}>
-        <Image
-          source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
-          resizeMode='center'
-          style={styles.pic}
-        />
+          <Image
+            source={{ uri: `${BaseUrl}${profile_Data?.profile_picture}` }}
+            resizeMode='center'
+            style={styles.pic}
+          />
         </View>
       ) : (
-        <View >
+        <View  style={styles.subimg}>
           <Image
-           source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
+            source={{ uri: `${BaseUrl}${profile_Data?.profile_picture}` }}
             style={{
-              width: inc ? 50 : 70,
-              height: inc ? 50 : 70,
+              width: inc ? 50 : 75,
+              height: inc ? 50 : 75,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
+              
             }}
           />
-             {edit ? (
+          {edit ? (
             <TouchableOpacity
               style={styles.profilepic}>
               <Image
@@ -52,7 +53,7 @@ const Mainprofile = props => {
       <View
         style={{
           marginLeft: row ? 10 : null,
-          marginBottom:row ? 15 :null
+          marginBottom: row ? 15 : null
         }}>
         <Text
           style={{
@@ -61,6 +62,8 @@ const Mainprofile = props => {
             color: Colors.black,
             fontFamily: 'serif',
             textAlign: row ? null : 'center',
+            textTransform: 'capitalize',
+            marginTop: 10
           }}>
           {props?.name}
         </Text>
@@ -79,8 +82,9 @@ const Mainprofile = props => {
             style={{
               fontSize: size ? 18 : 17,
               color: Colors.black,
-              fontWeight:'600',
-              fontFamily: 'serif',
+              fontWeight: '600',
+              fontFamily: 'serif', textTransform: 'capitalize',
+              marginLeft:5
             }}>
             {props?.subtitle}
           </Text>
@@ -106,7 +110,7 @@ const Mainprofile = props => {
 export default Mainprofile;
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     alignItems: 'center',
     width: 80,
     height: 80,
@@ -116,38 +120,41 @@ const styles = StyleSheet.create({
     borderColor: Colors.purple,
 
   },
-  pic:{
-    width: 75,
-    height: 75,
-    borderRadius:40 ,
+  pic: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    
   },
-  profilepic:{
+  profilepic: {
     padding: 12,
     alignItems: 'center',
     width: 25,
     height: 25,
     justifyContent: 'center',
     borderRadius: 40,
-    top:-25,
-    left:43,
-    backgroundColor:Colors.purple
-    
+    top: -25,
+    left: 48,
+    backgroundColor: Colors.purple
+
   },
-  edit:{
+  edit: {
     width: 12,
     height: 12,
     resizeMode: 'contain',
-  },
-  mark:{
     
+  },
+  mark: {
+
     flexDirection: 'row',
     right: 8,
     height: 50,
     alignItems: 'center',
     borderRadius: 10,
     position: 'absolute',
-    
+
   },
-  marker:{ width: 30, height: 30,  },
-  location:{ fontSize: 16, color: Colors.black, fontFamily: 'serif',fontWeight:'600' }
+  marker: { width: 30, height: 30, },
+  location: { fontSize: 16, color: Colors.black, fontFamily: 'serif', fontWeight: '600' },
+  subimg:{height:80}
 });

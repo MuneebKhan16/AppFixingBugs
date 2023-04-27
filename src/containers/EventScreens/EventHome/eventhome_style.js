@@ -28,6 +28,6 @@ export const styles = StyleSheet.create({
     container:{ marginBottom: 10, marginTop: 10, },
     img:{ borderRadius: 10 },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},
-    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold', textTransform: 'capitalize',}
   });
   

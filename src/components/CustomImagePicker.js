@@ -61,7 +61,7 @@ export default CustomImagePicker = ({
                 borderBottomColor: '#ccc',
                 paddingVertical: 10,
               }}>
-              <Text style={{color: 'grey', textAlign: 'center'}}>
+              <Text style={{color: 'grey', textAlign: 'center', textTransform: 'capitalize',}}>
                 Choose an option to pick an Image
               </Text>
             </View>
@@ -76,7 +76,7 @@ export default CustomImagePicker = ({
                 borderBottomWidth: 1.5,
                 borderBottomColor: '#ccc',
               }}>
-              <Text style={{color: 'rgb(0,88,200)', fontSize: 18}}>
+              <Text style={{color: 'rgb(0,88,200)', fontSize: 18, textTransform: 'capitalize',}}>
                 Take Photo
               </Text>
             </TouchableOpacity>

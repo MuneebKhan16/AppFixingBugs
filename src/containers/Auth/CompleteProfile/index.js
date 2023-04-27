@@ -6,10 +6,10 @@ import {
   ImageBackground,
   StyleSheet,
   TouchableOpacity,
-BackHandler,
-Alert
+  BackHandler,
+  Alert
 } from 'react-native';
-import React, { useEffect,useCallback } from 'react';
+import React, { useEffect, useCallback, } from 'react';
 import CustomBackground from '../../../components/CustomBackground';
 import AppBackground from '../../../components/AppBackground';
 import Images from '../../../assets/Images';
@@ -19,13 +19,13 @@ import { NavService } from '../../../config';
 import { useSelector } from 'react-redux'
 
 const index = (props) => {
-  
+
   const ScreenStack = useCallback(() => {
     NavService.navigate('ScreenStack')
-  },[])
+  }, [])
   const EventStack = useCallback(() => {
     NavService.navigate('EventScreenStack')
-  },[])
+  }, [])
   useEffect(() => {
     const backAction = () => {
       Alert.alert('Exit', 'Are you sure you want to go back?', [
@@ -45,15 +45,14 @@ const index = (props) => {
     );
 
     return () => backHandler.remove();
-  }, []);
-  return (
+  }, []);  return (
     <AppBackground back={false} profile={false} title={'User Selection'}>
       <View
         style={styles.maincontainer}>
         <View>
           <TouchableOpacity
             style={styles.container}
-            onPress={() => ScreenStack() }>
+            onPress={() => ScreenStack()}>
             <ImageBackground
               source={Images.background3}
               style={styles.imgbg}
@@ -97,6 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     position: 'absolute',
+    textTransform: 'capitalize',
   },
   maincontainer: {
     justifyContent: 'center',

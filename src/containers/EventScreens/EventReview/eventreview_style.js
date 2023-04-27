@@ -31,7 +31,8 @@ export const styles = StyleSheet.create({
       color: Colors.black,
       fontWeight: 'bold',
       fontFamily: 'serif',
-      marginTop: 10
+      marginTop: 10,
+      textTransform: 'capitalize',
     }
   });
   
