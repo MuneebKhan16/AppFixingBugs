@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     top:{ marginBottom: 20,marginTop:-10 },
     backbg:{ backgroundColor: 'transparent' },
     btm:{ marginBottom: 30 },
-    item:{ alignItems: 'center' },
+    item:{ alignItems: 'center',justifyContent:'center',width:300,height:150 },
     uploadimg:{ width: 20, height: 20, resizeMode: 'contain' },
     center:{ alignSelf: 'center' },
     txt:{ fontSize: 25, marginLeft: 10 }

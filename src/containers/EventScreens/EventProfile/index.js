@@ -17,9 +17,6 @@ const EventProfile = () => {
      SetshowEvents(events.events)
   }
   
-  useEffect(() => {
-    Event_data();
-  },[])
 
 
   const DateReadbleFunction = (dateIn) => {

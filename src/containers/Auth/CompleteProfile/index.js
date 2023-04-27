@@ -27,18 +27,25 @@ const index = (props) => {
     NavService.navigate('EventScreenStack')
   },[])
   useEffect(() => {
-    const handleBackButton = () => {
-      // handle the back button press here
+    const backAction = () => {
+      Alert.alert('Exit', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp()},
+      ]);
       return true;
     };
 
-    BackHandler.addEventListener('hardwareBackPress', handleBackButton);
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
 
-    return () => {
-      BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
-    };
+    return () => backHandler.remove();
   }, []);
-
   return (
     <AppBackground back={false} profile={false} title={'User Selection'}>
       <View
