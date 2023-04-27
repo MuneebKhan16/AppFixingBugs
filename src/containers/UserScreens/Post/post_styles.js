@@ -32,14 +32,14 @@ export const styles = StyleSheet.create({
     btn: { alignSelf: 'center', marginTop: 50 },
     tags: { fontSize: 25, marginLeft: 10 },
     check: { marginVertical: 10, flexDirection: 'row', },
-    box: { marginVertical: 10, flexDirection: 'row', marginTop: 100 },
+    box: { marginVertical: 10, flexDirection: 'row', marginTop: 80 },
     content:{
       alignItems: 'center',
       flexGrow: 1,
       marginTop: 30
     },
     flex:{flex:1},
-    top:{ marginBottom: 20 },
+    top:{ marginBottom: 20,marginTop:-10 },
     backbg:{ backgroundColor: 'transparent' },
     btm:{ marginBottom: 30 },
     item:{ alignItems: 'center' },

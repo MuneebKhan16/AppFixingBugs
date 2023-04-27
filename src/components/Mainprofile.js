@@ -60,14 +60,13 @@ const Mainprofile = props => {
             fontWeight: '700',
             color: Colors.black,
             fontFamily: 'serif',
-            textAlign: row ? null : 'center'
+            textAlign: row ? null : 'center',
           }}>
           {props?.name}
         </Text>
         {star ? (
           <StarRating
             fullStar={Icons.starFilled}
-            // halfStar={Icons.star_half}
             emptyStar={Icons.starEmpty}
             starSize={14}
             disabled={false}

@@ -6,7 +6,8 @@ import {
   ImageBackground,
   StyleSheet,
   TouchableOpacity,
-  Animated
+BackHandler,
+Alert
 } from 'react-native';
 import React, { useEffect,useCallback } from 'react';
 import CustomBackground from '../../../components/CustomBackground';
@@ -25,6 +26,19 @@ const index = (props) => {
   const EventStack = useCallback(() => {
     NavService.navigate('EventScreenStack')
   },[])
+  useEffect(() => {
+    const handleBackButton = () => {
+      // handle the back button press here
+      return true;
+    };
+
+    BackHandler.addEventListener('hardwareBackPress', handleBackButton);
+
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
+    };
+  }, []);
+
   return (
     <AppBackground back={false} profile={false} title={'User Selection'}>
       <View

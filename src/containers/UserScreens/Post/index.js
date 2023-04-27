@@ -14,8 +14,6 @@ import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
 import { post_reviews } from '../../../redux/APIs'
-import ImagePicker from 'react-native-image-crop-picker';
-
 const Checkbox = {
   first: false,
   second: false,
@@ -27,15 +25,15 @@ class Post extends Component {
     userImage: this.props.user?.image,
     selectedImage: null,
     starCount: 1,
-    isChecked: Checkbox,
+    isChecked: false,
+    isChecked1:false,
+    isChecked2:false
+
 
   };
   constructor(props) {
     super(props);
     this.actionSheetStateRef = createRef();
-  }
-  handleCheckboxChange = () => {
-    this.setState({ isChecked: !this.state.isChecked });
   }
 
   onStarRatingPress(rating) {
@@ -64,20 +62,19 @@ class Post extends Component {
     const tags = yups.pop()
     const rating_image = { uri: this.state.selectedImage?.path, name: `rating`, type: this.state.selectedImage?.mime }
     const review = 'null'
-    const event_id = this?.props?.route?.params;   
-    
-    if(user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null){
-      console.log('object',user_id,user_type,rating_image,tags,rating,review,event_id)
-       post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id)
-      
+    const event_id = this?.props?.route?.params;
+
+    if (user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null) {
+      console.log('object', user_id, user_type, rating_image, tags, rating, review, event_id)
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
     }
 
   }
 
-
   render() {
 
-    const { userImage, selectedImage, toggleCheckBox, toggleCheckBox2, toggleCheckBox3 } =
+    const { userImage, selectedImage,} =
       this.state;
     const { user } = this.props
 
@@ -98,8 +95,8 @@ class Post extends Component {
 
             <StarRating
               fullStar={Icons.starFilled}
-              emptyStar={Icons.starEmpty}
-              starSize={14}
+              emptyStar={Icons.null}
+              starSize={16}
               maxStars={5}
               rating={this.state.starCount}
               selectedStar={(rating) => this.onStarRatingPress(rating)}
@@ -143,14 +140,15 @@ class Post extends Component {
                 </CustomImagePicker>
               </View>
             </View>
+
             <View style={styles.center}>
 
               <View style={styles.box}>
                 <CheckBox
                   disabled={false}
-                  value={this.state.isChecked.first}
-                  onValueChange={() => this.handleReview('ItsLit')}
-                  tintColors={{ true: Colors.purple, false: 'grey' }}
+                  value={this.state.isChecked}
+                  onValueChange={(newValue) => this.setState({ isChecked: newValue })}
+                  tintColors={{ true: 'purple', false: 'purple' }}
                 />
                 <Text style={styles.txt}>ItsLit</Text>
 
@@ -158,20 +156,21 @@ class Post extends Component {
 
 
               <View style={styles.check}>
-                <CheckBox
+              <CheckBox
                   disabled={false}
-                  value={this.state.isChecked.second}
-                  onValueChange={() => this.handleReview('ItsAVibe')}
-                  tintColors={{ true: Colors.purple, false: 'grey' }}
+                  value={this.state.isChecked1}
+                  onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
+                  tintColors={{ true: 'purple', false: 'purple' }}
                 />
                 <Text style={styles.txt}>ItsAVibe</Text>
               </View>
 
               <View style={styles.check}>
-                <CheckBox
-                  value={this.state.isChecked.third}
-                  onValueChange={() => this.handleReview('NeedsCompany')}
-                  tintColors={{ true: Colors.purple, false: 'green' }}
+              <CheckBox
+                  disabled={false}
+                  value={this.state.isChecked2}
+                  onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
+                  tintColors={{ true: 'purple', false: 'purple' }}
                 />
                 <Text style={styles.txt}>NeedsCompany</Text>
 
