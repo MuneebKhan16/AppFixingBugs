@@ -8,7 +8,7 @@ import { Colors } from '../../../config';
 import Icons from '../../../assets/Icons';
 import { styles } from './eventreview_style';
 import  ImageURL from '../../../config/Common'
-import EventPost from '../../../components/EventsPosts';
+import EventsPosts from '../../../components/EventsPosts';
 import { get_reviews_event } from '../../../redux/APIs/index'
 import { useSelector } from 'react-redux'
 const EventReview = (props) => {
@@ -28,6 +28,9 @@ const EventReview = (props) => {
     var date = new Date();
     return date.toLocaleDateString();
   }
+
+  const filteringData = UserPost.filter(data => data.event_id === props.route.params.id)
+  console.log('object',UserPost)
 
   return (
     <AppBackground back home>
@@ -58,19 +61,10 @@ const EventReview = (props) => {
         </View>
         <Text
           style={styles.heading}>
-          Ratings & Posts
+          Ratings & Post
         </Text>
         {
-          PassedData.id === PassedData.id && UserPost.length > 0 ? 
-          (
-            <EventPost  UserPost={UserPost} event_id={PassedData.id} />
-            
-          ) :
-          (
-            <View style={styles.container1}>
-              <Text style={styles.txtheadersty}> No Review's Found </Text>
-            </View>
-          )
+           <EventsPosts datas={filteringData}  /> 
         }
         
         

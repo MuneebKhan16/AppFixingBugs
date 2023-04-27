@@ -25,12 +25,12 @@ const Posts = (props) => {
     return durationString;
   }
 
-  console.log(datas)
+  console.log('mnmn',datas)
 
   return (
     <View>
       {
-        datas.length > 0 ?
+        datas?.length > 0 ?
           (
             datas.map((data) => {
               return (
