@@ -50,7 +50,10 @@ const EventHome = (props) => {
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home>
-        <View style={styles.container}>
+      {
+        showEvents.length > 0 ? 
+        (
+          <View style={styles.container}>
           <FlatList
             data={showEvents}
             showsVerticalScrollIndicator={false}
@@ -86,6 +89,15 @@ const EventHome = (props) => {
             )}
           />
         </View>
+          
+        ) :
+        (
+          <View style={styles.container1}>
+          <Text style={styles.txtheadersty}>You donot Created Events</Text>
+        </View>
+
+        )
+      }
       </AppBackground>
   );
 };

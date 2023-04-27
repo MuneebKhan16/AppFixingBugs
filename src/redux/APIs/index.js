@@ -158,7 +158,7 @@ export async function signup(
   };
   const data = await postApi('signup', params);
   if (data?.status == 1) {
-    NavService.reset(0, [{ name: 'CompleteProfile' }])
+    NavService.reset(0, [{ name: 'Login' }])
     Toast.show({
       text1: data.message,
       type: 'success',
@@ -287,7 +287,7 @@ export async function resetPassword(password, otp, email) {
   //   });
 
 
-  
+
   const params = {
     email,
     password,

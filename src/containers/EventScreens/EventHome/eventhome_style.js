@@ -24,7 +24,9 @@ export const styles = StyleSheet.create({
     loc:{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 8, left: 5, },
     location:{ tintColor: Colors.white, width: 25, height: 25 },
     loctxt:{ color: Colors.white, fontWeight: 'bold', fontFamily: 'serif' },
-    container:{ marginBottom: 10, marginTop: 10 },
-    img:{ borderRadius: 10 }
+    container:{ marginBottom: 10, marginTop: 10, },
+    img:{ borderRadius: 10 },
+    container1:{justifyContent:'center',alignItems:'center',flex:1,},
+    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
   });
   
