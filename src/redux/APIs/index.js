@@ -223,7 +223,7 @@ export async function forget_password(email) {
 
 
   const data = await postApi('forget-password', params);
-  console.log('forgetone', data)
+  
   if (data.status === 1) {
     NavService.navigate('ForgetPasswordOTP', data);
     Toast.show({
@@ -413,10 +413,10 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
   params.append("rating", rating);
   params.append("review", review || 'miss');
   params.append("event_id", event_id);
-  console.log('params',params)
+  
 
   const data = await postApi('add-rating' ,params);
-  console.log('ikolo0000',data)
+  
 
 
   if (data.status == 1) {
@@ -438,7 +438,7 @@ export async function post_events(event_title, event_type, event_description, ev
 
 
   const data = await postApi('add-event', params)
-  console.log(data)
+  
   if (data.status == 1) {
     NavService.navigate('EventHome',data)
     return data;

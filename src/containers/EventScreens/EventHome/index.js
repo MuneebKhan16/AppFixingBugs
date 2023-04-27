@@ -32,7 +32,7 @@ const EventHome = (props) => {
   const Event_data = async () => {
     const events = await show_eventCreater_event(user_id);
     
-  console.log('showEvents',events,user_id)
+  
     SetshowEvents(events.events)
   }
   

@@ -18,7 +18,7 @@ const EventReview = (props) => {
   const PassedData = props?.route?.params
 
   const [UserPost, setUserPost] = useState([]);
-  console.log("UserPost45",UserPost)
+  
   useEffect(() => {
     get_reviews_event(token).then((res) => setUserPost(res.Data));
   }, [])
