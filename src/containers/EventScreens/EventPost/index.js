@@ -21,6 +21,7 @@ import Modal from 'react-native-modal';
 import { styles } from './eventpost_styles';
 import { post_events, Get_All_Categories } from '../../../redux/APIs';
 import { useSelector } from 'react-redux';
+import Toast from 'react-native-toast-message';
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
@@ -66,15 +67,18 @@ const users = useSelector((state) => state.reducer.user)
     const category_id = selectedData?.category_id;
     const event_location = location;
 
-    post_events(
-      event_title,
-      event_type,
-      event_description,
-      event_image,
-      user_id,
-      category_id,
-      event_location
-    );
+
+      post_events(
+        event_title,
+        event_type,
+        event_description,
+        event_image,
+        user_id,
+        category_id,
+        event_location
+      );
+
+    
   };
     return (
       <AppBackground title={'Events'} home back>
@@ -97,7 +101,9 @@ const users = useSelector((state) => state.reducer.user)
           name={user?.name}
           imageUri={selectedImage ? selectedImage.path : userImage}
         />
+        
         <View style={styles.picker}>
+        
           <CustomImagePicker
             onImageChange={(path, mime) => {
               setSelectedImage({ path, mime });
@@ -112,6 +118,7 @@ const users = useSelector((state) => state.reducer.user)
             </View>
           </CustomImagePicker>
         </View>
+       
       </View>
       <View style={styles.top}>
         <TextInput

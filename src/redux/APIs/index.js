@@ -427,22 +427,87 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
 }
 
 export async function post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location) {
-  const params = new FormData();
-  params.append("event_title", event_title)
-  params.append("event_type", event_type)
-  params.append("event_description", event_description)
-  params.append("event_image", event_image)
-  params.append("user_id", user_id)
-  params.append("category_id", category_id)
-  params.append("event_location", event_location)
-
-
-  const data = await postApi('add-event', params)
-  
-  if (data.status == 1) {
-    NavService.navigate('EventHome',data)
-    return data;
+  if(!event_title && !event_type && !event_description && !event_image && !category_id && !event_location){
+    return Toast.show({
+      text1: 'Select all fields',
+      type: 'error',
+      visibilityTime: 3000,
+    });
   }
+  else if(!event_title){
+    return Toast.show({
+      text1: 'No Title Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!event_description){
+    return Toast.show({
+      text1: 'No Description Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!event_location){
+    return Toast.show({
+      text1: 'No Location Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!category_id){
+    return Toast.show({
+      text1: 'No Category Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!event_type){
+    return Toast.show({
+      text1: 'No EventType Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+
+  if(!event_image == null){
+    return Toast.show({
+      text1: 'No Image Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+
+  if(event_title !== null  && event_type !== null && event_description !== null && event_image !== null && category_id !== null && event_location !== null){
+    const params = new FormData();
+    params.append("event_title", event_title)
+    params.append("event_type", event_type)
+    params.append("event_description", event_description)
+    params.append("event_image", event_image)
+    params.append("user_id", user_id)
+    params.append("category_id", category_id)
+    params.append("event_location", event_location)
+  
+  
+    const data = await postApi('add-event', params)
+    
+    if (data.status == 1) {
+      NavService.navigate('EventHome',data)
+      return data;
+    }
+
+  } else{
+    return Toast.show({
+      text1: 'No Events',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  
+
+  
+
+
 }
 
 export async function show_eventCreater_event(user_id) {
