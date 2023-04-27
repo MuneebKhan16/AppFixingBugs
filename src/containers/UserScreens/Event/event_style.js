@@ -34,6 +34,8 @@ export const styles = StyleSheet.create({
     },
     loctxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' },
     top:{ marginTop: 30 },
-    border:{ borderRadius: 10 }
+    border:{ borderRadius: 10 },
+    container1:{justifyContent:'center',alignItems:'center',flex:1,},
+    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
   });
   

@@ -78,5 +78,7 @@ export const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
       },
-      imgbg:{ borderRadius: 10 }
+      imgbg:{ borderRadius: 10 },
+      container1:{paddingTop:100, justifyContent:'center',alignItems:'center',flex:1,},
+  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
 })

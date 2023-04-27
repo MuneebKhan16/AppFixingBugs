@@ -74,7 +74,8 @@ const Posts = ({ UserPost, profile_Data }) => {
       )
       :
       (
-        <View><Text>No Data coming</Text></View>
+        <View style={styles.container1}>
+          <Text style={styles.txtheadersty}>No User Data Available</Text></View>
       )
 
   )
@@ -128,6 +129,8 @@ const styles = StyleSheet.create({
   maincontent: {
     borderTopWidth: 2,
     borderTopColor: Colors.grey,
-    marginTop: 10,
-  }
+    marginTop: 10
+  },
+  container1:{paddingTop:200 , justifyContent:'center',alignItems:'center',flex:1,},
+  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
 });
