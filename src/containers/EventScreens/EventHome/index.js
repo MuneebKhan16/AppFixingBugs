@@ -49,7 +49,7 @@ const EventHome = (props) => {
   };
 
   return (
-    <AppBackground profile marginHorizontal title={'Home'} home>
+    <AppBackground profile marginHorizontal title={'Home'} home style={{paddingBottom:20}}>
       {
         showEvents.length > 0 ? 
         (
