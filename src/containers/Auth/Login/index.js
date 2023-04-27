@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { Component, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, Dimensions, Animated, } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Dimensions, Animated, KeyboardAvoidingView } from 'react-native';
 import { Colors, NavService } from '../../../config';
 import CustomBackground from '../../../components/CustomBackground';
-import CustomTextInput from '../../../components/CustomTextInput';
 import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import AppBackground from '../../../components/AppBackground';
@@ -15,7 +14,7 @@ import { styles } from './Login_Style';
 
 
 class Login extends Component {
-  ForgetPassword =  () => {
+  ForgetPassword = () => {
     NavService.navigate("ForgetPassword")
   }
   Signup = () => {
@@ -64,7 +63,7 @@ class Login extends Component {
     const { email, password } = this.state;
     return (
       <AppBackground profile={false} back={true} title={"Login"} >
-        <CustomBackground>
+        <CustomBackground >
           <View
             style={styles.maincontainer}>
             <View
@@ -105,8 +104,9 @@ class Login extends Component {
 
               />
             </View>
+
           </View>
-          <View style={styles.btm} >
+          <KeyboardAvoidingView style={styles.btmheader} behavior="padding">
             <Text
               style={styles.btmtxt}>
               Don't have an account?{' '}
@@ -116,7 +116,7 @@ class Login extends Component {
                 Signup
               </Text>
             </Text>
-          </View>
+          </KeyboardAvoidingView>
         </CustomBackground>
       </AppBackground>
     );

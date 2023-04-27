@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         width: '90%',
+        marginTop:20
     },
     container: {
         alignItems: 'center',
@@ -28,7 +29,7 @@ touchable:{
   btm:{
     position: 'absolute',
     bottom: 15,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   btmtxt:{
     fontSize: 15,
@@ -40,5 +41,11 @@ touchable:{
     color: Colors.white,
     fontSize: 15,
     textDecorationLine: 'underline',
-  }
+  },
+  btmheader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop:20
+  },
 })

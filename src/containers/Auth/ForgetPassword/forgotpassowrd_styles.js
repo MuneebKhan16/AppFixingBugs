@@ -6,9 +6,9 @@ export const styles = StyleSheet.create({
     maincontainer:{
         alignItems: 'center',
         width: '90%',
+        
       },
       container:{
-        marginTop: -55,
         alignItems: 'center',
         backgroundColor: 'rgba(118,158,190,300)',
         paddingVertical: '8%',

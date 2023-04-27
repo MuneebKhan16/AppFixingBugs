@@ -38,7 +38,7 @@ const Profile = props => {
             edit
           />
           <Text
-            style={StyleSheet.post}>
+            style={styles.post}>
             Post History
           </Text>
             <Posts UserPost={UserPost} profile_Data={profile_Data} />

@@ -77,5 +77,6 @@ userprofile:require('./profilelist.png'),
 eventlist:require('./eventlist.png'),
 homelist:require('./homelist.png'),
 chatlist:require('./chalist.png'),
-subscription:require('./subcription.png')
+subscription:require('./subcription.png'),
+null:require('../Icons/null.png')
 };

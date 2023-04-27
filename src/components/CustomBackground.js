@@ -63,5 +63,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 140
   },
-  child:{ flex: 1, marginTop: 10 }
+  child:{ flex: 1, }
 })
