@@ -29,12 +29,15 @@ const EventHome = (props) => {
     NavService.navigate('EventReview', item)
   };
 
+  console.log('showEvents78',showEvents)
+
   return (
     <AppBackground profile marginHorizontal title={'Home'} home style={{ paddingBottom: 20 }}>
-      <View style={styles.container}>
+    
         {
-          showEvents.length > 0 ?
+          showEvents?.length > 0 ?
             (
+              <View style={styles.container}>
               <FlatList
                 data={showEvents}
                 showsVerticalScrollIndicator={false}
@@ -69,17 +72,17 @@ const EventHome = (props) => {
                   </View>
                 )}
               />
-
+                </View>
 
             ) :
             (
               <View style={styles.container1}>
-                <Text style={styles.txtheadersty}>You donot Created Events</Text>
+                <Text style={styles.txtheadersty}>No Events Available</Text>
               </View>
 
             )
         }
-      </View>
+    
     </AppBackground>
   );
 };

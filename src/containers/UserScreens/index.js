@@ -243,14 +243,14 @@ const getCategorys = async () => {
 };
   
   React.useEffect(() => {
-          Event_data();
+    showEvents && Event_data() ? datahandle : null
           datahandle();
           getCategorys();
    return () => {
     console.log('unmounting'); 
 }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showEvents])
+  }, [])
   return (
         <ImageBackground source={Images.bg} style={{flex: 1}}>
     <eventContext.Provider value={{showEvents , UserPost ,Categorys}}>

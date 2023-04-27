@@ -494,7 +494,7 @@ export async function post_events(event_title, event_type, event_description, ev
     
     if (data.status == 1) {
       NavService.navigate('TabComp',data)
-      return data;
+      return data
     }
 
   } else{
