@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
       marginBottom:5
 
     },
-    txt: { fontSize: 20, fontWeight: '700', fontFamily: 'serif',marginBottom:5 },
-    content:{ marginTop: 20 },
-    hdcontent:{ alignSelf: 'center' }
+    txt: { fontSize: 20, fontWeight: 'bold', fontFamily: 'serif',marginBottom:5 , textTransform: 'capitalize',color:Colors.darkGray},
+    content:{ marginTop: 20 ,},
+    hdcontent:{ alignSelf: 'center',alignItems:'center' }
   });
   

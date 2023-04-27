@@ -59,7 +59,7 @@ class App extends Component {
 
               {methods.map((method, i) => {
                 const { color, name, icon, onPress } = method;
-                if (Platform.OS !== 'ios' && name === 'Apple ID') return null;
+                if (Platform.OS !== 'ios' && name === 'Apple') return null;
                 return (
                   <RNBounceable
                     bounceFriction={0.8}

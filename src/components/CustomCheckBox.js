@@ -38,7 +38,7 @@ class CustomCheckBox extends Component {
                 />
               ) : null}
             </View>
-            <Text style={{ marginLeft: 10 }}>{label}</Text>
+            <Text style={{ marginLeft: 10 , textTransform: 'capitalize',}}>{label}</Text>
           </View>
         </TouchableOpacity>
       );

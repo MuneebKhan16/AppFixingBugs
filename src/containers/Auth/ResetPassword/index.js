@@ -72,7 +72,6 @@ class App extends Component {
               flex: 1,
               alignItems: 'center',
               width: '90%',
-              top: -15,
             }}>
             <View
               style={{

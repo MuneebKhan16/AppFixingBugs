@@ -52,6 +52,7 @@ export function AppBackground({
     setModalVisible(!isModalVisible);
   };
   const [location, setLocation] = useState();
+  const [isFocused, setIsFocused] = useState(false);
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
@@ -78,6 +79,7 @@ export function AppBackground({
                 color: Colors.black,
                 fontWeight: 'bold',
                 fontSize: 20,
+                textTransform: 'capitalize',
               }}>
               {title}
             </Text>
@@ -211,7 +213,8 @@ export function AppBackground({
                   <View style={{ borderRadius: 15, backgroundColor: Colors.white, width: '90%', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', padding: 20 }}>
                     <Text style={{
                       fontSize: 16,
-                      fontWeight: '600'
+                      fontWeight: '600',
+                      textTransform: 'capitalize',
                     }}>Filters</Text>
                     <View style={{
                       borderColor: Colors.black,
@@ -234,12 +237,16 @@ export function AppBackground({
                           tintColor: Colors.purple,
                         }}
                       />
+                     
                       <TextInput
-                        value={location}
+                        style={{  borderColor: 'gray',  borderRadius: 10,width:'82%',color:Colors.black ,marginLeft:10,fontSize:17,fontWeight:'700', }}
                         placeholder="Location"
                         placeholderTextColor={Colors.black}
-                        placeholderTextStyle={{ fontSize: 18 }}
-                        style={{ marginLeft: 15, width: 215, height: 40 }}
+                        secureTextEntry={!isFocused} 
+                        onFocus={() => setIsFocused(true)} 
+                        onBlur={() => setIsFocused(false)} 
+                        onChangeText={location => setLocation(location)}
+                        value={location}
                       />
                     </View>
                     <Pickdate />
@@ -250,7 +257,6 @@ export function AppBackground({
                       title="Continue"
                       onPress={toggleModal}
                     />
-                    {/* <Button title="Hide modal" onPress={toggleModal} /> */}
                   </View>
                 </Modal>
               </View>
@@ -398,23 +404,24 @@ export default React.memo(AppBackground);
 
 
 const styles = StyleSheet.create({
-  maincontainer:{
+  maincontainer: {
     marginTop: getStatusBarHeight() + 20,
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-     marginBottom: 10,
+    marginBottom: 10,
   },
-  usertouchable:{
+  usertouchable: {
     position: 'absolute',
     alignItems: 'center',
     left: 20,
     justifyContent: 'center',
     top: 3,
-    paddingRight: 30,
+    paddingRight: 50,
+    paddingVertical:5
   },
-  authtouchable:{
+  authtouchable: {
     position: 'absolute',
     alignItems: 'center',
     borderRadius: 10,

@@ -34,7 +34,7 @@ export default function CustomButton(props) {
           buttonStyle,
         ]}
       >
-        <Text style={[{ fontSize: 18, color: Colors.white, fontWeight: 'bold' }, textStyle]}>
+        <Text style={[{ fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', }, textStyle]}>
           {title}
         </Text>
         {nextBtn && (

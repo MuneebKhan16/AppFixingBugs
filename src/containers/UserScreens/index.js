@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React,{useEffect} from 'react';
 import TabbarComp from '../../TabbarComp';
 import TabbarComponent from '../../TabbarComponent';
 
@@ -8,7 +8,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 // Config
 import {Colors} from '../../config';
-import {ImageBackground} from 'react-native';
+import {ImageBackground,BackHandler} from 'react-native';
 import Images from '../../assets/Images';
 //Screens
 import PreLogin from '../Auth/Login';
@@ -128,6 +128,7 @@ const TabStack = () => {
 };
 
 const ScreenStack = () => {
+  
   return (
     <ImageBackground source={Images.bg} style={{flex: 1}}>
       <Stack.Navigator

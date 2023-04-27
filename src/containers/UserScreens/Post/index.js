@@ -26,8 +26,8 @@ class Post extends Component {
     selectedImage: null,
     starCount: 1,
     isChecked: false,
-    isChecked1:false,
-    isChecked2:false
+    isChecked1: false,
+    isChecked2: false
 
 
   };
@@ -79,7 +79,7 @@ class Post extends Component {
 
   render() {
 
-    const { userImage, selectedImage,} =
+    const { userImage, selectedImage, } =
       this.state;
     const { user } = this.props
 
@@ -153,7 +153,7 @@ class Post extends Component {
                   disabled={false}
                   value={this.state.isChecked}
                   onValueChange={(newValue) => this.setState({ isChecked: newValue })}
-                  tintColors={{ true: 'purple', false: 'purple' }}
+                  tintColors={{ true: 'white', false: 'black' }}
                 />
                 <Text style={styles.txt}>ItsLit</Text>
 
@@ -161,21 +161,21 @@ class Post extends Component {
 
 
               <View style={styles.check}>
-              <CheckBox
+                <CheckBox
                   disabled={false}
                   value={this.state.isChecked1}
                   onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
-                  tintColors={{ true: 'purple', false: 'purple' }}
+                  tintColors={{ true: 'white', false: 'black' }}
                 />
                 <Text style={styles.txt}>ItsAVibe</Text>
               </View>
 
               <View style={styles.check}>
-              <CheckBox
+                <CheckBox
                   disabled={false}
                   value={this.state.isChecked2}
                   onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
-                  tintColors={{ true: 'purple', false: 'purple' }}
+                  tintColors={{ true: 'white', false: 'black' }}
                 />
                 <Text style={styles.txt}>NeedsCompany</Text>
 

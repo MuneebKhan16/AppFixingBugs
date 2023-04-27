@@ -14,7 +14,8 @@ import { Colors } from '../config';
 const Pickdate = () => {
   const [date, setDate] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+ 
+  const [isFocused, setIsFocused] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -46,16 +47,25 @@ const Pickdate = () => {
             <View style={styles.datepicker}>
               <Image
                 source={Icons.date}
-
                 style={styles.img}
               />
-
+             
             </View>
-            <Text
+            <TextInput
+        style={{height: 40,color:Colors.black ,fontSize:17,fontWeight:'700',width:'92%',}}
+        placeholder="Date"
+        placeholderTextColor={Colors.black}
+        editable={false}
+        onFocus={() => setIsFocused(true)} 
+        onBlur={() => setIsFocused(false)} 
+        onChangeText={date => setDate(date)}
+        value={getDate()}
+      />
+            {/* <Text
               style={styles.textInput}
             >
               {getDate()}
-            </Text>
+            </Text> */}
           </TouchableOpacity>
         </View>
         <DateTimePickerModal
@@ -74,7 +84,7 @@ export default Pickdate;
 const styles = StyleSheet.create({
   textInput: {
     width: 232,
-    marginLeft: 10
+    marginLeft: 10,
   },
   content: {
     flexDirection: 'row',

@@ -128,13 +128,11 @@ class OTP extends Component {
                 : null
             }
             style={{
-              // marginTop: 100,
               color: '#fff',
               fontWeight: resend ? '600' : '300',
               alignSelf: 'center',
               fontSize: 14,
-              position: 'absolute',
-              bottom: 10,
+              marginTop:50
             }}>
             Didn't Receive Code ? Resend
           </Text>
