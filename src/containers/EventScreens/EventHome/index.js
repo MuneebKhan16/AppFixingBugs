@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect ,useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import { NavService } from '../../../config';
 import { styles } from './eventhome_style';
@@ -18,31 +18,12 @@ import { useSelector } from 'react-redux'
 import  ImageURL from '../../../config/Common'
 import { show_eventCreater_event } from '../../../redux/APIs'
 import Icons from '../../../assets/Icons'
-
+import eventContext from '../eventContext';
 
 
 const EventHome = (props) => {
-
+  const { showEvents } = useContext(eventContext);
   
-  const [showEvents , SetshowEvents] =useState([]);
-  
-  
-  const user_id = useSelector((state) => state?.reducer?.user?.id);
-  
-  const Event_data = async () => {
-    const events = await show_eventCreater_event(user_id);
-    
-  
-    SetshowEvents(events.events)
-  }
-  
-  useEffect(() => {
-    
-    Event_data();
-
-  },[])
-
-
   const EventReview = (item) => {
 
     NavService.navigate('EventReview' , item)
@@ -50,10 +31,10 @@ const EventHome = (props) => {
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home style={{paddingBottom:20}}>
+      <View style={styles.container}>
       {
         showEvents.length > 0 ? 
         (
-          <View style={styles.container}>
           <FlatList
             data={showEvents}
             showsVerticalScrollIndicator={false}
@@ -88,7 +69,7 @@ const EventHome = (props) => {
               </View>
             )}
           />
-        </View>
+     
           
         ) :
         (
@@ -98,6 +79,7 @@ const EventHome = (props) => {
 
         )
       }
+         </View>
       </AppBackground>
   );
 };

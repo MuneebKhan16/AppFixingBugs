@@ -420,7 +420,7 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
 
 
   if (data.status == 1) {
-    NavService.navigate('Event',data)
+    NavService.navigate('Tab')
     return data;
   }
   return data;
@@ -470,9 +470,9 @@ export async function post_events(event_title, event_type, event_description, ev
     });
   }
 
-  if(!event_image == null){
+  else if(!event_image){
     return Toast.show({
-      text1: 'No Image Selected',
+      text1: 'No Image Selecteds',
       type: 'error',
       visibilityTime: 3000,
     });
@@ -488,11 +488,12 @@ export async function post_events(event_title, event_type, event_description, ev
     params.append("category_id", category_id)
     params.append("event_location", event_location)
   
+    console.log('object09876',params)
   
     const data = await postApi('add-event', params)
     
     if (data.status == 1) {
-      NavService.navigate('EventHome',data)
+      NavService.navigate('TabComp',data)
       return data;
     }
 
