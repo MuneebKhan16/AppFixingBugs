@@ -55,23 +55,6 @@ export class Home extends Component {
     Get_All_Categories().then((res) => this.setState({ categoryid: res.Data.filter((data) => data?.category_id) }));
     localevents(userData).then((res) => this.setState({ feature: res?.Data?.featured }));
   }
-  constructor(props) {
-    super(props);
-
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  }
-
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-
-  handleBackButtonClick() {
-    return true;
-  }
   render() {
     const { popUp, location, date, category, categoryid, feature } = this.state;
     const userImage = this?.props?.user?.image;
