@@ -56,7 +56,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
 
-  },
+        marginVertical: 10,
+        marginLeft: 20,
+      },
   mdlmaincontainer: {
     marginVertical: 10,
     alignSelf: 'center',
