@@ -18,7 +18,7 @@ const EventReview = (props) => {
   const PassedData = props?.route?.params
 
   const [UserPost, setUserPost] = useState([]);
-
+  console.log("UserPost45",UserPost)
   useEffect(() => {
     get_reviews_event(token).then((res) => setUserPost(res.Data));
   }, [])
@@ -60,8 +60,19 @@ const EventReview = (props) => {
           style={styles.heading}>
           Ratings & Posts
         </Text>
+        {
+          PassedData.id === PassedData.id && UserPost.length > 0 ? 
+          (
+            <EventPost  UserPost={UserPost} event_id={PassedData.id} />
+            
+          ) :
+          (
+            <View style={styles.container1}>
+              <Text style={styles.txtheadersty}> No Review's Found </Text>
+            </View>
+          )
+        }
         
-        <EventPost  UserPost={UserPost} event_id={PassedData.id} />
         
       </ScrollView>
     </AppBackground>

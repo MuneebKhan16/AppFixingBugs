@@ -47,6 +47,7 @@ class Post extends Component {
 
 
   handleReview = (name) => {
+    
     const { isChecked } = this.state;
     isChecked[name] = !isChecked[name];
     this.setState({ isChecked });
@@ -55,7 +56,11 @@ class Post extends Component {
 
   handleSubmit = () => {
 
-    const tag = this.handleReview();
+    const tag = this.state.isChecked;
+    delete this.state.isChecked.first
+    delete this.state.isChecked.second
+    delete this.state.isChecked.third
+    
     const tar = this.state.starCount;
     const yups = Object.keys(tag).map(data => data)
     const user_id = this?.props?.user?.id
@@ -67,7 +72,7 @@ class Post extends Component {
     const event_id = this?.props?.route?.params;   
     
     if(user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null){
-      console.log('object',user_id,user_type,rating_image,tags,rating,review,event_id)
+      
        post_reviews(user_id,user_type,rating_image,tags,rating,review,event_id)
       
     }
