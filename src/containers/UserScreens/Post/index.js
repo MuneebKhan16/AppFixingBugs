@@ -14,7 +14,7 @@ import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
 import { post_reviews } from '../../../redux/APIs'
-import ImagePicker from 'react-native-image-crop-picker';
+
 
 const Checkbox = {
   first: false,
