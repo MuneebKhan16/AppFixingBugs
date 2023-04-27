@@ -34,5 +34,11 @@ export const styles = StyleSheet.create({
       color: Colors.white,
       fontSize: 16,
       textDecorationLine: 'underline',
-    }
+    },
+    btmheaderstyl:{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop:20
+    },
   })

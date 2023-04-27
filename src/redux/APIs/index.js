@@ -420,7 +420,9 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
 
 
   if (data.status == 1) {
-    NavService.navigate('Event',data)
+    setTimeout (() => {
+      NavService.navigate('Event',data)
+    },2000) 
     return data;
   }
   return data;

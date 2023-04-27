@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, Animated,StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Animated,StyleSheet,KeyboardAvoidingView } from 'react-native';
 import { Colors, NavService } from '../../../config';
 import CustomBackground from '../../../components/CustomBackground';
 import CustomTextInput from '../../../components/CustomTextInput';
@@ -128,7 +128,7 @@ class Login extends Component {
               />
             </View>
           </View>
-          <View style={styles.btmheader}>
+          <KeyboardAvoidingView style={styles.btmheaderstyl} behavior="padding">
             <Text
               style={styles.txt}>
               Already have an account?{' '}
@@ -138,7 +138,7 @@ class Login extends Component {
                 Login
               </Text>
             </Text>
-          </View>
+            </KeyboardAvoidingView>
         </CustomBackground>
       </AppBackground>
     );
