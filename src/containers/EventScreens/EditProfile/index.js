@@ -130,57 +130,6 @@ class EditProfile extends Component {
   }
 }
 
-const ActionSheetCommponent = ({
-  title = '',
-  dataset = [],
-  onPress = () => { },
-}) => {
-  return (
-    <View
-      style={{
-        backgroundColor: 'rgba(241,241,241,0.9)',
-        borderRadius: 10,
-        marginBottom: 10,
-        overflow: 'hidden',
-      }}>
-      <View
-        style={{
-          borderBottomWidth: 1.5,
-          borderBottomColor: '#ccc',
-          paddingVertical: 10,
-        }}>
-        <Text
-          style={{
-            color: 'rgb(0,88,200)',
-            textAlign: 'center',
-            fontSize: 18,
-            fontWeight: '500',
-          }}>
-          {title}
-        </Text>
-      </View>
-      <ScrollView style={{ maxHeight: 200 }} showsVerticalScrollIndicator={false}>
-        {dataset.map((item, index) => {
-          return (
-            <TouchableOpacity
-              onPress={() => onPress(item)}
-              style={{
-                paddingVertical: 12,
-                alignItems: 'center',
-                borderBottomWidth: 1.5,
-                borderBottomColor: '#ccc',
-              }}>
-              <Text style={{ color: '#000', fontSize: 16 }} numberOfLines={1}>
-                {item?.state_name?.length ? item?.state_name : item?.city_name}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
-  );
-};
-
 
 const styles = StyleSheet.create({})
 

@@ -37,7 +37,7 @@ import EventProfile from '../EventScreens/EventProfile';
 import EventSetting from '../EventScreens/EventSetting';
 import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
-import EditProfile from '../EventScreens/EditProfile';
+import EditProfile from '../EventScreens/EditProfile'
 import eventContext from '../EventScreens/eventContext'
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -278,7 +278,11 @@ const getCategorys = async () => {
               component={EventProfile}
               options={{headerShown: false}}
             />
-          
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{headerShown: false}}
+            />
             <Stack.Screen
               name="EventSetting"
               component={EventSetting}
