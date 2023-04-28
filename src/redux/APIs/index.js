@@ -102,18 +102,9 @@ export async function login(email, password, setLogin) {
     }
     
 
-<<<<<<< HEAD
   } 
   catch (err) {
    
-=======
-  } catch (err) {
-    // return Toast.show({
-    //   text: "Error exist",
-    //   type: 'error',
-    //   visibilityTime: 3000,
-    // })
->>>>>>> 69093781d92ca9e7ac17772d3089ca5ec58f2814
   }
 }
 

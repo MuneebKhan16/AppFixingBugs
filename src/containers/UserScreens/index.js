@@ -37,11 +37,7 @@ import EventProfile from '../EventScreens/EventProfile';
 import EventSetting from '../EventScreens/EventSetting';
 import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
-<<<<<<< HEAD
-import EditProfile from '../EventScreens/EditProfile';
-=======
 import eventContext from '../EventScreens/eventContext'
->>>>>>> 69093781d92ca9e7ac17772d3089ca5ec58f2814
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 import { show_eventCreater_event , get_reviews_event ,Get_All_Categories } from '../../redux/APIs';
@@ -254,67 +250,8 @@ const getCategorys = async () => {
    return () => {
     console.log('unmounting'); 
 }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-<<<<<<< HEAD
-    <ImageBackground source={Images.bg} style={{flex: 1}}>
-      <Stack.Navigator
-        screenOptions={{
-          contentStyle: {backgroundColor: 'transparent'},
-          animation: 'simple_push',
-          gestureEnabled: false,
-        }}
-        initialRouteName="TabComp">
-        <Stack.Screen
-          name="TabComp"
-          component={TabStackComp}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EventHome"
-          component={EventHome}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EventProfile"
-          component={EventProfile}
-          options={{headerShown: false}}
-        />
-       
-        <Stack.Screen
-          name="EventSetting"
-          component={EventSetting}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChatScreen"
-          component={ChatScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EventReview"
-          component={EventReview}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="EventPost"
-          component={EventPost}
-          options={{headerShown: false}}
-        />
-         <Stack.Screen
-          name="EditProfile"
-          component={EditProfile}
-          options={{headerShown: false}}
-        />
-           <Stack.Screen
-          name="Aboutthecreator"
-          component={Aboutthecreator}
-          options={{headerShown: false}}
-        />
-      </Stack.Navigator>
-    </ImageBackground>
-=======
         <ImageBackground source={Images.bg} style={{flex: 1}}>
     <eventContext.Provider value={{showEvents , UserPost ,Categorys}}>
           <Stack.Navigator
@@ -368,7 +305,6 @@ const getCategorys = async () => {
           </Stack.Navigator>
     </eventContext.Provider>
         </ImageBackground>
->>>>>>> 69093781d92ca9e7ac17772d3089ca5ec58f2814
   );
 };
 
