@@ -35,7 +35,6 @@ export async function Get_All_Categories(api_token) {
 }
 
 export async function socialSignin(access_token, provider) {
-  // const fcmToken = await getDeviceToken();
   const params = {
     access_token,
     provider,
@@ -95,31 +94,26 @@ export async function login(email, password, setLogin) {
     const data = await postApi('signin', params, false)
 
     if (data?.status == 1) {
-      // NavService.navigate(0, [{ name: 'CompleteProfile' , data }]);
       NavService.navigate('CompleteProfile', data)
-      Toast.show({
-        text1: data?.message,
-        type: 'success',
-        visibilityTime: 5000,
-      });
+     
       dispatch(saveUser(data?.Data));
 
       return { api_token: data?.Data?.api_token }
     }
-    else if (data?.status == 0) {
-      Toast.show({
-        text1: data.message,
-        type: 'error',
-        visibilityTime: 5000,
-      });
-    }
+    
 
+<<<<<<< HEAD
+  } 
+  catch (err) {
+   
+=======
   } catch (err) {
     // return Toast.show({
     //   text: "Error exist",
     //   type: 'error',
     //   visibilityTime: 3000,
     // })
+>>>>>>> 69093781d92ca9e7ac17772d3089ca5ec58f2814
   }
 }
 
