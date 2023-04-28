@@ -29,15 +29,15 @@ const EventHome = (props) => {
     NavService.navigate('EventReview', item)
   };
 
-  console.log('showEvents78',showEvents)
+  console.log('showEvents78', showEvents)
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home style={{ paddingBottom: 20 }}>
-    
-        {
-          showEvents?.length > 0 ?
-            (
-              <View style={styles.container}>
+
+      {
+        showEvents?.length > 0 ?
+          (
+            <View style={styles.container}>
               <FlatList
                 data={showEvents}
                 showsVerticalScrollIndicator={false}
@@ -60,7 +60,7 @@ const EventHome = (props) => {
                     <TouchableOpacity onPress={() => EventReview(item)}>
 
                       <ImageBackground
-                        source={{ uri: `${ImageURL?.ImageURL}${item?.event_image} ` }}
+                        source={{ uri: `${ImageURL?.ImageURL}${item.event_image} ` }}
                         style={styles.imgback}
                         imageStyle={styles.img} >
                         <View style={styles.loc}>
@@ -72,17 +72,16 @@ const EventHome = (props) => {
                   </View>
                 )}
               />
-                </View>
+            </View>
 
-            ) :
-            (
-              <View style={styles.container1}>
-                <Text style={styles.txtheadersty}>No Events Available</Text>
-              </View>
+          ) :
+          (
+            <View style={styles.container1}>
+              <Text style={styles.txtheadersty}>No Events Available</Text>
+            </View>
+          )
+      }
 
-            )
-        }
-    
     </AppBackground>
   );
 };

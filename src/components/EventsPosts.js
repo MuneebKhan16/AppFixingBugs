@@ -122,14 +122,14 @@ const styles = StyleSheet.create({
     right: 0,
     color: Colors.black,
     fontWeight: '700',
-    fontFamily: 'serif',
+    
     textTransform: 'capitalize',
   },
   name: {
     color: Colors.black,
     fontWeight: 'bold',
     marginLeft: 10,
-    fontFamily: 'serif',
+    
     textTransform: 'capitalize',
 
   },
@@ -144,10 +144,10 @@ const styles = StyleSheet.create({
     color: '#000',
     marginLeft: 12,
     marginTop: 10,
-    fontFamily: 'serif',
+    
     fontSize: 16,
     textTransform: 'capitalize',
   },
   container1:{paddingTop:100, justifyContent:'center',alignItems:'center',flex:1,},
-  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+  txtheadersty:{fontSize:25,fontWeight:'bold'}
 });

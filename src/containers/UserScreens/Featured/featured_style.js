@@ -4,20 +4,19 @@ import { Colors, NavService } from '../../../config';
 export const styles = StyleSheet.create({
     container: { marginTop: 30, marginHorizontal: 8 },
     header: { flexDirection: 'row', alignItems: 'center' },
-    title: { fontSize: 18, color: Colors.black, fontWeight: 'bold', marginLeft: 5, fontFamily: 'serif' },
+    title: { fontSize: 16, color: Colors.black, fontWeight: 'bold', marginLeft: 8,  },
     filled: {
       flexDirection: 'row',
       alignItems: 'center',
       position: 'absolute',
       right: 5,
     },
-    icnfilled: { width: 20, height: 20 },
+    icnfilled: { width: 15, height: 15 },
     review: {
       marginLeft: 10,
-      fontSize: 18,
+      fontSize: 16,
       color: Colors.black,
-      fontWeight: '700',
-      fontFamily: 'serif',
+      fontWeight: 'bold',
       textTransform: 'capitalize',
     },
     empty: {
@@ -45,11 +44,11 @@ export const styles = StyleSheet.create({
       left: 8,
     },
     location: {
-      tintColor: Colors.white, width: 22,
-      height: 22,
+      tintColor: Colors.white, width: 18,
+      height: 18,
       resizeMode: 'contain',
     },
-    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif', textTransform: 'capitalize', },
+    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 16,  textTransform: 'capitalize', },
     border:{ borderRadius: 10 }
   });
   

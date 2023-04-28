@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   bg: { borderRadius: 10 },
-  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', fontFamily: 'serif', textTransform: 'capitalize', },
+  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize', },
   modal: {
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  detail: { color: Colors.white, fontWeight: '700', fontSize: 16, fontFamily: 'serif', textTransform: 'capitalize', },
+  detail: { color: Colors.white, fontWeight: '700', fontSize: 16, textTransform: 'capitalize', },
   mdlbtn: {
     alignSelf: 'center',
     marginTop: 50,
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    fontFamily: 'serif',
     textTransform: 'capitalize',
   },
 });

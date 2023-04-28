@@ -30,8 +30,8 @@ export default React.memo(Btn);
 
 const styles = StyleSheet.create({
  content:{
-  fontWeight: '700',
-  fontSize: 20,
+  fontWeight: '600',
+  fontSize: 18,
   color: Colors.black,
    textTransform: 'capitalize',
    left:5

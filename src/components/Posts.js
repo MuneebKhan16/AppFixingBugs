@@ -12,10 +12,9 @@ const Posts = ({ UserPost, profile_Data }) => {
   const ConvertTimeStamp = (date) => {
     const data = new Date(date);
     const hours = data.getHours();
-    const minutes = data.getMinutes();
-    const readable = hours + " " + "Hours" + ':' + minutes + " " + "Minutes" + " " + "ago";
+    const readable = hours + " " + "Hours" + ' ' + 'ago' ;
     return readable;
-  }
+  }     
   return (
 
 
@@ -42,7 +41,7 @@ const Posts = ({ UserPost, profile_Data }) => {
                       fullStar={Icons.starFilled}
                       // halfStar={Icons.star_half}
                       emptyStar={Icons.starEmpty}
-                      starSize={14}
+                      starSize={12}
                       disabled={true}
                       maxStars={5}
                       rating={data.rating}
@@ -86,23 +85,23 @@ export default Posts;
 const styles = StyleSheet.create({
   maincontainer: {
     flexDirection: 'row',
-    height: 50,
+    height: 60,
     alignItems: 'center',
     marginTop: 10,
-    marginLeft: 6
+    marginLeft: 6,
   },
   container: {
-    height: 40,
-    width: 45,
+    height: 50,
+    width: 50,
     alignSelf: 'center',
-    borderRadius: 60,
+    borderRadius: 50,
     borderWidth: 2,
-    borderColor: Colors.purple
+    borderColor: Colors.purple,
   },
   name: {
     color: Colors.black,
     fontWeight: 'bold',
-    fontFamily: 'serif',
+    
     fontSize: 18,
     textTransform: 'capitalize',
   },
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     color: Colors.black,
-    fontWeight: '600',
+    fontWeight: 'bold',
     marginRight: 10
   },
   img: {
@@ -125,14 +124,14 @@ const styles = StyleSheet.create({
     color: '#000',
     marginLeft: 12,
     marginTop: 10,
-    fontFamily: 'serif',
+    
     textTransform: 'capitalize',
   },
   maincontent: {
-    borderTopWidth: 2,
+    borderTopWidth: 0.8,
     borderTopColor: Colors.grey,
     marginTop: 10
   },
   container1:{paddingTop:200 , justifyContent:'center',alignItems:'center',flex:1,},
-  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+  txtheadersty:{fontSize:25,fontWeight:'bold'}
 });

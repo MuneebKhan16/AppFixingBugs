@@ -5,9 +5,9 @@ export const styles = StyleSheet.create({
     scroll: { marginTop: 20, },
     imgbg: { width: '100%', height: 180, borderRadius: 10 },
     titlehdr: { flexDirection: 'row', alignItems: 'center', marginTop: 18 },
-    title: { color: Colors.black, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif' },
-    date: { fontSize: 16, fontFamily: 'serif' },
-    subtitle: { fontWeight: '600', marginTop: 10, fontFamily: 'serif' },
+    title: { color: Colors.black, fontWeight: 'bold', fontSize: 18,  },
+    date: { fontSize: 16,  },
+    subtitle: { fontWeight: '600', marginTop: 10,  },
     markericn: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
     markericnhdr: {
       alignItems: 'center',
@@ -24,17 +24,17 @@ export const styles = StyleSheet.create({
       resizeMode: 'contain',
       marginRight: 10
     },
-    subcontent: { color: Colors.black, fontWeight: '700', fontFamily: 'serif' },
+    subcontent: { color: Colors.black, fontWeight: '700',  },
     heading: {
       marginVertical: 5,
       fontSize: 20,
       color: Colors.black,
       fontWeight: 'bold',
-      fontFamily: 'serif',
+      
       marginTop: 10,
       textTransform: 'capitalize',
     },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},
-    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+    txtheadersty:{fontSize:25,fontWeight:'bold'}
   });
   

@@ -4,39 +4,40 @@ import { Colors, NavService } from '../../../config';
 
 export const styles = StyleSheet.create({
     container: { flexDirection: 'row', alignItems: 'center', },
-    title: { fontSize: 18, color: Colors.black, fontWeight: 'bold', fontFamily: 'serif', marginLeft: 5 , textTransform: 'capitalize',},
+    title: { fontSize: 16, color: Colors.black,   marginLeft: 5 , textTransform: 'capitalize',fontWeight:'bold'},
     filled: {
       flexDirection: 'row',
       alignItems: 'center',
       position: 'absolute',
       right: 5,
     },
-    icnfilled: { width: 20, height: 20 },
+    icnfilled: { width: 16, height: 16 },
     review: {
       marginLeft: 10,
-      fontSize: 18,
+      fontSize: 16,
       color: Colors.black,
-      fontWeight: 'bold',
-      fontFamily: 'serif',
+      fontWeight:'bold',
+      
       textTransform: 'capitalize',
     },
     img: { width: '100%', height: 180, marginTop: 10 },
-    loccontainer: { flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 5, },
+    loccontainer: { flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 5,},
     locsub: {
-      width: 38,
-      height: 38,
+      width: 30,
+      height: 30,
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 10,
+      marginLeft:5
     },
     location: {
-      tintColor: Colors.white, width: 24,
-      height: 24,
+      tintColor: Colors.white, width: 16,
+      height: 16,
     },
-    loctxt: { color: Colors.white, fontWeight: 'bold', fontSize: 18, fontFamily: 'serif', textTransform: 'capitalize', },
+    loctxt: { color: Colors.white, fontWeight: '400', fontSize: 14,  textTransform: 'capitalize', },
     top:{ marginTop: 30 },
     border:{ borderRadius: 10 },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},
-    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+    txtheadersty:{fontSize:25,fontWeight:'bold'}
   });
   

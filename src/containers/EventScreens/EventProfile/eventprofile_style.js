@@ -11,14 +11,14 @@ export const styles = StyleSheet.create({
       color: Colors.black,
       fontWeight: 'bold',
       fontSize: 20,
-      fontFamily: 'serif',
+      
       marginBottom:5
     },
     hd2: {
       color: Colors.black,
       fontWeight: 'bold',
       fontSize: 20,
-      fontFamily: 'serif',
+      
       marginBottom:5
 
     },
@@ -26,11 +26,11 @@ export const styles = StyleSheet.create({
       color: Colors.black,
       fontWeight: 'bold',
       fontSize: 20,
-      fontFamily: 'serif',
+      
       marginBottom:5
 
     },
-    txt: { fontSize: 20, fontWeight: 'bold', fontFamily: 'serif',marginBottom:5 , textTransform: 'capitalize',color:Colors.darkGray},
+    txt: { fontSize: 20, fontWeight: 'bold', marginBottom:5 , textTransform: 'capitalize',color:Colors.darkGray},
     content:{ marginTop: 20 ,},
     hdcontent:{ alignSelf: 'center',alignItems:'center' }
   });

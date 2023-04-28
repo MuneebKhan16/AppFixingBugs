@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     position: 'absolute',
     textTransform: 'capitalize',
+    fontFamily:'NexaText-Trial-Heavy'
   },
   maincontainer: {
     justifyContent: 'center',

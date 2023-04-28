@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.black,
     marginLeft: 20,
-    fontFamily: 'serif',
+    
     textTransform: 'capitalize',
   },
   maincontainer: {
@@ -46,7 +46,6 @@ export const styles = StyleSheet.create({
     color: Colors.white,
     fontWeight: 'bold',
     fontSize: 14,
-    fontFamily: 'serif',
     textTransform: 'capitalize',
   },
   modalcontainer: {
@@ -84,8 +83,8 @@ export const styles = StyleSheet.create({
   imgbg: { borderRadius: 10 },
   mdltxtheader: { marginTop: 20, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 10, paddingLeft: 10, },
   mdlimg: { width: 25, height: 25, },
-  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: 25, fontWeight: '600', marginVertical: 20 },
-  txtinputadrs: { borderColor: 'gray', borderRadius: 10, width: '92%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700' },
+  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: 20, fontWeight: '600', marginVertical: 20, },
+  txtinputadrs: { borderColor: 'grey', borderRadius: 10, width: '92%', color: Colors.darkGray, marginLeft: 10, fontSize: 16, fontWeight: '600' },
   container1:{justifyContent:'center',alignItems:'center',flex:1,},
-  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+  txtheadersty:{fontSize:25,fontWeight:'bold'}
 })
