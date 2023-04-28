@@ -116,8 +116,8 @@ export class Home extends Component {
                 })
               ) :
               (
-                <View>
-                  <Text>No Category Found</Text>
+                <View style={styles.container1}>
+                  <Text style={styles.txtheadersty}>No Category Found</Text>
                 </View>
               )
           }

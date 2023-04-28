@@ -1,23 +1,16 @@
  /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import React,{useState,useEffect,useCallback} from 'react';
+import React,{useState,useEffect,useCallback,useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Mainprofile from '../../../components/Mainprofile';
 import { useSelector } from 'react-redux';
 import { styles } from './eventprofile_style';
 import { show_eventCreater_event } from '../../../redux/APIs'
-
+import eventContext from '../eventContext';
 
 const EventProfile = () => {
-  const userData = useSelector((state) => state?.reducer?.user)
-  const [ showEvents , SetshowEvents] = useState([]);
-
-  const Event_data = async () => {
-    const events = await show_eventCreater_event(userData.api_token  );
-     SetshowEvents(events.events)
-  }
-  
-
+  const { showEvents , UserPost } = useContext(eventContext);
+   const userData = useSelector((state) => state?.reducer?.user)
 
   const DateReadbleFunction = (dateIn) => {
     const date = dateIn
@@ -56,7 +49,7 @@ const EventProfile = () => {
               <Text style={styles.txt}>{DateReadbleFunction(userData.created_at)}</Text>
               <View style={styles.hdcontent}>
                 <Text style={styles.txt}>{showEvents?.length}</Text>
-                <Text style={styles.txt}>25</Text>
+                <Text style={styles.txt}>{UserPost?.length}</Text>
               </View>
             </View>
           </View>

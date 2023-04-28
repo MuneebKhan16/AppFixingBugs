@@ -5,7 +5,7 @@ import { store } from '../index';
 import postApi from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
 import * as EmailValidator from 'email-validator';
-import { Keyboard } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { Platform } from 'react-native';
 import { saveUser, saveToken, addReviews } from '../actions';
 import { cleanSingle } from 'react-native-image-crop-picker';
@@ -102,9 +102,18 @@ export async function login(email, password, setLogin) {
     }
     
 
+<<<<<<< HEAD
   } 
   catch (err) {
    
+=======
+  } catch (err) {
+    // return Toast.show({
+    //   text: "Error exist",
+    //   type: 'error',
+    //   visibilityTime: 3000,
+    // })
+>>>>>>> 69093781d92ca9e7ac17772d3089ca5ec58f2814
   }
 }
 
@@ -208,7 +217,7 @@ export async function forget_password(email) {
 
 
   const data = await postApi('forget-password', params);
-  console.log('forgetone', data)
+  
   if (data.status === 1) {
     NavService.navigate('ForgetPasswordOTP', data);
     Toast.show({
@@ -398,38 +407,103 @@ export async function post_reviews(user_id, user_type, rating_image, tags, ratin
   params.append("rating", rating);
   params.append("review", review || 'miss');
   params.append("event_id", event_id);
-  console.log('params',params)
+  
 
   const data = await postApi('add-rating' ,params);
-  console.log('ikolo0000',data)
+  
 
 
   if (data.status == 1) {
-    setTimeout (() => {
-      NavService.navigate('Event',data)
-    },2000) 
+    NavService.navigate('Tab')
     return data;
   }
   return data;
 }
 
 export async function post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location) {
-  const params = new FormData();
-  params.append("event_title", event_title)
-  params.append("event_type", event_type)
-  params.append("event_description", event_description)
-  params.append("event_image", event_image)
-  params.append("user_id", user_id)
-  params.append("category_id", category_id)
-  params.append("event_location", event_location)
-
-
-  const data = await postApi('add-event', params)
-  console.log(data)
-  if (data.status == 1) {
-    NavService.navigate('EventHome',data)
-    return data;
+  if(!event_title && !event_type && !event_description && !event_image && !category_id && !event_location){
+    return Toast.show({
+      text1: 'Select all fields',
+      type: 'error',
+      visibilityTime: 3000,
+    });
   }
+  else if(!event_title){
+    return Toast.show({
+      text1: 'No Title Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!event_description){
+    return Toast.show({
+      text1: 'No Description Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!event_location){
+    return Toast.show({
+      text1: 'No Location Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!category_id){
+    return Toast.show({
+      text1: 'No Category Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  else if(!event_type){
+    return Toast.show({
+      text1: 'No EventType Selected',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+
+  else if(!event_image){
+    return Toast.show({
+      text1: 'No Image Selecteds',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+
+  if(event_title !== null  && event_type !== null && event_description !== null && event_image !== null && category_id !== null && event_location !== null){
+    const params = new FormData();
+    params.append("event_title", event_title)
+    params.append("event_type", event_type)
+    params.append("event_description", event_description)
+    params.append("event_image", event_image)
+    params.append("user_id", user_id)
+    params.append("category_id", category_id)
+    params.append("event_location", event_location)
+  
+    console.log('object09876',params)
+  
+    const data = await postApi('add-event', params)
+ 
+    
+    if (data.status == 1) {
+      NavService.navigate('TabComp',data)
+      return data
+    }
+
+  } else{
+    return Toast.show({
+      text1: 'No Events',
+      type: 'error',
+      visibilityTime: 3000,
+    });
+  }
+  
+
+  
+
+
 }
 
 export async function show_eventCreater_event(user_id) {

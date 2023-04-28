@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image ,StyleSheet} from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Colors, NavService } from '../../../config';
 import {
   ProfileTextInput,
@@ -13,7 +13,7 @@ import Images from '../../../assets/Images';
 import ImagePicker from 'react-native-image-crop-picker';
 
 class EditProfile extends Component {
- 
+
 
   state = {
     name: this.props.user?.name,
@@ -44,7 +44,7 @@ class EditProfile extends Component {
       Address,
       fullname,
       lastname,
-      
+
     } = this.state;
     return (
       <AppBackground title={'Edit Profile'} back home>
@@ -67,7 +67,7 @@ class EditProfile extends Component {
                 marginTop: 10,
               }}
             />
-         
+
           </View>
           <View
             style={{
@@ -110,7 +110,6 @@ class EditProfile extends Component {
 
             />
           </View>
-     
           <View
             style={{
               alignItems: 'center',

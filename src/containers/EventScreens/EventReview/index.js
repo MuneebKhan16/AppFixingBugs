@@ -8,7 +8,7 @@ import { Colors } from '../../../config';
 import Icons from '../../../assets/Icons';
 import { styles } from './eventreview_style';
 import  ImageURL from '../../../config/Common'
-import EventPost from '../../../components/EventsPosts';
+import EventsPosts from '../../../components/EventsPosts';
 import { get_reviews_event } from '../../../redux/APIs/index'
 import { useSelector } from 'react-redux'
 const EventReview = (props) => {
@@ -18,7 +18,7 @@ const EventReview = (props) => {
   const PassedData = props?.route?.params
 
   const [UserPost, setUserPost] = useState([]);
-
+  
   useEffect(() => {
     get_reviews_event(token).then((res) => setUserPost(res.Data));
   }, [])
@@ -28,6 +28,9 @@ const EventReview = (props) => {
     var date = new Date();
     return date.toLocaleDateString();
   }
+
+  const filteringData = UserPost.filter(data => data.event_id === props.route.params.id)
+  console.log('object',UserPost)
 
   return (
     <AppBackground back home>
@@ -58,10 +61,12 @@ const EventReview = (props) => {
         </View>
         <Text
           style={styles.heading}>
-          Ratings & Posts
+          Ratings & Post
         </Text>
+        {
+           <EventsPosts datas={filteringData}  /> 
+        }
         
-        <EventPost  UserPost={UserPost} event_id={PassedData.id} />
         
       </ScrollView>
     </AppBackground>

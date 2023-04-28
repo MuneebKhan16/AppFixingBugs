@@ -7,7 +7,12 @@ import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config//Common'
 // check
-const Posts = ({ UserPost, event_id }) => {
+const Posts = (props) => {
+
+  const { datas } = props
+
+
+
   const [starCount, setStarCount] = useState(1);
 
   const ConvertTimeStamp = (date) => {
@@ -20,67 +25,70 @@ const Posts = ({ UserPost, event_id }) => {
     return durationString;
   }
 
+  console.log('mnmn',datas)
+
   return (
-
-
-    UserPost && UserPost.length > 0 ?
-      (
-        UserPost.map((data) => {
-          if (data?.event_id === event_id) {
-            return (
-              <View
-                style={styles.mainprofile}>
+    <View>
+      {
+        datas?.length > 0 ?
+          (
+            datas.map((data) => {
+              return (
                 <View
-                  style={styles.container}>
-                  <Image
-                    source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
-                    style={styles.pic}
-                    resizeMode="center"
-                  />
-                  <View>
-                    <Text
-                      style={styles.name}>
-                      {data.user.name}
-                    </Text>
-                    <View style={{ marginLeft: 10 }}>
+                  style={styles.mainprofile}>
+                  <View
+                    style={styles.container}>
+                    <Image
+                      source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
+                      style={styles.pic}
+                      resizeMode="center"
+                    />
+                    <View>
+                      <Text
+                        style={styles.name}>
+                        {data.user.name}
+                      </Text>
+                      <View style={{ marginLeft: 10 }}>
 
-                      <StarRating
-                        fullStar={Icons.starFilled}
-                        // halfStar={Icons.star_half}
-                        emptyStar={Icons.starEmpty}
-                        starSize={14}
-                        disabled={true}
-                        maxStars={5}
-                        rating={data.rating}
-                        selectedStar={rating => setStarCount(rating)}
+                        <StarRating
+                          fullStar={Icons.starFilled}
+                          // halfStar={Icons.star_half}
+                          emptyStar={Icons.starEmpty}
+                          starSize={14}
+                          disabled={true}
+                          maxStars={5}
+                          rating={data.rating}
+                          selectedStar={rating => setStarCount(rating)}
 
-                      />
+                        />
+                      </View>
                     </View>
+                    <Text
+                      style={styles.time}>
+                      {ConvertTimeStamp(data.created_at)}
+                    </Text>
                   </View>
+                  <Image
+                    source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
+                    resizeMode="stretch"
+                    style={styles.rating}
+                  />
+
                   <Text
-                    style={styles.time}>
-                    {ConvertTimeStamp(data.created_at)}
+                    style={styles.tags}>
+                    {"#" + " " + data.tags}
                   </Text>
                 </View>
-                <Image
-                  source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
-                  resizeMode="stretch"
-                  style={styles.rating}
-                />
-
-                <Text
-                  style={styles.tags}>
-                  {"#" + " " + data.tags}
-                </Text>
-              </View>
-            )
-          }
-        })
+              )
+            })
+          ) :
+          (
+            <View style={styles.container1}>
+              <Text style={styles.txtheadersty}>No Reviews Found</Text>  
+            </View>
       )
-      :
-      (
-        <View><Text> No Data coming</Text></View>
-      )
+      }
+    </View>
 
   )
 };
@@ -139,5 +147,7 @@ const styles = StyleSheet.create({
     fontFamily: 'serif',
     fontSize: 16,
     textTransform: 'capitalize',
-  }
+  },
+  container1:{paddingTop:100, justifyContent:'center',alignItems:'center',flex:1,},
+  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
 });

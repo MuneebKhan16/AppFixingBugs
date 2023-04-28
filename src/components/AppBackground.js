@@ -86,7 +86,7 @@ export function AppBackground({
           </View>
           {profile && (
             <TouchableOpacity
-              activeOpacity={0.8}
+    
               onPress={() => {
                 NavService.navigate('EventProfile');
               }}

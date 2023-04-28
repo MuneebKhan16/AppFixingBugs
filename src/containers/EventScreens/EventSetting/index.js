@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import AppBackground from '../../../components/AppBackground'
@@ -6,17 +7,19 @@ import Heading from '../../../components/Heading';
 import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import { NavService } from '../../../config';
+import { useSelector } from 'react-redux'
 const EventSetting = () => {
   const logout = () => {
     NavService.reset(0, [{ name: 'Auth' }])
   }
+  const user_id = useSelector((state) => state.reducer.user);
   return (
     <AppBackground back title={"Settings"} home>
       <Mainprofile
         txt
         center
-        name="John Smith"
-        subtitle="johnsmith@gmail.com"
+        name={user_id.name}
+        subtitle={user_id.email}
       />
       <Heading name="Terms & Condition" icon={Icons.information} />
       <Heading name="Policies" icon={Icons.policies} />

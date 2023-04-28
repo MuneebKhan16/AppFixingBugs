@@ -12,7 +12,6 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
 import {Colors, Loader} from './src/config';
 import Toast from 'react-native-toast-message';
-
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
 

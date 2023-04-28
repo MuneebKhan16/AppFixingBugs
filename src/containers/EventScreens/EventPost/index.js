@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect , useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
 import { Colors, NavService } from '../../../config';
@@ -21,6 +21,9 @@ import Modal from 'react-native-modal';
 import { styles } from './eventpost_styles';
 import { post_events, Get_All_Categories } from '../../../redux/APIs';
 import { useSelector } from 'react-redux';
+import eventContext from '../eventContext';
+import Toast from 'react-native-toast-message';
+
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
@@ -34,19 +37,16 @@ const EventPost = (props) => {
   const [state, setState] = useState(user?.state);
   const [userImage, setUserImage] = useState(user?.image);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [Categorys, setCategorys] = useState(null);
+
   const [selectedData, setSelectedData] = useState(null);
 
 
 
 const users = useSelector((state) => state.reducer.user)
-  useEffect(() => {
-    const getCategorys = async () => {
-      const category = await Get_All_Categories();
-      setCategorys(category.Data);
-    };
-    getCategorys();
-  }, []);
+ 
+const { Categorys } = useContext(eventContext);
+
+console.log('Categorys',Categorys)
 
   const togglePopUp = () => {
     setPopUp((previousState) => previousState?.popUp);
@@ -66,15 +66,18 @@ const users = useSelector((state) => state.reducer.user)
     const category_id = selectedData?.category_id;
     const event_location = location;
 
-    post_events(
-      event_title,
-      event_type,
-      event_description,
-      event_image,
-      user_id,
-      category_id,
-      event_location
-    );
+
+      post_events(
+        event_title,
+        event_type,
+        event_description,
+        event_image,
+        user_id,
+        category_id,
+        event_location
+      );
+
+    
   };
     return (
       <AppBackground title={'Events'} home back>
@@ -97,7 +100,9 @@ const users = useSelector((state) => state.reducer.user)
           name={user?.name}
           imageUri={selectedImage ? selectedImage.path : userImage}
         />
+        
         <View style={styles.picker}>
+        
           <CustomImagePicker
             onImageChange={(path, mime) => {
               setSelectedImage({ path, mime });
@@ -112,6 +117,7 @@ const users = useSelector((state) => state.reducer.user)
             </View>
           </CustomImagePicker>
         </View>
+       
       </View>
       <View style={styles.top}>
         <TextInput

@@ -43,6 +43,7 @@ const Review = (props) => {
 
   useMemo(() => UserPost , [UserPost])
 
+  const filteringData = UserPost.filter(data => data.event_id === props.route.params.id)
 
 
 
@@ -75,7 +76,8 @@ const Review = (props) => {
           style={styles.post}>
           Ratings & Posts
         </Text>
-        <EventsPosts event_id={id} UserPost={UserPost} />
+        {   <EventsPosts datas={filteringData}  />  }
+        
       </ScrollView>
       <CustomButton
         buttonStyle={styles.self}

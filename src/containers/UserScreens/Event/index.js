@@ -32,42 +32,54 @@ const Event = (props) => {
 
   return (
     <AppBackground title={'Events'} home back filter>
-      <FlatList
-        data={cat}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item, index }) => (
-          <View style={styles.top}>
-            <View style={styles.container}>
-              <Text
-                style={styles.title}>
-                {item.event_title}
-              </Text>
-              <View
-                style={styles.filled}>
-                <Image source={Icons.starFilled} style={styles.icnfilled} />
+      {
+        cat?.length > 0 ?
+        (
+          <FlatList
+          data={cat}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item, index }) => (
+            <View style={styles.top}>
+              <View style={styles.container}>
                 <Text
-                  style={styles.review}>
-                  {item.rating_count + " " + "Reviews"}
+                  style={styles.title}>
+                  {item.event_title}
                 </Text>
-              </View>
-            </View>
-            <RNBounceable onPress={() => NavService.navigate('Review', item)}>
-              <ImageBackground
-                source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
-                style={styles.img}
-                imageStyle={styles.border}>
-                <View style={styles.loccontainer}>
-                  <View style={styles.locsub}>
-                    <Image source={Icons.location} resizeMode="contain" style={styles.location} />
-                  </View>
-                  <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                <View
+                  style={styles.filled}>
+                  <Image source={Icons.starFilled} style={styles.icnfilled} />
+                  <Text
+                    style={styles.review}>
+                    {item.rating_count + " " + "Reviews"}
+                  </Text>
                 </View>
-              </ImageBackground>
-
-            </RNBounceable>
-          </View>
-        )}
-      />
+              </View>
+              <RNBounceable onPress={() => NavService.navigate('Review', item)}>
+                <ImageBackground
+                  source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
+                  style={styles.img}
+                  imageStyle={styles.border}>
+                  <View style={styles.loccontainer}>
+                    <View style={styles.locsub}>
+                      <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                    </View>
+                    <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                  </View>
+                </ImageBackground>
+  
+              </RNBounceable>
+            </View>
+          )}
+        />
+        )
+        :
+        (
+          <View style={styles.container1}>
+                <Text style={styles.txtheadersty}>No Events Available</Text>
+              </View>
+        )
+      }
+     
     </AppBackground>
   );
 };

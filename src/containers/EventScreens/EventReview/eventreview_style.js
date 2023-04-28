@@ -33,6 +33,8 @@ export const styles = StyleSheet.create({
       fontFamily: 'serif',
       marginTop: 10,
       textTransform: 'capitalize',
-    }
+    },
+    container1:{justifyContent:'center',alignItems:'center',flex:1,},
+    txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
   });
   
