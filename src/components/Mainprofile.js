@@ -41,6 +41,7 @@ const Mainprofile = props => {
           />
           {edit ? (
             <TouchableOpacity
+            onPress={() => NavService.navigate('EditProfile')}
               style={styles.profilepic}>
               <Image
                 source={Icons.edit}

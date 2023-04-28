@@ -37,6 +37,7 @@ import EventProfile from '../EventScreens/EventProfile';
 import EventSetting from '../EventScreens/EventSetting';
 import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
+import EditProfile from '../EventScreens/EditProfile';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -258,6 +259,11 @@ const EventScreenStack = (props) => {
         <Stack.Screen
           name="EventPost"
           component={EventPost}
+          options={{headerShown: false}}
+        />
+         <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
           options={{headerShown: false}}
         />
            <Stack.Screen
