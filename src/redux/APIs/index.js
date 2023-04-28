@@ -115,11 +115,11 @@ export async function login(email, password, setLogin) {
     }
 
   } catch (err) {
-    return Toast.show({
-      text: "Error exist",
-      type: 'error',
-      visibilityTime: 3000,
-    })
+    // return Toast.show({
+    //   text: "Error exist",
+    //   type: 'error',
+    //   visibilityTime: 3000,
+    // })
   }
 }
 

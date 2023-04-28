@@ -33,7 +33,7 @@ const Event = (props) => {
   return (
     <AppBackground title={'Events'} home back filter>
       {
-        cat.length > 0 ?
+        cat?.length > 0 ?
         (
           <FlatList
           data={cat}
