@@ -5,7 +5,7 @@ import { store } from '../index';
 import postApi from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
 import * as EmailValidator from 'email-validator';
-import { Keyboard } from 'react-native';
+import { Alert, Keyboard } from 'react-native';
 import { Platform } from 'react-native';
 import { saveUser, saveToken, addReviews } from '../actions';
 import { cleanSingle } from 'react-native-image-crop-picker';
@@ -491,6 +491,7 @@ export async function post_events(event_title, event_type, event_description, ev
     console.log('object09876',params)
   
     const data = await postApi('add-event', params)
+ 
     
     if (data.status == 1) {
       NavService.navigate('TabComp',data)

@@ -23,6 +23,7 @@ import { post_events, Get_All_Categories } from '../../../redux/APIs';
 import { useSelector } from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
+
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
