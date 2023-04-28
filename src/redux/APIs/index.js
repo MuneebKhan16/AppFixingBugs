@@ -470,14 +470,14 @@ export async function post_events(event_title, event_type, event_description, ev
     });
   }
 
-  else if(!event_image){
+  else if(event_image.path == null){
     return Toast.show({
-      text1: 'No Image Selecteds',
+      text: 'No Image Selecteds',
       type: 'error',
       visibilityTime: 3000,
     });
   }
-
+else {
   if(event_title !== null  && event_type !== null && event_description !== null && event_image !== null && category_id !== null && event_location !== null){
     const params = new FormData();
     params.append("event_title", event_title)
@@ -506,6 +506,8 @@ export async function post_events(event_title, event_type, event_description, ev
     });
   }
   
+
+}
 
   
 

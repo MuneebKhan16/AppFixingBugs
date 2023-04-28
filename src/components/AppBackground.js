@@ -19,6 +19,10 @@ import Modal from "react-native-modal";
 import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
 import { TextInput } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
+import { ImageURL } from '../config/Common';
+
+ 
 
 export function AppBackground({
   editeIcon,
@@ -47,6 +51,11 @@ export function AppBackground({
         : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
+  const users =  useSelector((state) => state.reducer.user);
+
+  const ImageURL = 'https://api.myprojectstaging.com/outsideee/public/'
+
+  console.log('ImageURL',`${ImageURL}${users?.profile_picture}`)
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -99,12 +108,15 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={Images.avatar}
+                source={{ uri: `${ImageURL}${users?.profile_picture}` }}
                 style={{
                   height: 40,
                   width: 40,
                   alignSelf: 'center',
                   borderRadius: 60,
+                  borderWidth: 2,
+                  borderColor: Colors.purple
+                  
 
                 }}
               />
