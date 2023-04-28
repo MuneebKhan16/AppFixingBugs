@@ -55,7 +55,7 @@ export function AppBackground({
 
   const ImageURL = 'https://api.myprojectstaging.com/outsideee/public/'
 
-  console.log('ImageURL',`${ImageURL}${users?.profile_picture}`)
+  
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -108,7 +108,7 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: `${ImageURL}${users?.profile_picture}` }}
+                source={{ uri: users?.profile_picture ? `${ImageURL}${users?.profile_picture}` : Images.avatar }}
                 style={{
                   height: 40,
                   width: 40,
