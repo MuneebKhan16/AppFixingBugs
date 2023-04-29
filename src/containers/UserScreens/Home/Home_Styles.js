@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.black,
     marginLeft: 20,
-    fontFamily: 'serif',
+
     textTransform: 'capitalize',
   },
   maincontainer: {
@@ -41,13 +41,11 @@ export const styles = StyleSheet.create({
   },
   ftrtitle: {
     position: 'absolute',
-    bottom: 5,
+    bottom: 10,
     alignSelf: 'center',
     color: Colors.white,
     fontWeight: 'bold',
     fontSize: 14,
-    fontFamily: 'serif',
-    textTransform: 'capitalize',
   },
   modalcontainer: {
     backgroundColor: '#ffffff',
@@ -56,9 +54,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
 
-        marginVertical: 10,
-        marginLeft: 20,
-      },
+    marginVertical: 10,
+    marginLeft: 20,
+  },
   mdlmaincontainer: {
     marginVertical: 10,
     alignSelf: 'center',
@@ -78,14 +76,13 @@ export const styles = StyleSheet.create({
   },
   tch: {
     marginHorizontal: 5,
-    flex: 1,
     flexDirection: 'row',
   },
-  imgbg: { borderRadius: 10 },
+  imgbg: { borderRadius: 10, },
   mdltxtheader: { marginTop: 20, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 10, paddingLeft: 10, },
   mdlimg: { width: 25, height: 25, },
-  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: 25, fontWeight: '600', marginVertical: 20 },
-  txtinputadrs: { borderColor: 'gray', borderRadius: 10, width: '92%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700' },
-  container1:{justifyContent:'center',alignItems:'center',flex:1,},
-  txtheadersty:{fontSize:25,fontFamily: 'serif',fontWeight:'bold'}
+  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: 20, fontWeight: '600', marginVertical: 20, },
+  txtinputadrs: { borderColor: 'grey', borderRadius: 10, width: '92%', color: Colors.darkGray, marginLeft: 10, fontSize: 16, fontWeight: '600' },
+  container1: { justifyContent: 'center', alignItems: 'center', flex: 1, },
+  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
 })

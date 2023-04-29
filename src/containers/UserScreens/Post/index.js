@@ -45,38 +45,31 @@ class Post extends Component {
 
 
   handleReview = (name) => {
-    
+
     const { isChecked } = this.state;
     isChecked[name] = !isChecked[name];
     this.setState({ isChecked });
-    return isChecked
+    return 
   }
+  handleReview = (name) => {
 
+    const { isChecked1 } = this.state;
+    isChecked1[name] = !isChecked1[name];
+    this.setState({ isChecked1 });
+    return 
+  }
+  handleReview = (name) => {
+
+    const { isChecked2 } = this.state;
+    isChecked2[name] = !isChecked2[name];
+    this.setState({ isChecked2 });
+    return 
+  }
+  
   handleSubmit = () => {
-
-    const tag = this.state.isChecked;
-    delete this.state.isChecked.first
-    delete this.state.isChecked.second
-    delete this.state.isChecked.third
-    
-    const tar = this.state.starCount;
-    const yups = Object.keys(tag).map(data => data)
-    const user_id = this?.props?.user?.id
-    const user_type = this?.props?.user?.user_type || 'customer'
-    const rating = tar
-    const tags = yups.pop()
-    const rating_image = { uri: this.state.selectedImage?.path, name: `rating`, type: this.state.selectedImage?.mime }
-    const review = 'null'
-    const event_id = this?.props?.route?.params;
-
-    if (user_id !== null && user_type !== null && rating !== null && tags !== null && rating_image !== null) {
-      console.log('object', user_id, user_type, rating_image, tags, rating, review, event_id)
-      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
-
-    }
+   
 
   }
-
   render() {
 
     const { userImage, selectedImage, } =

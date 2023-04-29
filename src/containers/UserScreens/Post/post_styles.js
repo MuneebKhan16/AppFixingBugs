@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   uploadimg: { width: 20, height: 20, resizeMode: 'contain' },
   center: { alignSelf: 'center' },
   txt: {
-    fontSize: 20, marginLeft: 10, color: Colors.white, fontFamily: 'serif',
+    fontSize: 20, marginLeft: 10, color: Colors.white, 
     textTransform: 'capitalize',
   }
 })

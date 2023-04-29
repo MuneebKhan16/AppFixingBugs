@@ -71,16 +71,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   imgbg: {
-    height: 200,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: { height: 3, width: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 0.5,
     marginTop: 15,
+    borderWidth:2,
+    borderColor:Colors.purple,
+    width:'100%',
+    height:500
   },
   bg: { borderRadius: 10 },
-  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', fontFamily: 'serif', textTransform: 'capitalize', },
+  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize', },
   modal: {
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  detail: { color: Colors.white, fontWeight: '700', fontSize: 16, fontFamily: 'serif', textTransform: 'capitalize', },
+  detail: { color: Colors.white, fontWeight: '700', fontSize: 16, textTransform: 'capitalize', },
   mdlbtn: {
     alignSelf: 'center',
     marginTop: 50,
@@ -123,7 +126,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    fontFamily: 'serif',
     textTransform: 'capitalize',
   },
 });

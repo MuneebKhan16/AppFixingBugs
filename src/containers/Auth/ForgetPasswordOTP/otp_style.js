@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         marginVertical: 20,
         fontWeight:'bold',
-        fontFamily: 'serif', textTransform: 'capitalize',
+         textTransform: 'capitalize',
       },
       otp: { width: '80%', height: 80 ,},
       boders: {

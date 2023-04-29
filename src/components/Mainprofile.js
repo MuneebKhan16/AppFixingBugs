@@ -61,7 +61,7 @@ const Mainprofile = props => {
             fontSize: txt ? 20 : 17,
             fontWeight: '700',
             color: Colors.black,
-            fontFamily: 'serif',
+            
             textAlign: row ? null : 'center',
             textTransform: 'capitalize',
             marginTop: 10
@@ -82,10 +82,10 @@ const Mainprofile = props => {
           <Text
             style={{
               fontSize: size ? 18 : 17,
-              color: Colors.black,
-              fontWeight: '600',
-              fontFamily: 'serif', textTransform: 'capitalize',
-              marginLeft:5
+              color: Colors.darkGray,
+              fontWeight: '400',
+               textTransform: 'capitalize',
+
             }}>
             {props?.subtitle}
           </Text>
@@ -125,6 +125,8 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
+    borderWidth:2,
+    borderColor:Colors.purple
     
   },
   profilepic: {
@@ -134,7 +136,7 @@ const styles = StyleSheet.create({
     height: 25,
     justifyContent: 'center',
     borderRadius: 40,
-    top: -25,
+    top: -28,
     left: 48,
     backgroundColor: Colors.purple
 
@@ -156,6 +158,6 @@ const styles = StyleSheet.create({
 
   },
   marker: { width: 30, height: 30, },
-  location: { fontSize: 16, color: Colors.black, fontFamily: 'serif', fontWeight: '600' },
+  location: { fontSize: 16, color: Colors.black,  fontWeight: '600' },
   subimg:{height:80}
 });

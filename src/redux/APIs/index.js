@@ -252,25 +252,6 @@ export async function resendForgetPasswordCode(email) {
 }
 
 export async function resetPassword(password, otp, email) {
-  // if (!confirmPassword || !password)
-  //   return Toast.show({
-  //     text1: 'Please enter all info',
-  //     type: 'error',
-  //     visibilityTime: 3000,
-  //   });
-  // if (!schema.validate(password))
-  //   return Toast.show({
-  //     text1: 'Password not valid (Use atleast eight character)',
-  //     type: 'error',
-  //     visibilityTime: 3000,
-  //   });
-  // if (password !== confirmPassword)
-  //   return Toast.show({
-  //     text1: 'Passwords does not match',
-  //     type: 'error',
-  //     visibilityTime: 3000,
-  //   });
-
 
 
   const params = {
@@ -490,11 +471,12 @@ else {
     }
 
   } else{
-    return Toast.show({
-      text1: 'No Events',
-      type: 'error',
-      visibilityTime: 3000,
-    });
+    // return 
+    // Toast.show({
+    //   text1: 'No Events',
+    //   type: 'error',
+    //   visibilityTime: 3000,
+    // });
   }
   
 
@@ -522,5 +504,4 @@ export async function showprofiledetail(){
 }
 
 
-//Core Module APIs
 

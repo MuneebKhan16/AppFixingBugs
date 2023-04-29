@@ -52,9 +52,9 @@ const Pickdate = () => {
              
             </View>
             <TextInput
-        style={{height: 40,color:Colors.black ,fontSize:17,fontWeight:'700',width:'92%',}}
+        style={{height: 40,color:Colors.black ,fontSize:17,fontWeight:'600',width:'92%',}}
         placeholder="Date"
-        placeholderTextColor={Colors.black}
+        placeholderTextColor={Colors.darkGray}
         editable={false}
         onFocus={() => setIsFocused(true)} 
         onBlur={() => setIsFocused(false)} 

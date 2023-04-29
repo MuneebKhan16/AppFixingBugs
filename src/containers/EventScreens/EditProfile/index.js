@@ -197,16 +197,16 @@ const EditProfile = () => {
               icon={Icons.location}
               placeholder={'909 berkeley Ave, Trenton'}
 
-            />
-          </View>
-          <View
-            style={{
-              alignItems: 'center',
-              flex: 1,
-              paddingHorizontal: 40,
-            }}>
-            <View style={{ marginBottom: 40 }}>
-            </View>
+        />
+      </View>
+      <View
+        style={{
+          alignItems: 'center',
+          flex: 1,
+          paddingHorizontal: 40,
+        }}>
+        <View style={{ marginBottom: 40 }}>
+        </View>
 
             <CustomButton
               title={'Update'}
@@ -220,7 +220,6 @@ const EditProfile = () => {
     </AppBackground>
   )
 }
-
 
 
 export default React.memo(EditProfile);
