@@ -71,13 +71,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   imgbg: {
-    height: 200,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: { height: 3, width: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 0.5,
     marginTop: 15,
+    borderWidth:2,
+    borderColor:Colors.purple,
+    width:'100%',
+    height:500
   },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize', },

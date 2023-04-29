@@ -39,9 +39,8 @@ const Posts = ({ UserPost, profile_Data }) => {
                     </Text>
                     <StarRating
                       fullStar={Icons.starFilled}
-                      // halfStar={Icons.star_half}
                       emptyStar={Icons.starEmpty}
-                      starSize={12}
+                      starSize={14}
                       disabled={true}
                       maxStars={5}
                       rating={data.rating}

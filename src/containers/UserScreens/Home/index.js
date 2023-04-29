@@ -144,7 +144,6 @@ export class Home extends Component {
                   onChangeText={text => this.setState({ text })}
                   value={text}
                   placeholderTextColor={Colors.darkGray}
-
                 />
               </View>
             </View>
