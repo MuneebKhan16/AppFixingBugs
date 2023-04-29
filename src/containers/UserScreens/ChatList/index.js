@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+import React, {useCallback, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,40 +8,47 @@ import {
   SafeAreaView,
   Dimensions,
 } from 'react-native';
-import React, { useEffect } from 'react';
-import { Colors, NavService } from '../../../config';
+import { useSelector } from 'react-redux';
+import {useFocusEffect} from '@react-navigation/native';
+import {Colors, NavService} from '../../../config';
 import AppBackground from '../../../components/AppBackground';
 import Search from '../../../components/Search';
 import Images from '../../../assets/Images';
 import ChatComponent from '../../../components/ChatComponent';
 import Icons from '../../../assets/Icons';
-import { Chats } from './Dummydata';
-import { styles } from './chatlist_style';
-const index = ({ navigation, route }) => {
-  const chatlist = () => {
-    navigation.navigate('ChatScreen');
-  }
+import {Chats} from './Dummydata';
+import {chatList} from '../../../redux/APIs/index';
+import {styles} from './chatlist_style';
+
+const ChatList = ({navigation, route}) => {
+  const user = useSelector(state => state.reducer.user);
+  const [conversationList, setConversationList] = useState([]);
+  useFocusEffect(
+    useCallback(() => {
+      chatList(user?.id)
+        .then(res =>  setConversationList(res?.conversations))
+        .catch(error => console.log('error', error));
+    }, []),
+  );
+
+  console.log('conversationList',conversationList)
+
   return (
     <AppBackground title={'Message'} back={false} profile={false} home>
       <SafeAreaView style={styles.flex}>
-        <View
-          style={styles.container}>
-          <View
-            style={styles.content}>
+        <View style={styles.container}>
+          <View style={styles.content}>
             <Search />
           </View>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={Chats}
+            data={conversationList}
             style={styles.list}
-            renderItem={({ item }) => (
+            renderItem={({item, index}) => (
               <ChatComponent
-                onPress={
-                  chatlist
-              }
-                image={item.image}
-                msg={item.msg}
-                name={item.name}
+                item={item}
+                index={index}
+                navigation={navigation}
               />
             )}
           />
@@ -49,5 +58,4 @@ const index = ({ navigation, route }) => {
   );
 };
 
-export default React.memo(index);
-
+export default React.memo(ChatList);

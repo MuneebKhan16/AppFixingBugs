@@ -29,7 +29,7 @@ const EventHome = (props) => {
     NavService.navigate('EventReview', item)
   };
 
-  console.log('showEvents78',showEvents)
+
 
   return (
     <AppBackground profile marginHorizontal title={'Home'} home style={{ paddingBottom: 20 }}>
@@ -60,7 +60,7 @@ const EventHome = (props) => {
                     <TouchableOpacity onPress={() => EventReview(item)}>
 
                       <ImageBackground
-                        source={{ uri: `${ImageURL?.ImageURL}${item?.event_image} ` }}
+                        source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || Icons.add }}
                         style={styles.imgback}
                         imageStyle={styles.img} >
                         <View style={styles.loc}>

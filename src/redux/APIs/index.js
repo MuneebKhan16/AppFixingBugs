@@ -339,31 +339,30 @@ export async function logout() {
 
 export async function updateProfile(
   name,
-  date_of_birth,
-  bio,
-  imageUrl,
-  imageType,
+  last_name,
+  email,
+  address,
+  profilePicture,
+  auth_token
 ) {
-  const params = new FormData();
-  if (imageType)
-    params.append('attachment', {
-      uri: imageUrl,
-      name: `Profile${Date.now()}.${imageType.slice(
-        imageType.lastIndexOf('/') + 1,
-      )}`,
-      type: imageType,
-    });
+ const params = new FormData();
 
-  params.append('name', name);
-  params.append('date_of_birth', date_of_birth);
-  params.append('bio', bio);
+ params.append('name' , name)
+ params.append('last_name' , last_name)
+ params.append('email' , email)
+ params.append('address' , address)
+ params.append('profilePicture',profilePicture)
+ params.append('auth_token',auth_token)
 
-  const data = await postApi('update-profile', params);
+ console.log('param',params)
+ 
+const data = await postApi('update-profile',params)
+if (data.status == 1) {
+    
+  NavService.goBack();
+  return data?.Data;
 
-  if (data?.status == 1) {
-    dispatch({ type: 'SAVE_USER', payload: data?.data });
-    NavService.goBack();
-  }
+}
 
 }
 
@@ -382,7 +381,14 @@ export async function categoryevents(api_token, category_id) {
   const data = await postApi('category-events', params);
   return data;
 }
-
+export async function chatList(senderId) {
+  const data = await getApi(`get-conversations`);
+  return data;
+}
+export async function createChatConnection(senderAndRecieverId) {
+  const data = await postApi('chat', {conversation_id: senderAndRecieverId});
+  return data;
+}
 export async function get_reviews_event() {
   const data = await getApi('getreviews');
   return data;
@@ -510,6 +516,10 @@ export async function show_eventCreater_event(user_id) {
   }
 }
 
+export async function showprofiledetail(){
+  const data = await getApi('show-profile');
+  return data;
+}
 
 
 //Core Module APIs
