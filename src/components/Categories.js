@@ -31,7 +31,9 @@ const Categories = props => {
       activeOpacity={0.3}
       style={styles.touchable}>
       <ImageBackground
-        source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
+      resizeMode='contain'
+      source={Images.grid}
+        // source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
         imageStyle={styles.bg}>
         <TouchableOpacity
@@ -68,7 +70,7 @@ export default React.memo(Categories);
 
 const styles = StyleSheet.create({
   touchable: {
-    marginHorizontal: 20,
+    marginHorizontal:20
   },
   imgbg: {
     borderRadius: 20,
@@ -79,8 +81,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderWidth:2,
     borderColor:Colors.purple,
-    width:'100%',
-    height:500
+    height:400,
+    paddingRight:10
   },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize', },
