@@ -22,35 +22,44 @@ const EditProfile = () => {
 
 
   const handleUpdate = () => {
+    if(fullName !== null){
+      const name = fullName
+      const last_name = userProfile?.last_name
+      const email =  userProfile?.email
+      const address = userProfile?.address
+      const profilePicture = userProfile?.profile_picture
+      const auth_token = userProfile?.api_token
+  
+    return  updateProfile( name?.fullName, last_name, email, address, profilePicture, auth_token )
 
-    const name = fullName ? fullName : userProfile?.name
-    const last_name = lastName ? lastName : userProfile?.last_name
-    const email =  userProfile?.email
-    const address = addresss ? addresss : userProfile?.address
-    const profilePicture = userProfile?.profile_picture
-    const auth_token = userProfile?.api_token
-
-    console.log(
-      name?.fullName, 
-      last_name?.lastName, 
-      email, 
-      address?.address, 
-      profilePicture, 
-      auth_token,
-      addresss
-    )
- 
-
-    updateProfile(
-      name?.fullName, 
-      last_name?.lastName, 
-      email, 
-      address?.address, 
-      profilePicture, 
-      auth_token
-      )
-
-      
+    } else if(lastName !== null){
+      const name = userProfile?.name
+      const last_name = lastName
+      const email =  userProfile?.email
+      const address = userProfile?.address
+      const profilePicture = userProfile?.profile_picture
+      const auth_token = userProfile?.api_token
+  
+    return  updateProfile( name, last_name?.lastName, email, address, profilePicture, auth_token )
+    } else if(addresss !== null){
+      const name = userProfile?.name
+      const last_name = userProfile?.last_name
+      const email =  userProfile?.email
+      const address = addresss
+      const profilePicture = userProfile?.profile_picture
+      const auth_token = userProfile?.api_token
+  
+    return  updateProfile( name, last_name, email, address?.address, profilePicture, auth_token )
+    }else{
+      const name = fullName
+      const last_name = lastName
+      const email =  userProfile?.email
+      const address = addresss
+      const profilePicture = userProfile?.profile_picture
+      const auth_token = userProfile?.api_token
+  
+    return  updateProfile( name?.fullName, last_name?.lastName, email, address?.address, profilePicture, auth_token )
+    }
   }
 
   return (

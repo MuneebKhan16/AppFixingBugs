@@ -8,7 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { NavService,Common } from './config';
 import { ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
-import {io} from 'socket.io-client';
+import {io} from 'socket.io-client'
 import Images from './assets/Images';
 import {store} from './redux';
 //Screens
