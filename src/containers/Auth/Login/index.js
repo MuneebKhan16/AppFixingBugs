@@ -22,7 +22,7 @@ class Login extends Component {
   }
 
   state = {
-    email: 'daina@gog.com',
+    email: 'asd@gmail.com',
     password: 'Abcd123@',
     visible: false
   };
