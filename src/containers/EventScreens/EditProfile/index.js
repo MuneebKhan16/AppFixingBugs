@@ -14,15 +14,15 @@ import { updateProfile } from '../../../redux/APIs';
 
 const EditProfile = () => {
   const { userProfile } = useContext(eventContext);
-  const [fullName, setFullName] = useState(userProfile?.name ?? fullName);
-  const [lastName, setLastName] = useState(userProfile?.last_name ?? lastName);
+  const [fullName, setFullName] = useState(userProfile?.name);
+  const [lastName, setLastName] = useState(userProfile?.last_name);
   const [email, setEmail] = useState(userProfile?.email);
-  const [addresss, setAddress] = useState(userProfile?.address ?? addresss);
+  const [addresss, setAddress] = useState(userProfile?.address);
 
 
 
   const handleUpdate = () => {
-    if(fullName !== null && !lastName && !addresss){
+    if(fullName !== null && lastName == userProfile?.last_name && addresss == userProfile?.address){
       const name = fullName
       const last_name = userProfile?.last_name
       const email =  userProfile?.email
@@ -30,20 +30,24 @@ const EditProfile = () => {
       const profilePicture = userProfile?.profile_picture
       const auth_token = userProfile?.api_token
   
+    
       
-    return  updateProfile( name?.fullName, last_name, email, address, profilePicture, auth_token )
+      updateProfile( name?.fullName, last_name, email, address, profilePicture, auth_token )
 
-    } else if(lastName !== null && !fullName && !addresss){
+    } 
+    
+     if(lastName !== null && fullName == userProfile?.name && addresss == userProfile?.address){
       const name = userProfile?.name
       const last_name = lastName
       const email =  userProfile?.email
       const address = userProfile?.address
       const profilePicture = userProfile?.profile_picture
       const auth_token = userProfile?.api_token
-  
-    return  updateProfile( name, last_name?.lastName, email, address, profilePicture, auth_token )
+    
+      updateProfile( name, last_name?.lastName, email, address, profilePicture, auth_token )
     }
-     else if(!fullName && addresss !== null && !lastName){
+
+     if(addresss !== null && fullName == userProfile?.name && lastName == userProfile?.last_name){
       const name = userProfile?.name
       const last_name = userProfile?.last_name
       const email =  userProfile?.email
@@ -51,8 +55,12 @@ const EditProfile = () => {
       const profilePicture = userProfile?.profile_picture
       const auth_token = userProfile?.api_token
  
-    return  updateProfile( name, last_name, email, address?.address, profilePicture, auth_token )
-    }else{
+    
+     updateProfile( name, last_name, email, address?.address, profilePicture, auth_token )
+    }
+    
+    
+    if(fullName !== null && lastName !== null && addresss !== null){
       const name = fullName
       const last_name = lastName
       const email =  userProfile?.email
@@ -60,7 +68,7 @@ const EditProfile = () => {
       const profilePicture = userProfile?.profile_picture
       const auth_token = userProfile?.api_token
  
-    return  updateProfile( name?.fullName, last_name?.lastName, email, address?.address, profilePicture, auth_token )
+      updateProfile( name?.fullName, last_name?.lastName, email, address?.address, profilePicture, auth_token )
     }
   }
 
