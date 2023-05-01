@@ -46,7 +46,7 @@ const EventProfile = () => {
               </Text>
             </View>
             <View>
-              <Text style={styles.txt}>{DateReadbleFunction(userData.created_at)}</Text>
+              <Text style={styles.txt}>{DateReadbleFunction(userData?.created_at || 'now')}</Text>
               <View style={styles.hdcontent}>
                 <Text style={styles.txt}>{showEvents?.length}</Text>
                 <Text style={styles.txt}>{UserPost?.length}</Text>
