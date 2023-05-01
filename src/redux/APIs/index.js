@@ -460,7 +460,7 @@ else {
     params.append("category_id", category_id)
     params.append("event_location", event_location)
   
-    console.log('object09876',params)
+   // console.log('object09876',params)
   
     const data = await postApi('add-event', params)
  

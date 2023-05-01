@@ -30,7 +30,7 @@ const EventHome = (props) => {
     NavService.navigate('EventReview', item)
   };
 
-  console.log('showEvents78', showEvents)
+  
 
 
   return (

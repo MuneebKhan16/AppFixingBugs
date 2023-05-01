@@ -9,7 +9,7 @@ import ImageURL from '../config/Common'
 const MicroChat = props => {
   const { image, name, msg, onPress } = props;
 
-  console.log('ppppp',props)
+  //console.log('ppppp',props)
 
   return (
     <RNBounceable

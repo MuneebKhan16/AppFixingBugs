@@ -25,7 +25,7 @@ const Posts = (props) => {
     return durationString;
   }
 
-  console.log('mnmn',datas)
+  
 
   return (
     <View>
