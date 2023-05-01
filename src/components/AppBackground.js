@@ -20,7 +20,8 @@ import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
 import { TextInput } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
-import { ImageURL } from '../config/Common';
+import  ImageURL  from '../config/Common';
+import Dummy from '../config/Common';
 
  
 
@@ -53,7 +54,7 @@ export function AppBackground({
   const [isModalVisible, setModalVisible] = useState(false);
   const users =  useSelector((state) => state.reducer.user);
 
-  const ImageURL = 'https://api.myprojectstaging.com/outsideee/public/'
+
 
   
 
@@ -108,7 +109,7 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: users?.profile_picture ? `${ImageURL}${users?.profile_picture}` : Images.avatar }}
+                source={{ uri: users ? `${ImageURL?.ImageURL}${users?.profile_picture}` : `${Dummy.dummy}` }}
                 style={{
                   height: 40,
                   width: 40,

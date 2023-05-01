@@ -4,9 +4,12 @@ import Icons from '../assets/Icons';
 import { Colors } from '../config';
 import Images from '../assets/Images';
 import RNBounceable from "@freakycoder/react-native-bounceable";
+import ImageURL from '../config/Common'
 
 const MicroChat = props => {
   const { image, name, msg, onPress } = props;
+
+  //console.log('ppppp',props)
 
   return (
     <RNBounceable
@@ -17,7 +20,7 @@ const MicroChat = props => {
         <Image
           resizeMode="center"
           style={styles.img}
-          source={image}
+          source={{ uri : image }}
         />
       </View>
       <View

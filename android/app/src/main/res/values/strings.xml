@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Outsidee</string>
+     <string name="facebook_app_id">1284024702540652</string>
+    <string name="facebook_client_token">5f5471a935a8294a1e6f633348e81f22</string>
 </resources>

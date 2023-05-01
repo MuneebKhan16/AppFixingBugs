@@ -1,6 +1,7 @@
 const INITIAL_STATES = {
   user: null,
   loader: false,
+  socket: null,
 };
 
 export default function (state = INITIAL_STATES, action) {
@@ -26,7 +27,11 @@ export default function (state = INITIAL_STATES, action) {
         ...state,
         loader: false,
       };
-
+    case 'SET_SOCKET':
+      return {
+        ...state,
+        socket: action.payload,
+      };
     default:
       return state;
   }

@@ -30,7 +30,7 @@ const EventReview = (props) => {
   }
 
   const filteringData = UserPost.filter(data => data.event_id === props.route.params.id)
-  console.log('object',UserPost)
+ 
 
   return (
     <AppBackground back home>

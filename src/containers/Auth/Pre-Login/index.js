@@ -14,6 +14,7 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 const { width, height } = Dimensions.get('window');
 import { styles } from './prelogin_style';
 
+import AuthLogin from '../socialLogin';
 
 class App extends Component {
   state = {
@@ -35,11 +36,13 @@ class App extends Component {
         name: 'Facebook',
         icon: Icons.facebook,
         color: Colors.facebook,
+        onPress: () => AuthLogin.Facebook().then((data) => NavService.navigate('EventProfile' ,data))
       },
       {
         name: 'Google',
         icon: Icons.google,
         color: Colors.google,
+        onPress: () => AuthLogin.Google().then((data) => NavService.navigate('CompleteProfile')).catch((err) => console.log('Noo',err))
       },
       {
         name: 'Apple',

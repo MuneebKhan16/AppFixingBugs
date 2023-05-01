@@ -5,22 +5,28 @@ import React, { Component } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import { NavService } from './config';
+import { NavService,Common } from './config';
 import { ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
+import {io} from 'socket.io-client'
 import Images from './assets/Images';
-
+import {store} from './redux';
 //Screens
 import { Auth, ScreenStack, EventScreenStack } from './containers';
 
 const Stack = createNativeStackNavigator();
 
+const saveSocket = () => {
+  const socket = io(Common.socketURL);
+  store.dispatch({type: 'SET_SOCKET', payload: socket});
+};
 class Navigation extends Component {
   state = {
     ready: true,
     initialRouteName: 'Auth',
   };
   componentDidMount() {
+    saveSocket();
     setTimeout(() => {
       SplashScreen.hide();
     }, 2500)

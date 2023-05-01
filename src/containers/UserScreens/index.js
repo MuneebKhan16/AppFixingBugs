@@ -41,7 +41,7 @@ import EditProfile from '../EventScreens/EditProfile'
 import eventContext from '../EventScreens/eventContext'
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-import { show_eventCreater_event , get_reviews_event ,Get_All_Categories } from '../../redux/APIs';
+import { show_eventCreater_event , get_reviews_event ,Get_All_Categories , showprofiledetail } from '../../redux/APIs';
 import { useSelector } from 'react-redux';
 const UserAuthStack = () => {
   return (
@@ -222,6 +222,7 @@ const EventScreenStack = (props) => {
   const [ showEvents , SetshowEvents] = React.useState([]);
   const [UserPost, setUserPost] = React.useState([]);
   const [Categorys, setCategorys] = React.useState(null);
+  const [userProfile, setuserProfile] = React.useState({})
 
   const Event_data = async () => {
     const events = await show_eventCreater_event(userData.id  );
@@ -243,11 +244,17 @@ const getCategorys = async () => {
   const category = await Get_All_Categories();
   setCategorys(category.Data);
 };
+
+const getProfile = async () => {
+  const data = await showprofiledetail(userData.id )
+  setuserProfile(data.Data)
+}
   
   React.useEffect(() => {
     showEvents && Event_data() ? datahandle : null
           datahandle();
           getCategorys();
+          getProfile();
    return () => {
     console.log('unmounting'); 
 }
@@ -255,7 +262,7 @@ const getCategorys = async () => {
   }, [])
   return (
         <ImageBackground source={Images.bg} style={{flex: 1}}>
-    <eventContext.Provider value={{showEvents , UserPost ,Categorys}}>
+    <eventContext.Provider value={{showEvents , UserPost ,Categorys , userProfile}}>
           <Stack.Navigator
             screenOptions={{
               contentStyle: {backgroundColor: 'transparent'},

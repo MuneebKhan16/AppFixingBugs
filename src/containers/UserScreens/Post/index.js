@@ -15,9 +15,9 @@ import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
 import { post_reviews } from '../../../redux/APIs'
 const Checkbox = {
-  first: false,
-  second: false,
-  third: false
+  first: 'ItsLit',
+  second: 'ItsAVibe',
+  third: 'NeedsCompany'
 };
 class Post extends Component {
   state = {
@@ -27,8 +27,8 @@ class Post extends Component {
     starCount: 1,
     isChecked: false,
     isChecked1: false,
-    isChecked2: false
-
+    isChecked2: false,
+    checkbox: Checkbox
 
   };
   constructor(props) {
@@ -67,8 +67,61 @@ class Post extends Component {
   }
   
   handleSubmit = () => {
-   
 
+    
+   const { id } = this.props.user
+   const { selectedImage,starCount,isChecked,isChecked1,isChecked2 ,checkbox } = this.state
+
+   if(isChecked === true ){
+    var user_id = id;
+    var user_type = 'customer';
+    var rating_image = selectedImage.path;
+    var tags = checkbox.first;
+    var rating = starCount;
+    var review = null;
+    var event_id = this.props.route.params;
+    post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+   } else if( isChecked1 === true ){
+    var user_id = id;
+    var user_type = 'customer';
+    var rating_image = selectedImage.path;
+    var tags = checkbox.second;
+    var rating = starCount;
+    var review = null;
+    var event_id = this.props.route.params;
+     post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+   } else if (isChecked2 === true){
+
+    var user_id = id;
+    var user_type = 'customer';
+    var rating_image = selectedImage.path;
+    var tags = checkbox.third;
+    var rating = starCount;
+    var review = null;
+    var event_id = this.props.route.params;
+     post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+   }
+   
+   if(isChecked === true && isChecked1 === true && isChecked2 === true && checkbox ){
+    
+    const tag = Object.values(checkbox)
+
+    var user_id = id;
+    var user_type = 'customer';
+    var rating_image = selectedImage.path;
+    var tags = tag.join(',')
+    var rating = starCount;
+    var review = null;
+    var event_id = this.props.route.params;
+    post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+   }else{
+    console.log('object')
+   }
+   
   }
   render() {
 
@@ -148,7 +201,7 @@ class Post extends Component {
                   onValueChange={(newValue) => this.setState({ isChecked: newValue })}
                   tintColors={{ true: 'white', false: 'black' }}
                 />
-                <Text style={styles.txt}>ItsLit</Text>
+                <Text style={styles.txt}> {Checkbox.first} </Text>
 
               </View>
 
@@ -160,7 +213,7 @@ class Post extends Component {
                   onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
                   tintColors={{ true: 'white', false: 'black' }}
                 />
-                <Text style={styles.txt}>ItsAVibe</Text>
+                <Text style={styles.txt}> {Checkbox.second} </Text>
               </View>
 
               <View style={styles.check}>
@@ -170,7 +223,7 @@ class Post extends Component {
                   onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
                   tintColors={{ true: 'white', false: 'black' }}
                 />
-                <Text style={styles.txt}>NeedsCompany</Text>
+                <Text style={styles.txt}> {Checkbox.third} </Text>
 
               </View>
             </View>
