@@ -10,7 +10,7 @@ import {
 import React, { useState, useRef, useEffect , useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import { Colors, NavService } from '../../../config';
+import { Colors, NavService ,Common } from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
@@ -23,7 +23,7 @@ import { post_events, Get_All_Categories } from '../../../redux/APIs';
 import { useSelector } from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
-
+import axios from 'axios';
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
@@ -42,11 +42,11 @@ const EventPost = (props) => {
 
 
 
-const users = useSelector((state) => state.reducer.user)
+const users = useSelector((state) => state?.reducer?.user)
  
 const { Categorys } = useContext(eventContext);
 
-console.log('Categorys',Categorys)
+
 
   const togglePopUp = () => {
     setPopUp((previousState) => previousState?.popUp);
@@ -57,7 +57,50 @@ console.log('Categorys',Categorys)
   };
 
 
-  const handlesubmit = () => {
+  const handlesubmit =  () => {
+
+    if(!title){
+      return  Toast.show({
+        text1: 'No Title Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
+
+    if(!dec){
+      return  Toast.show({
+        text1: 'No Description Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
+
+    if(!selectedData){
+      return  Toast.show({
+        text1: 'No Category Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
+
+
+    if(!location){
+      return  Toast.show({
+        text1: 'No Location Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
+
+    if(!selectedImage){
+      return  Toast.show({
+        text1: 'No Image Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
+
+
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
@@ -67,16 +110,30 @@ console.log('Categorys',Categorys)
     const event_location = location;
 
 
-      post_events(
-        event_title,
-        event_type,
-        event_description,
-        event_image,
-        user_id,
-        category_id,
-        event_location
-      );
+     const params = new FormData();
+     params.append('event_title' , event_title)
+     params.append('event_type' , event_type)
+     params.append('event_description' , event_description)
+     params.append('event_image' , event_image)
+     params.append('user_id' , user_id)
+     params.append('category_id' , category_id)
+     params.append('event_location' , event_location)
+    
+     
+     
+    const config = {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }
 
+    axios
+    .post(`${Common.baseURL}add-event` , params , config)
+    .then((res) => {
+      if(res.status == 200){
+        NavService.goBack();
+        Toast.show({text1:'Event Created' , type: 'success'})
+      }
+    })
+   
     
   };
     return (
