@@ -18,8 +18,8 @@ const EventSetting = () => {
       <Mainprofile
         txt
         center
-        name={user_id.name}
-        subtitle={user_id.email}
+        name={user_id?.name}
+        subtitle={user_id?.email}
       />
       <Heading name="Terms & Condition" icon={Icons.information} />
       <Heading name="Policies" icon={Icons.policies} />
