@@ -125,15 +125,15 @@ const ChatScreen = ({navigation, route}) => {
       .catch(error => console.log('error', error));
   }, []);
 
-  useEffect(() => {
-    socket.emit('SendChatToClient',(data) => {
-      console.log( 'SendChatToClient' , data)
-      let times = [...mess]
-      Setmess(times.msg)
-    })
-  },[mess]);
+  // useEffect(() => {
+  //   socket.emit('SendChatToClient',(data) => {
+  //     console.log( 'SendChatToClient' , data)
+  //     let times = [...mess]
+  //     Setmess(times.msg)
+  //   })
+  // },[mess]);
 
-  console.log('mess',mess)
+  // console.log('mess',mess)
   console.log('sender_id', sender_id, 'reciever_id', receiver_id);
   console.log('chatUser?.user_receiver?.id', chatUser);
   console.log('chatList456', chatList);
