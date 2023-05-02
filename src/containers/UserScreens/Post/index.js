@@ -75,7 +75,7 @@ class Post extends Component {
     if (isChecked === true) {
       var user_id = id;
       var user_type = 'customer';
-      var rating_image = selectedImage.path;
+      var rating_image =  { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime } ;
       var tags = checkbox.first;
       var rating = starCount;
       var review = null;
@@ -85,7 +85,7 @@ class Post extends Component {
     } else if (isChecked1 === true) {
       var user_id = id;
       var user_type = 'customer';
-      var rating_image = selectedImage.path;
+      var rating_image =  { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime } ;
       var tags = checkbox.second;
       var rating = starCount;
       var review = null;
@@ -96,7 +96,7 @@ class Post extends Component {
 
       var user_id = id;
       var user_type = 'customer';
-      var rating_image = selectedImage.path;
+      var rating_image =  { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime } ;
       var tags = checkbox.third;
       var rating = starCount;
       var review = null;
