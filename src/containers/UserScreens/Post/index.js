@@ -111,7 +111,7 @@ class Post extends Component {
 
       var user_id = id;
       var user_type = 'customer';
-      var rating_image = selectedImage.path;
+      var rating_image =  { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime } ;
       var tags = tag.join(',')
       var rating = starCount;
       var review = null;
