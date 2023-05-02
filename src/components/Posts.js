@@ -5,16 +5,17 @@ import { Post } from '../config/Dummydata/Dummydata';
 import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
-import  ImageURL  from '../config/Common'
+import ImageURL from '../config/Common'
+import FastImage from 'react-native-fast-image'
 const Posts = ({ UserPost, profile_Data }) => {
   const [starCount, setStarCount] = useState(1);
 
   const ConvertTimeStamp = (date) => {
     const data = new Date(date);
     const hours = data.getHours();
-    const readable = hours + " " + "Hours" + ' ' + 'ago' ;
+    const readable = hours + " " + "Hours" + ' ' + 'ago';
     return readable;
-  }     
+  }
   return (
 
 
@@ -53,12 +54,16 @@ const Posts = ({ UserPost, profile_Data }) => {
                   </Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
-
-                  <Image
+                  <FastImage
                     source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
                     resizeMode="stretch"
                     style={styles.img}
                   />
+                  {/* <Image
+                    source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
+                    resizeMode="stretch"
+                    style={styles.img}
+                  /> */}
 
                   <Text
                     style={styles.tags}>
@@ -100,7 +105,7 @@ const styles = StyleSheet.create({
   name: {
     color: Colors.black,
     fontWeight: 'bold',
-    
+
     fontSize: 18,
     textTransform: 'capitalize',
   },
@@ -115,15 +120,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
     height: 180,
     borderRadius: 10,
-    width:'98%',
-    marginLeft:5
+    width: '98%',
+    marginLeft: 5
   },
   tags: {
     fontWeight: '700',
     color: '#000',
     marginLeft: 12,
     marginTop: 10,
-    
+
     textTransform: 'capitalize',
   },
   maincontent: {
@@ -131,6 +136,6 @@ const styles = StyleSheet.create({
     borderTopColor: Colors.grey,
     marginTop: 10
   },
-  container1:{paddingTop:200 , justifyContent:'center',alignItems:'center',flex:1,},
-  txtheadersty:{fontSize:25,fontWeight:'bold'}
+  container1: { paddingTop: 200, justifyContent: 'center', alignItems: 'center', flex: 1, },
+  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
 });

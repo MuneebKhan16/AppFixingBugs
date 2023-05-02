@@ -20,7 +20,7 @@ import dummy from '../../../config/Common'
 import { show_eventCreater_event } from '../../../redux/APIs'
 import Icons from '../../../assets/Icons'
 import eventContext from '../eventContext';
-
+import FastImage from 'react-native-fast-image'
 
 const EventHome = (props) => {
   const { showEvents } = useContext(eventContext);
@@ -30,7 +30,7 @@ const EventHome = (props) => {
     NavService.navigate('EventReview', item)
   };
 
-  
+
 
 
   return (
@@ -60,8 +60,21 @@ const EventHome = (props) => {
                       </View>
                     </View>
                     <TouchableOpacity onPress={() => EventReview(item)}>
-
-                      <ImageBackground
+                      <FastImage
+                        source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
+                        style={styles.imgback}
+                        imageStyle={styles.img}
+                      >
+                        <View style={styles.loc}>
+                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                          <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                        </View>
+                        <Text
+                          style={styles.ftrtitle}>
+                          {item.event_title}
+                        </Text>
+                      </FastImage>
+                      {/* <ImageBackground
                          source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
                         style={styles.imgback}
                         imageStyle={styles.img} >
@@ -69,7 +82,7 @@ const EventHome = (props) => {
                           <Image source={Icons.location} resizeMode="contain" style={styles.location} />
                           <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
                         </View>
-                      </ImageBackground>
+                      </ImageBackground> */}
                     </TouchableOpacity>
                   </View>
                 )}
