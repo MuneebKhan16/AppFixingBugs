@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
       
       textTransform: 'capitalize',
     },
-    img: { width: '100%', height: 180, marginTop: 10 },
+    img: { width: '100%', height: 180, marginTop: 10 ,borderRadius:10},
     loccontainer: { flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 5,},
     locsub: {
       width: 30,
@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     },
     loctxt: { color: Colors.white, fontWeight: '400', fontSize: 14,  textTransform: 'capitalize', },
     top:{ marginTop: 30 },
-    border:{ borderRadius: 10 },
+    border:{ borderRadius: 20 },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},
     txtheadersty:{fontSize:25,fontWeight:'bold'}
   });

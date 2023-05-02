@@ -31,27 +31,24 @@ if (Platform.OS === 'android') {
 }
 
 const ChatScreen = ({navigation, route}) => {
+
   const {chatUser, conversation_id} = route.params;
   const user = useSelector(state => state.reducer.user);
   const socket = useSelector(state => state.reducer.socket);
 
-  console.log("888888",socket  )
-
-
-
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState('');
   const [Data,Setdata] = useState(null)
-  const [mess,Setmess] = useState([])
+
 
 
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
   const response = () => {
-    // socket?.emit('SendChatToClient', {
-    //   sender_id: sender_id,
-    //   receiver_id: receiver_id,
-    // });
+    socket?.emit('SendChatToClient', {
+      sender_id: sender_id,
+      receiver_id: receiver_id,
+    });
   
 
     socket?.on( receiver_id, data => {
@@ -93,13 +90,9 @@ const ChatScreen = ({navigation, route}) => {
         msg_type: 'text',
       };
      
-     socket.emit('sendChatToServer', {
-      sender_id: sender_id,
-      receiver_id: receiver_id,
-      msg: message,
-      msg_type: 'text',
-     } );
+     socket.emit('sendChatToServer',  payload );
 
+   
       setMessage('');
       LayoutAnimation.linear();
       loaderStop();
@@ -125,15 +118,7 @@ const ChatScreen = ({navigation, route}) => {
       .catch(error => console.log('error', error));
   }, []);
 
-  useEffect(() => {
-    socket.emit('SendChatToClient',(data) => {
-      console.log( 'SendChatToClient' , data)
-      let times = [...mess]
-      Setmess(times.msg)
-    })
-  },[mess]);
 
-  console.log('mess',mess)
   console.log('sender_id', sender_id, 'reciever_id', receiver_id);
   console.log('chatUser?.user_receiver?.id', chatUser);
   console.log('chatList456', chatList);

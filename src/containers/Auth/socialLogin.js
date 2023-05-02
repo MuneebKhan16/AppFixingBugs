@@ -6,7 +6,7 @@ import { AccessToken, LoginManager, Settings } from 'react-native-fbsdk-next';
 
 GoogleSignin.configure({
     webClientId:
-        '267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com/',
+        '267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com',
 });
 
 Settings.setAppID('1284024702540652');  

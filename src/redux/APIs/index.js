@@ -338,6 +338,7 @@ export async function updateProfile(
  console.log('param',params)
  
 const data = await postApi('update-profile',params)
+console.log('object',data)
 if (data.status == 1) {
     
   NavService.goBack();

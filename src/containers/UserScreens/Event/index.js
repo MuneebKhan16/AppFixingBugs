@@ -16,8 +16,8 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import { useSelector } from 'react-redux';
 import Icons from '../../../assets/Icons';
 import { styles } from './event_style';
-import  ImageURL  from '../../../config/Common'
-
+import ImageURL from '../../../config/Common'
+import FastImage from 'react-native-fast-image'
 const Event = (props) => {
 
   const api_token = useSelector(state => state?.reducer?.user.api_token);
@@ -34,52 +34,64 @@ const Event = (props) => {
     <AppBackground title={'Events'} home back filter>
       {
         cat?.length > 0 ?
-        (
-          <FlatList
-          data={cat}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, index }) => (
-            <View style={styles.top}>
-              <View style={styles.container}>
-                <Text
-                  style={styles.title}>
-                  {item.event_title}
-                </Text>
-                <View
-                  style={styles.filled}>
-                  <Image source={Icons.starFilled} style={styles.icnfilled} />
-                  <Text
-                    style={styles.review}>
-                    {item.rating_count + " " + "Reviews"}
-                  </Text>
-                </View>
-              </View>
-              <RNBounceable onPress={() => NavService.navigate('Review', item)}>
-                <ImageBackground
-                  source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
-                  style={styles.img}
-                  imageStyle={styles.border}>
-                  <View style={styles.loccontainer}>
-                    <View style={styles.locsub}>
-                      <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+          (
+            <FlatList
+              data={cat}
+              showsVerticalScrollIndicator={false}
+              renderItem={({ item, index }) => (
+                <View style={styles.top}>
+                  <View style={styles.container}>
+                    <Text
+                      style={styles.title}>
+                      {item.event_title}
+                    </Text>
+                    <View
+                      style={styles.filled}>
+                      <Image source={Icons.starFilled} style={styles.icnfilled} />
+                      <Text
+                        style={styles.review}>
+                        {item.rating_count + " " + "Reviews"}
+                      </Text>
                     </View>
-                    <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
                   </View>
-                </ImageBackground>
-  
-              </RNBounceable>
+                  <RNBounceable onPress={() => NavService.navigate('Review', item)}>
+                    <FastImage
+                       source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
+                       style={styles.img}
+                       imageStyle={styles.border}
+                    >
+                        <View style={styles.loccontainer}>
+                        <View style={styles.locsub}>
+                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                        </View>
+                        <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                      </View>
+                      </FastImage>
+                    {/* <ImageBackground
+                      source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
+                      style={styles.img}
+                      imageStyle={styles.border}>
+                      <View style={styles.loccontainer}>
+                        <View style={styles.locsub}>
+                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                        </View>
+                        <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                      </View>
+                    </ImageBackground> */}
+
+                  </RNBounceable>
+                </View>
+              )}
+            />
+          )
+          :
+          (
+            <View style={styles.container1}>
+              <Text style={styles.txtheadersty}>No Events Available</Text>
             </View>
-          )}
-        />
-        )
-        :
-        (
-          <View style={styles.container1}>
-                <Text style={styles.txtheadersty}>No Events Available</Text>
-              </View>
-        )
+          )
       }
-     
+
     </AppBackground>
   );
 };
