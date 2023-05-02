@@ -126,7 +126,7 @@ const ChatScreen = ({navigation, route}) => {
   }, []);
 
   useEffect(() => {
-    socket.on('SendChatToClient',(data) => {
+    socket.emit('SendChatToClient',(data) => {
       console.log( 'SendChatToClient' , data)
       let times = [...mess]
       Setmess(times.msg)

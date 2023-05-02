@@ -376,7 +376,7 @@ export async function get_reviews_event() {
 }
 
 export async function post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id) {
-  
+  console.log('user_id, user_type, rating_image, tags, rating, review, event_id',user_id, user_type, rating_image, tags, rating, review, event_id)
   const params = new FormData();
   params.append("user_id", user_id);
   params.append("user_type", user_type || 'customer');
