@@ -11,7 +11,7 @@ import AppBackground from '../../../components/AppBackground';
 import Images from '../../../assets/Images';
 import eventContext from '../eventContext';
 import { updateProfile } from '../../../redux/APIs';
-
+import ImageURL from '../../../config/Common'
 const EditProfile = () => {
   const { userProfile } = useContext(eventContext);
   const [fullName, setFullName] = useState(userProfile?.name);
@@ -19,7 +19,7 @@ const EditProfile = () => {
   const [email, setEmail] = useState(userProfile?.email);
   const [addresss, setAddress] = useState(userProfile?.address);
 
-
+  console.log('object',userProfile)
 
   const handleUpdate = () => {
     if(fullName !== null && lastName == userProfile?.last_name && addresss == userProfile?.address){
@@ -86,7 +86,7 @@ const EditProfile = () => {
             }}>
             <View>
               <Image
-                source={Images.avatar}
+                source={{ uri : `${ImageURL.ImageURL}${ userProfile.profile_picture}` }}
                 style={{
                   width: 130,
                   height: 130,
