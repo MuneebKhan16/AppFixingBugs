@@ -42,7 +42,7 @@ class App extends Component {
         name: 'Google',
         icon: Icons.google,
         color: Colors.google,
-      //  onPress: () => AuthLogin.Google().then((data) => NavService.navigate('CompleteProfile')).catch((err) => console.log('Noo',err))
+        onPress: () => AuthLogin.Google().then((data) => console.log(data)).catch((err) => console.log('Noo',err))
       },
       {
         name: 'Apple',
