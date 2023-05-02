@@ -7,10 +7,15 @@ import RNBounceable from "@freakycoder/react-native-bounceable";
 import ImageURL from '../config/Common'
 
 const MicroChat = props => {
-  const { image, name, msg, onPress } = props;
+  const { image, name, msg, onPress,date } = props;
 
-  //console.log('ppppp',props)
 
+
+  const DateReadbleFunction = (dateIn) => {
+    const date = dateIn
+    const dates = new Date(date);
+    return dates?.toLocaleDateString();
+  }
   return (
     <RNBounceable
       onPress={onPress}
@@ -20,7 +25,7 @@ const MicroChat = props => {
         <Image
           resizeMode="center"
           style={styles.img}
-          source={{ uri : image }}
+          source={{ uri : `${ImageURL.ImageURL}${image}` ??  image}}
         />
       </View>
       <View
@@ -28,6 +33,10 @@ const MicroChat = props => {
         <Text
           style={styles.txt}>
           {msg}
+        </Text>
+        <Text
+          style={styles.txt}>
+          {DateReadbleFunction(date)}
         </Text>
 
       </View>

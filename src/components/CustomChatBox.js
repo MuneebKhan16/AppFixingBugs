@@ -4,9 +4,19 @@ import Icons from '../assets/Icons';
 import { Colors } from '../config';
 import Images from '../assets/Images';
 import RNBounceable from "@freakycoder/react-native-bounceable";
-
+import { yellow100 } from 'react-native-paper/lib/typescript/styles/colors';
+import ImageURL from '../config/Common'
 const MicroChat = props => {
-  const { image, name, msg, onPress } = props;
+  const { image, name, msg, onPress ,date } = props;
+
+  const DateReadbleFunction = (dateIn) => {
+    const date = dateIn
+    const dates = new Date(date);
+    return dates?.toLocaleDateString();
+  }
+  const db = `${ImageURL.ImageURL}${image}`
+  const bd = image
+  
 
   return (
     <View style={styles.self} >
@@ -21,6 +31,10 @@ const MicroChat = props => {
               style={styles.msg}>
               {msg}
             </Text>
+            <Text
+              style={styles.msg}>
+              {DateReadbleFunction(date)}
+            </Text>
           </View>
 
         </View>
@@ -29,7 +43,7 @@ const MicroChat = props => {
           <Image
             resizeMode="cover"
             style={styles.img}
-            source={image}
+            source={{ uri : db ? db : bd}}
           />
         </View>
       </RNBounceable>
@@ -77,7 +91,8 @@ const styles = StyleSheet.create({
     width: 50,
     alignSelf: 'center',
     borderRadius: 30,
-    marginTop: 10
+    marginTop: 10,
+   backgroundColor:'grey'
   },
   self: {
     alignSelf: "flex-end"
