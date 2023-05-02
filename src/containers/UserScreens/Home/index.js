@@ -30,7 +30,7 @@ import { Get_All_Categories, localevents } from '../../../redux/APIs/index'
 import Icons from '../../../assets/Icons';
 import { styles } from './Home_Styles';
 import ImageURL from '../../../config/Common'
-
+import FastImage from 'react-native-fast-image'
 
 export class Home extends Component {
 
@@ -86,7 +86,23 @@ export class Home extends Component {
                 <TouchableOpacity
                   onPress={this.Featured}
                   style={styles.tch}>
-                  <ImageBackground
+                   <FastImage
+                        source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
+                        style={styles.imgbackground}
+                        imageStyle={styles.imgbg}
+                    >
+                      <View style={styles.icnstrempty}>
+                      <Image
+                        source={Icons.starEmpty}
+                        style={styles.starempty}
+                      />
+                    </View>
+                    <Text
+                      style={styles.ftrtitle}>
+                      {item.event_title}
+                    </Text>
+                      </FastImage>
+                  {/* <ImageBackground
                     source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
                     style={styles.imgbackground}
                     imageStyle={styles.imgbg}>
@@ -100,7 +116,8 @@ export class Home extends Component {
                       style={styles.ftrtitle}>
                       {item.event_title}
                     </Text>
-                  </ImageBackground>
+                  </ImageBackground> */}
+
                 </TouchableOpacity>
               )}
             />

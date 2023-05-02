@@ -6,6 +6,7 @@ import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config//Common'
+import FastImage from 'react-native-fast-image'
 // check
 const Posts = (props) => {
 
@@ -25,7 +26,7 @@ const Posts = (props) => {
     return durationString;
   }
 
-  
+
 
   return (
     <View>
@@ -67,11 +68,19 @@ const Posts = (props) => {
                       {ConvertTimeStamp(data.created_at)}
                     </Text>
                   </View>
-                  <Image
+                  <FastImage
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data.rating_image}`,
+                      priority: FastImage.priority.normal,
+                    }}
+                    style={styles.rating}
+                    resizeMode={FastImage.resizeMode.contain}
+                  />
+                  {/* <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
                     resizeMode="stretch"
                     style={styles.rating}
-                  />
+                  /> */}
 
                   <Text
                     style={styles.tags}>
@@ -83,9 +92,9 @@ const Posts = (props) => {
           ) :
           (
             <View style={styles.container1}>
-              <Text style={styles.txtheadersty}>No Reviews Found</Text>  
+              <Text style={styles.txtheadersty}>No Reviews Found</Text>
             </View>
-      )
+          )
       }
     </View>
 
@@ -121,14 +130,14 @@ const styles = StyleSheet.create({
     right: 0,
     color: Colors.black,
     fontWeight: '700',
-    
+
     textTransform: 'capitalize',
   },
   name: {
     color: Colors.black,
     fontWeight: 'bold',
     marginLeft: 10,
-    
+
     textTransform: 'capitalize',
 
   },
@@ -143,10 +152,10 @@ const styles = StyleSheet.create({
     color: '#000',
     marginLeft: 12,
     marginTop: 10,
-    
+
     fontSize: 16,
     textTransform: 'capitalize',
   },
-  container1:{paddingTop:100, justifyContent:'center',alignItems:'center',flex:1,},
-  txtheadersty:{fontSize:25,fontWeight:'bold'}
+  container1: { paddingTop: 100, justifyContent: 'center', alignItems: 'center', flex: 1, },
+  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
 });

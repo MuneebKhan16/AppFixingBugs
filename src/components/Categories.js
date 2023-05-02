@@ -27,14 +27,15 @@ const Categories = props => {
 
   const { category, image, onPress, name, info, title } = props;
   return (
-   
+
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}>
+      
       <ImageBackground
-      resizeMode='contain'
-      // source={Images.grid}
+        resizeMode='contain'
+        // source={Images.grid}
         source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
         imageStyle={styles.bg}>
@@ -48,9 +49,9 @@ const Categories = props => {
         </TouchableOpacity>
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
-            <Text style={styles.title}>{categories?.title}</Text> 
+            <Text style={styles.title}>{categories?.title}</Text>
           </View>
-           <View style={styles.category}>
+          <View style={styles.category}>
             <View>
               <Text style={styles.detail}>{categories?.category_info}</Text>
             </View>
@@ -59,13 +60,13 @@ const Categories = props => {
             buttonStyle={styles.mdlbtn}
             title="Close"
             onPress={toggleModal}
-          /> 
+          />
         </Modal>
 
         <Text style={styles.ctg}>{categories?.title}</Text>
       </ImageBackground>
     </TouchableOpacity>
-   
+
   );
 };
 
@@ -73,7 +74,7 @@ export default React.memo(Categories);
 
 const styles = StyleSheet.create({
   touchable: {
-    marginHorizontal:20
+    marginHorizontal: 20
   },
   imgbg: {
     borderRadius: 20,
@@ -82,13 +83,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 0.5,
     marginTop: 15,
-    borderWidth:2,
-    borderColor:Colors.purple,
-    height:400,
-    paddingRight:10
+    borderWidth: 2,
+    borderColor: Colors.purple,
+    height: 400,
+    paddingRight: 10
   },
   bg: { borderRadius: 10 },
-  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize', },
+  title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', },
   modal: {
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
