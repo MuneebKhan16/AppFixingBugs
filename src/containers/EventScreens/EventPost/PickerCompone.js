@@ -25,12 +25,14 @@ const PickerCompone = (props) => {
       color={Colors.grey}
       selectedValue={selectedLanguage}
       onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
+      itemStyle={{ color: 'white', fontSize: 20 ,  backgroundColor: '#ededed',}}
+      mode="dropdown"
     >
-      <Picker.Item label='Select an options' value='null' color={'black'} style={{ fontWeight: 'bold' }} />
+      <Picker.Item label='Select an options' value='null' color={'black'} style={{ fontWeight: 'bold',backgroundColor: '#ededed',}} />
       {
         categories?.map((data) => {
           return(
-            <Picker.Item  key={data.category_id} label={data.title} value={data || data.title} color={'black'} style={{ fontWeight: 'bold' }} />
+            <Picker.Item  key={data.category_id} label={data.title} value={data || data.title} color={Colors.black} style={{ fontWeight: 'bold',  backgroundColor: '#ededed', }} />
 
           )
         } )
@@ -50,5 +52,6 @@ const styles = StyleSheet.create({
     width: 300,
     paddingLeft: 15,
     borderRadius: 20,
+
   }
 })

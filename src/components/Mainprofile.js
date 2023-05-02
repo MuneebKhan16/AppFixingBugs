@@ -84,7 +84,7 @@ const Mainprofile = props => {
               fontSize: size ? 18 : 17,
               color: Colors.darkGray,
               fontWeight: '400',
-               textTransform: 'capitalize',
+             
 
             }}>
             {props?.subtitle}
@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
     height: 25,
     justifyContent: 'center',
     borderRadius: 40,
-    top: -28,
-    left: 48,
+    top: -25,
+    left: 47,
     backgroundColor: Colors.purple
 
   },
@@ -158,6 +158,6 @@ const styles = StyleSheet.create({
 
   },
   marker: { width: 30, height: 30, },
-  location: { fontSize: 16, color: Colors.black,  fontWeight: '600' },
+  location: { fontSize: 16, color: Colors.black,  fontWeight: '600', ellipsizeMode:'middle',maxWidth:150 },
   subimg:{height:80}
 });

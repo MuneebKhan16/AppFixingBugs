@@ -139,11 +139,14 @@ export class Home extends Component {
                 <TextInput
                   style={styles.txtinputadrs}
                   placeholder="Address"
+                  secureTextEntry={!isFocused}
                   onFocus={() => this.setState({ isFocused: true })}
                   onBlur={() => this.setState({ isFocused: false })}
                   onChangeText={text => this.setState({ text })}
+
                   value={text}
-                  placeholderTextColor={Colors.darkGray}
+                  placeholderTextColor={Colors.black}
+
                 />
               </View>
             </View>

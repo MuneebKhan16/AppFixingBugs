@@ -24,6 +24,8 @@ export const styles = StyleSheet.create({
       paddingLeft: 15,
       borderRadius: 10,
       height: 50,
+      color:Colors.black
+      
     },
     location: {
       backgroundColor: '#ededed',
@@ -33,11 +35,12 @@ export const styles = StyleSheet.create({
       borderRadius: 10,
       flexDirection: 'row',
       alignItems: 'center',
-      height: 50
+      height: 50,
+      color:Colors.black
     },
-    loc: { width: '90%' },
+    loc: { width: '90%' ,  color:Colors.black},
     marker: { width: 15, height: 18, position: 'absolute', right: 10, tintColor: '#434343' },
-    description: { maxHeight: 150, marginLeft: 10, marginTop: 10 },
+    description: { maxHeight: 150, marginLeft: 10, marginTop: 10,  color:Colors.black },
     descp: {
       height: 150,
       backgroundColor: '#ededed',
@@ -55,10 +58,11 @@ export const styles = StyleSheet.create({
     top: { marginTop: 60 ,alignSelf:'center'},
     user: { marginTop: 40 },
     mime: { alignItems: 'center',justifyContent:'center',width:300,height:150 },
-    upload: { width: 50, height: 20, resizeMode: 'contain', },
+    upload: { width: 50, height: 20, resizeMode: 'contain',color:Colors.black, },
     modal: { margin: 0, padding: 0 },
     posting: { backgroundColor: Colors.purple, borderTopLeftRadius: 10, borderTopRightRadius: 10, alignItems: 'center', paddingTop: 10, width: '90%', alignSelf: 'center' },
     requriment: { fontSize: 18, color: Colors.white, fontWeight: 'bold' },
     category: { backgroundColor: Colors.purple, paddingHorizontal: 8, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, width: '90%', alignSelf: 'center', padding: 20, alignItems: 'center', justifyContent: 'center' },
     modaltxt: { color: Colors.white, fontWeight: '700', fontSize: 16, lineHeight: 28, paddingHorizontal: 10 , textTransform: 'capitalize',},
+    txtclr:{color:Colors.black}
   })

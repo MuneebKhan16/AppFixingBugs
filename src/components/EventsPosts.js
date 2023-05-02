@@ -59,7 +59,6 @@ const Posts = (props) => {
                           maxStars={5}
                           rating={data.rating}
                           selectedStar={rating => setStarCount(rating)}
-
                         />
                       </View>
                     </View>

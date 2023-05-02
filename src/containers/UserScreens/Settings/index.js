@@ -54,7 +54,7 @@ export class TermsConditions extends Component {
           <View style={styles.topbtm}>
 
             <Heading name="Location Tracking" switchs icon={Icons.location} tintclr />
-            <Heading name="Terms & Condition" icon={Icons.information} />
+            <Heading name="Terms & Condition" icon={Icons.information}  />
             <Heading name="Policies" icon={Icons.policies} />
             <Heading name="Help" icon={Icons.help} />
             <Heading name="Subscription" icon={Icons.subscription} />

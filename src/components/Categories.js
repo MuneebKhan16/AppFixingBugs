@@ -16,6 +16,7 @@ import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
 import Images from '../assets/Images';
+
 const Categories = props => {
   const { categories } = props;
   const [isModalVisible, setModalVisible] = useState(false);
@@ -26,14 +27,15 @@ const Categories = props => {
 
   const { category, image, onPress, name, info, title } = props;
   return (
+   
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}>
       <ImageBackground
       resizeMode='contain'
-      source={Images.grid}
-        // source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
+      // source={Images.grid}
+        source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
         imageStyle={styles.bg}>
         <TouchableOpacity
@@ -63,6 +65,7 @@ const Categories = props => {
         <Text style={styles.ctg}>{categories?.title}</Text>
       </ImageBackground>
     </TouchableOpacity>
+   
   );
 };
 

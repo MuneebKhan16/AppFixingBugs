@@ -9,28 +9,31 @@ const PickerComptwo = () => {
   return (
     <Picker
           style={{
-            backgroundColor: '#ededed',
             marginTop: 10,
             width: 300,
-            paddingLeft: 15,
-            borderRadius: 10,
+            backgroundColor: '#ededed',
+            borderRadius: 10
+           
           }}
           color={Colors.grey}
           selectedValue={selectedPicker}
           onValueChange={(itemValue, itemIndex) =>
             setSelectedPicker(itemValue)
-          }>
+            }
+            itemStyle={{ color: 'white', fontSize: 20 ,  backgroundColor: '#ededed',}}
+            mode="dropdown"
+            >
           <Picker.Item
             label="Event Type (i.e Recurring)"
             value="Event Type (i.e Recurring)"
-            color={'black'} style={{ fontWeight: 'bold' }}
+            color={'black'} style={{ fontWeight: 'bold',backgroundColor: '#ededed',}}
           />
            <Picker.Item
             label="local"
             value="local"
-            color={'black'} style={{ fontWeight: 'bold' }}
+            color={'black'} style={{ fontWeight: 'bold',color:Colors.black ,backgroundColor: '#ededed',}}
           />
-          <Picker.Item label="event" value="event" color={'black'} style={{ fontWeight: 'bold' }} />
+          <Picker.Item label="event" value="event" color={'black'} style={{fontWeight: 'bold',backgroundColor: '#ededed', }} />
         </Picker> 
   )
 }

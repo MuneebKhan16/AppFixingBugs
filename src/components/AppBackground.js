@@ -79,6 +79,7 @@ export function AppBackground({
                 height: 24,
                 resizeMode: 'contain',
                 tintColor: Colors.purple,
+                marginTop:-8
               }}
             />
           </TouchableOpacity>
