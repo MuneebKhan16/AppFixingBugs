@@ -36,7 +36,7 @@ class App extends Component {
         name: 'Facebook',
         icon: Icons.facebook,
         color: Colors.facebook,
-       // onPress: () => AuthLogin.Facebook().then((data) => NavService.navigate('EventProfile' ,data))
+        onPress: () => AuthLogin.Facebook().then((data) => console.log('kiol',data))
       },
       {
         name: 'Google',
