@@ -16,6 +16,7 @@ import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
 import Images from '../assets/Images';
+
 const Categories = props => {
   const { categories } = props;
   const [isModalVisible, setModalVisible] = useState(false);
@@ -26,11 +27,14 @@ const Categories = props => {
 
   const { category, image, onPress, name, info, title } = props;
   return (
+   
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}>
       <ImageBackground
+      resizeMode='contain'
+      // source={Images.grid}
         source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
         imageStyle={styles.bg}>
@@ -61,6 +65,7 @@ const Categories = props => {
         <Text style={styles.ctg}>{categories?.title}</Text>
       </ImageBackground>
     </TouchableOpacity>
+   
   );
 };
 
@@ -68,7 +73,7 @@ export default React.memo(Categories);
 
 const styles = StyleSheet.create({
   touchable: {
-    marginHorizontal: 20,
+    marginHorizontal:20
   },
   imgbg: {
     borderRadius: 20,
@@ -79,8 +84,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderWidth:2,
     borderColor:Colors.purple,
-    width:'100%',
-    height:500
+    height:400,
+    paddingRight:10
   },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize', },

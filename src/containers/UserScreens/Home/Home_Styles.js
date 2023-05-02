@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.black,
     marginLeft: 20,
-
     textTransform: 'capitalize',
   },
   maincontainer: {
@@ -45,7 +44,9 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     color: Colors.white,
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 18,
+    marginHorizontal:5,
+    textAlign:'center'
   },
   modalcontainer: {
     backgroundColor: '#ffffff',

@@ -5,9 +5,9 @@ export const styles = StyleSheet.create({
     scroll: { marginTop: 20, },
     imgbg: { width: '100%', height: 180, borderRadius: 10 },
     titlehdr: { flexDirection: 'row', alignItems: 'center', marginTop: 18 },
-    title: { color: Colors.black, fontWeight: 'bold', fontSize: 18,  },
-    date: { fontSize: 16,  },
-    subtitle: { fontWeight: '600', marginTop: 10,  },
+    title: { color: Colors.black, fontWeight: 'bold', fontSize: 20, textTransform: 'capitalize', },
+    date: { fontSize: 17,color:Colors.darkGray,marginLeft:5  },
+    subtitle: {  marginTop: 10,fontSize: 17,color:Colors.black,marginLeft:5 },
     markericn: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
     markericnhdr: {
       alignItems: 'center',
@@ -19,12 +19,11 @@ export const styles = StyleSheet.create({
   
     },
     marker: {
-      width: 22,
-      height: 22,
+      width: 18,
+      height: 18,
       resizeMode: 'contain',
-      marginRight: 10
     },
-    subcontent: { color: Colors.black, fontWeight: '700',  },
+    subcontent: { color: Colors.black ,fontSize:18 ,fontWeight:'500' },
     heading: {
       marginVertical: 5,
       fontSize: 20,

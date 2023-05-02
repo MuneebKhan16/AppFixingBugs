@@ -49,79 +49,79 @@ class Post extends Component {
     const { isChecked } = this.state;
     isChecked[name] = !isChecked[name];
     this.setState({ isChecked });
-    return 
+    return
   }
   handleReview = (name) => {
 
     const { isChecked1 } = this.state;
     isChecked1[name] = !isChecked1[name];
     this.setState({ isChecked1 });
-    return 
+    return
   }
   handleReview = (name) => {
 
     const { isChecked2 } = this.state;
     isChecked2[name] = !isChecked2[name];
     this.setState({ isChecked2 });
-    return 
+    return
   }
-  
+
   handleSubmit = () => {
 
-    
-   const { id } = this.props.user
-   const { selectedImage,starCount,isChecked,isChecked1,isChecked2 ,checkbox } = this.state
 
-   if(isChecked === true ){
-    var user_id = id;
-    var user_type = 'customer';
-    var rating_image = selectedImage.path;
-    var tags = checkbox.first;
-    var rating = starCount;
-    var review = null;
-    var event_id = this.props.route.params;
-    post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+    const { id } = this.props.user
+    const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox } = this.state
 
-   } else if( isChecked1 === true ){
-    var user_id = id;
-    var user_type = 'customer';
-    var rating_image = selectedImage.path;
-    var tags = checkbox.second;
-    var rating = starCount;
-    var review = null;
-    var event_id = this.props.route.params;
-     post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+    if (isChecked === true) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = selectedImage.path;
+      var tags = checkbox.first;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
 
-   } else if (isChecked2 === true){
+    } else if (isChecked1 === true) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = selectedImage.path;
+      var tags = checkbox.second;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
 
-    var user_id = id;
-    var user_type = 'customer';
-    var rating_image = selectedImage.path;
-    var tags = checkbox.third;
-    var rating = starCount;
-    var review = null;
-    var event_id = this.props.route.params;
-     post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+    } else if (isChecked2 === true) {
 
-   }
-   
-   if(isChecked === true && isChecked1 === true && isChecked2 === true && checkbox ){
-    
-    const tag = Object.values(checkbox)
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = selectedImage.path;
+      var tags = checkbox.third;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
 
-    var user_id = id;
-    var user_type = 'customer';
-    var rating_image = selectedImage.path;
-    var tags = tag.join(',')
-    var rating = starCount;
-    var review = null;
-    var event_id = this.props.route.params;
-    post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+    }
 
-   }else{
-    console.log('object')
-   }
-   
+    if (isChecked === true && isChecked1 === true && isChecked2 === true && checkbox) {
+
+      const tag = Object.values(checkbox)
+
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = selectedImage.path;
+      var tags = tag.join(',')
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+    } else {
+      console.log('object')
+    }
+
   }
   render() {
 
@@ -191,7 +191,6 @@ class Post extends Component {
                 </CustomImagePicker>
               </View>
             </View>
-
             <View style={styles.center}>
 
               <View style={styles.box}>
@@ -201,7 +200,7 @@ class Post extends Component {
                   onValueChange={(newValue) => this.setState({ isChecked: newValue })}
                   tintColors={{ true: 'white', false: 'black' }}
                 />
-                <Text style={styles.txt}> {Checkbox.first} </Text>
+                <Text style={styles.txt}>{Checkbox.first}</Text>
 
               </View>
 
@@ -213,7 +212,7 @@ class Post extends Component {
                   onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
                   tintColors={{ true: 'white', false: 'black' }}
                 />
-                <Text style={styles.txt}> {Checkbox.second} </Text>
+                <Text style={styles.txt}>{Checkbox.second}</Text>
               </View>
 
               <View style={styles.check}>
@@ -223,7 +222,7 @@ class Post extends Component {
                   onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
                   tintColors={{ true: 'white', false: 'black' }}
                 />
-                <Text style={styles.txt}> {Checkbox.third} </Text>
+                <Text style={styles.txt}>{Checkbox.third}</Text>
 
               </View>
             </View>

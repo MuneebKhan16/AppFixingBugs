@@ -12,6 +12,7 @@ export default Images = {
   bg1:require('./bg-1.png'),
   bg2:require('./bg-2.png'),
   bg3:require('./bg-3.png'),
-  splashlogo:require('./splashlogo.png')
+  splashlogo:require('./splashlogo.png'),
+  grid:require('./gridart.jpg')
 };
 
