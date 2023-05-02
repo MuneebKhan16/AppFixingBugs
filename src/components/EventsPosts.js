@@ -74,7 +74,7 @@ const Posts = (props) => {
                       priority: FastImage.priority.normal,
                     }}
                     style={styles.rating}
-                    resizeMode={FastImage.resizeMode.contain}
+                    resizeMode="stretch"
                   />
                   {/* <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}

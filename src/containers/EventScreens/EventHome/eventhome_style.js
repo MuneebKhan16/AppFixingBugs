@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
       fontWeight: 'bold',
       marginRight:5
     },
-    imgback:{ width: '100%', height: 170, marginTop: 10 },
+    imgback:{ width: '100%', height: 170, marginTop: 10 ,borderRadius:10},
     loc:{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 12, left: 5, },
     location:{ tintColor: Colors.white, width: 20, height: 20, },
     loctxt:{ color: Colors.white, fontWeight: 'bold',  textTransform: 'capitalize',fontSize:17 },
