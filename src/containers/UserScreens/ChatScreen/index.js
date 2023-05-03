@@ -7,8 +7,8 @@ import {
   Platform,
   View,
 } from 'react-native';
-import React, {useState, useRef, useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import React, { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import AppBackground from '../../../components/AppBackground';
 import ChatComponent from '../../../components/ChatComponent';
@@ -16,7 +16,7 @@ import MicroChat from '../../../components/microChat';
 import Images from '../../../assets/Images';
 import CustomChatBox from '../../../components/CustomChatBox';
 import CustomSender from '../../../components/CustomSender';
-import {styles} from './chatscreen_style';
+import { styles } from './chatscreen_style';
 import {
   loaderStart,
   loaderStop,
@@ -30,50 +30,48 @@ if (Platform.OS === 'android') {
   }
 }
 
-const ChatScreen = ({route}) => {
-
-  const {chatUser, conversation_id} = route.params;
+const ChatScreen = ({ route }) => {
+  const { chatUser, conversation_id } = route.params;
   const user = useSelector(state => state.reducer.user);
   const socket = useSelector(state => state.reducer.socket);
-
-  const [chatList, setChatList] = useState([]);
+  const [chatList, setChatList] = useState(null);
   const [message, setMessage] = useState('');
-  const [Data,Setdata] = useState(null)
-
-
-
+  // const [Data, Setdata] = useState(null);s
+  const [ resp ,Setresp ] = useState('')
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
-  const response = () => {
-    // socket?.emit('SendChatToClient', {
-    //   sender_id: sender_id,
-    //   receiver_id: receiver_id,
-    // });
   
-
-    socket?.on( receiver_id, data => {
-      console.log('socket response',data)
-      if (data?.message?.length == 0) {
-        loaderStop();
-        return;
-      }
-      if (data?.object_type == 'get_messages') {
-        const messages = data?.data || [];
-        messages.sort((a, b) => {
-          return new Date(b.createdAt) - new Date(a.createdAt);
-        });
-        setChatList(() => messages);
-      } else setChatList(chatList => [...data?.data, ...chatList]);
-      loaderStop();
-      LayoutAnimation.linear();
+  
+  const response = () => {
+    const payload = {
+      sender_id:sender_id,
+      conv_id:`${sender_id}_${receiver_id}`,
+    }
+    socket?.emit('SendChatToClient',payload);
+    socket?.on('ChatList' , data => {
+      setChatList(data);
+      console.log('jjjjjj',data);
+      // setcombine(...Data)
     });
+
+    socket?.on(`'${receiver_id}'`, data => {
+      console.log('socket response', data);
+      loaderStop();
+      const newMessage = { message: message };
+      setChatList(prevChatList => [...prevChatList, newMessage]);
+      return;
+    });
+
     socket.on('error', data => {
       console.log('data', data);
       loaderStop();
     });
   };
 
- 
+  useEffect(() => {
+    response();
+  }, []);
+
 
   const sendNewMessage = () => {
     console.log('message', message);
@@ -86,16 +84,19 @@ const ChatScreen = ({route}) => {
       const payload = {
         sender_id: sender_id,
         receiver_id: receiver_id,
+        conv_id: route.params.conversation_id,
         msg: message,
         msg_type: 'text',
       };
-     
-     socket.emit('sendChatToServer',  payload );
-
-   
+      socket.emit('sendChatToServer', payload);
+      const nnn = {sender_id:sender_id,message: message}
+      setChatList(prevChatList => [...prevChatList, nnn]);
+      // console.log(chatList);
+      // response();
       setMessage('');
       LayoutAnimation.linear();
       loaderStop();
+
     } else {
       Toast.show({
         text1: 'Enter_message',
@@ -103,21 +104,9 @@ const ChatScreen = ({route}) => {
         visibilityTime: 3000,
       });
     }
-      };
+  };
 
-   
-
-  useEffect(() => {
-    createChatConnection(`${sender_id}_${receiver_id}`)
-      .then(res => {
-        console.log('res', res);
-        Setdata(res.Data)
-        response();
-      })
-      .catch(error => console.log('error', error));
-  }, []);
-
-
+console.log('conbine',chatList)
 
   return (
     <AppBackground title={'Chats'} back profile={false} home>
@@ -125,16 +114,27 @@ const ChatScreen = ({route}) => {
         <View style={styles.container}>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={Data?.concat(chatUser)}
+            data={chatList}
             style={styles.msg}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <>
-                <MicroChat msg={item.message } image={item.profile_picture || `${dummy.dummy}`} date={item.created_at} />
-                <CustomChatBox
-                  msg={item.message}
-                  image={item.profile_picture || `${dummy.dummy}`}
-                  date={item.created_at}
-                />
+              {
+                item.sender_id == sender_id ?
+                (
+                  <MicroChat msg={item.message} image={item.profile_picture || `${dummy.dummy}`}  />
+                )
+                :item.sender_id == receiver_id ?
+                (
+                  <CustomChatBox
+                   msg={item.message}
+                   image={item.profile_picture || `${dummy.dummy}`}
+            
+                 /> 
+
+                )
+                :
+                null
+              }
               </>
             )}
           />

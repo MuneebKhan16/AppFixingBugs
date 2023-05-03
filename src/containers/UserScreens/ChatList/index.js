@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useCallback, useState } from 'react';
+import React, {useCallback, useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -22,6 +22,7 @@ import {styles} from './chatlist_style';
 
 const ChatList = ({navigation, route}) => {
   const user = useSelector(state => state.reducer.user);
+  // const socket = useSelector(state => state.reducer.socket);
   const [conversationList, setConversationList] = useState([]);
   useFocusEffect(
     useCallback(() => {
@@ -30,9 +31,21 @@ const ChatList = ({navigation, route}) => {
         .catch(error => console.log('error', error));
     }, []),
   );
+  // console.log('conversationList',conversationList)
 
-  console.log('conversationList',conversationList)
+  // const sender_id = user?.id;
+  // // const receiver_id = chatUser?.id;
+  // const response = () => {
+  //   socket?.emit('GetConversations', {
+  //     sender_id: sender_id,
+  //   });
+  //   socket?.on('ConversationList', data => {
+  //     console.log('data here',data);
+  //   });
+  // }
 
+  // setConversationList(response);
+  // console.log(conversationList);
   return (
     <AppBackground title={'Message'} back={false} profile={false} home>
       <SafeAreaView style={styles.flex}>

@@ -9,11 +9,6 @@ import ImageURL from '../config/Common'
 const MicroChat = props => {
   const { image, name, msg, onPress ,date } = props;
 
-  const DateReadbleFunction = (dateIn) => {
-    const date = dateIn
-    const dates = new Date(date);
-    return dates?.toLocaleDateString();
-  }
   const db = `${ImageURL.ImageURL}${image}`
   const bd = image
   
@@ -31,10 +26,7 @@ const MicroChat = props => {
               style={styles.msg}>
               {msg}
             </Text>
-            <Text
-              style={styles.msg}>
-              {DateReadbleFunction(date)}
-            </Text>
+           
           </View>
 
         </View>

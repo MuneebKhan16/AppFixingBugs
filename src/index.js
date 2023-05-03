@@ -11,6 +11,7 @@ import { connect, useSelector } from 'react-redux';
 import { io } from 'socket.io-client'
 import Images from './assets/Images';
 import { store } from './redux';
+import { Show_socket } from './redux/actions'
 
 //Screens
 import { AuthStack, ScreenStack, EventScreenStack } from './containers';
@@ -31,24 +32,24 @@ class Navigation extends Component {
     super(props);
 
     this.state = {
-  
+
     };
   }
 
 
- 
+
   componentDidMount() {
- 
+
     saveSocket();
     setTimeout(() => {
       SplashScreen.hide();
     }, 2500)
   }
   render() {
-   
+
 
     //  const initialRouteName = this?.props?.api_token ? ScreenStack : Auth;
-         
+
     return (
       <NavigationContainer
         ref={ref => NavService.setTopLevelNavigator(ref)}
@@ -58,12 +59,12 @@ class Navigation extends Component {
             contentStyle: { backgroundColor: 'transparent' },
             animation: 'simple_push',
           }}
-          >
-            {
-                this?.props?.api_token ? 
-                (
-                  <>
-                    <Stack.Screen
+        >
+          {
+            this?.props?.api_token ?
+              (
+                <>
+                  <Stack.Screen
                     name="ScreenStack"
                     component={ScreenStack}
                     options={{ headerShown: false }}
@@ -73,15 +74,15 @@ class Navigation extends Component {
                     component={EventScreenStack}
                     options={{ headerShown: false }}
                   />
-                  </>
-                ):(
-                  <Stack.Screen
+                </>
+              ) : (
+                <Stack.Screen
                   name="AuthStack"
                   component={AuthStack}
                   options={{ headerShown: false }}
                 />
-                )
-            }
+              )
+          }
         </Stack.Navigator>
       </NavigationContainer>
     );
