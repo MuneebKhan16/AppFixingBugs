@@ -49,11 +49,11 @@ export async function socialSignin(access_token, provider) {
       type: 'SAVE_USER',
       payload: { ...data?.data, api_token: data?.access_token },
     });
-    Toast.show({
-      text1: data.message,
-      type: 'success',
-      visibilityTime: 5000,
-    });
+    // Toast.show({
+    //   text1: data.message,
+    //   type: 'success',
+    //   visibilityTime: 5000,
+    // });
     NavService.reset(0, [{ name: 'AppStack' }]);
   } else {
     Toast.show({
@@ -144,11 +144,11 @@ export async function signup(
   const data = await postApi('signup', params);
   if (data?.status == 1) {
     NavService.reset(0, [{ name: 'Login' }])
-    Toast.show({
-      text1: data.message,
-      type: 'success',
-      visibilityTime: 5000,
-    });
+    // Toast.show({
+    //   text1: data.message,
+    //   type: 'success',
+    //   visibilityTime: 5000,
+    // });
   }
   else if (data?.status === 0) {
     Toast.show({
@@ -211,11 +211,11 @@ export async function forget_password(email) {
   
   if (data.status === 1) {
     NavService.navigate('ForgetPasswordOTP', data);
-    Toast.show({
-      text1: data.message,
-      type: 'success',
-      visibilityTime: 5000,
-    });
+    // Toast.show({
+    //   text1: data.message,
+    //   type: 'success',
+    //   visibilityTime: 5000,
+    // });
     return data.otp
   }
   else if (data.status === 0) {
@@ -263,11 +263,11 @@ export async function resetPassword(password, otp, email) {
   const data = await postApi('update-password', params);
 
   if (data?.status == 1) {
-    Toast.show({
-      text1: data.message,
-      type: 'success',
-      visibilityTime: 2000,
-    });
+    // Toast.show({
+    //   text1: data.message,
+    //   type: 'success',
+    //   visibilityTime: 2000,
+    // });
     NavService.navigate('Login')
   }
 }

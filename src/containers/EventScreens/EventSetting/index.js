@@ -8,9 +8,12 @@ import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import { NavService } from '../../../config';
 import { useSelector } from 'react-redux'
+import { logoutUser } from '../../../redux/actions';
+
 const EventSetting = () => {
   const logout = () => {
-    NavService.reset(0, [{ name: 'Auth' }])
+    // NavService.reset(0, [{ name: 'AuthStack' }])
+    logoutUser();
   }
   const user_id = useSelector((state) => state.reducer.user);
   return (

@@ -31,7 +31,7 @@ function dispatch(action) {
 export default async function postApi(
   endpoint,
   params = null,
-  sucessToast = true,
+  sucessToast = false,
   startLoader = true,
 ) {
   storeUpdate();
