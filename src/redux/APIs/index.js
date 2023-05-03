@@ -98,7 +98,7 @@ export async function login(email, password, setLogin) {
      
       dispatch(saveUser(data?.Data));
 
-      return { api_token: data?.Data?.api_token }
+      // return { api_token: data?.Data?.api_token }
     }
     
 

@@ -13,7 +13,7 @@ import Images from './assets/Images';
 import { store } from './redux';
 
 //Screens
-import { Auth, ScreenStack, EventScreenStack } from './containers';
+import { AuthStack, ScreenStack, EventScreenStack } from './containers';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,10 +23,7 @@ const saveSocket = () => {
   store.dispatch({ type: 'SET_SOCKET', payload: socket });
 };
 
-// const dummyFunc = () => {
-//   let users = useSelector((state) => state?.reducer?.user?.api_token);
-//   console.log('new-------user', users)
-// }
+
 
 class Navigation extends Component {
 
@@ -34,36 +31,24 @@ class Navigation extends Component {
     super(props);
 
     this.state = {
-      ready: true,
+  
     };
   }
 
 
-  // state = {
-  //   ready: true,
-  //   initialRouteName: 'Auth',
-  // };
+ 
   componentDidMount() {
-    // foo()
-    // dummyFunc();
+ 
     saveSocket();
     setTimeout(() => {
       SplashScreen.hide();
     }, 2500)
   }
   render() {
-    const { api_token } = this.props;
-    const { user } = this.props;
-console.log('toeknnn', api_token)
-    // const initialRouteName = api_token ? 'ScreenStack' : 'Auth';
-    // const { user } = this.props;
-    const ready = this.state;
-    if (!ready) return null;
+   
 
-    const initialRouteName = 'Auth';
-
- ;
-      
+    //  const initialRouteName = this?.props?.api_token ? ScreenStack : Auth;
+         
     return (
       <NavigationContainer
         ref={ref => NavService.setTopLevelNavigator(ref)}
@@ -73,22 +58,35 @@ console.log('toeknnn', api_token)
             contentStyle: { backgroundColor: 'transparent' },
             animation: 'simple_push',
           }}
-          initialRouteName={initialRouteName}>
-          <Stack.Screen
-            name="Auth"
-            component={Auth}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ScreenStack"
-            component={ScreenStack}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventScreenStack"
-            component={EventScreenStack}
-            options={{ headerShown: false }}
-          />
+          >
+            {
+                this?.props?.api_token ? 
+                (
+                  <>
+                    <Stack.Screen
+                    name="ScreenStack"
+                    component={ScreenStack}
+                    options={{ headerShown: false }}
+                  />
+                  <Stack.Screen
+                    name="EventScreenStack"
+                    component={EventScreenStack}
+                    options={{ headerShown: false }}
+                  />
+                  </>
+                 
+                ) 
+                :
+                (
+                  <Stack.Screen
+                  name="AuthStack"
+                  component={AuthStack}
+                  options={{ headerShown: false }}
+                />
+                )
+            }
+          
+        
         </Stack.Navigator>
       </NavigationContainer>
     );

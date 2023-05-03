@@ -21,7 +21,7 @@ import { useSelector } from 'react-redux'
 const index = (props) => {
 
   const ScreenStack = useCallback(() => {
-    NavService.navigate('ScreenStack')
+    NavService.navigate('Tab')
   }, [])
   const EventStack = useCallback(() => {
     NavService.navigate('EventScreenStack')

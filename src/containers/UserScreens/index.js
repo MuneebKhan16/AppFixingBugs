@@ -17,7 +17,7 @@ import Signup from '../Auth/Login';
 import ForgetPassword from '../Auth/Login';
 import OTP from '../Auth/Login';
 import ResetPassword from '../Auth/Login';
-import CompleteProfile from '../Auth/Login';
+import CompleteProfile from '../Auth/CompleteProfile';
 //LocalEvent
 import Home from './Home';
 import Profile from './Profile';
@@ -83,11 +83,7 @@ const UserAuthStack = () => {
           component={ResetPassword}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="CompleteProfile"
-          component={CompleteProfile}
-          options={{headerShown: false, gestureEnabled: false}}
-        />
+       
         <Stack.Screen
           name="TermsConditions"
           component={TermsConditions}
@@ -138,12 +134,18 @@ const ScreenStack = () => {
           animation: 'simple_push',
           gestureEnabled: false,
         }}
-        initialRouteName="Tab">
+       >
+           <Stack.Screen
+          name="CompleteProfile"
+          component={CompleteProfile}
+          options={{headerShown: false, gestureEnabled: false}}
+        />
         <Stack.Screen
           name="Tab"
           component={TabStack}
           options={{headerShown: false}}
         />
+
         <Stack.Screen
           name="Home"
           component={Home}

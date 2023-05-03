@@ -28,7 +28,7 @@ const ChatList = ({navigation, route}) => {
       chatList(user?.id)
         .then(res =>  setConversationList(res?.conversations))
         .catch(error => console.log('error', error));
-    }, []),
+    }, [conversationList]),
   );
 
   console.log('conversationList',conversationList)

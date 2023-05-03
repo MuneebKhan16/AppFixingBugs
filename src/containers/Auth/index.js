@@ -43,7 +43,7 @@ const AuthStack = () => {
           animation: 'simple_push',
           gestureEnabled: false,
         }}
-        initialRouteName="PreLogin">
+        >
 
         <Stack.Screen
           name="PreLogin"
@@ -80,11 +80,7 @@ const AuthStack = () => {
           component={ResetPassword}
           options={{ headerShown: false }}
         />
-        <Stack.Screen
-          name="CompleteProfile"
-          component={CompleteProfile}
-          options={{ headerShown: false }}
-        />
+      
         <Stack.Screen
           name="TermsCondition"
           component={TermsConditions}

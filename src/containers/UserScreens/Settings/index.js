@@ -33,8 +33,8 @@ export class TermsConditions extends Component {
     this.setState({ user: userData })
   }
   logout = () => {
-    NavService.reset(0, [{ name: 'Auth' }])
-    // logoutUser();
+    // NavService.reset(0, [{ name: 'Auth' }])
+     logoutUser();
   }
   render() {
     const { notifications, user } = this.state;
