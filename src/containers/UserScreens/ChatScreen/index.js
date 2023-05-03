@@ -54,7 +54,7 @@ const ChatScreen = ({ route }) => {
       // setcombine(...Data)
     });
 
-    socket?.on(`'${receiver_id}'`, data => {
+    socket?.on(`'${sender_id}'`, data => {
       console.log('socket response', data);
       loaderStop();
       const newMessage = { message: message };
