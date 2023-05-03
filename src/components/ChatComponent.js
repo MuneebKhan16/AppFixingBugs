@@ -13,7 +13,7 @@ const ChatComponent = props => {
     user?.id == item?.user_receiver?.id
       ? item?.user_sender
       : item?.user_receiver;
-  console.log('item', item);
+  // console.log('item', item);
 
 
   return (
