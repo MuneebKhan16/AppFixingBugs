@@ -1,8 +1,8 @@
-
+/* eslint-disable prettier/prettier */
 import Auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AccessToken, LoginManager, Settings } from 'react-native-fbsdk-next';
-//import { appleAuth } from '@invertase/react-native-apple-authentication';
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 
 GoogleSignin.configure({
     webClientId:
@@ -54,23 +54,23 @@ const Facebook = () => {
         })
 };
 
-// const Apple = async type => {
-//     try {
-//         const appleAuthRequestResponse = await appleAuth.performRequest({
-//             requestedOperation: appleAuth.Operation.LOGIN,
-//             requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-//         });
-//         const { identityToken, nonce } = appleAuthRequestResponse;
-//         const appleCredential = Auth?.AppleAuthProvider?.credential(
-//             identityToken,
-//             nonce,
-//         );
-//         const userAuth = await Auth()?.signInWithCredential(appleCredential);
-//         const { uid, email } = userAuth?.user;
-//         console.log('userAuth', userAuth);
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+const Apple = async type => {
+    try {
+        const appleAuthRequestResponse = await appleAuth.performRequest({
+            requestedOperation: appleAuth.Operation.LOGIN,
+            requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+        });
+        const { identityToken, nonce } = appleAuthRequestResponse;
+        const appleCredential = Auth?.AppleAuthProvider?.credential(
+            identityToken,
+            nonce,
+        );
+        const userAuth = await Auth()?.signInWithCredential(appleCredential);
+        const { uid, email } = userAuth?.user;
+        console.log('userAuth', userAuth);
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export default { Google, Facebook };

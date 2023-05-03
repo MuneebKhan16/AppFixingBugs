@@ -1,12 +1,11 @@
-
+/* eslint-disable prettier/prettier */
 import Auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AccessToken, LoginManager, Settings } from 'react-native-fbsdk-next';
 //import { appleAuth } from '@invertase/react-native-apple-authentication';
 
 GoogleSignin.configure({
-    webClientId:
-        '267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com/',
+    webClientId: '267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com',
 });
 
 Settings.setAppID('1284024702540652');  
@@ -30,7 +29,7 @@ const Google = async () => {
     }
 };
 
-const Facebook = () => {
+const Facebook = async () => {
    return  LoginManager.logInWithPermissions(['public_profile'])
         .then(async login => {
             if (login.isCancelled) {
@@ -43,7 +42,7 @@ const Facebook = () => {
                     );
                     const userAuth = await Auth().signInWithCredential(fbCredential);
                     const { uid, providerData,displayName,photoURL,emailVerified } = userAuth?.user?._user;
-                    return { uid: uid,Email : providerData[0].providerId ,Name: displayName, Pic:photoURL , status:emailVerified };
+                    //return { uid: uid,Email : providerData[0].providerId ,Name: displayName, Pic:photoURL , status:emailVerified };
                 } catch (error) {
                     console.log(error);
                 }

@@ -69,10 +69,6 @@ const EventHome = (props) => {
                           <Image source={Icons.location} resizeMode="contain" style={styles.location} />
                           <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
                         </View>
-                        {/* <Text
-                          style={styles.ftrtitle}>
-                          {item.event_title}
-                        </Text> */}
                       </FastImage>
                       {/* <ImageBackground
                          source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
