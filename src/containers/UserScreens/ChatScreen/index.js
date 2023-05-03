@@ -45,13 +45,14 @@ const ChatScreen = ({route}) => {
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
   const response = () => {
-    socket?.emit('SendChatToClient', {
-      sender_id: sender_id,
-      receiver_id: receiver_id,
-    });
+    // socket?.emit('SendChatToClient', {
+    //   sender_id: sender_id,
+    //   receiver_id: receiver_id,
+    // });
   
 
     socket?.on( receiver_id, data => {
+      console.log('socket response',data)
       if (data?.message?.length == 0) {
         loaderStop();
         return;

@@ -74,10 +74,7 @@ class Navigation extends Component {
                     options={{ headerShown: false }}
                   />
                   </>
-                 
-                ) 
-                :
-                (
+                ):(
                   <Stack.Screen
                   name="AuthStack"
                   component={AuthStack}
@@ -85,8 +82,6 @@ class Navigation extends Component {
                 />
                 )
             }
-          
-        
         </Stack.Navigator>
       </NavigationContainer>
     );
