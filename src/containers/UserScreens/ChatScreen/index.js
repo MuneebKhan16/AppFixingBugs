@@ -30,7 +30,7 @@ if (Platform.OS === 'android') {
   }
 }
 
-const ChatScreen = ({navigation, route}) => {
+const ChatScreen = ({route}) => {
 
   const {chatUser, conversation_id} = route.params;
   const user = useSelector(state => state.reducer.user);
@@ -52,7 +52,6 @@ const ChatScreen = ({navigation, route}) => {
   
 
     socket?.on( receiver_id, data => {
-     // console.log('datallllllllll', data);
       if (data?.message?.length == 0) {
         loaderStop();
         return;
@@ -108,7 +107,6 @@ const ChatScreen = ({navigation, route}) => {
    
 
   useEffect(() => {
-   
     createChatConnection(`${sender_id}_${receiver_id}`)
       .then(res => {
         console.log('res', res);
@@ -119,11 +117,7 @@ const ChatScreen = ({navigation, route}) => {
   }, []);
 
 
-  console.log('sender_id', sender_id, 'reciever_id', receiver_id);
-  console.log('chatUser?.user_receiver?.id', chatUser);
-  console.log('chatList456', chatList);
-  console.log('socket', socket);
-  console.log('Data', Data);
+
   return (
     <AppBackground title={'Chats'} back profile={false} home>
       <SafeAreaView style={styles.flex}>

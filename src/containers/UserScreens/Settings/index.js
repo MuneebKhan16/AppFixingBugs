@@ -16,6 +16,7 @@ import { Colors, NavService } from '../../../config';
 import Mainprofile from '../../../components/Mainprofile';
 import Heading from '../../../components/Heading';
 import { styles } from './setting_style';
+import { logoutUser } from '../../../redux/actions';
 export class TermsConditions extends Component {
   state = {
     notifications: false,
@@ -33,6 +34,7 @@ export class TermsConditions extends Component {
   }
   logout = () => {
     NavService.reset(0, [{ name: 'Auth' }])
+    // logoutUser();
   }
   render() {
     const { notifications, user } = this.state;

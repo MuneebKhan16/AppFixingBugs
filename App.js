@@ -28,7 +28,7 @@ class App extends Component {
           <Provider store={store}>
             <Loader />
             <Nav />
-            <Toast />
+            {/* <Toast /> */}
           </Provider>
         </GestureHandlerRootView>
       </Wrapper>

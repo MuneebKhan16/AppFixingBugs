@@ -63,8 +63,14 @@ export class Home extends Component {
     const userImage = this?.props?.user?.image;
 
 
+
     const togglePopUp = () => {
-      this.setState(previousState => ({ popUp: !previousState?.popUp }));
+      if (text != '') {
+        console.log('data', text);
+        this.setState(previousState => ({ popUp: !previousState?.popUp }));
+      }
+
+
     };
 
     return (
@@ -86,12 +92,12 @@ export class Home extends Component {
                 <TouchableOpacity
                   onPress={this.Featured}
                   style={styles.tch}>
-                   <FastImage
-                        source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
-                        style={styles.imgbackground}
-                        imageStyle={styles.imgbg}
-                    >
-                      <View style={styles.icnstrempty}>
+                  <FastImage
+                    source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
+                    style={styles.imgbackground}
+                    imageStyle={styles.imgbg}
+                  >
+                    <View style={styles.icnstrempty}>
                       <Image
                         source={Icons.starEmpty}
                         style={styles.starempty}
@@ -101,7 +107,7 @@ export class Home extends Component {
                       style={styles.ftrtitle}>
                       {item.event_title}
                     </Text>
-                      </FastImage>
+                  </FastImage>
                   {/* <ImageBackground
                     source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
                     style={styles.imgbackground}
@@ -162,10 +168,14 @@ export class Home extends Component {
                   onChangeText={text => this.setState({ text })}
 
                   value={text}
-                  placeholderTextColor={Colors.black}
+                  placeholderTextColor={Colors.greey}
 
                 />
               </View>
+              {
+                text.length <= 0 ? <Text style={{ color: Colors?.purple, fontSize: 16 }}>Address required</Text> : null
+              }
+
             </View>
             <Pickdate />
             <CustomButton
@@ -176,6 +186,7 @@ export class Home extends Component {
           </View>
 
         </Modal>
+
       </AppBackground>
     );
   }
