@@ -11,7 +11,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  BackHandler
+Button
 
 } from 'react-native';
 import Modal from 'react-native-modal';
@@ -31,6 +31,7 @@ import Icons from '../../../assets/Icons';
 import { styles } from './Home_Styles';
 import ImageURL from '../../../config/Common'
 import FastImage from 'react-native-fast-image'
+import Searchable from '../../../components/searchable';
 
 export class Home extends Component {
 
@@ -49,6 +50,10 @@ export class Home extends Component {
     feature: [],
     text: '',
     isFocused: false,
+    modalVisible: false,
+  };
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
   };
 
   componentDidMount() {
@@ -59,7 +64,7 @@ export class Home extends Component {
     localevents(userData).then((res) => this.setState({ feature: res?.Data?.featured }));
   }
   render() {
-    const { popUp, location, date, category, categoryid, feature, text, isFocused } = this.state;
+    const { popUp, location, date, category, categoryid, feature, text, isFocused,modalVisible } = this.state;
     const userImage = this?.props?.user?.image;
 
 
@@ -69,7 +74,7 @@ export class Home extends Component {
         console.log('data', text);
         this.setState(previousState => ({ popUp: !previousState?.popUp }));
       }
-
+    
 
     };
 
@@ -157,9 +162,10 @@ export class Home extends Component {
               <Text style={styles.mdltxt}>Please enter the location</Text>
 
               <Btn />
-              <View style={styles.mdltxtheader}>
+              <TouchableOpacity style={styles.mdltxtheader}  onPress={() => this.setModalVisible(true)}>
                 <Image source={Icons.marker} resizeMode='contain' style={styles.mdlimg} />
                 <TextInput
+                editable={false}
                   style={styles.txtinputadrs}
                   placeholder="Address"
                   secureTextEntry={!isFocused}
@@ -171,7 +177,7 @@ export class Home extends Component {
                   placeholderTextColor={Colors.greey}
 
                 />
-              </View>
+              </TouchableOpacity>
               {
                 text.length <= 0 ? <Text style={{ color: Colors?.purple, fontSize: 16 }}>Address required</Text> : null
               }
@@ -186,7 +192,11 @@ export class Home extends Component {
           </View>
 
         </Modal>
-
+       
+           <Searchable isVisible={this.state.modalVisible}   onClose={() => this.setModalVisible(false)} />
+        
+           
+       
       </AppBackground>
     );
   }
