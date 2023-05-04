@@ -45,7 +45,7 @@ const ChatScreen = ({ route }) => {
   const response = () => {
     const payload = {
       sender_id:sender_id,
-      conv_id:`${sender_id}_${receiver_id}`,
+      conv_id:`${sender_id}_${receiver_id}`
     }
     socket?.emit('SendChatToClient',payload);
     socket?.on('ChatList' , data => {
