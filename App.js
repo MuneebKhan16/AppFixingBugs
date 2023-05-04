@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { Component } from 'react';
-import Nav from './src';
+import React, {Component} from 'react';
 import {
   View,
   StatusBar,
@@ -8,31 +7,20 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { store } from './src/redux';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { Provider } from 'react-redux';
-import { Colors, Loader } from './src/config';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {Provider} from 'react-redux';
 import Toast from 'react-native-toast-message';
-import {  Common } from './src/config';
+import Nav from './src';
+import { store } from './src/redux';
+import {Loader} from './src/config';
+
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
-import { io } from 'socket.io-client'
-
-const saveSocket = () => {
-  const socket = io(Common.socketURL);
-  console.log('socket', socket, 'socket')
-  store.dispatch({ type: 'SET_SOCKET', payload: socket });
-};
 class App extends Component {
-
-  componentDidMount() {
-    saveSocket();
-  }
-
   render() {
     return (
       <Wrapper>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView style={{flex: 1}}>
           <StatusBar
             translucent={true}
             backgroundColor="transparent"
@@ -51,16 +39,12 @@ class App extends Component {
 
 export default App;
 
-function Wrapper({ children }) {
+function Wrapper({children}) {
   if (Platform.OS === 'ios')
     return (
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior="padding"
-      // keyboardVerticalOffset={20}
-      >
+      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
         {children}
       </KeyboardAvoidingView>
     );
-  return <View style={{ flex: 1 }}>{children}</View>;
+  return <View style={{flex: 1}}>{children}</View>;
 }
