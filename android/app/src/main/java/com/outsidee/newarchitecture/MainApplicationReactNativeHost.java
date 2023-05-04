@@ -1,4 +1,4 @@
-package com.outsidee.newarchitecture;
+package com.celectstudios.outsideee.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.outsidee.BuildConfig;
-import com.outsidee.newarchitecture.components.MainComponentsRegistry;
-import com.outsidee.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.celectstudios.outsideee.BuildConfig;
+import com.celectstudios.outsideee.newarchitecture.components.MainComponentsRegistry;
+import com.celectstudios.outsideee.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

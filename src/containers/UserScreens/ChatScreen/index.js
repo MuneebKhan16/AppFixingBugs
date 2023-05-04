@@ -1,30 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
-import {
-  LayoutAnimation,
-  SafeAreaView,
-  UIManager,
-  FlatList,
-  Platform,
-  View,
-} from 'react-native';
-import React, { useState, useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import {SafeAreaView, UIManager, FlatList, Platform, View} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import Toast from 'react-native-toast-message';
 import AppBackground from '../../../components/AppBackground';
-import ChatComponent from '../../../components/ChatComponent';
 import MicroChat from '../../../components/microChat';
-import Images from '../../../assets/Images';
 import CustomChatBox from '../../../components/CustomChatBox';
 import CustomSender from '../../../components/CustomSender';
-import { styles } from './chatscreen_style';
-import {
-  loaderStart,
-  loaderStop,
-  createChatConnection,
-} from '../../../redux/APIs';
-import dummy from '../../../config/Common'
+import {styles} from './chatscreen_style';
+import {loaderStart, loaderStop} from '../../../redux/APIs';
+import dummy from '../../../config/Common';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -32,65 +19,35 @@ if (Platform.OS === 'android') {
   }
 }
 
-const ChatScreen = ({ route }) => {
-  try{
-    const { chatUser, conversation_id } = route?.params;
+const ChatScreen = ({route}) => {
+  const {chatUser, conversation_id} = route?.params;
   const user = useSelector(state => state?.reducer?.user);
   const socket = useSelector(state => state?.reducer?.socket);
-  const [chatList, setChatList] = useState(null);
+  const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState('');
-  // const [Data, Setdata] = useState(null);s
-  // const [ resp ,Setresp ] = useState('')
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
-  // console.log('receiver',receiver_id);
-  // console.log('sender',sender_id);
-  // // console.log(receiver_id);
-  // console.log(conversation_id)
   const response = () => {
-    console.log('function initiated => response');
     const payload = {
-      sender_id:sender_id,
-      // conv_id:`${sender_id}_${receiver_id}`
-      conv_id:conversation_id,
+      sender_id: sender_id,
+      conv_id: conversation_id,
     };
-    
-    socket?.emit('SendChatToClient',payload);
-    socket?.on('ChatList' , data => {
-      setChatList(data);
-      // console.log('jjjjjj',data);
-      // setcombine(...Data)
-    });
-
-    socket?.on(`'${sender_id}'`, data => {
-      console.log('socket response', data);
-      loaderStop();
-      const newMessage = { message: message };
-      setChatList(prevChatList => [...prevChatList, newMessage]);
-      return;
+    socket?.emit('SendChatToClient', payload);
+    socket?.on('ChatList', data => {
+      if (data?.object_type == 'get_messages') {
+        const messages = data?.data || [];
+        setChatList(messages);
+      } else if (data?.object_type == 'get_message') {
+        console.log(data?.object_type, data?.data);
+        setChatList(chatList1 => [...[data?.data], ...chatList1]);
+      }
     });
 
     socket.on('error', data => {
-      // console.log('data', data);
       loaderStop();
     });
   };
-  
-
-  useEffect(() => {
-    response();
-    return()=>{
-      console.log('asdf unmount')
-    }
-  }, []);
-
-
   const sendNewMessage = () => {
-    // console.log('message', message);
-    // console.log('sender_id', sender_id);
-    // console.log('reciever_id', receiver_id);
-    // console.log('msg_type');
-
     if (message.length > 0) {
       loaderStart();
       const payload = {
@@ -101,14 +58,8 @@ const ChatScreen = ({ route }) => {
         msg_type: 'text',
       };
       socket.emit('sendChatToServer', payload);
-      const nnn = {sender_id:sender_id,message: message}
-      setChatList(prevChatList => [...prevChatList, nnn]);
-      // // console.log(chatList);
-      // response();
       setMessage('');
-      LayoutAnimation.linear();
       loaderStop();
-
     } else {
       Toast.show({
         text1: 'Enter_message',
@@ -118,7 +69,9 @@ const ChatScreen = ({ route }) => {
     }
   };
 
-// // console.log('conbine',chatList)
+  useEffect(() => {
+    response();
+  }, []);
 
   return (
     <AppBackground title={'Chats'} back profile={false} home>
@@ -127,26 +80,21 @@ const ChatScreen = ({ route }) => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={chatList}
+            inverted
             style={styles.msg}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <>
-              {
-                item.sender_id == sender_id ?
-                (
-                  <MicroChat msg={item.message} image={item.profile_picture || `${dummy.dummy}`}  />
-                )
-                :item.sender_id == receiver_id ?
-                (
+                {item.sender_id == sender_id ? (
                   <CustomChatBox
-                   msg={item.message}
-                   image={item.profile_picture || `${dummy.dummy}`}
-            
-                 /> 
-
-                )
-                :
-                null
-              }
+                    msg={item.message ? item.message : item.msg}
+                    image={item.profile_picture || `${dummy.dummy}`}
+                  />
+                ) : item.sender_id == receiver_id ? (
+                  <MicroChat
+                    msg={item.message ? item.message : item.msg}
+                    image={item.profile_picture || `${dummy.dummy}`}
+                  />
+                ) : null}
               </>
             )}
           />
@@ -161,11 +109,6 @@ const ChatScreen = ({ route }) => {
       </SafeAreaView>
     </AppBackground>
   );
-
-  }catch(exception){
-    alert(JSON.stringify(exception))
-  }
-  
 };
 
 export default React.memo(ChatScreen);

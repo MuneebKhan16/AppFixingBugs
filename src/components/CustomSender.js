@@ -12,7 +12,7 @@ import {Colors} from '../config';
 import Icons from '../assets/Icons';
 import RNBounceable from '@freakycoder/react-native-bounceable';
 
-const CustomSender = ({messageInput,changeMessage, sendMessage}) => {
+const CustomSender = ({messageInput, changeMessage, sendMessage}) => {
   return (
     <View style={styles.container}>
       <TextInput
@@ -20,7 +20,7 @@ const CustomSender = ({messageInput,changeMessage, sendMessage}) => {
         placeholderTextColor={Colors.grey}
         style={styles.content}
         value={messageInput}
-        onChangeText={(text)=>changeMessage(text)}
+        onChangeText={text => changeMessage(text)}
       />
       <RNBounceable style={styles.send} onPress={() => sendMessage()}>
         <Image source={Icons.send} style={styles.imgsend} />

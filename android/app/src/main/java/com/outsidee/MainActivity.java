@@ -1,4 +1,4 @@
-package com.outsidee;
+package com.celectstudios.outsideee;
 import com.facebook.react.ReactActivity;
 import android.os.Bundle; 
 import com.facebook.react.ReactActivityDelegate;

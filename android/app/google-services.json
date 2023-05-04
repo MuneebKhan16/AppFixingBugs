@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "267078628700-a9tmeavh3tpmntugs9ksq2nqtt18sp77.apps.googleusercontent.com",
+          "client_id": "267078628700-3bnjiprci7139gaqu2creipubfu8juhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.celectstudios.outsideee",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +37,13 @@
             {
               "client_id": "267078628700-a9tmeavh3tpmntugs9ksq2nqtt18sp77.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "267078628700-vjs0s1omkabh7bebhnn3bdmqh6r6c8em.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.celectstudios.outsideee"
+              }
             }
           ]
         }

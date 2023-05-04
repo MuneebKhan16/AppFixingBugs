@@ -1,31 +1,23 @@
 /* eslint-disable prettier/prettier */
-import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Platform,
-  Dimensions,
-} from 'react-native';
-import { Colors, NavService } from '../../../config';
+import React, {Component} from 'react';
+import {View, Text, Image, Platform, Dimensions} from 'react-native';
+import {Colors, NavService} from '../../../config';
 import CustomBackground from '../../../components/CustomBackground';
 import Icons from '../../../assets/Icons';
 import AppBackground from '../../../components/AppBackground';
-import RNBounceable from "@freakycoder/react-native-bounceable";
-const { width, height } = Dimensions.get('window');
-import { styles } from './prelogin_style';
-
+import RNBounceable from '@freakycoder/react-native-bounceable';
 import AuthLogin from '../../../components/SocialSignin';
+import {socialSignin} from '../../../redux/APIs';
+import {styles} from './prelogin_style';
+const {width, height} = Dimensions.get('window');
 
 class App extends Component {
   state = {
     showModal: false,
-    currentOption: ''
+    currentOption: '',
   };
-  componentDidMount() {
-  }
+  componentDidMount() {}
   render() {
-
     const methods = [
       {
         name: 'Email',
@@ -37,32 +29,33 @@ class App extends Component {
         name: 'Facebook',
         icon: Icons.facebook,
         color: Colors.facebook,
-        onPress: () => AuthLogin.Facebook().then((data) => console.log('kiol',data))
+        onPress: async () => {
+          const result = await AuthLogin.Facebook();
+          socialSignin(result?.uid, 'facebook', result?.Name, result?.Email);
+        },
       },
       {
         name: 'Google',
         icon: Icons.google,
         color: Colors.google,
-        onPress: () => AuthLogin.Google().then((data) => console.log(data,'kplo')).catch((err) => console.log('Noo',err))
+        onPress: async () => {
+          const result = await AuthLogin.Google();
+          socialSignin(result?.uid, 'google', result?.Name, result?.Email);
+        },
       },
       {
         name: 'Apple',
         icon: Icons.apple,
         color: Colors.apple,
       },
-
     ];
     return (
-      <AppBackground back={false} title={"Pre Login"} profile={false} >
+      <AppBackground back={false} title={'Pre Login'} profile={false}>
         <CustomBackground>
-
-          <View
-            style={styles.maincontainer}>
-            <View
-              style={styles.container}>
-
+          <View style={styles.maincontainer}>
+            <View style={styles.container}>
               {methods.map((method, i) => {
-                const { color, name, icon, onPress } = method;
+                const {color, name, icon, onPress} = method;
                 if (Platform.OS !== 'ios' && name === 'Apple') return null;
                 return (
                   <RNBounceable
@@ -88,7 +81,10 @@ class App extends Component {
                         width: 20,
                         height: 20,
                         resizeMode: 'contain',
-                        tintColor: name === 'Apple ID' || name === "Email" ? Colors.white : Colors.white,
+                        tintColor:
+                          name === 'Apple ID' || name === 'Email'
+                            ? Colors.white
+                            : Colors.white,
                         position: 'absolute',
                         left: width / 8,
                       }}
@@ -97,7 +93,10 @@ class App extends Component {
                       style={{
                         fontWeight: '500',
                         fontSize: 16,
-                        color: name === 'Apple ID' || name === "Email" ? Colors.white : Colors.white,
+                        color:
+                          name === 'Apple ID' || name === 'Email'
+                            ? Colors.white
+                            : Colors.white,
                         position: 'absolute',
                         left: width / 4,
                       }}>
@@ -107,33 +106,33 @@ class App extends Component {
                 );
               })}
             </View>
-            <View style={{
-              // top: Dimensions.get("window").height / 9.4
-              width: '70%',
-              marginBottom: 20
-            }} >
+            <View
+              style={{
+                // top: Dimensions.get("window").height / 9.4
+                width: '70%',
+                marginBottom: 20,
+              }}>
               <Text
                 style={{
                   color: Colors.white,
                   textAlign: 'center',
-                  fontSize: 16
+                  fontSize: 16,
                 }}>
                 By sign up you agree to our{' '}
-                <Text style={{ fontWeight: '700', textDecorationLine: 'underline', }}
+                <Text
+                  style={{fontWeight: '700', textDecorationLine: 'underline'}}
                   onPress={() => NavService.navigate('TermsCondition')}>
                   Terms & Condition
                 </Text>
                 {'  '}and{'  '}
-                <Text style={{ fontWeight: '700', textDecorationLine: 'underline', }}
+                <Text
+                  style={{fontWeight: '700', textDecorationLine: 'underline'}}
                   onPress={() => NavService.navigate('PrivacyPolicy')}>
                   Privacy Policy
                 </Text>
-
-
               </Text>
             </View>
           </View>
-
         </CustomBackground>
       </AppBackground>
     );
@@ -141,5 +140,3 @@ class App extends Component {
 }
 
 export default React.memo(App);
-
-
