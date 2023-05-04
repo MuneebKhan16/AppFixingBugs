@@ -15,6 +15,7 @@ import { Colors, NavService, Common } from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
+import PickerLocation from './PickerLocation';
 import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
@@ -26,13 +27,14 @@ import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { store } from '../../../redux/index';
-import { ActivityIndicator } from 'react-native-paper';
+import SearchableDropdown from 'react-native-searchable-dropdown';
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState(false);
+  const [loc, setLoc] = useState('')
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -44,11 +46,43 @@ const EventPost = (props) => {
 
   const [selectedData, setSelectedData] = useState(null);
 
-  const GoogleAPiKey = 'AIzaSyCzeJMBG7dupF95sa6qz5USqXYLJlGpjI4'
+  console.log('kjkj',loc)
+
+  const items = [
+    {
+      name: 'hello',
+      h: 'hhh'
+    },
+    {
+      name: 'hello',
+      h: 'hhh'
+    },
+    {
+      name: 'hello',
+      h: 'hhh'
+    }
+  ]
 
   const users = useSelector((state) => state?.reducer?.user)
 
   const { Categorys } = useContext(eventContext);
+
+  const handleSearch = async (e, query) => {
+    try {
+      console.log('query', e, query)
+      const GoogleAPiKey = 'AIzaSyCzeJMBG7dupF95sa6qz5USqXYLJlGpjI4'
+      const results = await fetch(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${e}&key=${GoogleAPiKey}`
+      );
+      const json = await results.json();
+      const list = json?.predictions?.map((data) => data?.description)
+      console.log('list',list)
+      setLoc(list)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
 
@@ -147,103 +181,122 @@ const EventPost = (props) => {
   return (
 
     <AppBackground title={'Events'} home back>
-      {
-        isLoading ?
-          (
-            <ActivityIndicator />
-          )
-          :
-          (
-            <View style={styles.container}>
-              <ActionSheet
-                ref={actionSheetStateRef}
-                containerStyle={styles.sheet}
-              >
-                <View style={styles.action}>
-                  <TouchableOpacity
-                    onPress={() => actionSheetStateRef.current.hide()}
-                    style={styles.touchable}
-                  >
-                    <Text style={styles.cancel}>Cancel</Text>
-                  </TouchableOpacity>
-                </View>
-              </ActionSheet>
-              <View style={styles.user}>
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
+      <View style={styles.container}>
+        <ActionSheet
+          ref={actionSheetStateRef}
+          containerStyle={styles.sheet}
+        >
+          <View style={styles.action}>
+            <TouchableOpacity
+              onPress={() => actionSheetStateRef.current.hide()}
+              style={styles.touchable}
+            >
+              <Text style={styles.cancel}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </ActionSheet>
+        <View style={styles.user}>
+          <ProfileImage
+            name={user?.name}
+            imageUri={selectedImage ? selectedImage.path : userImage}
+          />
+
+          <View style={styles.picker}>
+
+            <CustomImagePicker
+              onImageChange={(path, mime) => {
+                setSelectedImage({ path, mime });
+              }}
+            >
+              <View style={styles.mime}>
+                <Image
+                  source={Icons.upload}
+                  style={styles.upload}
                 />
-
-                <View style={styles.picker}>
-
-                  <CustomImagePicker
-                    onImageChange={(path, mime) => {
-                      setSelectedImage({ path, mime });
-                    }}
-                  >
-                    <View style={styles.mime}>
-                      <Image
-                        source={Icons.upload}
-                        style={styles.upload}
-                      />
-                      <Text style={styles.txtclr} >Upload</Text>
-                    </View>
-                  </CustomImagePicker>
-                </View>
-
+                <Text style={styles.txtclr} >Upload</Text>
               </View>
-              <View style={styles.top}>
-                <TextInput
-                  style={styles.maincontainer}
-                  onChangeText={(title) => setTitle(title)}
-                  value={title}
-                  placeholder="Title"
-                  placeholderTextColor={Colors.black}
-                />
-                <PickerCompone categories={Categorys} setSelectedData={setSelectedData} />
-                <View style={styles.location}>
-                  {/* <GooglePlacesAutocomplete
-                    placeholder='Enter Location'
-                    onPress={(data, details = null) => {
-                      setLocation(data, details)
-                    }}
-                    query={{
-                      key: 'YOUR_API_KEY',
-                      language: 'en',
-                    }}
-                  /> */}
-                  <TextInput
-                    onChangeText={(location) => setLocation(location)}
-                    value={location}
-                    placeholder="Location"
-                    style={styles.loc}
-                    placeholderTextColor={Colors.black}
+            </CustomImagePicker>
+          </View>
 
-                  />
-                  <Image source={Icons.marker} style={styles.marker} />
-                </View>
-                <View style={styles.descp}>
-                  <TextInput
-                    placeholder="Descriptions"
-                    multiline={true}
-                    style={styles.description}
-                    onChangeText={(dec) => setDec(dec)}
-                    value={dec}
-                    placeholderTextColor={Colors.black}
+        </View>
+        <View style={styles.top}>
+          <TextInput
+            style={styles.maincontainer}
+            onChangeText={(title) => setTitle(title)}
+            value={title}
+            placeholder="Title"
+            placeholderTextColor={Colors.black}
+          />
+          <PickerCompone categories={Categorys} setSelectedData={setSelectedData} />
+          <View style={styles.location}>
+          <SearchableDropdown
+          onTextChange={(text) => console.log(text)}
+          // Listner on the searchable input
+          onItemSelect={(item) => alert(JSON.stringify(item))}
+          // Called after the selection
+          containerStyle={{padding: 5}}
+          // Suggestion container style
+          textInputStyle={{
+            // Inserted text style
+            padding: 12,
+            borderWidth: 1,
+            borderColor: '#ccc',
+            backgroundColor: '#FAF7F6',
+          }}
+          itemStyle={{
+            padding: 10,
+            marginTop: 2,
+            backgroundColor: '#ddd',
+            borderColor: '#bbb',
+            borderWidth: 1,
+            borderRadius: 5,
+            color:'black'
+          }}
+          itemTextStyle={{
+            // Text style of a single dropdown item
+            color: '#222',
+          }}
+          itemsContainerStyle={{
+            // Items container style you can pass maxHeight
+            // To restrict the items dropdown hieght
+            maxHeight: '60%',
+          }}
+          items={items}
+          // Mapping of item array
+          defaultIndex={2}
+          // Default selected item index
+          placeholder="placeholder"
+          // place holder for the search input
+          resPtValue={false}
+          // Reset textInput Value with true and false state
+          underlineColorAndroid="transparent"
+          // To remove the underline from the android input
+        />
+           
+              
+              {/* <Text style={{ marginTop: 20 }}>your</Text> */}
+           
+            <Image source={Icons.marker} style={styles.marker} />
+          </View>
+          <View style={styles.descp}>
+            <TextInput
+              placeholder="Descriptions"
+              multiline={true}
+              style={styles.description}
+              onChangeText={(dec) => setDec(dec)}
+              value={dec}
+              placeholderTextColor={Colors.black}
 
-                  />
-                </View>
-                <PickerComptwo />
-                <CustomButton
-                  buttonStyle={styles.btn}
-                  title="Posts"
-                  onPress={handlesubmit}
-                />
-              </View>
-            </View>
-          )
-      }
-
+            />
+          </View>
+          <PickerComptwo />
+          <CustomButton
+            buttonStyle={styles.btn}
+            title="Posts"
+            onPress={handlesubmit}
+          />
+        </View>
+      </View>
       {/* Modal */}
 
       <Modal
