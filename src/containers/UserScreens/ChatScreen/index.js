@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable prettier/prettier */
 import {
   LayoutAnimation,
@@ -31,35 +33,36 @@ if (Platform.OS === 'android') {
 }
 
 const ChatScreen = ({ route }) => {
-  const { chatUser, conversation_id } = route.params;
-  const user = useSelector(state => state.reducer.user);
-  const socket = useSelector(state => state.reducer.socket);
+  try{
+    const { chatUser, conversation_id } = route?.params;
+  const user = useSelector(state => state?.reducer?.user);
+  const socket = useSelector(state => state?.reducer?.socket);
   const [chatList, setChatList] = useState(null);
   const [message, setMessage] = useState('');
   // const [Data, Setdata] = useState(null);s
-  const [ resp ,Setresp ] = useState('')
+  // const [ resp ,Setresp ] = useState('')
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
-  console.log('receiver',receiver_id);
-  console.log('sender',sender_id);
-  // console.log(receiver_id);
-  console.log(conversation_id)
+  // console.log('receiver',receiver_id);
+  // console.log('sender',sender_id);
+  // // console.log(receiver_id);
+  // console.log(conversation_id)
   const response = () => {
+    console.log('function initiated => response');
     const payload = {
       sender_id:sender_id,
-      conv_id:`${sender_id}_${receiver_id}`
-      // conv_id:conversation_id,
-
-    }
-    // console.log('hereeee');
+      // conv_id:`${sender_id}_${receiver_id}`
+      conv_id:conversation_id,
+    };
+    
     socket?.emit('SendChatToClient',payload);
     socket?.on('ChatList' , data => {
       setChatList(data);
-      console.log('jjjjjj',data);
+      // console.log('jjjjjj',data);
       // setcombine(...Data)
     });
 
-    socket?.on(`'${receiver_id}'`, data => {
+    socket?.on(`'${sender_id}'`, data => {
       console.log('socket response', data);
       loaderStop();
       const newMessage = { message: message };
@@ -68,21 +71,25 @@ const ChatScreen = ({ route }) => {
     });
 
     socket.on('error', data => {
-      console.log('data', data);
+      // console.log('data', data);
       loaderStop();
     });
   };
+  
 
   useEffect(() => {
     response();
+    return()=>{
+      console.log('asdf unmount')
+    }
   }, []);
 
 
   const sendNewMessage = () => {
-    console.log('message', message);
-    console.log('sender_id', sender_id);
-    console.log('reciever_id', receiver_id);
-    console.log('msg_type');
+    // console.log('message', message);
+    // console.log('sender_id', sender_id);
+    // console.log('reciever_id', receiver_id);
+    // console.log('msg_type');
 
     if (message.length > 0) {
       loaderStart();
@@ -96,7 +103,7 @@ const ChatScreen = ({ route }) => {
       socket.emit('sendChatToServer', payload);
       const nnn = {sender_id:sender_id,message: message}
       setChatList(prevChatList => [...prevChatList, nnn]);
-      // console.log(chatList);
+      // // console.log(chatList);
       // response();
       setMessage('');
       LayoutAnimation.linear();
@@ -111,7 +118,7 @@ const ChatScreen = ({ route }) => {
     }
   };
 
-// console.log('conbine',chatList)
+// // console.log('conbine',chatList)
 
   return (
     <AppBackground title={'Chats'} back profile={false} home>
@@ -154,6 +161,11 @@ const ChatScreen = ({ route }) => {
       </SafeAreaView>
     </AppBackground>
   );
+
+  }catch(exception){
+    alert(JSON.stringify(exception))
+  }
+  
 };
 
 export default React.memo(ChatScreen);

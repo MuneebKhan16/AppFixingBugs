@@ -27,14 +27,22 @@ import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import { store } from '../../../redux/index';
-import SearchableDropdown from 'react-native-searchable-dropdown';
+import SearchableDropdown from '../../../components/SearchDropdown';
+const data = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Jane' },
+  { id: 3, name: 'Bob' },
+  { id: 4, name: 'Alice' },
+  { id: 5, name: 'Sam' },
+];
+
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
-  const [location, setLocation] = useState(false);
-  const [loc, setLoc] = useState('')
+  const [location, setLocation] = useState('');
+  const [loc, setLoc] = useState([])
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -46,45 +54,40 @@ const EventPost = (props) => {
 
   const [selectedData, setSelectedData] = useState(null);
 
-  console.log('kjkj',loc)
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [query, setQuery] = useState('');
 
-  const items = [
-    {
-      name: 'hello',
-      h: 'hhh'
-    },
-    {
-      name: 'hello',
-      h: 'hhh'
-    },
-    {
-      name: 'hello',
-      h: 'hhh'
-    }
-  ]
+  const handleSelect = item => {
+    setSelectedItem(item);
+  };
+
 
   const users = useSelector((state) => state?.reducer?.user)
 
   const { Categorys } = useContext(eventContext);
 
+
   const handleSearch = async (e, query) => {
     try {
-      console.log('query', e, query)
+
       const GoogleAPiKey = 'AIzaSyCzeJMBG7dupF95sa6qz5USqXYLJlGpjI4'
       const results = await fetch(
         `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${e}&key=${GoogleAPiKey}`
       );
       const json = await results.json();
-      const list = json?.predictions?.map((data) => data?.description)
-      console.log('list',list)
-      setLoc(list)
+      const list = json?.predictions?.map((data) =>
+        {
+          const name =  data.description
+          return name
+        })
+        setQuery(list)
 
     } catch (error) {
       console.error(error);
     }
   };
 
-
+  console.log('checksss',query)
 
   const togglePopUp = () => {
     setPopUp((previousState) => previousState?.popUp);
@@ -93,7 +96,7 @@ const EventPost = (props) => {
   function dispatch(action) {
     store.dispatch(action);
   }
-
+console.log('lll',selectedItem , loc)
 
   const handlesubmit = () => {
 
@@ -178,6 +181,14 @@ const EventPost = (props) => {
 
 
   };
+
+  const data = [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' },
+    { id: 3, name: 'Bob' },
+    { id: 4, name: 'Alice' },
+    { id: 5, name: 'Sam' },
+  ];
   return (
 
     <AppBackground title={'Events'} home back>
@@ -228,55 +239,64 @@ const EventPost = (props) => {
             placeholderTextColor={Colors.black}
           />
           <PickerCompone categories={Categorys} setSelectedData={setSelectedData} />
-          <View style={styles.location}>
-          <SearchableDropdown
-          onTextChange={(text) => console.log(text)}
-          // Listner on the searchable input
-          onItemSelect={(item) => alert(JSON.stringify(item))}
-          // Called after the selection
-          containerStyle={{padding: 5}}
-          // Suggestion container style
-          textInputStyle={{
-            // Inserted text style
-            padding: 12,
-            borderWidth: 1,
-            borderColor: '#ccc',
-            backgroundColor: '#FAF7F6',
-          }}
-          itemStyle={{
-            padding: 10,
-            marginTop: 2,
-            backgroundColor: '#ddd',
-            borderColor: '#bbb',
-            borderWidth: 1,
-            borderRadius: 5,
-            color:'black'
-          }}
-          itemTextStyle={{
-            // Text style of a single dropdown item
-            color: '#222',
-          }}
-          itemsContainerStyle={{
-            // Items container style you can pass maxHeight
-            // To restrict the items dropdown hieght
-            maxHeight: '60%',
-          }}
-          items={items}
-          // Mapping of item array
-          defaultIndex={2}
-          // Default selected item index
-          placeholder="placeholder"
-          // place holder for the search input
-          resPtValue={false}
-          // Reset textInput Value with true and false state
-          underlineColorAndroid="transparent"
-          // To remove the underline from the android input
-        />
+
+          {/* <View style={styles.location}>
+          <Text style={{backgroundColor:'red'}}>Selected: {selectedItem ? selectedItem.name : 'None'}</Text>
+            <SearchableDropdown data={data} onSelect={handleSelect}  />
+          
+            {/* <SearchableDropdown
+              onItemSelect={(item) => {
+                const items = location;
+                console.log('hyhy',items)
+                items.push(item)
+                setLocation(items.description );
+              }}
+              containerStyle={{ padding: 5 }}
+              onRemoveItem={(item, index) => {
+                const items = location.filter((sitem) => sitem.id !== item.id);
+                setLocation(items.description );
+              }}
+              itemStyle={{
+                padding: 10,
+                marginTop: 2,
+                backgroundColor: '#ddd',
+                borderColor: '#bbb',
+                borderWidth: 1,
+                borderRadius: 5,
+              }}
+              itemTextStyle={{ color: '#222' }}
+              itemsContainerStyle={{ maxHeight: 140 }}
+              items={loc}
+              defaultIndex={2}
+              resetValue={false}
+              textInputProps={
+                {
+                  placeholder: "placeholder",
+                  underlineColorAndroid: "transparent",
+                  style: {
+                    padding: 12,
+                    borderWidth: 1,
+                    borderColor: '#ccc',
+                    borderRadius: 5,
+                  },
+                  onTextChange: (e,location) => {
+                    setLocation( location) 
+                    handleSearch(e)
+                  }
+                }
+              }
+              listProps={
+                {
+                  nestedScrollEnabled: true,
+                }
+              }
+            /> */}
            
-              
-              {/* <Text style={{ marginTop: 20 }}>your</Text> */}
-           
-            <Image source={Icons.marker} style={styles.marker} />
+            {/* <Image source={Icons.marker} style={styles.marker} /> */}
+          {/* </View>  */}
+          <View>
+          <Text style={{backgroundColor:'red'}}>Selected: {selectedItem ? selectedItem.name : 'None'}</Text>
+            <SearchableDropdown data={loc} query={query} setQuery={setQuery} onSelect={(e) => handleSearch(e)}  />
           </View>
           <View style={styles.descp}>
             <TextInput
@@ -297,6 +317,7 @@ const EventPost = (props) => {
           />
         </View>
       </View>
+
       {/* Modal */}
 
       <Modal
