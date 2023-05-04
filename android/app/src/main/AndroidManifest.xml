@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.outsidee">
+  package="com.celectstudios.outsideee">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
