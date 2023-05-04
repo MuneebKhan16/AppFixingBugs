@@ -64,5 +64,36 @@ export const styles = StyleSheet.create({
     requriment: { fontSize: 18, color: Colors.white, fontWeight: 'bold' },
     category: { backgroundColor: Colors.purple, paddingHorizontal: 8, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, width: '90%', alignSelf: 'center', padding: 20, alignItems: 'center', justifyContent: 'center' },
     modaltxt: { color: Colors.white, fontWeight: '700', fontSize: 16, lineHeight: 28, paddingHorizontal: 10 , textTransform: 'capitalize',},
-    txtclr:{color:Colors.black}
+    txtclr:{color:Colors.black},
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    searchBox: {
+      width: '90%',
+    },
+    listView: {
+      backgroundColor: '#FFF',
+      borderTopWidth: 1,
+      borderColor: '#DDD',
+      position: 'absolute',
+      top: 55,
+      left: 5,
+      right: 5,
+      borderRadius: 5,
+      maxHeight: 200,
+    },
+    separator: {
+      backgroundColor: '#DDD',
+      height: 1,
+    },
+    description: {
+      fontSize: 16,
+    },
+    selectedPlace: {
+      marginTop: 10,
+      alignItems: 'center',
+    },
   })
+  

@@ -28,6 +28,7 @@ export default async function getApi(
   successToast = false,
   loaderStart = true,
   showError = false,
+
   defaultError = true,
 ) {
   storeUpdate();

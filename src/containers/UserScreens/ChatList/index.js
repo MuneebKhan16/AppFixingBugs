@@ -31,7 +31,7 @@ const ChatList = ({navigation, route}) => {
         .catch(error => console.log('error', error));
     }, []),
   );
-  // console.log('conversationList',conversationList)
+  console.log('conversationList',conversationList)
 
   // const sender_id = user?.id;
   // // const receiver_id = chatUser?.id;

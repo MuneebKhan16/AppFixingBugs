@@ -16,7 +16,7 @@ import { styles } from './forgotpassowrd_styles';
 
 class Login extends Component {
   state = {
-    email: 'M@g.com',
+    email: '',
   };
   onSubmit =  () => {
     const { email } = this.state;

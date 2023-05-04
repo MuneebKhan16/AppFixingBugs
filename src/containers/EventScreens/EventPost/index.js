@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
@@ -14,21 +15,26 @@ import { Colors, NavService, Common } from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
+import PickerLocation from './PickerLocation';
 import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
 import { styles } from './eventpost_styles';
-import { post_events, Get_All_Categories } from '../../../redux/APIs';
+import { post_events, Get_All_Categories, loaderStop, loaderStart } from '../../../redux/APIs';
 import { useSelector } from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
+import { store } from '../../../redux/index';
+import SearchableDropdown from 'react-native-searchable-dropdown';
 const EventPost = (props) => {
   const { user } = props
   const actionSheetStateRef = useRef();
+  const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState(false);
+  const [loc, setLoc] = useState('')
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -40,11 +46,43 @@ const EventPost = (props) => {
 
   const [selectedData, setSelectedData] = useState(null);
 
+  console.log('kjkj',loc)
 
+  const items = [
+    {
+      name: 'hello',
+      h: 'hhh'
+    },
+    {
+      name: 'hello',
+      h: 'hhh'
+    },
+    {
+      name: 'hello',
+      h: 'hhh'
+    }
+  ]
 
   const users = useSelector((state) => state?.reducer?.user)
 
   const { Categorys } = useContext(eventContext);
+
+  const handleSearch = async (e, query) => {
+    try {
+      console.log('query', e, query)
+      const GoogleAPiKey = 'AIzaSyCzeJMBG7dupF95sa6qz5USqXYLJlGpjI4'
+      const results = await fetch(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${e}&key=${GoogleAPiKey}`
+      );
+      const json = await results.json();
+      const list = json?.predictions?.map((data) => data?.description)
+      console.log('list',list)
+      setLoc(list)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
 
@@ -52,9 +90,9 @@ const EventPost = (props) => {
     setPopUp((previousState) => previousState?.popUp);
   };
 
-  const goback = () => {
-    NavService.goBack();
-  };
+  function dispatch(action) {
+    store.dispatch(action);
+  }
 
 
   const handlesubmit = () => {
@@ -128,15 +166,20 @@ const EventPost = (props) => {
     axios
       .post(`${Common.baseURL}add-event`, params, config)
       .then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
+          dispatch({ type: 'LOADER_STOP' });
           NavService.goBack();
-          Toast.show({ text1: 'Event Created', type: 'success' })
+        } else {
+          dispatch({ type: 'LOADER_START' });
         }
+      }).catch(() => {
+        dispatch({ type: 'LOADER_START' });
       })
 
 
   };
   return (
+
     <AppBackground title={'Events'} home back>
       <View style={styles.container}>
         <ActionSheet
@@ -186,14 +229,53 @@ const EventPost = (props) => {
           />
           <PickerCompone categories={Categorys} setSelectedData={setSelectedData} />
           <View style={styles.location}>
-            <TextInput
-              onChangeText={(location) => setLocation(location)}
-              value={location}
-              placeholder="Location"
-              style={styles.loc}
-              placeholderTextColor={Colors.black}
-
-            />
+          <SearchableDropdown
+          onTextChange={(text) => console.log(text)}
+          // Listner on the searchable input
+          onItemSelect={(item) => alert(JSON.stringify(item))}
+          // Called after the selection
+          containerStyle={{padding: 5}}
+          // Suggestion container style
+          textInputStyle={{
+            // Inserted text style
+            padding: 12,
+            borderWidth: 1,
+            borderColor: '#ccc',
+            backgroundColor: '#FAF7F6',
+          }}
+          itemStyle={{
+            padding: 10,
+            marginTop: 2,
+            backgroundColor: '#ddd',
+            borderColor: '#bbb',
+            borderWidth: 1,
+            borderRadius: 5,
+            color:'black'
+          }}
+          itemTextStyle={{
+            // Text style of a single dropdown item
+            color: '#222',
+          }}
+          itemsContainerStyle={{
+            // Items container style you can pass maxHeight
+            // To restrict the items dropdown hieght
+            maxHeight: '60%',
+          }}
+          items={items}
+          // Mapping of item array
+          defaultIndex={2}
+          // Default selected item index
+          placeholder="placeholder"
+          // place holder for the search input
+          resPtValue={false}
+          // Reset textInput Value with true and false state
+          underlineColorAndroid="transparent"
+          // To remove the underline from the android input
+        />
+           
+              
+              {/* <Text style={{ marginTop: 20 }}>your</Text> */}
+           
             <Image source={Icons.marker} style={styles.marker} />
           </View>
           <View style={styles.descp}>
@@ -215,7 +297,6 @@ const EventPost = (props) => {
           />
         </View>
       </View>
-
       {/* Modal */}
 
       <Modal

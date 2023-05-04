@@ -40,13 +40,18 @@ const ChatScreen = ({ route }) => {
   const [ resp ,Setresp ] = useState('')
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
-  
-  
+  console.log('receiver',receiver_id);
+  console.log('sender',sender_id);
+  // console.log(receiver_id);
+  console.log(conversation_id)
   const response = () => {
     const payload = {
       sender_id:sender_id,
       conv_id:`${sender_id}_${receiver_id}`
+      // conv_id:conversation_id,
+
     }
+    // console.log('hereeee');
     socket?.emit('SendChatToClient',payload);
     socket?.on('ChatList' , data => {
       setChatList(data);
@@ -54,7 +59,7 @@ const ChatScreen = ({ route }) => {
       // setcombine(...Data)
     });
 
-    socket?.on(`'${sender_id}'`, data => {
+    socket?.on(`'${receiver_id}'`, data => {
       console.log('socket response', data);
       loaderStop();
       const newMessage = { message: message };
@@ -84,7 +89,7 @@ const ChatScreen = ({ route }) => {
       const payload = {
         sender_id: sender_id,
         receiver_id: receiver_id,
-        conv_id: route.params.conversation_id,
+        conv_id: conversation_id,
         msg: message,
         msg_type: 'text',
       };
@@ -106,7 +111,7 @@ const ChatScreen = ({ route }) => {
     }
   };
 
-console.log('conbine',chatList)
+// console.log('conbine',chatList)
 
   return (
     <AppBackground title={'Chats'} back profile={false} home>
