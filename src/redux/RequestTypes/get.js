@@ -26,8 +26,9 @@ function dispatch(action) {
 export default async function getApi(
   endpoint,
   successToast = false,
-  loaderStart = false,
-  showError = true,
+  loaderStart = true,
+  showError = false,
+
   defaultError = true,
 ) {
   storeUpdate();

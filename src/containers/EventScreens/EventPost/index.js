@@ -36,8 +36,8 @@ const EventPost = (props) => {
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
-  const [location, setLocation] = useState(false);
-  const [loc, setLoc] = useState('')
+  const [location, setLocation] = useState('');
+  const [loc, setLoc] = useState([])
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -144,6 +144,14 @@ const EventPost = (props) => {
 
 
   };
+
+  const data = [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' },
+    { id: 3, name: 'Bob' },
+    { id: 4, name: 'Alice' },
+    { id: 5, name: 'Sam' },
+  ];
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleOpenModal = () => {
@@ -231,6 +239,7 @@ const EventPost = (props) => {
           />
         </View>
       </View>
+
       {/* Modal */}
       <Modal
         isVisible={popUp}
