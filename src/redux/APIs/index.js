@@ -33,8 +33,8 @@ export async function Get_All_Categories(api_token) {
 
 export async function socialSignin(access_token, provider, name, email) {
   const params = {
-    socialToken: access_token,
-    loginType: provider,
+    social_token: access_token,
+    login_type: provider,
     device_token: 'fcmToken',
     device_type: Platform.OS,
     name,
