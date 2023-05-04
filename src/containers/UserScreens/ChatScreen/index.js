@@ -70,7 +70,15 @@ const ChatScreen = ({route}) => {
   };
 
   useEffect(() => {
-    response();
+    if (socket && typeof socket == 'object') {
+      response();
+    } else {
+      Toast.show({
+        text1: "Couldn't connect to server",
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
   }, []);
 
   return (
