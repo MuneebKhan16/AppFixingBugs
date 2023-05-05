@@ -145,13 +145,7 @@ const EventPost = (props) => {
 
   };
 
-  const data = [
-    { id: 1, name: 'John' },
-    { id: 2, name: 'Jane' },
-    { id: 3, name: 'Bob' },
-    { id: 4, name: 'Alice' },
-    { id: 5, name: 'Sam' },
-  ];
+  
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleOpenModal = () => {
@@ -213,9 +207,13 @@ const EventPost = (props) => {
           />
           <PickerCompone categories={Categorys} setSelectedData={setSelectedData} />
           <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-            <Text style={{ color: "#000" }}>Location</Text>
+            <Text style={{ color: "#000" }}>{location ? location.name : "Location"}</Text>
+            {console.log('jjj',location)}
             <Image source={Icons.marker} style={styles.marker} />
-           <Mymdll isVisible={isModalVisible} onClose={handleCloseModal} />
+            
+                <Mymdll isVisible={isModalVisible} onClose={handleCloseModal} setLocation={setLocation} location={location} />
+
+            
           </TouchableOpacity>
 
 

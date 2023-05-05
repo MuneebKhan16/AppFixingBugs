@@ -43,7 +43,7 @@ export class Home extends Component {
     category: [],
     categoryid: null,
     feature: [],
-    text: '',
+    text: 'usa',
     isFocused: false,
     modalVisible: false,
   };
