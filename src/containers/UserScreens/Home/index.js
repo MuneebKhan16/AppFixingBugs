@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import AppBackground from '../../../components/AppBackground';
-import {Colors, NavService, Shadows} from '../../../config';
+import {Colors, NavService} from '../../../config';
 import {connect} from 'react-redux';
 import CustomButton from '../../../components/CustomButton';
 import Btn from '../../../components/Btn';
@@ -75,7 +75,6 @@ export class Home extends Component {
     const userImage = this?.props?.user?.image;
 
     const togglePopUp = () => {
-      console.log('first', location.name);
       if (location.name != '') {
         this.setState(previousState => ({popUp: !previousState?.popUp}));
       }
@@ -163,7 +162,6 @@ export class Home extends Component {
             </ScrollView>
           </View>
         </Modal>
-        {console.log('location', location)}
         <Searchable
           isVisible={this.state.modalVisible}
           onClose={() => this.setModalVisible(false)}
