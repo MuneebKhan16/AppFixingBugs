@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
+  ScrollView
 } from 'react-native';
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
@@ -27,7 +28,7 @@ import axios from 'axios';
 import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import {styles} from './eventpost_styles';
-
+import GooglePlaceAutocomplete from '../../../components/GooglePlaceAutocomplete';
 const EventPost = props => {
   const {user} = props;
   const actionSheetStateRef = useRef();
@@ -192,13 +193,15 @@ const EventPost = props => {
             categories={Categorys}
             setSelectedData={setSelectedData}
           />
+         
           <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
             <Text style={{color: '#000'}}>
               {location ? location.name : 'Location'}
             </Text>
 
-            <Image source={Icons.marker} style={styles.marker} />
+            
 
+              <Image source={Icons.marker} style={styles.marker} />
             <Mymdll
               isVisible={isModalVisible}
               onClose={handleCloseModal}
