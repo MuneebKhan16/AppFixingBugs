@@ -54,7 +54,7 @@ export function AppBackground({
   };
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector((state) => state.reducer.user);
-  console.log('********',user)
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };

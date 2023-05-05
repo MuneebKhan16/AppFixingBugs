@@ -308,7 +308,7 @@ export async function updateProfile(
   last_name,
   email,
   address,
-  profilePicture,
+  profile_picture,
   auth_token,
 ) {
   const params = new FormData();
@@ -317,7 +317,7 @@ export async function updateProfile(
   params.append('last_name', last_name);
   params.append('email', email);
   params.append('address', address);
-  params.append('profilePicture', profilePicture);
+  params.append('profile_picture', profile_picture);
   params.append('auth_token', auth_token);
 
   console.log('param', params);

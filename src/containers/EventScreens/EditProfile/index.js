@@ -24,53 +24,53 @@ const EditProfile = () => {
   console.log('object', userProfile)
 
   const handleUpdate = () => {
-    if (fullName !== null && lastName == userProfile?.last_name && addresss == userProfile?.address) {
+    if (fullName != null && lastName == userProfile?.last_name && addresss == userProfile?.address) {
       const name = fullName
       const last_name = userProfile?.last_name
       const email = userProfile?.email
       const address = userProfile?.address
-      const profilePicture = userProfile ? userProfile?.profile_picture : selectedImage
+      const profile_picture = userProfile ? userProfile?.profile_picture : selectedImage
       const auth_token = userProfile?.api_token
 
 
 
-      updateProfile(name?.fullName, last_name, email, address, profilePicture, auth_token)
+      updateProfile(name?.fullName, last_name, email, address, profile_picture, auth_token)
 
     }
 
-    if (lastName !== null && fullName == userProfile?.name && addresss == userProfile?.address) {
+    if (lastName != null && fullName == userProfile?.name && addresss == userProfile?.address) {
       const name = userProfile?.name
       const last_name = lastName
       const email = userProfile?.email
       const address = userProfile?.address
-      const profilePicture = userProfile?.profile_picture
+      const profile_picture = userProfile?.profile_picture
       const auth_token = userProfile?.api_token
 
-      updateProfile(name, last_name?.lastName, email, address, profilePicture, auth_token)
+      updateProfile(name, last_name?.lastName, email, address, profile_picture, auth_token)
     }
 
-    if (addresss !== null && fullName == userProfile?.name && lastName == userProfile?.last_name) {
+    if (addresss != null && fullName == userProfile?.name && lastName == userProfile?.last_name) {
       const name = userProfile?.name
       const last_name = userProfile?.last_name
       const email = userProfile?.email
       const address = addresss
-      const profilePicture = userProfile?.profile_picture
+      const profile_picture = userProfile?.profile_picture
       const auth_token = userProfile?.api_token
 
 
-      updateProfile(name, last_name, email, address?.address, profilePicture, auth_token)
+      updateProfile(name, last_name, email, address?.address, profile_picture, auth_token)
     }
 
 
-    if (fullName !== null && lastName !== null && addresss !== null) {
+    if (fullName != null && lastName != null && addresss != null && selectedImage != null) {
       const name = fullName
       const last_name = lastName
       const email = userProfile?.email
       const address = addresss
-      const profilePicture = userProfile?.profile_picture
+      const profile_picture = { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime };
       const auth_token = userProfile?.api_token
-
-      updateProfile(name?.fullName, last_name?.lastName, email, address?.address, profilePicture, auth_token)
+      console.log('890',name?.fullName, last_name?.lastName, email, address?.address,  JSON.stringify(profile_picture), auth_token)
+      updateProfile(name?.fullName, last_name?.lastName, email, address?.address, profile_picture, auth_token)
     }
   }
 
@@ -94,22 +94,37 @@ const EditProfile = () => {
                     setselectedImage({ path, mime });
                   }}>
                   <View style={styles.item}>
-                    <ImageBackground
-                      source={{ uri: selectedImage ? selectedImage.path : `${ImageURL.ImageURL}${userProfile.profile_picture}` }}
-                      style={{
-                        width: 130,
-                        height: 130,
-                        borderRadius: 80,
-                        borderColor: Colors.purple,
-                        borderWidth: 3,
-                        marginTop: 10,
-                      }}
-                    >
-                      <Image
-                        source={Icons.edit}
-                        style={styles.edit}
-                      />
-                    </ImageBackground>
+                    {
+                      selectedImage != null ? 
+                      (
+                        <Image
+                          source={{ uri: selectedImage.path }}
+                          style={{
+                            width: 130,
+                            height: 130,
+                            borderRadius: 80,
+                            borderColor: Colors.purple,
+                            borderWidth: 3,
+                            marginTop: 10,
+                          }}
+                         />
+
+                      )
+                      : 
+                      (
+                        <Image
+                        source={{ uri: `${ImageURL.ImageURL}${userProfile.profile_picture}` }}
+                        style={{
+                          width: 130,
+                          height: 130,
+                          borderRadius: 80,
+                          borderColor: Colors.purple,
+                          borderWidth: 3,
+                          marginTop: 10,
+                        }}
+                       />
+                      )
+                    }
                     <Text style={styles.upload}>Upload</Text>
                   </View>
                 </CustomImagePicker>
