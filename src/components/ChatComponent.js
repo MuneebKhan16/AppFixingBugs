@@ -50,18 +50,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: Colors.grey,
-    marginVertical: 10,
+marginVertical:5,
   },
   container: {
     flex: 2,
     height: 55,
     justifyContent: 'center',
+    
   },
   img: {
-    height: 55,
+    height: 45,
     width: 45,
     alignSelf: 'center',
     borderRadius: 60,
+    borderColor:Colors.purple,
+    borderWidth:2
   },
   txt: {
     flex: 2.5,
@@ -71,13 +74,13 @@ const styles = StyleSheet.create({
     color: Colors.black,
     paddingLeft: 4,
     marginBottom: 2,
+    marginTop:8
   },
   msg: {
     flex: 7.5,
     paddingLeft: 4,
     maxWidth: 280,
     color: Colors.darkGray,
-    marginBottom: 10,
   },
   flex: {
     flex: 8,

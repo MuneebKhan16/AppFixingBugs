@@ -39,14 +39,14 @@ export class Home extends Component {
 
   state = {
     popUp: true,
-    location: false,
+    location: '',
     date: false,
     isVisible: false,
     selectedId: '',
     category: [],
     categoryid: null,
     feature: [],
-    text: 'usa',
+    text: '',
     isFocused: false,
     modalVisible: false,
   };
@@ -54,6 +54,9 @@ export class Home extends Component {
     this.setState({modalVisible: visible});
   };
 
+  setLocation = (location) => {
+    this.setState({ location });
+  };
   componentDidMount() {
     SplashScreen.hide();
     const userData = this.props?.user?.api_token;
@@ -165,8 +168,8 @@ export class Home extends Component {
                 <TextInput
                   editable={false}
                   style={styles.txtinputadrs}
-                  placeholder="Address"
-                  secureTextEntry={!isFocused}
+                  placeholder={location ? location.name :"Address"}
+                  // secureTextEntry={!isFocused}
                   onFocus={() => this.setState({isFocused: true})}
                   onBlur={() => this.setState({isFocused: false})}
                   onChangeText={text => this.setState({text})}
@@ -188,10 +191,11 @@ export class Home extends Component {
             />
           </View>
         </Modal>
-
+                {console.log("location",location) }
         <Searchable
           isVisible={this.state.modalVisible}
           onClose={() => this.setModalVisible(false)}
+          setLocation={this.setLocation}
         />
       </AppBackground>
     );

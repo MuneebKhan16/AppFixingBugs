@@ -53,6 +53,7 @@ const ChatList = ({navigation, route}) => {
           <View style={styles.content}>
             <Search />
           </View>
+          <View style={{marginTop:60}}>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={conversationList}
@@ -65,6 +66,7 @@ const ChatList = ({navigation, route}) => {
               />
             )}
           />
+          </View>
         </View>
       </SafeAreaView>
     </AppBackground>

@@ -10,10 +10,12 @@ export const styles = StyleSheet.create({
     list: {
         width: Dimensions.get('window').width * 1,
         paddingTop: 5,
-        marginLeft: 30
+        marginLeft: 30,
+
     },
     content: {
         marginTop: 25,
         width: '110%',
+
     }
 })

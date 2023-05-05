@@ -254,6 +254,24 @@ const MyMdl = ({ isVisible, onClose , setLocation }) => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [textInputEditable, setTextInputEditable] = useState(true);
 
+
+    const handleSearch = async (e, query) => {
+    try {
+      console.log('query', e, query)
+      const GoogleAPiKey = 'AIzaSyCzeJMBG7dupF95sa6qz5USqXYLJlGpjI4'
+      const results = await fetch(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${e}&key=${GoogleAPiKey}`
+      );
+      const json = await results.json();
+      const list = json?.predictions?.map((data) => data?.description)
+      console.log('list',list)
+      setLoc(list)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleItemSelect = (item) => {
     setSelectedItems([...selectedItems, item]);
     setTextInputEditable(false);

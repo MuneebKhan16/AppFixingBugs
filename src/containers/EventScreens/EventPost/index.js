@@ -111,7 +111,7 @@ const EventPost = (props) => {
     const event_image = { uri: selectedImage?.path, name: `rating`, type: selectedImage?.mime }
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
-    const event_location = location;
+    const event_location = location?.name;
 
 
     const params = new FormData();
@@ -123,7 +123,7 @@ const EventPost = (props) => {
     params.append('category_id', category_id)
     params.append('event_location', event_location)
 
-
+console.log('params',params)
 
     const config = {
       headers: { 'Content-Type': 'multipart/form-data' },

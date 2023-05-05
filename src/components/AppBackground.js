@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+// eslint-disable prettier/prettier /
 import React, { useRef, useEffect, useState } from 'react';
 import {
   Text,
@@ -20,10 +20,10 @@ import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
 import { TextInput } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
-import  ImageURL  from '../config/Common';
+import ImageURL from '../config/Common';
 import Dummy from '../config/Common';
+import Mymdll from './Mymdll';
 
- 
 
 export function AppBackground({
   editeIcon,
@@ -52,17 +52,26 @@ export function AppBackground({
         : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
-  const users =  useSelector((state) => state.reducer.user);
-
-
-
-  
-
+  const users = useSelector((state) => state.reducer.user);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
   const [location, setLocation] = useState();
   const [isFocused, setIsFocused] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [ModalVisible, setIsModalVisible] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  };
+
+
+ 
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
@@ -79,7 +88,7 @@ export function AppBackground({
                 height: 24,
                 resizeMode: 'contain',
                 tintColor: Colors.purple,
-                marginTop:-8
+                marginTop: -8
               }}
             />
           </TouchableOpacity>
@@ -97,7 +106,7 @@ export function AppBackground({
           </View>
           {profile && (
             <TouchableOpacity
-    
+
               onPress={() => {
                 NavService.navigate('EventProfile');
               }}
@@ -118,7 +127,7 @@ export function AppBackground({
                   borderRadius: 60,
                   borderWidth: 2,
                   borderColor: Colors.purple
-                  
+
 
                 }}
               />
@@ -230,7 +239,9 @@ export function AppBackground({
                       fontWeight: '600',
                       textTransform: 'capitalize',
                     }}>Filters</Text>
-                    <View style={{
+                    <TouchableOpacity 
+                    onPress={handleOpenModal}
+                    style={{
                       borderColor: Colors.black,
                       borderWidth: 1,
                       width: '96%',
@@ -251,18 +262,19 @@ export function AppBackground({
                           tintColor: Colors.purple,
                         }}
                       />
-                     
-                      <TextInput
-                        style={{  borderColor: 'gray',  borderRadius: 10,width:'82%',color:Colors.black ,marginLeft:10,fontSize:17,fontWeight:'700', }}
-                        placeholder="Location"
-                        placeholderTextColor={Colors.black}
-                        secureTextEntry={!isFocused} 
-                        onFocus={() => setIsFocused(true)} 
-                        onBlur={() => setIsFocused(false)} 
-                        onChangeText={location => setLocation(location)}
-                        value={location}
-                      />
-                    </View>
+                        <TextInput
+                          editable={false}
+                          style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
+                          placeholder={location ? location.name : 'Locaion'}
+                          placeholderTextColor={Colors.black}
+                          secureTextEntry={!isFocused}
+                          onFocus={() => setIsFocused(true)}
+                          onBlur={() => setIsFocused(false)}
+                          onChangeText={location => setLocation(location)}
+                          value={location}
+                        />
+                    </TouchableOpacity>
+                    <Mymdll isVisible={ModalVisible} onClose={handleCloseModal} setLocation={setLocation}  />
                     <Pickdate />
                     <CustomButton
                       buttonStyle={{
@@ -433,7 +445,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 3,
     paddingRight: 50,
-    paddingVertical:5
+    paddingVertical: 5
   },
   authtouchable: {
     position: 'absolute',
