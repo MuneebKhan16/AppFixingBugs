@@ -13,6 +13,7 @@ import CheckBox from '@react-native-community/checkbox';
 import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
 import { styles } from './post_styles';
+import Toast from 'react-native-toast-message';
 import { post_reviews } from '../../../redux/APIs'
 const Checkbox = {
   first: 'ItsLit',
@@ -71,6 +72,14 @@ class Post extends Component {
 
     const { id } = this.props.user
     const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox } = this.state
+
+    if (!selectedImage) {
+      return Toast.show({
+        text1: 'No Image Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
 
     if (isChecked === true) {
       var user_id = id;
