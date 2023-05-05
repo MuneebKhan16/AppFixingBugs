@@ -9,6 +9,7 @@ import RNBounceable from '@freakycoder/react-native-bounceable';
 import AuthLogin from '../../../components/SocialSignin';
 import {socialSignin} from '../../../redux/APIs';
 import {styles} from './prelogin_style';
+import AuthBackground from '../../../components/AuthBackground';
 const {width, height} = Dimensions.get('window');
 
 class App extends Component {
@@ -50,7 +51,7 @@ class App extends Component {
       },
     ];
     return (
-      <AppBackground back={false} title={'Pre Login'} profile={false}>
+      <AuthBackground back={false} title={'Pre Login'} profile={false}>
         <CustomBackground>
           <View style={styles.maincontainer}>
             <View style={styles.container}>
@@ -134,7 +135,7 @@ class App extends Component {
             </View>
           </View>
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

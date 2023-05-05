@@ -13,7 +13,7 @@ import { schema } from '../../../config/validation';
 import { forget_password } from '../../../redux/APIs';
 import ReactNativeCalendarStrip from 'react-native-calendar-strip';
 import { styles } from './forgotpassowrd_styles';
-
+import AuthBackground from '../../../components/AuthBackground';
 class Login extends Component {
   state = {
     email: '',
@@ -39,7 +39,7 @@ class Login extends Component {
   render() {
     const { email } = this.state;
     return (
-      <AppBackground profile={false} back title={'Forgot Password'}>
+      <AuthBackground profile={false} back title={'Forgot Password'}>
         <CustomBackground>
           <View
             style={styles.maincontainer}>
@@ -59,7 +59,7 @@ class Login extends Component {
             </View>
           </View>
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

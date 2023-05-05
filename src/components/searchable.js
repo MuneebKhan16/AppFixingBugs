@@ -290,7 +290,7 @@ console.log('jjjj',selectedItems)
 
           }}
           itemTextStyle={{ color: '#ffff' }}
-          itemsContainerStyle={{ maxHeight: 430, marginTop: 10 }}
+          itemsContainerStyle={{ maxHeight: 300, marginTop: 10 }}
           items={items}
           chip
           resetValue={true}
@@ -353,8 +353,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     padding: 10,
     borderRadius: 5,
-    position: 'absolute',
-    bottom: 30,
+    top: 80,
     alignSelf: 'center',
     width: '80%',
     height: 60,

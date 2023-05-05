@@ -19,7 +19,8 @@ if (Platform.OS === 'android') {
   }
 }
 
-const ChatScreen = ({route}) => {
+const ChatScreen = (props) => {
+  const {route } = props;
   const {chatUser, conversation_id} = route?.params;
   const user = useSelector(state => state?.reducer?.user);
   const socket = useSelector(state => state?.reducer?.socket);
@@ -27,11 +28,17 @@ const ChatScreen = ({route}) => {
   const [message, setMessage] = useState('');
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
+
+  const conversation_id2 = user.id+"_"+props.route.params.id;
+  console.log('conversation_id',conversation_id2)
+  console.log('user ',user.id)
+
   const response = () => {
     const payload = {
       sender_id: sender_id,
-      conv_id: conversation_id,
+      conv_id: conversation_id? conversation_id : conversation_id2,
     };
+    console.log("payload response"+ JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
@@ -50,13 +57,29 @@ const ChatScreen = ({route}) => {
   const sendNewMessage = () => {
     if (message.length > 0) {
       loaderStart();
-      const payload = {
-        sender_id: sender_id,
-        receiver_id: receiver_id,
-        conv_id: conversation_id,
-        msg: message,
-        msg_type: 'text',
-      };
+      var payload = ''
+      if(conversation_id != null ){ // chat through search user: already existing chats 
+      console.log("conversation_id != null" + payload)
+      payload = {
+          sender_id: sender_id,
+          receiver_id: receiver_id,
+          conv_id: conversation_id ,
+          msg: message,
+          msg_type: 'text',
+        };
+      }
+      else{  // direct chat through event page :totally new chat initiation
+      console.log("conversation_id== null" + payload)
+      payload = {
+          sender_id: user.id,
+          receiver_id: props.route.params.id,
+          conv_id:  conversation_id2 ,
+          msg: message,
+          msg_type: 'text',
+        };
+      }
+      console.log("payload" + payload)
+      console.log( JSON.stringify(payload))
       socket.emit('sendChatToServer', payload);
       setMessage('');
       loaderStop();

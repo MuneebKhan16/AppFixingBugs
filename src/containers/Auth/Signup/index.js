@@ -12,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import { schema } from '../../../config/validation';
 import { signup } from '../../../redux/APIs';
 import { styles } from './signup_style';
+import AuthBackground from '../../../components/AuthBackground';
 class Login extends Component {
   state = {
     name: '',
@@ -85,7 +86,7 @@ class Login extends Component {
   render() {
     const { email, password, confirm_Password, name } = this.state;
     return (
-      <AppBackground back profile={false} title={'Sign Up'}>
+      <AuthBackground back profile={false} title={'Sign Up'}>
         <CustomBackground>
           <View
             style={styles.maincontainer}>
@@ -140,7 +141,7 @@ class Login extends Component {
             </Text>
             </KeyboardAvoidingView>
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

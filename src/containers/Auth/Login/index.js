@@ -11,7 +11,7 @@ import * as EmailValidator from 'email-validator';
 import Toast from 'react-native-toast-message';
 import { login } from '../../../redux/APIs';
 import { styles } from './Login_Style';
-
+import AuthBackground from '../../../components/AuthBackground';
 
 class Login extends Component {
   ForgetPassword = () => {
@@ -62,7 +62,7 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <AppBackground profile={false} back={true} title={"Login"} >
+      <AuthBackground profile={false} back={true} title={"Login"} >
         <CustomBackground >
           <View
             style={styles.maincontainer}>
@@ -118,7 +118,7 @@ class Login extends Component {
             </Text>
           </KeyboardAvoidingView>
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

@@ -9,6 +9,7 @@ import AppBackground from '../../../components/AppBackground';
 import OTPTextInput from '@twotalltotems/react-native-otp-input';
 import {styles} from '../ForgetPasswordOTP/otp_style'
 import Toast from 'react-native-toast-message'
+import AuthBackground from '../../../components/AuthBackground';
 class OTP extends Component {
   ResetPassword = () => {
     NavService.navigate('ResetPassword')
@@ -65,7 +66,7 @@ class OTP extends Component {
     const { timerCode, resend, code } = this.state;
     const { user_id } = this.props.route.params;
     return (
-      <AppBackground back profile={false} title={'Verification'}>
+      <AuthBackground back profile={false} title={'Verification'}>
         <CustomBackground>
           {
           }
@@ -138,7 +139,7 @@ class OTP extends Component {
           </Text>
           {/* </ScrollView> */}
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

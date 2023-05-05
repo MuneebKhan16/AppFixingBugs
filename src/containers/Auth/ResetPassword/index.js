@@ -11,7 +11,7 @@ import {ProfileTextInput} from '../../../components/CustomTextInput';
 import { resetPassword } from '../../../redux/APIs';
 import { schema } from '../../../config/validation';
 import Toast from 'react-native-toast-message';
-
+import AuthBackground from '../../../components/AuthBackground';
 
 class App extends Component {
   state = {
@@ -65,7 +65,7 @@ class App extends Component {
     const {password, confirmPassword} = this.state;
         
     return (
-      <AppBackground back profile={false} title={'Reset Password'}>
+      <AuthBackground back profile={false} title={'Reset Password'}>
         <CustomBackground>
           <View
             style={{
@@ -112,7 +112,7 @@ class App extends Component {
             </View>
           </View>
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

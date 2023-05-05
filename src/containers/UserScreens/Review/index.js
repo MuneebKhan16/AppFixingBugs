@@ -18,6 +18,7 @@ import Swiper from 'react-native-swiper';
 import Mainprofile from '../../../components/Mainprofile';
 import { styles } from './review_style';
 import ImageURL from '../../../config/Common'
+
 const Review = (props) => {
   const profile_Data = useSelector((state) => state.reducer.user)
 
@@ -42,7 +43,7 @@ const Review = (props) => {
   useMemo(() => UserPost, [UserPost])
   const filteringData = UserPost.filter(data => data.event_id === props.route.params.id)
   return (
-    <AppBackground title={'Events'} home back chat>
+    <AppBackground title={'Events'} home back chat Eventuser={user}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
         <Swiper
           style={styles.swiper}

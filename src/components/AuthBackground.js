@@ -25,7 +25,7 @@ import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
 
 
-export function AppBackground({
+export function AuthBackground({
   editeIcon,
   route,
   children,
@@ -43,7 +43,6 @@ export function AppBackground({
   chat = false,
   setting = false,
   home,
-  Eventuser
 }) {
   const onPress = () => {
     nav.length
@@ -53,8 +52,7 @@ export function AppBackground({
         : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
-  const user = useSelector((state) => state.reducer.user);
-  console.log('********',user)
+ 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -70,7 +68,10 @@ export function AppBackground({
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
-  }; 
+  };
+
+
+ 
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
@@ -291,7 +292,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
-                NavService.navigate('ChatScreen',Eventuser);
+                NavService.navigate('ChatScreen',users);
               }}
               style={{
                 position: 'absolute',
@@ -425,7 +426,7 @@ export function AppBackground({
   );
 }
 
-export default React.memo(AppBackground);
+export default React.memo(AuthBackground);
 
 
 const styles = StyleSheet.create({

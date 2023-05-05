@@ -11,7 +11,7 @@ import AppBackground from '../../../components/AppBackground';
 // import {login} from '../../redux/actions';
 // import {connect} from 'react-redux';
 // import {resendVerifyCode, verifyCode} from '../../redux/APIs';
-
+import AuthBackground from '../../../components/AuthBackground';
 
 
 class OTP extends Component {
@@ -51,7 +51,7 @@ class OTP extends Component {
     const {timerCode, resend, code} = this.state;
     const {user_id} = this.props.route.params;
     return (
-      <AppBackground back profile={false} title={"OTP Verification"} >
+      <AuthBackground back profile={false} title={"OTP Verification"} >
       <CustomBackground>
         <ScrollView
           bounces={false}
@@ -141,7 +141,7 @@ class OTP extends Component {
           </Text>
         </ScrollView>
       </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }
