@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-import moment from 'moment';
 import React, {Component} from 'react';
 import {
   Text,
@@ -20,8 +19,6 @@ import {connect} from 'react-redux';
 import CustomButton from '../../../components/CustomButton';
 import Btn from '../../../components/Btn';
 import Pickdate from '../../../components/Pickdate';
-const {width} = Dimensions.get('window');
-import RNBounceable from '@freakycoder/react-native-bounceable';
 import SplashScreen from 'react-native-splash-screen';
 import Categories from '../../../components/Categories';
 import Images from '../../../assets/Images';
@@ -31,7 +28,7 @@ import {styles} from './Home_Styles';
 import ImageURL from '../../../config/Common';
 import FastImage from 'react-native-fast-image';
 import Searchable from '../../../components/searchable';
-
+import GooglePlaceAutocomplete from '../../../components/GooglePlaceAutocomplete';
 export class Home extends Component {
   Featured = () => {
     NavService.navigate('Featured');
@@ -83,10 +80,10 @@ export class Home extends Component {
     const userImage = this?.props?.user?.image;
 
     const togglePopUp = () => {
-      // if (text != '') {
-      console.log('data', text);
-      this.setState(previousState => ({popUp: !previousState?.popUp}));
-      // }
+      if (text != '') {
+        console.log('data', text);
+        this.setState(previousState => ({popUp: !previousState?.popUp}));
+      }
     };
 
     return (
@@ -155,7 +152,6 @@ export class Home extends Component {
           <View style={styles.modalcontainer}>
             <View>
               <Text style={styles.mdltxt}>Please enter the location</Text>
-
               <Btn />
               <TouchableOpacity
                 style={styles.mdltxtheader}

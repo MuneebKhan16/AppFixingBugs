@@ -1,0 +1,93 @@
+import React from 'react';
+import {StyleSheet, View, Dimensions, Image} from 'react-native';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import {Common} from '../config';
+import Icons from '../assets/Icons';
+import {Colors} from '../config';
+
+const {width} = Dimensions.get('screen');
+
+const GooglePlaceAutocomplete = ({
+  callback,
+  wrapperStyles,
+  inputStyles,
+  placeholder,
+  iconColor,
+}) => {
+  return (
+    <View style={[styles.geoLocationView, wrapperStyles]}>
+      <GooglePlacesAutocomplete
+        enableHighAccuracyLocation
+        fetchDetails
+        disableScroll
+        enablePoweredByContainer={false}
+        keepResultsAfterBlur={true}
+        listViewDisplayed={false}
+        placeholder={placeholder ? placeholder : 'Address'}
+        placeholderTextColor={iconColor ? Colors.primary : Colors.white}
+        onPress={(data, details = null) => {
+          const {formatted_address, geometry} = details;
+          callback(formatted_address, geometry);
+        }}
+        renderLeftButton={() => (
+          <Image
+            source={Icons.marker}
+            style={{
+              width: 20,
+              height: 20,
+              resizeMode: 'contain',
+              tintColor: iconColor ? Colors.purple : Colors.white,
+              alignSelf: 'center',
+              marginBottom: 5,
+              marginLeft: 15,
+              marginRight: 5,
+            }}
+          />
+        )}
+        styles={{
+          textInput: {
+            borderRadius: 10,
+            height: 50,
+            color: iconColor ? Colors?.black : Colors?.white,
+            backgroundColor: iconColor ? Colors.white : Colors.white,
+            width: '100%',
+          },
+          description: {color: iconColor ? Colors.purple : Colors.white},
+        }}
+        textInputProps={{
+          placeholderTextColor: iconColor ? Colors.black : Colors.white,
+          // paddingLeft: 25,
+        }}
+        query={{
+          key: Common?.GEOCODE_API_KEY,
+          language: 'en',
+        }}
+      />
+    </View>
+  );
+};
+
+export default GooglePlaceAutocomplete;
+
+const styles = StyleSheet.create({
+  geoLocationView: {
+    width: '90%',
+    marginVertical: 20,
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+    height: 55,
+    borderColor: Colors.black,
+    borderWidth: 1,
+  },
+  textInput: {
+    flex: 1,
+    height: 55,
+    color: Colors?.black,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors?.lightBlack,
+    marginTop: 13,
+    backgroundColor: Colors.white,
+    width: width,
+  },
+});
