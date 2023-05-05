@@ -52,7 +52,7 @@ const EventPost = (props) => {
     setSelectedItem(item);
   };
   const [selectedData, setSelectedData] = useState(null);
-  console.log('kjkj', loc)
+ // console.log('kjkj', loc)
   const users = useSelector((state) => state?.reducer?.user)
   const { Categorys } = useContext(eventContext);
   const togglePopUp = () => {
@@ -123,7 +123,7 @@ const EventPost = (props) => {
     params.append('category_id', category_id)
     params.append('event_location', event_location)
 
-console.log('params',params)
+//console.log('params',params)
 
     const config = {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -134,7 +134,7 @@ console.log('params',params)
       .then((res) => {
         if (res.status === 200) {
           dispatch({ type: 'LOADER_STOP' });
-          NavService.goBack();
+          NavService.goBack();  
         } else {
           dispatch({ type: 'LOADER_START' });
         }
@@ -208,7 +208,7 @@ console.log('params',params)
           <PickerCompone categories={Categorys} setSelectedData={setSelectedData} />
           <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
             <Text style={{ color: "#000" }}>{location ? location.name : "Location"}</Text>
-            {console.log('jjj',location)}
+            
             <Image source={Icons.marker} style={styles.marker} />
             
                 <Mymdll isVisible={isModalVisible} onClose={handleCloseModal} setLocation={setLocation} location={location} />

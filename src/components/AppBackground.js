@@ -220,7 +220,7 @@ export function AppBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-                // backgroundColor: Colors.white,
+                backgroundColor: Colors.white,
               }}>
               <Image
                 source={Icons.filter}

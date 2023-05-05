@@ -45,8 +45,8 @@ export const styles = StyleSheet.create({
     color: Colors.white,
     fontWeight: 'bold',
     fontSize: 18,
-    marginHorizontal:5,
-    textAlign:'center'
+    marginHorizontal: 5,
+    textAlign: 'center'
   },
   modalcontainer: {
     backgroundColor: '#ffffff',
@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
   mdltxtheader: { marginTop: 20, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 10, paddingLeft: 10, },
   mdlimg: { width: 20, height: 20, },
   mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: 20, fontWeight: '600', marginVertical: 20, },
-  txtinputadrs: { borderColor: 'grey', borderRadius: 10, width: '88%', color: Colors.darkGray, marginLeft: 10, fontSize: 16, fontWeight: '600' ,height:45},
+  txtinputadrs: { borderColor: 'grey', borderRadius: 10, width: '88%', color: Colors.darkGray, marginLeft: 10, fontSize: 16, fontWeight: '600', height: 45 },
   container1: { justifyContent: 'center', alignItems: 'center', flex: 1, },
   txtheadersty: { fontSize: 25, fontWeight: 'bold' }
 })

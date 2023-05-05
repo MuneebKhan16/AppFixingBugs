@@ -54,18 +54,28 @@ const ChatList = ({navigation, route}) => {
             <Search />
           </View>
           <View style={{marginTop:60}}>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={conversationList}
-            style={styles.list}
-            renderItem={({item, index}) => (
-              <ChatComponent
-                item={item}
-                index={index}
-                navigation={navigation}
+            {
+              conversationList?.length > 0 ? 
+              (
+                <FlatList
+                showsVerticalScrollIndicator={false}
+                data={conversationList}
+                style={styles.list}
+                renderItem={({item, index}) => (
+                  <ChatComponent
+                    item={item}
+                    index={index}
+                    navigation={navigation}
+                  />
+                )}
               />
-            )}
-          />
+              ) 
+              :
+               (
+                    <Text>No Chat Found</Text>
+               )
+            }
+         
           </View>
         </View>
       </SafeAreaView>

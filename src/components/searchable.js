@@ -286,10 +286,11 @@ console.log('jjjj',selectedItems)
             width: '95%',
             alignSelf: 'center',
             height: 40,
+            borderRadius: 11,
 
           }}
           itemTextStyle={{ color: '#ffff' }}
-          itemsContainerStyle={{ maxHeight: 130, marginTop: 10 }}
+          itemsContainerStyle={{ maxHeight: 430, marginTop: 10 }}
           items={items}
           chip
           resetValue={true}

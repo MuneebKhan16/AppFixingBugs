@@ -273,9 +273,11 @@ const MyMdl = ({ isVisible, onClose , setLocation }) => {
   };
 
   const handleItemSelect = (item) => {
+ 
     setSelectedItems([...selectedItems, item]);
     setTextInputEditable(false);
     setLocation(item)
+  
   };
 
   const handleItemRemove = (item, index) => {
@@ -305,10 +307,10 @@ const MyMdl = ({ isVisible, onClose , setLocation }) => {
             width: '95%',
             alignSelf: 'center',
             height: 40,
-
+            borderRadius: 11,
           }}
           itemTextStyle={{ color: '#ffff' }}
-          itemsContainerStyle={{ maxHeight: 130, marginTop: 10 }}
+          itemsContainerStyle={{ maxHeight: 430, marginTop: 10 }}
           items={items}
           chip
           resetValue={true}
@@ -375,7 +377,7 @@ const styles = StyleSheet.create({
     bottom: 30,
     alignSelf: 'center',
     width: '80%',
-    height: 60,
+    height: 55,
     justifyContent: 'center',
     borderRadius: 20
   },
