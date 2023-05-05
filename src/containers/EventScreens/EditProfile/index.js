@@ -19,7 +19,6 @@ const EditProfile = () => {
   const [email, setEmail] = useState(userProfile?.email);
   const [addresss, setAddress] = useState(userProfile?.address);
 
-  console.log('object',userProfile)
 
   const handleUpdate = () => {
     if(fullName !== null && lastName == userProfile?.last_name && addresss == userProfile?.address){

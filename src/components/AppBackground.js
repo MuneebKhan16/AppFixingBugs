@@ -118,7 +118,7 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: users ? `${ImageURL?.ImageURL}${users?.profile_picture}` : `${Dummy.dummy}` }}
+                source={{ uri: user ? `${ImageURL?.ImageURL}${user?.profile_picture}` : `${Dummy.dummy}` }}
                 style={{
                   height: 40,
                   width: 40,

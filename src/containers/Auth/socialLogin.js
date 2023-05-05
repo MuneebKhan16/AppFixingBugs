@@ -14,7 +14,6 @@ Settings.setAppID('1284024702540652');
 const Google = async () => {
     try {
         const userInfo = await GoogleSignin.signIn();
-        console.log(userInfo)
         const googleCredential = Auth.GoogleAuthProvider.credential(
             userInfo.idToken,
         );
@@ -67,7 +66,6 @@ const Apple = async type => {
         );
         const userAuth = await Auth()?.signInWithCredential(appleCredential);
         const { uid, email } = userAuth?.user;
-        console.log('userAuth', userAuth);
     } catch (error) {
         console.log(error);
     }

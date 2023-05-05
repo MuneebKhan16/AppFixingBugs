@@ -14,7 +14,6 @@ Settings.setAppID('1284024702540652');
 const Google = async () => {
   try {
     const userInfo = await GoogleSignin.signIn();
-    console.log(userInfo);
     const googleCredential = Auth.GoogleAuthProvider.credential(
       userInfo.idToken,
     );

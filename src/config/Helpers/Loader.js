@@ -5,7 +5,6 @@ const {width, height} = Dimensions.get('screen');
 
 export default function Loader() {
   const loader = useSelector(state => state?.reducer?.loader || false);
-  console.log('loader', loader)
   if (!loader) return null;
   return (
     <View

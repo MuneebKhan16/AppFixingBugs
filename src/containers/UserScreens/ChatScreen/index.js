@@ -30,22 +30,18 @@ const ChatScreen = (props) => {
   const receiver_id = chatUser?.id;
 
   const conversation_id2 = user.id+"_"+props.route.params.id;
-  console.log('conversation_id',conversation_id2)
-  console.log('user ',user.id)
 
   const response = () => {
     const payload = {
       sender_id: sender_id,
       conv_id: conversation_id? conversation_id : conversation_id2,
     };
-    console.log("payload response"+ JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
         const messages = data?.data || [];
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
-        console.log(data?.object_type, data?.data);
         setChatList(chatList1 => [...[data?.data], ...chatList1]);
       }
     });
@@ -59,7 +55,6 @@ const ChatScreen = (props) => {
       loaderStart();
       var payload = ''
       if(conversation_id != null ){ // chat through search user: already existing chats 
-      console.log("conversation_id != null" + payload)
       payload = {
           sender_id: sender_id,
           receiver_id: receiver_id,
@@ -69,7 +64,6 @@ const ChatScreen = (props) => {
         };
       }
       else{  // direct chat through event page :totally new chat initiation
-      console.log("conversation_id== null" + payload)
       payload = {
           sender_id: user.id,
           receiver_id: props.route.params.id,
@@ -78,8 +72,6 @@ const ChatScreen = (props) => {
           msg_type: 'text',
         };
       }
-      console.log("payload" + payload)
-      console.log( JSON.stringify(payload))
       socket.emit('sendChatToServer', payload);
       setMessage('');
       loaderStop();

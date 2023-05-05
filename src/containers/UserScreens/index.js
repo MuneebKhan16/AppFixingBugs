@@ -258,8 +258,7 @@ const getProfile = async () => {
           getCategorys();
           getProfile();
    return () => {
-    console.log('unmounting'); 
-}
+s}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 
 const SearchableDropdown = ({ data = [], onSelect , query ,setQuery }) => {
-    console.log('hgf',data)
 //   const [query, setQuery] = useState('');
   const [filteredData, setFilteredData] = useState(data);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -17,7 +16,6 @@ const SearchableDropdown = ({ data = [], onSelect , query ,setQuery }) => {
     setQuery(text);
   };
 
-  console.log('query',query , 'filteredData' , filteredData)
   const handleSelect = item => {
     setIsDropdownOpen(false);
     setQuery(item.name);

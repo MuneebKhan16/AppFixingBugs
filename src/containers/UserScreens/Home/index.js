@@ -80,7 +80,6 @@ export class Home extends Component {
     const userImage = this?.props?.user?.image;
 
     const togglePopUp = () => {
-      console.log('first',location.name)
       if (location.name != '') {
         this.setState(previousState => ({popUp: !previousState?.popUp}));
       }

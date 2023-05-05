@@ -24,7 +24,7 @@ const GooglePlaceAutocomplete = ({
         keepResultsAfterBlur={true}
         listViewDisplayed={false}
         placeholder={placeholder ? placeholder : 'Address'}
-        placeholderTextColor={iconColor ? Colors.primary : Colors.white}
+        placeholderTextColor={iconColor ? Colors.primary : Colors.black}
         onPress={(data, details = null) => {
           const {formatted_address, geometry} = details;
           callback(formatted_address, geometry);
@@ -36,7 +36,7 @@ const GooglePlaceAutocomplete = ({
               width: 20,
               height: 20,
               resizeMode: 'contain',
-              tintColor: iconColor ? Colors.purple : Colors.white,
+              tintColor: iconColor ? Colors.purple : Colors.black,
               alignSelf: 'center',
               marginBottom: 5,
               marginLeft: 15,
@@ -48,14 +48,14 @@ const GooglePlaceAutocomplete = ({
           textInput: {
             borderRadius: 10,
             height: 50,
-            color: iconColor ? Colors?.black : Colors?.white,
-            backgroundColor: iconColor ? Colors.white : Colors.white,
+            color: iconColor ? Colors?.black : Colors?.black,
+            backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
           },
-          description: {color: iconColor ? Colors.purple : Colors.white},
+          description: {color: iconColor ? Colors.purple : Colors.black},
         }}
         textInputProps={{
-          placeholderTextColor: iconColor ? Colors.black : Colors.white,
+          placeholderTextColor: iconColor ? Colors.black : Colors.black,
           // paddingLeft: 25,
         }}
         query={{

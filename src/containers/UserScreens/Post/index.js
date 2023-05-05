@@ -119,7 +119,6 @@ class Post extends Component {
       post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
 
     } else {
-      console.log('object')
     }
 
   }

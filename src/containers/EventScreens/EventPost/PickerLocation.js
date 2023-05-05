@@ -6,7 +6,6 @@ import { Colors } from '../../../config';
 const PickerCompone = (props) => {
   const { categories ,setSelectedData } = props
 
-  console.log("categories",categories , "setSelectedData",setSelectedData)
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [selectedPicker, setSelectedPicker] = useState(categories);
 
