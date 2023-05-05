@@ -29,16 +29,16 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: -90
   },
-  btn: { alignSelf: 'center', marginTop: 50 ,width:310},
+  btn: { alignSelf: 'center', marginTop: 20 ,width:310},
   tags: { fontSize: 25, marginLeft: 10 },
   check: { marginVertical: 10, flexDirection: 'row', backgroundColor: Colors.purple, width: 300, borderRadius: 10, paddingVertical: 10, alignItems: 'center', paddingLeft: 10 },
   box: { marginVertical: 10, flexDirection: 'row', marginTop: 80, backgroundColor: Colors.purple, width: 300, borderRadius: 10, paddingVertical: 10, paddingLeft: 10 ,alignItems:'center'},
   content: {
     alignItems: 'center',
     flexGrow: 1,
-    marginTop: 30
+   
   },
-  flex: { flex: 1 },
+  flex: { flex: 1, },
   top: { marginBottom: 20, marginTop: -10 },
   backbg: { backgroundColor: 'transparent' },
   btm: { marginBottom: 30 },

@@ -20,7 +20,6 @@ const Stack = createNativeStackNavigator();
 
 const saveSocket = () => {
   const socket = io.connect(Common.socketURL);
-  console.log('socket', socket, 'socket');
   store.dispatch({type: 'SET_SOCKET', payload: socket});
 };
 

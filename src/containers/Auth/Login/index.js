@@ -80,7 +80,6 @@ class Login extends Component {
                 value={password}
                 onChangeText={text => this.setState({ password: text })}
                 icon={Icons.password}
-
                 secureTextEntry={
                   this.state.visible ? false : true
                 }

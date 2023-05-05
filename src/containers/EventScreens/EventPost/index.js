@@ -49,8 +49,8 @@ const EventPost = props => {
     setSelectedItem(item);
   };
   const [selectedData, setSelectedData] = useState(null);
+  const users = useSelector((state) => state?.reducer?.user)
   // console.log('kjkj', loc)
-  const users = useSelector(state => state?.reducer?.user);
   const {Categorys} = useContext(eventContext);
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
@@ -120,7 +120,6 @@ const EventPost = props => {
     params.append('category_id', category_id);
     params.append('event_location', event_location);
 
-    //console.log('params',params)
 
     const config = {
       headers: {'Content-Type': 'multipart/form-data'},
@@ -130,7 +129,7 @@ const EventPost = props => {
       .post(`${Common.baseURL}add-event`, params, config)
       .then(res => {
         if (res.status === 200) {
-          dispatch({type: 'LOADER_STOP'});
+          dispatch({ type: 'LOADER_STOP' });
           NavService.goBack();
         } else {
           dispatch({type: 'LOADER_START'});
@@ -228,40 +227,51 @@ const EventPost = props => {
       </View>
 
       {/* Modal */}
-      <Modal isVisible={popUp} style={styles.modal} backdropOpacity={0.7}>
+      <Modal
+        isVisible={popUp}
+        style={styles.modal}
+        backdropOpacity={0.7}
+
+      >
         <View style={styles.posting}>
-          <Text style={styles.requriment}>
-            Requirements and Tips for Posting
-          </Text>
+          <TouchableOpacity 
+          onPress={() => togglePopUp()}
+          style={{
+            marginVertical: 10,
+            position: 'absolute',
+            right: 10,
+            backgroundColor: 'white',
+            padding: 10,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 30
+          }}>
+            <Text style={{ color: Colors.purple, fontWeight: 'bold' }}>X</Text>
+          </TouchableOpacity>
+          <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
         </View>
         <View style={styles.category}>
-          <View>
-            <Text style={styles.modaltxt}>
-              1-Name of Location (mandatory){'\n'}
-              2-Official Address (mandatory){'\n'}
-              3-Clear Photo of Building (mandatory){'\n'}
-              4-Operating Hours (Mandatory){'\n'}
-              5-Parking tips, where to park in description field (helpful tip)
-              {'\n'}
-              6-If crowd (age, genre) differs from night to night, please
-              include this helpful tip for outsiders{'\n'}
-              7-If specified dress code is required on a specific night or on
-              all nights, please include this helpful tip for outsiders{'\n'}
-              8-Flyers, Pictures and videos of your most recent nights or
-              events! (helpful){'\n'}
-              9-Don't forget you may purchase optimisation to have your events
-              featured on main home page!{'\n'}
-            </Text>
+          <View style={{ marginTop: 10 }}>
+            <Text style={styles.modaltxt}>1-Name of Location (mandatory){'\n'}</Text>
+            <Text style={styles.modaltxt}>2-Official Address (mandatory){'\n'}</Text>
+            <Text style={styles.modaltxt}>3-Clear Photo of Building (mandatory){'\n'}</Text>
+            <Text style={styles.modaltxt}> 4-Operating Hours (Mandatory){'\n'}</Text>
+            <Text style={styles.modaltxt}>5-Parking tips, where to park in description field (helpful tip){'\n'}</Text>
+            <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
+            <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
+            <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
+            <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text>
           </View>
+
         </View>
-        <CustomButton
+        {/* <CustomButton
           buttonStyle={{
             alignSelf: 'center',
-            marginTop: 50,
           }}
           title="Close"
           onPress={() => togglePopUp()}
-        />
+        /> */}
+
       </Modal>
     </AppBackground>
   );

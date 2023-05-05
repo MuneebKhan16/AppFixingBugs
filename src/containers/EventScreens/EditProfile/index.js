@@ -260,4 +260,11 @@ const EditProfile = () => {
 
 export default React.memo(EditProfile);
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  edit: {
+    width: 12,
+    height: 12,
+    resizeMode: 'contain',
+    
+  },
+})
