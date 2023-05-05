@@ -5,30 +5,25 @@ import {
   View,
   ScrollView,
   FlatList,
-  Dimensions,
-  ImageBackground,
-  TextInput,
   Image,
   TouchableOpacity,
-  Button,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import AppBackground from '../../../components/AppBackground';
-import {Colors, NavService, Shadows} from '../../../config';
+import {Colors, NavService} from '../../../config';
 import {connect} from 'react-redux';
 import CustomButton from '../../../components/CustomButton';
 import Btn from '../../../components/Btn';
 import Pickdate from '../../../components/Pickdate';
 import SplashScreen from 'react-native-splash-screen';
 import Categories from '../../../components/Categories';
-import Images from '../../../assets/Images';
 import {Get_All_Categories, localevents} from '../../../redux/APIs/index';
 import Icons from '../../../assets/Icons';
-import {styles} from './Home_Styles';
 import ImageURL from '../../../config/Common';
 import FastImage from 'react-native-fast-image';
 import Searchable from '../../../components/searchable';
 import GooglePlaceAutocomplete from '../../../components/GooglePlaceAutocomplete';
+import {styles} from './Home_Styles';
 export class Home extends Component {
   Featured = () => {
     NavService.navigate('Featured');
@@ -51,8 +46,8 @@ export class Home extends Component {
     this.setState({modalVisible: visible});
   };
 
-  setLocation = (location) => {
-    this.setState({ location });
+  setLocation = location => {
+    this.setState({location});
   };
   componentDidMount() {
     SplashScreen.hide();
@@ -110,21 +105,6 @@ export class Home extends Component {
                     </View>
                     <Text style={styles.ftrtitle}>{item.event_title}</Text>
                   </FastImage>
-                  {/* <ImageBackground
-                    source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
-                    style={styles.imgbackground}
-                    imageStyle={styles.imgbg}>
-                    <View style={styles.icnstrempty}>
-                      <Image
-                        source={Icons.starEmpty}
-                        style={styles.starempty}
-                      />
-                    </View>
-                    <Text
-                      style={styles.ftrtitle}>
-                      {item.event_title}
-                    </Text>
-                  </ImageBackground> */}
                 </TouchableOpacity>
               )}
             />
@@ -149,44 +129,39 @@ export class Home extends Component {
         </ScrollView>
         <Modal isVisible={popUp} style={styles.modal} backdropOpacity={0.7}>
           <View style={styles.modalcontainer}>
-            <View>
-              <Text style={styles.mdltxt}>Please enter the location</Text>
-              <Btn />
-              <TouchableOpacity
-                style={styles.mdltxtheader}
-                onPress={() => this.setModalVisible(true)}>
-                <Image
-                  source={Icons.marker}
-                  resizeMode="contain"
-                  style={styles.mdlimg}
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View>
+                <Text style={styles.mdltxt}>Please enter the location</Text>
+                <Btn />
+                <GooglePlaceAutocomplete
+                  callback={(address, geometry) =>
+                    console.log('address, geometry', address, geometry)
+                  }
+                  wrapperStyles={{
+                    width: '100%',
+                  }}
+                  inputStyles={{
+                    borderWidth: 1,
+                    borderColor: Colors.lightGrey,
+                  }}
+                  iconColor
+                  placeholder={text !== '' ? text : 'Address'}
                 />
-                <TextInput
-                  editable={false}
-                  style={styles.txtinputadrs}
-                  placeholder={location ? location.name :"Address"}
-                  // secureTextEntry={!isFocused}
-                  onFocus={() => this.setState({isFocused: true})}
-                  onBlur={() => this.setState({isFocused: false})}
-                  onChangeText={text => this.setState({text})}
-                  value={text}
-                  placeholderTextColor={Colors.greey}
-                />
-              </TouchableOpacity>
-              {text.length <= 0 ? (
-                <Text style={{color: Colors?.purple, fontSize: 16}}>
-                  Address required
-                </Text>
-              ) : null}
-            </View>
-            <Pickdate />
-            <CustomButton
-              onPress={togglePopUp}
-              buttonStyle={styles.btnstyle}
-              title="Continue"
-            />
+                {text.length <= 0 ? (
+                  <Text style={{color: Colors?.purple, fontSize: 16}}>
+                    Address required
+                  </Text>
+                ) : null}
+              </View>
+              <Pickdate />
+              <CustomButton
+                onPress={togglePopUp}
+                buttonStyle={styles.btnstyle}
+                title="Continue"
+              />
+            </ScrollView>
           </View>
         </Modal>
-                {console.log("location",location) }
         <Searchable
           isVisible={this.state.modalVisible}
           onClose={() => this.setModalVisible(false)}

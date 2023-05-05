@@ -1,9 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Dimensions, Image} from 'react-native';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {Common} from '../config';
+import {Common, Colors} from '../config';
 import Icons from '../assets/Icons';
-import {Colors} from '../config';
 
 const {width} = Dimensions.get('screen');
 
@@ -61,6 +60,7 @@ const GooglePlaceAutocomplete = ({
         query={{
           key: Common?.GEOCODE_API_KEY,
           language: 'en',
+          types: 'premise',
         }}
       />
     </View>
@@ -71,11 +71,10 @@ export default GooglePlaceAutocomplete;
 
 const styles = StyleSheet.create({
   geoLocationView: {
-    width: '90%',
+    width: width,
     marginVertical: 20,
     backgroundColor: Colors.white,
     borderRadius: 10,
-    height: 55,
     borderColor: Colors.black,
     borderWidth: 1,
   },
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Colors?.lightBlack,
     marginTop: 13,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors?.white,
     width: width,
   },
 });
