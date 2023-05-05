@@ -1,7 +1,7 @@
 // npm i react-native-image-crop-picker react-native-actions-sheet react-native-actions-sheet; cd ios; pod install; cd ..
 
 import React, {useRef} from 'react';
-import {Text, TouchableOpacity, View, Image,StyleSheet} from 'react-native';
+import {Text, TouchableOpacity, View, Image} from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import ActionSheet from 'react-native-actions-sheet';
 import {Image as ImageCompressor} from 'react-native-compressor';
@@ -48,7 +48,7 @@ export default CustomImagePicker = ({
       <ActionSheet
         ref={actionSheetRef}
         containerStyle={{backgroundColor: 'transparent'}}>
-        <View style={styles.space}>
+        <View style={{padding: 10}}>
           <View
             style={{
               backgroundColor: 'rgba(241,241,241,0.8)',
@@ -61,7 +61,7 @@ export default CustomImagePicker = ({
                 borderBottomColor: '#ccc',
                 paddingVertical: 10,
               }}>
-              <Text style={{color: 'grey', textAlign: 'center', textTransform: 'capitalize',}}>
+              <Text style={{color: 'grey', textAlign: 'center'}}>
                 Choose an option to pick an Image
               </Text>
             </View>
@@ -76,7 +76,7 @@ export default CustomImagePicker = ({
                 borderBottomWidth: 1.5,
                 borderBottomColor: '#ccc',
               }}>
-              <Text style={{color: 'rgb(0,88,200)', fontSize: 18, textTransform: 'capitalize',}}>
+              <Text style={{color: 'rgb(0,88,200)', fontSize: 18}}>
                 Take Photo
               </Text>
             </TouchableOpacity>
@@ -114,7 +114,3 @@ export default CustomImagePicker = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  space:{padding: 10}
-})

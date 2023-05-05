@@ -154,14 +154,22 @@ class Post extends Component {
           </View>
           <ActionSheet
             ref={this.actionSheetStateRef}
-            containerStyle={styles.backbg}>
-            <View style={styles.action}>
-
-              <TouchableOpacity
+            containerStyle={{backgroundColor: 'transparent'}}>
+            <View style={{padding: 10, paddingBottom: 20}}>
+            <TouchableOpacity
                 onPress={() => actionSheetStateRef.current.hide()}
-                style={styles.touchable}>
+                style={{
+                  backgroundColor: 'white',
+                  borderRadius: 10,
+                  paddingVertical: 12,
+                  alignItems: 'center',
+                }}>
                 <Text
-                  style={styles.cancel}>
+                  style={{
+                    color: 'rgb(0,88,200)',
+                    fontSize: 18,
+                    fontWeight: '600',
+                  }}>
                   Cancel
                 </Text>
               </TouchableOpacity>
@@ -177,9 +185,10 @@ class Post extends Component {
               <View
                 style={styles.picker}>
                 <CustomImagePicker
-                  onImageChange={(path, mime) => {
-                    this.setState({ selectedImage: { path, mime } });
-                  }}>
+                 onImageChange={(path, mime) => {
+                  console.log('path', path);
+                  this.setState({selectedImage: {path, mime}});
+                }}>
                   <View style={styles.item}>
                     <Image
                       source={Icons.upload}
