@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
       tintColor: Colors.white, width: 16,
       height: 16,
     },
-    loctxt: { color: Colors.white, fontWeight: '400', fontSize: 14,  textTransform: 'capitalize', },
+    loctxt: { color: Colors.white, fontWeight: '400', fontSize: 14,  marginRight:10,width:250 },
     top:{ marginTop: 30 },
     border:{ borderRadius: 20 },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},

@@ -39,6 +39,8 @@ const Posts = (props) => {
                   style={styles.mainprofile}>
                   <View
                     style={styles.container}>
+                             { console.log(ImageURL?.ImageURL +data?.user?.profile_picture+ " pic ")}
+
                     <Image
                       source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                       style={styles.pic}
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     height: 45,
     width: 45,
     borderWidth: 2,
-    borderRadius: 20,
+    borderRadius: 100,
     borderColor: Colors.purple
   },
   time: {

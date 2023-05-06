@@ -24,16 +24,16 @@ const PickerComptwo = () => {
             mode="dropdown"
             >
           <Picker.Item
-            label="Event Type (i.e Recurring)"
-            value="Event Type (i.e Recurring)"
+            label="Event Occurrence"
+            value="Event Occurrence"
             color={'black'} style={{ fontWeight: 'bold',backgroundColor: '#ededed',}}
           />
            <Picker.Item
-            label="local"
-            value="local"
+            label="Re-curring"
+            value="Re-curring"
             color={'black'} style={{ fontWeight: 'bold',color:Colors.black ,backgroundColor: '#ededed',}}
           />
-          <Picker.Item label="event" value="event" color={'black'} style={{fontWeight: 'bold',backgroundColor: '#ededed', }} />
+          <Picker.Item label="One-Time" value="One-Time" color={'black'} style={{fontWeight: 'bold',backgroundColor: '#ededed', }} />
         </Picker> 
   )
 }

@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
       height: 18,
       resizeMode: 'contain',
     },
-    subcontent: { color: Colors.black ,fontSize:18 ,fontWeight:'500' },
+    subcontent: { color: Colors.black ,fontSize:18 ,fontWeight:'500',width:250 },
     heading: {
       marginVertical: 5,
       fontSize: 20,

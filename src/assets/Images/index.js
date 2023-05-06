@@ -1,7 +1,7 @@
 export default Images = {
   logo: require('./logo.png'),
   avatar: require('./avatar.png'),
-  background1: require('./background.jpeg'),
+  background1: require('./background.jpg'),
   background2: require('./background2.jpeg'),
   background3: require('./background3.jpg'),
   splash: require('./splash.png'),

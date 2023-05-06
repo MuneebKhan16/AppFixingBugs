@@ -64,7 +64,7 @@ const Featured = () => {
                     source={Icons.location}
                     style={styles.location}
                   />
-                  <Text style={styles.locationtxt}>
+                  <Text style={styles.locationtxt} numberOfLines={1} ellipsizeMode='head'>
                     {' '}
                     {item.event_location}
                   </Text>

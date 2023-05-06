@@ -29,13 +29,14 @@ const ChatScreen = (props) => {
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
 
-  const conversation_id2 = user.id+"_"+props.route.params.id;
+  const conversation_id2 = user?.id+"_"+props?.route?.params?.id;
 
   const response = () => {
     const payload = {
       sender_id: sender_id,
       conv_id: conversation_id? conversation_id : conversation_id2,
     };
+    console.log("payload " +  JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
@@ -65,8 +66,8 @@ const ChatScreen = (props) => {
       }
       else{  // direct chat through event page :totally new chat initiation
       payload = {
-          sender_id: user.id,
-          receiver_id: props.route.params.id,
+          sender_id: user?.id,
+          receiver_id: props?.route?.params?.id,
           conv_id:  conversation_id2 ,
           msg: message,
           msg_type: 'text',

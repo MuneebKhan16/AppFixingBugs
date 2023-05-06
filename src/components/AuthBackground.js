@@ -264,7 +264,7 @@ export function AuthBackground({
                         <TextInput
                           editable={false}
                           style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
-                          placeholder={location ? location.name : 'Locaion'}
+                          placeholder={location ? location.name : 'Location'}
                           placeholderTextColor={Colors.black}
                           secureTextEntry={!isFocused}
                           onFocus={() => setIsFocused(true)}

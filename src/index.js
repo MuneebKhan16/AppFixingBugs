@@ -18,10 +18,10 @@ import {AuthStack, ScreenStack, EventScreenStack} from './containers';
 
 const Stack = createNativeStackNavigator();
 
-const saveSocket = () => {
-  const socket = io.connect(Common.socketURL);
-  store.dispatch({type: 'SET_SOCKET', payload: socket});
-};
+// const saveSocket = () => {
+//   const socket = io.connect(Common.socketURL);
+//   store.dispatch({type: 'SET_SOCKET', payload: socket});
+// };
 
 class Navigation extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class Navigation extends Component {
   }
 
   componentDidMount() {
-    saveSocket();
+    // saveSocket();
     setTimeout(() => {
       SplashScreen.hide();
     }, 2500);

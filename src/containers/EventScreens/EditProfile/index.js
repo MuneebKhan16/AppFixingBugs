@@ -113,7 +113,7 @@ const EditProfile = () => {
                       : 
                       (
                         <Image
-                        source={{ uri: `${ImageURL.ImageURL}${userProfile.profile_picture}` }}
+                        source={{ uri: userProfile.profile_picture ? `${ImageURL.ImageURL}${userProfile.profile_picture}` : "https://picsum.photos/200/300" }}
                         style={{
                           width: 130,
                           height: 130,

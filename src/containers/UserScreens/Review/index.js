@@ -41,7 +41,7 @@ const Review = (props) => {
   }, [])
 
   useMemo(() => UserPost, [UserPost])
-  const filteringData = UserPost.filter(data => data.event_id === props.route.params.id)
+  const filteringData = UserPost?.filter(data => data.event_id === props.route.params.id)
   return (
     <AppBackground title={'Events'} home back chat Eventuser={user}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
@@ -60,7 +60,6 @@ const Review = (props) => {
           <Mainprofile
             center
             name={user?.name}
-            subtitle="Event Owner"
             row
             inc
             size
@@ -76,7 +75,7 @@ const Review = (props) => {
       </ScrollView>
       <CustomButton
         buttonStyle={styles.self}
-        title="Rate & Posts"
+        title="Rate & Post"
         onPress={() => NavService.navigate('Post', id)}
       />
     </AppBackground>

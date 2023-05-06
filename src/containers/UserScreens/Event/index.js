@@ -64,7 +64,7 @@ const Event = (props) => {
                         <View style={styles.locsub}>
                           <Image source={Icons.location} resizeMode="contain" style={styles.location} />
                         </View>
-                        <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                        <Text style={styles.loctxt} numberOfLines={1} >{item.event_location}</Text>
                       </View>
                       </FastImage>
                     {/* <ImageBackground

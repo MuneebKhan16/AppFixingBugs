@@ -55,7 +55,7 @@ const EventReview = (props) => {
               style={styles.marker}
             />
           </View>
-          <Text style={styles.subcontent}>
+          <Text style={styles.subcontent} numberOfLines={1} >
             {PassedData.event_location}
           </Text>
         </View>

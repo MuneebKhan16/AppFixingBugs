@@ -35,13 +35,12 @@ const index = (props) => {
             style={styles.container}
             onPress={() => ScreenStack()}>
             <ImageBackground
-              source={Images.background3}
+              source={Images.background1}
               style={styles.imgbg}
               imageStyle={styles.opicty}
               resizeMode='cover'
 
             >
-              <Text style={styles.txt}>Going Outsideee</Text>
             </ImageBackground>
           </TouchableOpacity>
         </View>
@@ -54,12 +53,11 @@ const index = (props) => {
 
             }}>
             <ImageBackground
-              source={Images.background1}
+              source={Images.background3}
               style={styles.imgbg}
               imageStyle={styles.opicty}
               resizeMode='cover'
             >
-              <Text style={styles.txt}>Host Outsideee</Text>
             </ImageBackground>
           </TouchableOpacity>
         </View>

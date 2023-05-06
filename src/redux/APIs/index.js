@@ -312,15 +312,13 @@ export async function updateProfile(
   auth_token,
 ) {
   const params = new FormData();
-
   params.append('name', name);
   params.append('last_name', last_name);
   params.append('email', email);
   params.append('address', address);
   params.append('profile_picture', profile_picture);
   params.append('auth_token', auth_token);
-
-  console.log('param', params);
+  
 
   const data = await postApi('update-profile', params);
   console.log('object', data);
@@ -404,63 +402,14 @@ export async function post_events(
   category_id,
   event_location,
 ) {
-  if (
-    !event_title &&
-    !event_type &&
-    !event_description &&
-    !event_image &&
-    !category_id &&
-    !event_location
-  ) {
-    return Toast.show({
-      text1: 'Select all fields',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else if (!event_title) {
-    return Toast.show({
-      text1: 'No Title Selected',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else if (!event_description) {
-    return Toast.show({
-      text1: 'No Description Selected',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else if (!event_location) {
-    return Toast.show({
-      text1: 'No Location Selected',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else if (!category_id) {
-    return Toast.show({
-      text1: 'No Category Selected',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else if (!event_type) {
-    return Toast.show({
-      text1: 'No EventType Selected',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else if (event_image.path == null) {
-    return Toast.show({
-      text: 'No Image Selecteds',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  } else {
+  
     if (
-      event_title !== null &&
-      event_type !== null &&
-      event_description !== null &&
-      event_image !== null &&
-      category_id !== null &&
-      event_location !== null
+      event_title != null &&
+      event_type != null &&
+      event_description != null &&
+      event_image != null &&
+      category_id != null &&
+      event_location != null
     ) {
       const params = new FormData();
       params.append('event_title', event_title);
@@ -480,6 +429,7 @@ export async function post_events(
         return data;
       }
     } else {
+      console.log('No Data Posted')
       // return
       // Toast.show({
       //   text1: 'No Events',
@@ -487,7 +437,7 @@ export async function post_events(
       //   visibilityTime: 3000,
       // });
     }
-  }
+  
 }
 
 export async function show_eventCreater_event(user_id) {

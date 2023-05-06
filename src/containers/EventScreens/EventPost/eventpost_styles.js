@@ -64,12 +64,11 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    alignItems: 'center',
     paddingVertical: 20,
     width: '95%', 
     alignSelf: 'center'
   },
-  requriment: { fontSize: 16, color: Colors.white, fontWeight: 'bold', },
+  requriment: { fontSize: 17, color: Colors.white, fontWeight: 'bold',marginLeft:20 },
   category: { backgroundColor: Colors.purple, 
     borderBottomLeftRadius: 10, 
     borderBottomRightRadius: 10, 

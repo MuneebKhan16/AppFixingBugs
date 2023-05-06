@@ -3,7 +3,7 @@ import {Text, ScrollView} from 'react-native';
 import AppBackground from '../../../components/AppBackground';
 import {Colors} from '../../../config';
 
-export class TermsConditions extends Component {
+export class EventTermsConditions extends Component {
   render() {
     return (
       <AppBackground title={'Terms & Conditions'} profile={false} notification={false} back>
@@ -308,4 +308,4 @@ Don't hesitate to contact us if you have any questions.{'\n'}</Text>
   }
 }
 
-export default TermsConditions;
+export default EventTermsConditions;

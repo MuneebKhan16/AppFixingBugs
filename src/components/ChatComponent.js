@@ -28,7 +28,7 @@ const ChatComponent = props => {
       <View style={styles.container}>
         <Image
           style={styles.img}
-          source={{uri: Common.ImageURL + configureData?.profile_picture}}
+          source={{uri: configureData?.profile_picture ?  Common.ImageURL + configureData?.profile_picture : "https://picsum.photos/200/300" }}
         />
       </View>
       <View style={styles.flex}>

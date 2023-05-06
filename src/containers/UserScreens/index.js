@@ -21,8 +21,8 @@ import CompleteProfile from '../Auth/CompleteProfile';
 //LocalEvent
 import Home from './Home';
 import Profile from './Profile';
-import TermsConditions from './TermsConditions';
-import PrivacyPolicy from './PrivacyPolicy';
+import TermsConditions from '../UserScreens/TermsConditions';
+import PrivacyPolicy from '../UserScreens/PrivacyPolicy';
 import Settings from './Settings';
 import ChatList from './ChatList';
 import ChatScreen from './ChatScreen';
@@ -31,6 +31,7 @@ import Event from './Event';
 import Review from './Review';
 import Post from './Post';
 import Aboutthecreator from './AbouttheCreator';
+// import TermsConditions from './TermsConditions';
 // EventScreens
 import EventHome from '../EventScreens/EventHome';
 import EventProfile from '../EventScreens/EventProfile';
@@ -39,6 +40,11 @@ import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
 import EditProfile from '../EventScreens/EditProfile'
 import eventContext from '../EventScreens/eventContext'
+// import TermsConditions from '../EventScreens/EventTerms&Condition';
+// import PrivacyPolicy from '../EventScreens/EventPrivayPoicy';
+import EventTermsConditions from '../EventScreens/EventTerms&Condition'
+import EventPrivacyPolicy from '../EventScreens/EventPrivayPoicy'
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 import { show_eventCreater_event , get_reviews_event ,Get_All_Categories , showprofiledetail } from '../../redux/APIs';
@@ -160,7 +166,11 @@ const ScreenStack = () => {
           component={TabStack}
           options={{headerShown: false}}
         />
-
+  <Stack.Screen
+          name="PrivacyPolicy"
+          component={PrivacyPolicy}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Home"
           component={Home}
@@ -205,6 +215,7 @@ const ScreenStack = () => {
           component={Post}
           options={{headerShown: false}}
         />
+        
       </Stack.Navigator>
       </eventContext.Provider>
     </ImageBackground>
@@ -335,6 +346,16 @@ const getProfile = async () => {
               <Stack.Screen
               name="Aboutthecreator"
               component={Aboutthecreator}
+              options={{headerShown: false}}
+            />
+              <Stack.Screen
+              name="EventTermsConditions"
+              component={EventTermsConditions}
+              options={{headerShown: false}}
+            />
+             <Stack.Screen
+              name="EventPrivacyPolicy"
+              component={EventPrivacyPolicy}
               options={{headerShown: false}}
             />
           </Stack.Navigator>

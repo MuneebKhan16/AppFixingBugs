@@ -16,9 +16,9 @@ import { styles } from './post_styles';
 import Toast from 'react-native-toast-message';
 import { post_reviews } from '../../../redux/APIs'
 const Checkbox = {
-  first: 'ItsLit',
-  second: 'ItsAVibe',
-  third: 'NeedsCompany'
+  first: '#ItsLit',
+  second: '#ItsAVibe',
+  third: '#NeedsCompany'
 };
 class Post extends Component {
   state = {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet } from 'react-native';
+import { Colors } from 'react-native-paper';
 
 const SearchableDropdown = ({ data = [], onSelect }) => {
   const [query, setQuery] = useState('');
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginBottom: 10,
     width: '80%',
+    color:Colors.black
   },
   flatList: {
     width: '80%',

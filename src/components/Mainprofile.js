@@ -1,13 +1,17 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React ,{useContext} from 'react';
 import { Colors, NavService } from '../config';
 import Icons from '../assets/Icons';
 import StarRating from 'react-native-star-rating';
 import { useSelector } from 'react-redux';
-
+import { backgroundUpload } from 'react-native-compressor';
+import eventContext from '../containers/EventScreens/eventContext';
 const Mainprofile = props => {
   const profile_Data = useSelector((state) => state.reducer.user);
+  const { userProfile } = useContext(eventContext);
+
+  console.log('userProfile',userProfile)
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
   const [starCount, setStarCount] = React.useState(1);
   const { name, subtitle, center, row, top, star, edit, inc, size, txt, location } = props;
@@ -22,21 +26,22 @@ const Mainprofile = props => {
       {top ? (
         <View style={styles.container}>
           <Image
-            source={{ uri: `${BaseUrl}${profile_Data?.profile_picture}` }}
+            source={{ uri:  userProfile?.profile_picture  ?  `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
             resizeMode='center'
             style={styles.pic}
           />
         </View>
       ) : (
-        <View  style={styles.subimg}>
+        <View  style={{marginBottom:10}}>
           <Image
-            source={{ uri: `${BaseUrl}${profile_Data?.profile_picture}` }}
+            source={{ uri:  userProfile?.profile_picture  ?  `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
             style={{
               width: inc ? 50 : 75,
               height: inc ? 50 : 75,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
+              marginBottom:10
               
             }}
           />
@@ -55,17 +60,15 @@ const Mainprofile = props => {
       <View
         style={{
           marginLeft: row ? 10 : null,
-          marginBottom: row ? 15 : null
         }}>
         <Text
           style={{
-            fontSize: txt ? 20 : 17,
+            fontSize: txt ? 18 : 19,
             fontWeight: '700',
-            color: Colors.black,
-            
+            color: Colors.black,            
             textAlign: row ? null : 'center',
             textTransform: 'capitalize',
-            marginTop: 10
+
           }}>
           {props?.name}
         </Text>
@@ -85,7 +88,6 @@ const Mainprofile = props => {
               fontSize: size ? 18 : 17,
               color: Colors.darkGray,
               fontWeight: '400',
-             
 
             }}>
             {props?.subtitle}
@@ -100,7 +102,7 @@ const Mainprofile = props => {
             resizeMode="center"
             style={styles.marker}
           />
-          <Text style={styles.location}>
+          <Text style={styles.location} numberOfLines={1} >
             {props.location}
           </Text>
         </View>
@@ -127,7 +129,8 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 40,
     borderWidth:2,
-    borderColor:Colors.purple
+    borderColor:Colors.purple,
+    
     
   },
   profilepic: {
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
     height: 25,
     justifyContent: 'center',
     borderRadius: 40,
-    top: -25,
+    top: -30,
     left: 47,
     backgroundColor: Colors.purple
 
@@ -149,9 +152,8 @@ const styles = StyleSheet.create({
     
   },
   mark: {
-
     flexDirection: 'row',
-    right: 8,
+    right: 0,
     height: 50,
     alignItems: 'center',
     borderRadius: 10,
@@ -159,5 +161,5 @@ const styles = StyleSheet.create({
 
   },
   marker: { width: 30, height: 30, },
-  location: { fontSize: 16, color: Colors.black,  fontWeight: '600', ellipsizeMode:'middle',maxWidth:150 },
+  location: { fontSize: 14, color: Colors.black,  fontWeight: '600', ellipsizeMode:'middle',maxWidth:150 },
 });

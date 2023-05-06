@@ -9,10 +9,10 @@ import {
   FlatList,
   ScrollView
 } from 'react-native';
-import React, {useState, useRef, useEffect, useContext} from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import {Colors, NavService, Common} from '../../../config';
+import { Colors, NavService, Common } from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
@@ -21,16 +21,17 @@ import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
-import {store} from '../../../redux/index';
+import { store } from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
-import {styles} from './eventpost_styles';
+import { styles } from './eventpost_styles';
+import { post_events } from '../../../redux/APIs'
 import GooglePlaceAutocomplete from '../../../components/Google_Location'
 const EventPost = props => {
-  const {user} = props;
+  const { user } = props;
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
@@ -53,8 +54,7 @@ const EventPost = props => {
   };
   const [selectedData, setSelectedData] = useState(null);
   const users = useSelector((state) => state?.reducer?.user)
-  // console.log('kjkj', loc)
-  const {Categorys} = useContext(eventContext);
+  const { Categorys } = useContext(eventContext);
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
@@ -113,35 +113,11 @@ const EventPost = props => {
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;
-    console.log('first',location)
+    console.log('first', location)
 
-    const params = new FormData();
-    params.append('event_title', event_title);
-    params.append('event_type', event_type);
-    params.append('event_description', event_description);
-    params.append('event_image', event_image);
-    params.append('user_id', user_id);
-    params.append('category_id', category_id);
-    params.append('event_location', event_location);
+    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location)
 
 
-    const config = {
-      headers: {'Content-Type': 'multipart/form-data'},
-    };
-
-    axios
-      .post(`${Common.baseURL}add-event`, params, config)
-      .then(res => {
-        if (res.status === 200) {
-          dispatch({ type: 'LOADER_STOP' });
-          NavService.goBack();
-        } else {
-          dispatch({type: 'LOADER_START'});
-        }
-      })
-      .catch(() => {
-        dispatch({type: 'LOADER_START'});
-      });
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -156,83 +132,83 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{flex:1,height:280}} showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
-          <View style={styles.action}>
-            <TouchableOpacity
-              onPress={() => actionSheetStateRef.current.hide()}
-              style={styles.touchable}>
-              <Text style={styles.cancel}>Cancel</Text>
-            </TouchableOpacity>
+      <ScrollView style={{ flex: 1, height: 280 }} showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
+            <View style={styles.action}>
+              <TouchableOpacity
+                onPress={() => actionSheetStateRef.current.hide()}
+                style={styles.touchable}>
+                <Text style={styles.cancel}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          </ActionSheet>
+          <View style={styles.user}>
+            <ProfileImage
+              name={user?.name}
+              imageUri={selectedImage ? selectedImage.path : userImage}
+            />
+
+            <View style={styles.picker}>
+              <CustomImagePicker
+                onImageChange={(path, mime) => {
+                  setSelectedImage({ path, mime });
+                }}>
+                <View style={styles.mime}>
+                  <Image source={Icons.upload} style={styles.upload} />
+                  <Text style={styles.txtclr}>Upload</Text>
+                </View>
+              </CustomImagePicker>
+            </View>
           </View>
-        </ActionSheet>
-        <View style={styles.user}>
-          <ProfileImage
-            name={user?.name}
-            imageUri={selectedImage ? selectedImage.path : userImage}
-          />
-
-          <View style={styles.picker}>
-            <CustomImagePicker
-              onImageChange={(path, mime) => {
-                setSelectedImage({path, mime});
-              }}>
-              <View style={styles.mime}>
-                <Image source={Icons.upload} style={styles.upload} />
-                <Text style={styles.txtclr}>Upload</Text>
-              </View>
-            </CustomImagePicker>
-          </View>
-        </View>
-        <View style={styles.top}>
-          <TextInput
-            style={styles.maincontainer}
-            onChangeText={title => setTitle(title)}
-            value={title}
-            placeholder="Title"
-            placeholderTextColor={Colors.black}
-          />
-          <PickerCompone
-            categories={Categorys}
-            setSelectedData={setSelectedData}
-          />
-         
-               
-          <TouchableOpacity style={styles.location} onPress={handleOpenModal}> 
-            <Text style={{color: '#000'}}>  
-              {location ? location : 'Location'} 
-             </Text> 
-             { console.log('nnnn',location)}
-            <Image source={Icons.marker} style={styles.marker} />
-
-              <Image source={Icons.marker} style={styles.marker} />
-            <Mymdll
-              isVisible={isModalVisible}
-              onClose={handleCloseModal}
-              setLocation={setLocation}
-              location={location}
-            /> 
-         </TouchableOpacity>
-
-          <View style={styles.descp}>
+          <View style={styles.top}>
             <TextInput
-              placeholder="Descriptions"
-              multiline={true}
-              style={styles.description}
-              onChangeText={dec => setDec(dec)}
-              value={dec}
+              style={styles.maincontainer}
+              onChangeText={title => setTitle(title)}
+              value={title}
+              placeholder="Name of Location"
               placeholderTextColor={Colors.black}
             />
+            <PickerCompone
+              categories={Categorys}
+              setSelectedData={setSelectedData}
+            />
+
+
+            <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
+              <Text style={{ color: '#000' }}>
+                {location ? location : 'Location'}
+              </Text>
+              {console.log('nnnn', location)}
+              <Image source={Icons.marker} style={styles.marker} />
+
+              <Image source={Icons.marker} style={styles.marker} />
+              <Mymdll
+                isVisible={isModalVisible}
+                onClose={handleCloseModal}
+                setLocation={setLocation}
+                location={location}
+              />
+            </TouchableOpacity>
+
+            <View style={styles.descp}>
+              <TextInput
+                placeholder="Description"
+                multiline={true}
+                style={styles.description}
+                onChangeText={dec => setDec(dec)}
+                value={dec}
+                placeholderTextColor={Colors.black}
+              />
+            </View>
+            <PickerComptwo />
+            <CustomButton
+              buttonStyle={styles.btn}
+              title="Posts"
+              onPress={handlesubmit}
+            />
           </View>
-          <PickerComptwo />
-          <CustomButton
-            buttonStyle={styles.btn}
-            title="Posts"
-            onPress={handlesubmit}
-          />
         </View>
-      </View>
       </ScrollView>
       {/* Modal */}
       <Modal
@@ -242,43 +218,49 @@ const EventPost = props => {
 
       >
         <View style={styles.posting}>
-          <TouchableOpacity 
+          {/* <TouchableOpacity 
           onPress={() => togglePopUp()}
           style={{
             marginVertical: 10,
             position: 'absolute',
-            right: 10,
+            right: 15,
             backgroundColor: 'white',
-            padding: 10,
+            padding: 8,
             alignItems: 'center',
             justifyContent: 'center',
-            borderRadius: 30
+            height:28,
+            marginTop:15,
+            borderRadius:10,
+           
           }}>
-            <Text style={{ color: Colors.purple, fontWeight: 'bold' }}>X</Text>
-          </TouchableOpacity>
+            <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
+          </TouchableOpacity> */}
           <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
         </View>
         <View style={styles.category}>
           <View style={{ marginTop: 10 }}>
             <Text style={styles.modaltxt}>1-Name of Location (mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}>2-Official Address (mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}>3-Clear Photo of Building (mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}> 4-Operating Hours (Mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}>5-Parking tips, where to park in description field (helpful tip){'\n'}</Text>
-            <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
+            <Text style={styles.modaltxt}>2-Upload Clear Photo of Building (Mandatory){'\n'}</Text>
+            <Text style={styles.modaltxt}>3-Operating Hours (Mandatory){'\n'}</Text>
+            <Text style={styles.modaltxt}>4-Helpful Tips in Description field such as Parking tips, Crowd (Age, Music Genre) on SpecificNights if Differs, Dress code,{'\n'}</Text>
+            <Text style={styles.modaltxt}>5-Flyers, Pictures and videos of your most recent nights or events! (helpful)
+              & Don’t forget you may purchase optimization to have your events featured on main home
+              page!{'\n'}</Text>
+            {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
-            <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text>
+            <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
           </View>
 
         </View>
-        {/* <CustomButton
+        <CustomButton
           buttonStyle={{
             alignSelf: 'center',
+            width: 360
           }}
           title="Close"
           onPress={() => togglePopUp()}
-        /> */}
+        />
 
       </Modal>
     </AppBackground>

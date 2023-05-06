@@ -120,7 +120,7 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: user.profile_picture ==  ''  ? 'https://picsum.photos/200/300' : `${ImageURL?.ImageURL}${user?.profile_picture}` }}
+                source={{ uri: user?.profile_picture  ? `${ImageURL?.ImageURL}${user?.profile_picture}`  : "https://picsum.photos/200/300"}}
                 style={{
                   height: 40,
                   width: 40,
@@ -267,7 +267,7 @@ export function AppBackground({
                         <TextInput
                           editable={false}
                           style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
-                          placeholder={location ? location.name : 'Locaion'}
+                          placeholder={location ? location.name : 'Location'}
                           placeholderTextColor={Colors.black}
                           secureTextEntry={!isFocused}
                           onFocus={() => setIsFocused(true)}

@@ -63,7 +63,7 @@ const Categories = props => {
           />
         </Modal>
 
-        <Text style={styles.ctg}>{categories?.title}</Text>
+        {/* <Text style={styles.ctg}>{categories?.title}</Text> */}
       </ImageBackground>
     </TouchableOpacity>
 
@@ -77,12 +77,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
   imgbg: {
-    borderRadius: 20,
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: { height: 3, width: 3 },
     shadowOpacity: 0.8,
     shadowRadius: 0.5,
-    marginTop: 15,
+    marginTop: 8,
+    marginBottom: 8,
     borderWidth: 2,
     borderColor: Colors.purple,
     height: 400,

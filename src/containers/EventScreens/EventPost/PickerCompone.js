@@ -28,7 +28,7 @@ const PickerCompone = (props) => {
       itemStyle={{ color: 'white', fontSize: 20 ,  backgroundColor: '#ededed',}}
       mode="dropdown"
     >
-      <Picker.Item label='Select an options' value='null' color={'black'} style={{ fontWeight: 'bold',backgroundColor: '#ededed',}} />
+      <Picker.Item label='Select an Option' value='null' color={'black'} style={{ fontWeight: 'bold',backgroundColor: '#ededed',}} />
       {
         categories?.map((data) => {
           return(

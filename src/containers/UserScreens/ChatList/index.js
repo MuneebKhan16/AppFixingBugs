@@ -59,12 +59,24 @@ const ChatList = ({navigation, route}) => {
                 showsVerticalScrollIndicator={false}
                 data={conversationList}
                 style={styles.list}
-                renderItem={({item, index}) => (
-                  <ChatComponent
-                    item={item}
-                    index={index}
-                    navigation={navigation}
-                  />
+                renderItem={({item, index}) => (                 
+                  <>
+                  {
+                    item !== null ? 
+                    (
+                      <ChatComponent
+                        item={item}
+                        index={index}
+                        navigation={navigation}
+                      />
+
+                    ) 
+                    : 
+                    (
+                      null
+                    )
+                  }
+                  </>
                 )}
               />
               ) 
