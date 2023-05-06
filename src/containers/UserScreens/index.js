@@ -125,9 +125,24 @@ const TabStack = () => {
 };
 
 const ScreenStack = () => {
-  
+  const userData = useSelector((state) => state?.reducer?.user)
+  const [userProfile, setuserProfile] = React.useState({})
+  const getProfile = async () => {
+    const data = await showprofiledetail(userData.id )
+    setuserProfile(data.Data)
+  }
+    
+    React.useEffect(() => {
+            getProfile();
+     return () => {
+    console.log('unmounting')}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
   return (
     <ImageBackground source={Images.bg} style={{flex: 1}}>
+       <eventContext.Provider value={{ userProfile}}>
+
+
       <Stack.Navigator
         screenOptions={{
           contentStyle: {backgroundColor: 'transparent'},
@@ -151,6 +166,11 @@ const ScreenStack = () => {
           component={Home}
           options={{headerShown: false}}
         />
+         <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{headerShown: false}}
+            />
 
         <Stack.Screen
           name="TermsConditions"
@@ -186,6 +206,7 @@ const ScreenStack = () => {
           options={{headerShown: false}}
         />
       </Stack.Navigator>
+      </eventContext.Provider>
     </ImageBackground>
   );
 };
@@ -258,7 +279,7 @@ const getProfile = async () => {
           getCategorys();
           getProfile();
    return () => {
-s}
+  console.log('unmounting')}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (

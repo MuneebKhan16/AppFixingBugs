@@ -107,6 +107,7 @@ export const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
+    color:Colors.black
   },
   selectedPlace: {
     marginTop: 10,

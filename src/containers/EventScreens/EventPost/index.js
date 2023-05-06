@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
+  ScrollView
 } from 'react-native';
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
@@ -27,7 +28,6 @@ import axios from 'axios';
 import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import {styles} from './eventpost_styles';
-import { ScrollView } from 'react-native-gesture-handler';
 import GooglePlaceAutocomplete from '../../../components/Google_Location'
 const EventPost = props => {
   const {user} = props;
@@ -206,6 +206,7 @@ const EventPost = props => {
              { console.log('nnnn',location)}
             <Image source={Icons.marker} style={styles.marker} />
 
+              <Image source={Icons.marker} style={styles.marker} />
             <Mymdll
               isVisible={isModalVisible}
               onClose={handleCloseModal}

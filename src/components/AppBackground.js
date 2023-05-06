@@ -54,7 +54,7 @@ export function AppBackground({
   };
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector((state) => state.reducer.user);
-  console.log('********',user)
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -63,6 +63,8 @@ export function AppBackground({
   const [isFocused, setIsFocused] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalVisible, setIsModalVisible] = useState(false);
+
+  console.log('kl',`${Dummy.dummy}`)
 
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -118,7 +120,7 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: user ? `${ImageURL?.ImageURL}${user?.profile_picture}` : `${Dummy.dummy}` }}
+                source={{ uri: user.profile_picture ==  ''  ? 'https://picsum.photos/200/300' : `${ImageURL?.ImageURL}${user?.profile_picture}` }}
                 style={{
                   height: 40,
                   width: 40,
