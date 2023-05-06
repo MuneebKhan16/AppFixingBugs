@@ -220,7 +220,6 @@ export function AuthBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-                backgroundColor: Colors.white,
               }}>
               <Image
                 source={Icons.filter}

@@ -137,5 +137,5 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   container1: { paddingTop: 200, justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
+  txtheadersty: { fontSize: 25, fontWeight: 'bold',color:Colors.black }
 });

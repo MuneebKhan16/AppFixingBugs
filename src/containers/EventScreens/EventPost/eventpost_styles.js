@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   },
   location: {
     backgroundColor: '#ededed',
-    marginTop: 10,
+    marginTop: 20,
     width: 300,
     paddingLeft: 15,
     borderRadius: 10,
@@ -49,13 +49,12 @@ export const styles = StyleSheet.create({
     marginTop: 10
   },
   btn: {
-    marginTop: 10,
     alignSelf: 'center',
     top: 20,
     width: 300
   },
   sheet: { backgroundColor: 'transparent' },
-  top: { marginTop: 60, alignSelf: 'center' },
+  top: { marginTop: 50, alignSelf: 'center',height:500 },
   user: { marginTop: 40 },
   mime: { alignItems: 'center', justifyContent: 'center', width: 300, height: 150 },
   upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black, },

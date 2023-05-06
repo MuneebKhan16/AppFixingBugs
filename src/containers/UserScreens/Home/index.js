@@ -147,11 +147,11 @@ export class Home extends Component {
                   iconColor
                   placeholder={text !== '' ? text : 'Address'}
                 />
-                {text.length <= 0 ? (
+                {/* {text.length <= 0 ? (
                   <Text style={{color: Colors?.purple, fontSize: 16}}>
                     Address required
                   </Text>
-                ) : null}
+                ) : null} */}
               </View>
               <Pickdate />
               <CustomButton

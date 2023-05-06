@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, FlatList, TextInput, KeyboardAvoidingView, } from 'react-native';
 import { Colors } from '../config';
 import SearchableDropdown from 'react-native-searchable-dropdown';
+import { ScrollView } from 'react-native-gesture-handler';
+import GooglePlaceAutocomplete from '../components/Google_Location'
 
 const items = [ 
   {id: 1, name: 'Afghanistan', code: 'AF'}, 
@@ -249,7 +251,7 @@ const items = [
   {id: 243,name: 'Zimbabwe', code: 'ZW'} 
 ]
 
-const MyMdl = ({ isVisible, onClose , setLocation }) => {
+const MyMdl = ({ isVisible, onClose , setLocation,location }) => {
 
   const [selectedItems, setSelectedItems] = useState([]);
   const [textInputEditable, setTextInputEditable] = useState(true);
@@ -287,49 +289,34 @@ const MyMdl = ({ isVisible, onClose , setLocation }) => {
   };
   return (
     <Modal visible={isVisible} animationType="slide">
-
+<ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.modalContainer}>
         <View style={styles.modalHeader}>
           <Text style={styles.modalHeaderText}>Select Location</Text>
         </View>
-        <SearchableDropdown
-          multi
-          selectedItems={selectedItems}
-          onItemSelect={handleItemSelect}
-          onRemoveItem={handleItemRemove}
-          containerStyle={{ padding: 5 }}
-          itemStyle={{
-            padding: 10,
-            marginTop: 2,
-            backgroundColor: 'purple',
-            borderColor: '#bbb',
-            borderWidth: 1,
-            width: '95%',
-            alignSelf: 'center',
-            height: 40,
-            borderRadius: 11,
-          }}
-          itemTextStyle={{ color: '#ffff' }}
-          itemsContainerStyle={{ maxHeight: 430, marginTop: 10 }}
-          items={items}
-          chip
-          resetValue={true}
-          textInputProps={{
-            placeholder: 'Select Location',
-            underlineColorAndroid: 'transparent',
-            style: {
-              padding: 12,
-              borderWidth: 1,
-              borderColor: '#ccc',
-              borderRadius: 15,
-              width: '95%',
-              alignSelf: 'center',
-              marginTop: 10
-            },
-            editable: textInputEditable,
-          }}
-          listProps={{ nestedScrollEnabled: true }}
-        />
+          <GooglePlaceAutocomplete
+          
+                  callback={(address, geometry) =>{
+                    console.log('address, geometry', address, geometry)
+                    setLocation(address)
+
+                  }
+                    
+                  }
+                  onPress={(data, details) => {
+                    console.log("oooo",data , details)
+                  }}
+                  wrapperStyles={{
+                    width: 300,
+                    alignSelf:'center'
+                  }}
+                  inputStyles={{
+                    borderWidth: 1,
+                    borderColor: Colors.lightGrey,
+                  }}
+                  iconColor
+                  placeholder={ location !== '' ?  location : 'Address'}
+                />
         {/* Single */}
   
      
@@ -338,6 +325,7 @@ const MyMdl = ({ isVisible, onClose , setLocation }) => {
         </TouchableOpacity>
   
       </View>
+      </ScrollView>
     </Modal>
   );
 };
@@ -373,13 +361,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     padding: 10,
     borderRadius: 5,
-    position: 'absolute',
-    bottom: 30,
     alignSelf: 'center',
     width: '80%',
     height: 55,
     justifyContent: 'center',
-    borderRadius: 20
+    borderRadius: 20,
+    marginTop:30
   },
   closeButtonText: {
     fontSize: 18,

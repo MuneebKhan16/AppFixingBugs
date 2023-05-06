@@ -159,5 +159,4 @@ const styles = StyleSheet.create({
   },
   marker: { width: 30, height: 30, },
   location: { fontSize: 16, color: Colors.black,  fontWeight: '600', ellipsizeMode:'middle',maxWidth:150 },
-  subimg:{height:50,}
 });

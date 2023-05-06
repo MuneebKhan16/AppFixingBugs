@@ -1,93 +1,93 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import React from 'react';
+import {StyleSheet, View, Dimensions, Image} from 'react-native';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import {Common, Colors} from '../config';
+import Icons from '../assets/Icons';
 
-const Google_Location = () => {
-  const [address, setAddress] = useState('');
+const {width} = Dimensions.get('screen');
 
-  const handleSelect = (data, details) => {
-    setAddress(data.description);
-  };
-
+const GooglePlaceAutocomplete = ({
+  callback,
+  wrapperStyles,
+  inputStyles,
+  placeholder,
+  iconColor,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.geoLocationView, wrapperStyles]}>
       <GooglePlacesAutocomplete
-        placeholder='Enter Location'
-        onPress={handleSelect}
-        fetchDetails={true}
-        query={{
-          key: 'YOUR_API_KEY',
-          language: 'en',
-          types: 'geocode'
+        enableHighAccuracyLocation
+        fetchDetails
+        disableScroll={false}
+        enablePoweredByContainer={false}
+        keepResultsAfterBlur={true}
+        listViewDisplayed={false}
+        placeholder={placeholder ? placeholder : 'Location'}
+        placeholderTextColor={iconColor ? Colors.primary : Colors.black}
+        onPress={(data, details = null) => {
+          const {formatted_address, geometry,location} = details;
+          callback(formatted_address, geometry,location);
         }}
+        renderRightButton={() => (
+          <Image
+            source={Icons.marker}
+            style={{
+              width: 20,
+              height: 20,
+              resizeMode: 'contain',
+              tintColor: iconColor ? Colors.purple : Colors.black,
+              alignSelf: 'center',
+              marginBottom: 5,
+              marginLeft: 15,
+              marginRight: 5,
+              tintColor: '#434343'
+            }}
+          />
+        )}
         styles={{
-          container: {
-            flex: 0,
-          },
           textInput: {
-            height: 50,
-            color: '#5d5d5d',
-            fontSize: 16,
-            borderWidth: 1,
-            borderColor: '#ddd',
-            borderRadius: 5,
-            marginTop: 10,
-            marginRight: 10,
-            marginLeft: 10,
+            borderRadius: 10,
+            height: 40,
+            color: iconColor ? Colors?.black : Colors?.black,
+            // backgroundColor: iconColor ? Colors.white : Colors.black,
+            width: '100%',
           },
-          listView: {
-            backgroundColor: '#fff',
-            borderWidth: 1,
-            borderColor: '#ddd',
-            borderRadius: 5,
-            marginTop: 5,
-            marginRight: 10,
-            marginLeft: 10,
-          },
-          row: {
-            padding: 13,
-            height: 44,
-            flexDirection: 'row',
-          },
-          separator: {
-            height: 0.5,
-            backgroundColor: '#c8c7cc',
-          },
-          poweredContainer: {
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            backgroundColor: '#fff',
-          },
-          powered: {
-            marginTop: 10,
-          },
+          description: {color: iconColor ? Colors.purple : Colors.black},
         }}
-      />
-      <TextInput
-        value={address}
-        onChangeText={(text) => setAddress(text)}
-        style={styles.input}
+        textInputProps={{
+          placeholderTextColor: iconColor ? Colors.black : Colors.black,
+          // paddingLeft: 25,
+        }}
+        query={{
+          key: Common?.GEOCODE_API_KEY,
+          language: 'en',
+          types: 'premise',
+        }}
       />
     </View>
   );
 };
 
+export default GooglePlaceAutocomplete;
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  input: {
-    height: 50,
-    width: '90%',
-    marginVertical: 10,
+  geoLocationView: {
+    width: width,
+    marginTop: 20,
+    // backgroundColor: Colors.white,
+    borderRadius: 10,
+    borderColor: Colors.black,
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    fontSize: 16,
+  },
+  textInput: {
+    flex: 1,
+    height: 55,
+    color: Colors?.black,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors?.lightBlack,
+    marginTop: 13,
+    // backgroundColor: Colors?.white,
+    width: width,
   },
 });
-
-export default Google_Location;

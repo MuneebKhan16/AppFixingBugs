@@ -235,8 +235,9 @@ export function AppBackground({
                   <View style={{ borderRadius: 15, backgroundColor: Colors.white, width: '90%', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', padding: 20 }}>
                     <Text style={{
                       fontSize: 16,
-                      fontWeight: '600',
+                      fontWeight: 'bold',
                       textTransform: 'capitalize',
+                      color:Colors.black
                     }}>Filters</Text>
                     <TouchableOpacity 
                     onPress={handleOpenModal}

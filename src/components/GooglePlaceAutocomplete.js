@@ -25,8 +25,8 @@ const GooglePlaceAutocomplete = ({
         placeholder={placeholder ? placeholder : 'Address'}
         placeholderTextColor={iconColor ? Colors.primary : Colors.black}
         onPress={(data, details = null) => {
-          const {formatted_address, geometry} = details;
-          callback(formatted_address, geometry);
+          const {formatted_address, geometry,location} = details;
+          callback(formatted_address, geometry,location);
         }}
         renderLeftButton={() => (
           <Image
@@ -46,9 +46,9 @@ const GooglePlaceAutocomplete = ({
         styles={{
           textInput: {
             borderRadius: 10,
-            height: 50,
+            height: 40,
             color: iconColor ? Colors?.black : Colors?.black,
-            backgroundColor: iconColor ? Colors.white : Colors.black,
+            // backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
           },
           description: {color: iconColor ? Colors.purple : Colors.black},
@@ -72,8 +72,8 @@ export default GooglePlaceAutocomplete;
 const styles = StyleSheet.create({
   geoLocationView: {
     width: width,
-    marginVertical: 20,
-    backgroundColor: Colors.white,
+    marginTop: 20,
+    // backgroundColor: Colors.white,
     borderRadius: 10,
     borderColor: Colors.black,
     borderWidth: 1,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Colors?.lightBlack,
     marginTop: 13,
-    backgroundColor: Colors?.white,
+    // backgroundColor: Colors?.white,
     width: width,
   },
 });

@@ -27,12 +27,15 @@ import axios from 'axios';
 import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import {styles} from './eventpost_styles';
-
+import { ScrollView } from 'react-native-gesture-handler';
+import GooglePlaceAutocomplete from '../../../components/Google_Location'
 const EventPost = props => {
   const {user} = props;
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
+  const [text, settext] = useState();
+
   const [location, setLocation] = useState('');
   const [loc, setLoc] = useState([]);
   const [date, setDate] = useState(false);
@@ -109,7 +112,8 @@ const EventPost = props => {
     };
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
-    const event_location = location?.name;
+    const event_location = location;
+    console.log('first',location)
 
     const params = new FormData();
     params.append('event_title', event_title);
@@ -152,6 +156,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
+      <ScrollView style={{flex:1,height:280}} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
           <View style={styles.action}>
@@ -192,11 +197,13 @@ const EventPost = props => {
             categories={Categorys}
             setSelectedData={setSelectedData}
           />
-          <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-            <Text style={{color: '#000'}}>
-              {location ? location.name : 'Location'}
-            </Text>
-
+         
+               
+          <TouchableOpacity style={styles.location} onPress={handleOpenModal}> 
+            <Text style={{color: '#000'}}>  
+              {location ? location : 'Location'} 
+             </Text> 
+             { console.log('nnnn',location)}
             <Image source={Icons.marker} style={styles.marker} />
 
             <Mymdll
@@ -204,8 +211,8 @@ const EventPost = props => {
               onClose={handleCloseModal}
               setLocation={setLocation}
               location={location}
-            />
-          </TouchableOpacity>
+            /> 
+         </TouchableOpacity>
 
           <View style={styles.descp}>
             <TextInput
@@ -225,7 +232,7 @@ const EventPost = props => {
           />
         </View>
       </View>
-
+      </ScrollView>
       {/* Modal */}
       <Modal
         isVisible={popUp}
