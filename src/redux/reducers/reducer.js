@@ -1,7 +1,7 @@
 const INITIAL_STATES = {
   user: null,
   loader: false,
-  socket: null,
+  socket: false,
 };
 
 export default function (state = INITIAL_STATES, action) {
