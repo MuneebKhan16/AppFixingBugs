@@ -40,8 +40,6 @@ class Navigation extends Component {
     }, 2500);
   }
   render() {
-    //  const initialRouteName = this?.props?.api_token ? ScreenStack : Auth;
-
     return (
       <NavigationContainer
         ref={ref => NavService.setTopLevelNavigator(ref)}
