@@ -7,6 +7,8 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Platform,
+  PermissionsAndroid 
 } from 'react-native';
 import Modal from 'react-native-modal';
 import AppBackground from '../../../components/AppBackground';
@@ -23,7 +25,11 @@ import ImageURL from '../../../config/Common';
 import FastImage from 'react-native-fast-image';
 import Searchable from '../../../components/searchable';
 import GooglePlaceAutocomplete from '../../../components/GooglePlaceAutocomplete';
+import Geolocation from '@react-native-community/geolocation';
+navigator.geolocation = require('@react-native-community/geolocation');
 import {styles} from './Home_Styles';
+
+
 export class Home extends Component {
   Featured = () => {
     NavService.navigate('Featured');
@@ -41,6 +47,10 @@ export class Home extends Component {
     text: '',
     isFocused: false,
     modalVisible: false,
+    geolocation: false,
+    latitude:null,
+    longitude:null,
+
   };
   setModalVisible = visible => {
     this.setState({modalVisible: visible});
@@ -49,7 +59,61 @@ export class Home extends Component {
   setLocation = location => {
     this.setState({location});
   };
-  componentDidMount() {
+
+  requestCameraPermission() {
+    if (Platform.OS === 'android') {
+      PermissionsAndroid
+      .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+      .then(granted => {
+        if(granted) {
+          Geolocation.getCurrentPosition(position => { 
+            
+            const { latitude , longitude } = position.coords
+            this.setState({latitude})
+            this.setState({longitude})
+           
+  
+           })
+        }
+        });
+    } else {
+     
+      Geolocation.getCurrentPosition(position => { 
+            
+        const { latitude , longitude } = position.coords
+        this.setState({latitude})
+        this.setState({longitude})
+       
+  
+       })
+    }
+  }
+
+ 
+
+
+  currentLocations = async () => {
+    const apiKey = 'AIzaSyB3QpMvb2IXZtJ6VI_pfH5687HyHCGVnUs';
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${apiKey}`;
+    console.log("345",url)
+    const data = await fetch(url);
+    const resp = await data.json();
+    this.setState({ text : JSON.stringify(resp?.results[0]?.formatted_address)})
+  }
+  setGeoLocation = async (geolocation) => {
+
+      this.setState({geolocation});
+       this.requestCameraPermission()
+      setTimeout(() => {
+        this.currentLocations()
+  
+      },2000)
+  
+     }
+  
+ 
+ componentDidMount() {
+
     SplashScreen.hide();
     const userData = this.props?.user?.api_token;
     Get_All_Categories().then(res => this.setState({category: res?.Data}));
@@ -59,8 +123,16 @@ export class Home extends Component {
     localevents(userData).then(res =>
       this.setState({feature: res?.Data?.featured}),
     );
+
+
   }
+
+
+
+
   render() {
+
+    
     const {
       popUp,
       location,
@@ -127,25 +199,34 @@ export class Home extends Component {
             </View>
           )}
         </ScrollView>
+        {console.log('hhhhhhsssd',this.state.latitude , this.state.longitude)}
         <Modal isVisible={popUp} style={styles.modal} backdropOpacity={0.7}>
           <View style={styles.modalcontainer}>
             <ScrollView showsVerticalScrollIndicator={false}>
               <View>
                 <Text style={styles.mdltxt}>Please enter the location</Text>
-                <Btn />
+                <Btn Setlocations={this.setGeoLocation} />
                 <GooglePlaceAutocomplete
                   callback={(address, geometry) =>
                     console.log('address, geometry', address, geometry)
                   }
+                  onPress={(data, details = null) => {
+                    console.log(data, details);
+                    // const { lat, lng } = details.geometry.location;
+                    // console.log(lat, lng );
+                  }}
+                  
+                
                   wrapperStyles={{
                     width: '100%',
                   }}
                   inputStyles={{
                     borderWidth: 1,
-                    borderColor: Colors.lightGrey,
+                    borderColor: Colors.lightGrey
                   }}
                   iconColor
-                  placeholder={text !== '' ? text : 'Address'}
+                  placeholder={text !== '' ? text  : 'Address'}
+                
                 />
                 {/* {text.length <= 0 ? (
                   <Text style={{color: Colors?.purple, fontSize: 16}}>
