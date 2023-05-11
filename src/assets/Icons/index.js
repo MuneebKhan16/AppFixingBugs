@@ -78,5 +78,6 @@ eventlist:require('./eventlist.png'),
 homelist:require('./homelist.png'),
 chatlist:require('./chalist.png'),
 subscription:require('./subcription.png'),
-null:require('../Icons/null.png')
+null:require('../Icons/null.png'),
+current:require('../Icons/icons8-my-location-50.png')
 };

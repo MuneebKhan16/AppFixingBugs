@@ -107,7 +107,7 @@ export class Home extends Component {
       setTimeout(() => {
         this.currentLocations()
   
-      },2000)
+      },3000)
   
      }
   

@@ -38,7 +38,7 @@ const EventPost = props => {
   const [text, settext] = useState();
 
   const [location, setLocation] = useState('');
-  const [loc, setLoc] = useState([]);
+  const [currentlocation, setcurrentlocation] = useState('');
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -176,9 +176,32 @@ const EventPost = props => {
 
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-              <Text style={{ color: '#000' }}>
-                {location ? location : 'Location'}
-              </Text>
+               {
+                currentlocation != null ? 
+                (
+                  <Text style={{ color: '#000' }}>
+                  {currentlocation ? currentlocation : 'Location'}
+                </Text>
+                ) 
+                : (
+                  null
+                )  
+                
+              }
+               {
+                location != null ? 
+                (
+                  <Text style={{ color: '#000' }}>
+                  {location ? location : 'Location'}
+                </Text>
+                ) 
+                : 
+                (
+                  null
+                )
+              }
+              
+              {console.log('nnnn', location,'currentlocationssss',currentlocation)}
               {console.log('nnnn', location)}
               <Image source={Icons.marker} style={styles.marker} />
 
@@ -188,6 +211,8 @@ const EventPost = props => {
                 onClose={handleCloseModal}
                 setLocation={setLocation}
                 location={location}
+                currentlocation={currentlocation}
+                setcurrentlocation={setcurrentlocation}
               />
             </TouchableOpacity>
 
