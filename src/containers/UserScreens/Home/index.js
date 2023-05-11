@@ -206,28 +206,83 @@ export class Home extends Component {
               <View>
                 <Text style={styles.mdltxt}>Please enter the location</Text>
                 <Btn Setlocations={this.setGeoLocation} />
-                <GooglePlaceAutocomplete
-                  callback={(address, geometry) =>
-                    console.log('address, geometry', address, geometry)
-                  }
-                  onPress={(data, details = null) => {
-                    console.log(data, details);
-                    // const { lat, lng } = details.geometry.location;
-                    // console.log(lat, lng );
-                  }}
+                {
+                  this.state.geolocation ?
+                  (
+                    <GooglePlaceAutocomplete
+                      callback={(address, geometry) =>
+                        console.log('address, geometry', address, geometry)
+                      }
+                      onPress={(data, details = null) => {
+                        console.log(data, details);
+                        // const { lat, lng } = details.geometry.location;
+                        // console.log(lat, lng );
+                      }}
+                      
+                    
+                      wrapperStyles={{
+                        width: '100%',
+                      }}
+                      inputStyles={{
+                        borderWidth: 1,
+                        borderColor: Colors.lightGrey
+                      }}
+                      iconColor
+                      placeholder={text !== '' ? text  : 'Current Location'}
+                    
+                    />
+                  )
+                  :
+                  (
+                    <View style={{ flexDirection:"row" ,justifyContent:'space-between' }}>
+                    <GooglePlaceAutocomplete
+                      callback={(address, geometry) =>
+                        console.log('address, geometry', address, geometry)
+                      }
+                      onPress={(data, details = null) => {
+                        console.log(data, details);
+                        // const { lat, lng } = details.geometry.location;
+                        // console.log(lat, lng );
+                      }}
+                      
+                    
+                      wrapperStyles={{
+                        width: '49%',
+                      }}
+                      inputStyles={{
+                        borderWidth: 1,
+                        borderColor: Colors.lightGrey
+                      }}
+                      iconColor
+                      placeholder={text !== '' ? text  : 'City'}
+                    
+                    />
+                    <GooglePlaceAutocomplete
+                    callback={(address, geometry) =>
+                      console.log('address, geometry', address, geometry)
+                    }
+                    onPress={(data, details = null) => {
+                      console.log(data, details);
+                      // const { lat, lng } = details.geometry.location;
+                      // console.log(lat, lng );
+                    }}
+                    
                   
-                
-                  wrapperStyles={{
-                    width: '100%',
-                  }}
-                  inputStyles={{
-                    borderWidth: 1,
-                    borderColor: Colors.lightGrey
-                  }}
-                  iconColor
-                  placeholder={text !== '' ? text  : 'Address'}
-                
-                />
+                    wrapperStyles={{
+                      width: '49%',
+                    }}
+                    inputStyles={{
+                      borderWidth: 1,
+                      borderColor: Colors.lightGrey
+                    }}
+                    iconColor
+                    placeholder={text !== '' ? text  : 'State'}
+                  
+                  />
+                    </View>
+                  )
+                }
+                {console.log('bvcxz',text)}
                 {/* {text.length <= 0 ? (
                   <Text style={{color: Colors?.purple, fontSize: 16}}>
                     Address required
