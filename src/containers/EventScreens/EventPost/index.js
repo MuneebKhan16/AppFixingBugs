@@ -37,8 +37,8 @@ const EventPost = props => {
   const [popUp, setPopUp] = useState(true);
   const [text, settext] = useState();
 
-  const [location, setLocation] = useState('');
-  const [currentlocation, setcurrentlocation] = useState('');
+  const [location, setLocation] = useState(null);
+  const [currentlocation, setcurrentlocation] = useState(null);
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -176,34 +176,16 @@ const EventPost = props => {
 
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-               {
-                currentlocation != null ? 
-                (
-                  <Text style={{ color: '#000' }}>
-                  {currentlocation ? currentlocation : 'Location'}
+              {location ?
+                <Text style={{ color: '#000' }}>
+                  {location}
                 </Text>
-                ) 
-                : (
-                  null
-                )  
-                
-              }
-               {
-                location != null ? 
-                (
+                : currentlocation ?
                   <Text style={{ color: '#000' }}>
-                  {location ? location : 'Location'}
-                </Text>
-                ) 
-                : 
-                (
-                  null
-                )
+                    {currentlocation}
+                  </Text>
+                  : null
               }
-              
-              {console.log('nnnn', location,'currentlocationssss',currentlocation)}
-              {console.log('nnnn', location)}
-              <Image source={Icons.marker} style={styles.marker} />
 
               <Image source={Icons.marker} style={styles.marker} />
               <Mymdll
