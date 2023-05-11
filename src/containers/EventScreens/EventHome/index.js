@@ -1,5 +1,5 @@
+/* eslint-disable prettier/prettier */
 import {
-  StyleSheet,
   Text,
   View,
   FlatList,
@@ -9,69 +9,93 @@ import {
   BackHandler,
   Alert,
 } from 'react-native';
-import React, { useEffect } from 'react';
+
+import React, { useState, useEffect, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
-import { Evntdata } from '../../../config/Dummydata/Dummydata';
-import { Colors, NavService } from '../../../config';
-import RNBounceable from '@freakycoder/react-native-bounceable';
+import { NavService } from '../../../config';
+import { styles } from './eventhome_style';
+import { useSelector } from 'react-redux'
+import ImageURL from '../../../config/Common'
+import dummy from '../../../config/Common'
+import { show_eventCreater_event } from '../../../redux/APIs'
+import Icons from '../../../assets/Icons'
+import eventContext from '../eventContext';
+import FastImage from 'react-native-fast-image'
 
-const EventHome = () => {
-  useEffect(() => {
+const EventHome = (props) => {
+  const { showEvents } = useContext(eventContext);
 
-  }, []);
+  const EventReview = (item) => {
+
+    NavService.navigate('EventReview', item)
+  };
+
+
+
+
   return (
-    <AppBackground profile marginHorizontal title={'Home'} home>
-      <View style={{marginBottom:10,marginTop:10}}>
+    <AppBackground profile marginHorizontal title={'Home'} home style={{ paddingBottom: 20 }}>
 
-      <FlatList
-        data={Evntdata}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item, index }) => (
-          <View style={{ marginTop: 25, marginHorizontal: 20 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text
-                style={{ fontSize: 16, color: Colors.black, fontWeight: 'bold' }}>
-                {item.title}
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  right: 5,
-                }}>
-                <Image source={item.rating} style={{ width: 20, height: 20 }} />
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: '600',
-                  }}>
-                  {item.review}
-                </Text>
-              </View>
+      {
+        showEvents?.length > 0 ?
+          (
+            <View style={styles.container}>
+              <FlatList
+                data={showEvents}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item, index }) => (
+                  <View style={styles.maincontainer}>
+                    <View style={styles.content}>
+                      <Text
+                        style={styles.title}>
+                        {item?.event_title}
+                      </Text>
+                      <View
+                        style={styles.rev}>
+                        <Image source={Icons.starFilled} style={styles.review} />
+                        <Text
+                          style={styles.txt}>
+                          {item?.rating_avg.map((data) => data.rating_count) || 0}{" "} Reviews
+                        </Text>
+                      </View>
+                    </View>
+                    <TouchableOpacity onPress={() => EventReview(item)}>
+                      <FastImage
+                        source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
+                        style={styles.imgback}
+                        imageStyle={styles.img}
+                      >
+                        <View style={styles.loc}>
+                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                          <Text style={styles.loctxt} numberOfLines={1} >{' '}{item.event_location}</Text>
+                        </View>
+                      </FastImage>
+                      {/* <ImageBackground
+                         source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
+                        style={styles.imgback}
+                        imageStyle={styles.img} >
+                        <View style={styles.loc}>
+                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                          <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
+                        </View>
+                      </ImageBackground> */}
+                    </TouchableOpacity>
+                  </View>
+                )}
+              />
             </View>
-            <RNBounceable onPress={() => NavService.navigate('EventReview')}>
-              
-              <ImageBackground
-                source={item.background}
-                style={{ width: '100%', height: 150, marginTop: 10 }}
-                imageStyle={{ borderRadius: 10 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 8, left: 5, }}>
-                  <Image source={item.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 25, height: 25 }} />
-                  <Text style={{ color: Colors.white, fontWeight: 'bold' }}>{' '}{item.loc}</Text>
-                </View>
-              </ImageBackground>
-            </RNBounceable>
-          </View>
-        )}
-      />
-      </View>
+
+          ) :
+          (
+            <View style={styles.container1}>
+              <Text style={styles.txtheadersty}>No Events Available</Text>
+            </View>
+          )
+      }
+
     </AppBackground>
   );
 };
 
-export default EventHome;
+export default React.memo(EventHome);
 
-const styles = StyleSheet.create({});

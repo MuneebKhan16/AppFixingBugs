@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import { Common } from '../../config';
@@ -23,10 +24,14 @@ function dispatch(action) {
   store.dispatch(action);
 }
 
+
+
+
+
 export default async function postApi(
   endpoint,
   params = null,
-  sucessToast = true,
+  sucessToast = false,
   startLoader = true,
 ) {
   storeUpdate();
@@ -34,14 +39,17 @@ export default async function postApi(
     dispatch({type: 'LOADER_START'});
   }
   try {
-    const response = await axios.post(endpoint, params);
+    const headers = {
+      'Content-Type': 'multipart/form-data'
+    };
+    const response = await axios.post(endpoint, params, { headers });
     dispatch({type: 'LOADER_STOP'});
     {
       sucessToast
         ? Toast.show({
             text1: response.data.message,
             type: 'success',
-            visibilityTime: 5000,
+            visibilityTime: 2000,
           })
         : null;
     }

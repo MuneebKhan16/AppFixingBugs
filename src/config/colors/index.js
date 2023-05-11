@@ -12,6 +12,7 @@ const Colors = {
   grey: '#C9D4E7',
   icon: '#AA1B21',
   black: '#1B2230',
+  greey:'grey',
   darkGray: '#454C5A',
   offWhite: '#ffffff',
   dark: '#1B2230',

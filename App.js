@@ -1,5 +1,5 @@
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
-import Nav from './src';
 import {
   View,
   StatusBar,
@@ -7,15 +7,14 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import {store} from './src/redux';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
-import {Colors, Loader} from './src/config';
 import Toast from 'react-native-toast-message';
-
+import Nav from './src';
+import {store} from './src/redux';
+import {Loader} from './src/config';
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
-
 class App extends Component {
   render() {
     return (
@@ -42,11 +41,7 @@ export default App;
 function Wrapper({children}) {
   if (Platform.OS === 'ios')
     return (
-      <KeyboardAvoidingView
-        style={{flex: 1}}
-        behavior="padding"
-        // keyboardVerticalOffset={20}
-      >
+      <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
         {children}
       </KeyboardAvoidingView>
     );

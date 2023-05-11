@@ -1,55 +1,87 @@
-import React from 'react';
-import {View, TextInput, Image} from 'react-native';
-import Icons from '../assets/Icons';
-import {Colors, Shadows} from '../config';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, FlatList,StyleSheet } from 'react-native';
+import { Colors } from 'react-native-paper';
 
-const Search = ({onChangeText = () => {}}) => {
-  const [search, setSearch] = React.useState('');
+const SearchableDropdown = ({ data = [], onSelect }) => {
+  const [query, setQuery] = useState('');
+  const [filteredData, setFilteredData] = useState(data);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleSearch = text => {
+    const formattedQuery = text.toLowerCase();
+    const filtered = data.filter(item => {
+      return item.name.toLowerCase().includes(formattedQuery);
+    });
+    setFilteredData(filtered);
+    setQuery(text);
+  };
+
+  const handleSelect = item => {
+    setIsDropdownOpen(false);
+    setQuery(item.name);
+    onSelect(item);
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => handleSelect(item)}>
+        <Text>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <View
-      style={{
-        // backgroundColor: Colors.backgroundColor,
-        height: 45,
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 25,
-        // ...Shadows.shadow3,
-        borderWidth: 1,
-        borderColor: Colors.lightGrey,
-        marginHorizontal: 30,
-        borderRadius:5
-
-      }}>
-      <TextInput
-        onChangeText={text => {
-          setSearch(text);
-          onChangeText(text);
-        }}
-        returnKeyType="search"
-        placeholder={'Search'}
-        // label={'Search'}
-        value={search}
-        placeholderTextColor={Colors.grey}
-        style={{
-          flex: 1,
-          color: Colors.grey,
-          fontSize: 14,
-          paddingHorizontal: 4,
-        }}
-        maxLength={20}
+    <View style={styles.container}>
+    <TextInput
+      placeholder="Search"
+      style={styles.textInput}
+      value={query}
+      onChangeText={handleSearch}
+      onFocus={() => setIsDropdownOpen(true)}
+      onBlur={() => setIsDropdownOpen(false)}
+    />
+    {isDropdownOpen && (
+      <FlatList
+        style={styles.flatList}
+        data={filteredData}
+        keyExtractor={item => item.id.toString()}
+        renderItem={renderItem}
       />
-      <Image
-        source={Icons.search}
-        style={{
-          height: 20,
-          width: 20,
-          resizeMode: 'contain',
-          marginRight: 10,
-          tintColor:Colors.lightGrey
-        }}
-      />
-    </View>
+    )}
+  </View>
   );
 };
 
-export default Search;
+export default SearchableDropdown;
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  textInput: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginBottom: 10,
+    width: '80%',
+    color:Colors.black
+  },
+  flatList: {
+    width: '80%',
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: 'gray',
+    maxHeight: 200,
+  },
+  itemContainer: {
+    padding: 10,
+  },
+  itemText: {
+    fontSize: 16,
+  },
+})

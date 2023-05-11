@@ -1,4 +1,4 @@
-package com.outsidee.newarchitecture.modules;
+package com.celectstudios.outsideee.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

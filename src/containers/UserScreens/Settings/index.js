@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Text,
   View,
@@ -12,27 +12,32 @@ import { connect } from 'react-redux'
 import Icons from '../../../assets/Icons';
 import AppBackground from '../../../components/AppBackground';
 import CustomButton from '../../../components/CustomButton';
-import {Colors, NavService} from '../../../config';
+import { Colors, NavService } from '../../../config';
 import Mainprofile from '../../../components/Mainprofile';
 import Heading from '../../../components/Heading';
+import { styles } from './setting_style';
+import { logoutUser } from '../../../redux/actions';
 export class TermsConditions extends Component {
   state = {
     notifications: false,
-    user : {},
+    user: {},
   };
   onNotificationPress = () => {
-    const {notifications} = this.state;
+    const { notifications } = this.state;
     let response;
-    this.setState({notifications: !notifications});
+    this.setState({ notifications: !notifications });
   };
 
- async componentDidMount(){
+  async componentDidMount() {
     const userData = this.props?.user;
-    this.setState({ user : userData})
+    this.setState({ user: userData })
   }
-
+  logout = () => {
+    // NavService.reset(0, [{ name: 'Auth' }])
+     logoutUser();
+  }
   render() {
-    const {notifications , user} = this.state;
+    const { notifications, user } = this.state;
     return (
       <AppBackground
         title={'Settings'}
@@ -40,39 +45,31 @@ export class TermsConditions extends Component {
         notification={false}
         back
         home>
-        <ScrollView style={{marginTop: 20}} showsVerticalScrollIndicator={false}>
+        <ScrollView style={styles.top} showsVerticalScrollIndicator={false}>
           <Mainprofile
-          txt
+            txt
             center
             top
             name={user.name}
             subtitle={user.email}
           />
-          <View style={{marginTop:30}}>
-          {/* <Heading name="Facebook.com" icon={Icons.fbk}/>
-          <Heading name="Twitter.com" icon={Icons.twitter} />
-          <Heading name="Instagram" icon={Icons.instagram}/> */}
-          <Heading name="Location Tracking" switchs icon={Icons.location} tintclr/>
-         <Heading name="Terms & Condition" icon={Icons.information} />
-          <Heading name="Policies" icon={Icons.policies}/>
-          <Heading name="Help" icon={Icons.help}/>
-          <Heading name="Subscription" icon={Icons.subscription}/>
-          <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator"/>
+          <View style={styles.topbtm}>
+
+            <Heading name="Location Tracking" switchs icon={Icons.location} tintclr />
+            <Heading name="Terms & Condition" icon={Icons.information} onpress="TermsConditions" />
+            <Heading name="Policies" icon={Icons.policies} onpress="PrivacyPolicy"/>
+            <Heading name="Help" icon={Icons.help} />
+            <Heading name="Subscription" icon={Icons.subscription} />
+            <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator" />
 
 
           </View>
           <CustomButton
-          // onPress={() => NavService.navigate('Auth')}
-              buttonStyle={{
-                marginTop: '10%',
-                width:'95%',
-                marginLeft:10
-              }}
-              title="Logout"
-              // onPress={() => NavService.reset(0, [{name: 'ScreenStack'}])}
-              onPress={() => NavService.reset(0, [{name: 'Auth'}])}
+            buttonStyle={styles.btn}
+            title="Logout"
+            onPress={this.logout}
 
-            />
+          />
         </ScrollView>
       </AppBackground>
     );

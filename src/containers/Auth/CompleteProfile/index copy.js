@@ -130,7 +130,6 @@ class App extends Component {
             isVisible={showDOB}
             mode="date"
             onConfirm={date => {
-              console.log('date', date);
               this.setState({
                 showDOB: false,
                 dob: moment(date).format('YYYY-MM-DD'),

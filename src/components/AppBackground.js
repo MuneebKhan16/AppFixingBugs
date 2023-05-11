@@ -1,3 +1,4 @@
+// eslint-disable prettier/prettier /
 import React, { useRef, useEffect, useState } from 'react';
 import {
   Text,
@@ -6,7 +7,8 @@ import {
   Image,
   ImageBackground,
   Animated,
-  Button
+  Button,
+  StyleSheet
 } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Icons from '../assets/Icons';
@@ -17,6 +19,11 @@ import Modal from "react-native-modal";
 import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
 import { TextInput } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
+import ImageURL from '../config/Common';
+import Dummy from '../config/Common';
+import Mymdll from './Mymdll';
+
 
 export function AppBackground({
   editeIcon,
@@ -36,6 +43,7 @@ export function AppBackground({
   chat = false,
   setting = false,
   home,
+  Eventuser
 }) {
   const onPress = () => {
     nav.length
@@ -45,42 +53,43 @@ export function AppBackground({
         : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
+  const user = useSelector((state) => state.reducer.user);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
+
   const [location, setLocation] = useState();
-  //  console.log("==========="+ route.name)
+  const [isFocused, setIsFocused] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [ModalVisible, setIsModalVisible] = useState(false);
+
+  console.log('kl',`${Dummy.dummy}`)
+
+  const handleOpenModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  }; 
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
-        style={{
-          marginTop: getStatusBarHeight(),
-          flexDirection: 'row',
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+        style={styles.maincontainer}>
         <>
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={onPress}
-            style={{
-              position: 'absolute',
-              alignItems: 'center',
-              left: 25,
-              // width: 35,
-              // height: 35,
-              justifyContent: 'center',
-              top: 3,
-            }}>
+            style={styles.usertouchable}>
             <Image
               source={back ? Icons.back : null}
               style={{
-                width: 20,
-                height: 20,
+                width: 24,
+                height: 24,
                 resizeMode: 'contain',
                 tintColor: Colors.purple,
+                marginTop: -8
               }}
             />
           </TouchableOpacity>
@@ -90,33 +99,36 @@ export function AppBackground({
               style={{
                 color: Colors.black,
                 fontWeight: 'bold',
-                fontSize: 18,
+                fontSize: 20,
+                textTransform: 'capitalize',
               }}>
               {title}
             </Text>
           </View>
           {profile && (
             <TouchableOpacity
-              activeOpacity={0.8}
+
               onPress={() => {
                 NavService.navigate('EventProfile');
               }}
               style={{
                 right: 25,
                 position: 'absolute',
-                //
                 height: 40,
                 alignItems: 'center',
                 marginTop: 10,
                 borderRadius: 15,
               }}>
               <Image
-                source={Images.avatar}
+                source={{ uri: user?.profile_picture  ? `${ImageURL?.ImageURL}${user?.profile_picture}`  : "https://picsum.photos/200/300"}}
                 style={{
                   height: 40,
                   width: 40,
                   alignSelf: 'center',
                   borderRadius: 60,
+                  borderWidth: 2,
+                  borderColor: Colors.purple
+
 
                 }}
               />
@@ -209,7 +221,7 @@ export function AppBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-                // backgroundColor: Colors.white,
+                backgroundColor: Colors.white,
               }}>
               <Image
                 source={Icons.filter}
@@ -225,9 +237,13 @@ export function AppBackground({
                   <View style={{ borderRadius: 15, backgroundColor: Colors.white, width: '90%', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', padding: 20 }}>
                     <Text style={{
                       fontSize: 16,
-                      fontWeight: '600'
+                      fontWeight: 'bold',
+                      textTransform: 'capitalize',
+                      color:Colors.black
                     }}>Filters</Text>
-                    <View style={{
+                    <TouchableOpacity 
+                    onPress={handleOpenModal}
+                    style={{
                       borderColor: Colors.black,
                       borderWidth: 1,
                       width: '96%',
@@ -248,14 +264,19 @@ export function AppBackground({
                           tintColor: Colors.purple,
                         }}
                       />
-                      <TextInput
-                        value={location}
-                        placeholder="Location"
-                        placeholderTextColor={Colors.black}
-                        placeholderTextStyle={{ fontSize: 18 }}
-                        style={{ marginLeft: 15, width: 215, height: 40 }}
-                      />
-                    </View>
+                        <TextInput
+                          editable={false}
+                          style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
+                          placeholder={location ? location.name : 'Location'}
+                          placeholderTextColor={Colors.black}
+                          secureTextEntry={!isFocused}
+                          onFocus={() => setIsFocused(true)}
+                          onBlur={() => setIsFocused(false)}
+                          onChangeText={location => setLocation(location)}
+                          value={location}
+                        />
+                    </TouchableOpacity>
+                    <Mymdll isVisible={ModalVisible} onClose={handleCloseModal} setLocation={setLocation}  />
                     <Pickdate />
                     <CustomButton
                       buttonStyle={{
@@ -264,7 +285,6 @@ export function AppBackground({
                       title="Continue"
                       onPress={toggleModal}
                     />
-                    {/* <Button title="Hide modal" onPress={toggleModal} /> */}
                   </View>
                 </Modal>
               </View>
@@ -274,7 +294,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
-                NavService.navigate('ChatList');
+                NavService.navigate('ChatScreen',Eventuser);
               }}
               style={{
                 position: 'absolute',
@@ -312,47 +332,30 @@ export function AppBackground({
   ) : (
     <ImageBackground source={Images.bg} style={{ flex: 1 }}>
       <View
-        style={{
-          marginTop: getStatusBarHeight(),
-          flexDirection: 'row',
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginBottom: 10,
-        }}>
+        style={styles.maincontainer}>
         <>
           {back && (
-            <RNBounceable
+            <TouchableOpacity
               activeOpacity={0.8}
               onPress={onPress}
-              style={{
-                position: 'absolute',
-                alignItems: 'center',
-                // backgroundColor: Colors.white,
-                borderRadius: 10,
-                left: 10,
-                // width: 35,
-                // height: 35,
-                padding: 5,
-                justifyContent: 'center',
-              }}>
+              style={styles.authtouchable}>
               <Image
                 source={Icons.back}
                 style={{
-                  width: 16,
-                  height: 16,
+                  width: 20,
+                  height: 20,
                   resizeMode: 'contain',
                   tintColor: Colors.white,
                 }}
               />
-            </RNBounceable>
+            </TouchableOpacity>
           )}
           <View>
             <Text
               style={{
                 color: Colors.white,
-                fontWeight: '600',
-                fontSize: 18,
+                fontWeight: 'bold',
+                fontSize: 20,
               }}>
               {title}
             </Text>
@@ -425,4 +428,34 @@ export function AppBackground({
   );
 }
 
-export default AppBackground;
+export default React.memo(AppBackground);
+
+
+const styles = StyleSheet.create({
+  maincontainer: {
+    marginTop: getStatusBarHeight() + 20,
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  usertouchable: {
+    position: 'absolute',
+    alignItems: 'center',
+    left: 20,
+    justifyContent: 'center',
+    top: 3,
+    paddingRight: 50,
+    paddingVertical: 5
+  },
+  authtouchable: {
+    position: 'absolute',
+    alignItems: 'center',
+    borderRadius: 10,
+    left: 15,
+    padding: 5,
+    justifyContent: 'center',
+    paddingRight: 50
+  }
+})

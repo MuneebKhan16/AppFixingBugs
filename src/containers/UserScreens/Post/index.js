@@ -1,29 +1,37 @@
-import React, {Component, createRef} from 'react';
-import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
-import {Colors, NavService} from '../../../config';
+/* eslint-disable prettier/prettier */
+import React, { Component, createRef } from 'react';
+import { Colors, NavService } from '../../../config';
+import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import ActionSheet from 'react-native-actions-sheet';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import AppBackground from '../../../components/AppBackground';
 import ProfileImage from '../../../components/ProfileImage';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
-
-
+import { styles } from './post_styles';
+import Toast from 'react-native-toast-message';
+import { post_reviews } from '../../../redux/APIs'
+const Checkbox = {
+  first: '#ItsLit',
+  second: '#ItsAVibe',
+  third: '#NeedsCompany'
+};
 class Post extends Component {
   state = {
     state: this.props.user?.state,
     userImage: this.props.user?.image,
     selectedImage: null,
-    toggleCheckBox:false,
-    toggleCheckBox2:false,
-    toggleCheckBox3:false,
-    starCount:1,
-  };
+    starCount: 1,
+    isChecked: false,
+    isChecked1: false,
+    isChecked2: false,
+    checkbox: Checkbox
 
+  };
   constructor(props) {
     super(props);
     this.actionSheetStateRef = createRef();
@@ -35,47 +43,129 @@ class Post extends Component {
     });
   }
 
+
+
+  handleReview = (name) => {
+
+    const { isChecked } = this.state;
+    isChecked[name] = !isChecked[name];
+    this.setState({ isChecked });
+    return
+  }
+  handleReview = (name) => {
+
+    const { isChecked1 } = this.state;
+    isChecked1[name] = !isChecked1[name];
+    this.setState({ isChecked1 });
+    return
+  }
+  handleReview = (name) => {
+
+    const { isChecked2 } = this.state;
+    isChecked2[name] = !isChecked2[name];
+    this.setState({ isChecked2 });
+    return
+  }
+
+  handleSubmit = () => {
+
+
+    const { id } = this.props.user
+    const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox } = this.state
+
+    if (!selectedImage) {
+      return Toast.show({
+        text1: 'No Image Found',
+        type: 'error',
+        visibilityTime: 3000,
+      });
+    }
+
+    if (isChecked === true) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime };
+      var tags = checkbox.first;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+    } else if (isChecked1 === true) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime };
+      var tags = checkbox.second;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+    } else if (isChecked2 === true) {
+
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime };
+      var tags = checkbox.third;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+    }
+
+    if (isChecked === true && isChecked1 === true && isChecked2 === true && checkbox) {
+
+      const tag = Object.values(checkbox)
+
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image = { uri: selectedImage.path, name: `rating`, type: selectedImage?.mime };
+      var tags = tag.join(',')
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+
+    } else {
+    }
+
+  }
   render() {
-    const {name, state,  starCount,  userImage, selectedImage,toggleCheckBox,toggleCheckBox2,toggleCheckBox3} =
+
+    const { userImage, selectedImage, } =
       this.state;
-      const {user }  = this.props
-      
+    const { user } = this.props
+
     return (
       <AppBackground title={'Post'} back home>
         <ScrollView
           bounces={false}
           showsVerticalScrollIndicator={false}
-          style={{flex: 1}}
-          contentContainerStyle={{
-            alignItems: 'center',
-            flexGrow: 1,
-            marginTop:30
-          }}>
-              <Mainprofile
-          txt
+          style={styles.flex}
+          contentContainerStyle={styles.content}>
+          <Mainprofile
+            txt
             center
             top
             name={user.name}
           />
-          <View style={{marginBottom:20}}>
+          <View style={styles.top}>
 
-             <StarRating
-            fullStar={Icons.starFilled}
-            // halfStar={Icons.star_half}
-            emptyStar={Icons.starEmpty}
-            starSize={14}
-            disabled={false}
-            maxStars={5}
-            rating={this.state.starCount}
-            selectedStar={(rating) => this.onStarRatingPress(rating)}
-          />
+            <StarRating
+              fullStar={Icons.starFilled}
+              emptyStar={Icons.null}
+              starSize={16}
+              maxStars={5}
+              rating={this.state.starCount}
+              selectedStar={(rating) => this.onStarRatingPress(rating)}
+            />
           </View>
           <ActionSheet
             ref={this.actionSheetStateRef}
             containerStyle={{backgroundColor: 'transparent'}}>
             <View style={{padding: 10, paddingBottom: 20}}>
-             
-              <TouchableOpacity
+            <TouchableOpacity
                 onPress={() => actionSheetStateRef.current.hide()}
                 style={{
                   backgroundColor: 'white',
@@ -94,97 +184,70 @@ class Post extends Component {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-         
-        
           <View
-            style={{
-              alignItems: 'center',
-              flex: 1,
-              paddingHorizontal: 40,
-            }}>
-            <View style={{marginBottom: 30}}>
+            style={styles.profile}>
+            <View style={styles.btm}>
               <ProfileImage
                 name={user?.name}
                 imageUri={selectedImage ? selectedImage.path : userImage}
               />
               <View
-                style={{
-                  width:60,
-                  height: 35,
-                  // borderRadius: 35 / 2,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  alignSelf:'center',
-                  marginTop:-90
-                }}>
+                style={styles.picker}>
                 <CustomImagePicker
-                  onImageChange={(path, mime) => {
-                    console.log('path', path);
-                    this.setState({selectedImage: {path, mime}});
-                  }}>
-                    <View style={{alignItems:'center'}}>
-
-                  <Image
-                    source={Icons.upload}
-                    style={{width: 20, height: 20, resizeMode: 'contain'}}
-                  />
-                  <Text style={{fontWeight:'bold'}}>Upload</Text>
-                    </View>
+                 onImageChange={(path, mime) => {
+                  console.log('path', path);
+                  this.setState({selectedImage: {path, mime}});
+                }}>
+                  <View style={styles.item}>
+                    <Image
+                      source={Icons.upload}
+                      style={styles.uploadimg}
+                    />
+                    <Text style={styles.upload}>Upload</Text>
+                  </View>
                 </CustomImagePicker>
               </View>
             </View>
-            <View style={{alignSelf:'center'}}>
-        <View style={{ marginVertical: 10, flexDirection: 'row', marginTop:100}}>
+            <View style={styles.center}>
 
-          <CheckBox
-            disabled={false}
-            value={this.state.toggleCheckBox}
-            tintColor={Colors.black}
-            onCheckColor={Colors.white}
-            onFillColor={Colors.purple}
-            onTintColor={Colors.purple}
-            boxType='square'
-            lineWidth={3.0}
-          />
-          <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsLit</Text>
+              <View style={styles.box}>
+                <CheckBox
+                  disabled={false}
+                  value={this.state.isChecked}
+                  onValueChange={(newValue) => this.setState({ isChecked: newValue })}
+                  tintColors={{ true: 'white', false: 'black' }}
+                />
+                <Text style={styles.txt}>{Checkbox.first}</Text>
 
-        </View>
-        <View style={{ marginVertical: 10, flexDirection: 'row',  }}>
+              </View>
 
-          <CheckBox
-            disabled={false}
-            value={this.state.toggleCheckBox2}
-            tintColor={Colors.black}
-            onCheckColor={Colors.white}
-            onFillColor={Colors.purple}
-            onTintColor={Colors.purple}
-            boxType='square'
-            lineWidth={3.0}
-          />
-          <Text style={{ fontSize: 25, marginLeft: 10 }}>ItsAVibe</Text>
 
-        </View>
-        <View style={{ marginVertical: 10, flexDirection: 'row',  }}>
+              <View style={styles.check}>
+                <CheckBox
+                  disabled={false}
+                  value={this.state.isChecked1}
+                  onValueChange={(newValue) => this.setState({ isChecked1: newValue })}
+                  tintColors={{ true: 'white', false: 'black' }}
+                />
+                <Text style={styles.txt}>{Checkbox.second}</Text>
+              </View>
 
-          <CheckBox
-            disabled={false}
-            value={this.state.toggleCheckBox3}
-            tintColor={Colors.black}
-            onCheckColor={Colors.white}
-            onFillColor={Colors.purple}
-            onTintColor={Colors.purple}
-            boxType='square'
-            lineWidth={3.0}
-          />
-             <Text style={{ fontSize: 25, marginLeft: 10 }}>NeedsCompany</Text>
+              <View style={styles.check}>
+                <CheckBox
+                  disabled={false}
+                  value={this.state.isChecked2}
+                  onValueChange={(newValue) => this.setState({ isChecked2: newValue })}
+                  tintColors={{ true: 'white', false: 'black' }}
+                />
+                <Text style={styles.txt}>{Checkbox.third}</Text>
 
-</View>
-</View>
+              </View>
+            </View>
             <CustomButton
-          title={'Post'}
-          buttonStyle={{ alignSelf: 'center',marginTop:50 }}
-          onPress={() => NavService.navigate('Home')}
-        />
+              title={'Post'}
+              buttonStyle={styles.btn}
+              onPress={this.handleSubmit}
+            />
           </View>
         </ScrollView>
       </AppBackground>
@@ -192,56 +255,8 @@ class Post extends Component {
   }
 }
 
-const ActionSheetCommponent = ({
-  title = '',
-  dataset = [],
-  onPress = () => {},
-}) => {
-  return (
-    <View
-      style={{
-        backgroundColor: 'rgba(241,241,241,0.9)',
-        borderRadius: 10,
-        marginBottom: 10,
-        overflow: 'hidden',
-      }}>
-      <View
-        style={{
-          borderBottomWidth: 1.5,
-          borderBottomColor: '#ccc',
-          paddingVertical: 10,
-        }}>
-        <Text
-          style={{
-            color: 'rgb(0,88,200)',
-            textAlign: 'center',
-            fontSize: 18,
-            fontWeight: '500',
-          }}>
-          {title}
-        </Text>
-      </View>
-      <ScrollView style={{maxHeight: 200}} showsVerticalScrollIndicator={false}>
-        {dataset.map((item, index) => {
-          return (
-            <TouchableOpacity
-              onPress={() => onPress(item)}
-              style={{
-                paddingVertical: 12,
-                alignItems: 'center',
-                borderBottomWidth: 1.5,
-                borderBottomColor: '#ccc',
-              }}>
-            
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
-    </View>
-  );
-};
 
-function mapState({reducer: {user}}) {
+function mapState({ reducer: { user } }) {
   return {
     user,
   };

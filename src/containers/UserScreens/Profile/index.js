@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import moment from 'moment';
-import React, {Component, useRef, useState , useEffect} from 'react';
+import React, { Component, useRef, useState, useEffect , useContext } from 'react';
 import {
   Text,
   View,
@@ -7,51 +8,50 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+  StyleSheet
 } from 'react-native';
 import AppBackground from '../../../components/AppBackground';
-import {Colors, NavService} from '../../../config';
-import CustomButton from '../../../components/CustomButton';
 import Mainprofile from '../../../components/Mainprofile';
 import Posts from '../../../components/Posts';
 import { useSelector } from 'react-redux';
 import { get_reviews_event } from '../../../redux/APIs/index'
-const {width, height} = Dimensions.get('window');
-
-export default Profile = props => {
-  const [UserPost , setUserPost] = useState([]);
+import eventContext from '../../EventScreens/eventContext';
+const { width, height } = Dimensions.get('window');
+import { styles } from './profile_style';
+const Profile = props => {
+  const [UserPost, setUserPost] = useState([]);
   const profile_Data = useSelector((state) => state.reducer.user)
-  console.log(profile_Data)
+  const { userProfile } = useContext(eventContext);
+
+  console.log('userProfile',userProfile)
+
   useEffect(() => {
     get_reviews_event(profile_Data.api_token).then((res) => setUserPost(res.Data));
-  },[])
-
+  }, [])
+console.log('profile_Data',profile_Data)
   return (
-    <AppBackground title={'User Profiles'} home setting>
+    <AppBackground title={'User Profile'} home setting>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={{marginBottom: 5}}>
-        <View style={{marginTop: 10}}>
+        style={styles.btm}>
+        <View style={styles.top}>
           <Mainprofile
             center
             row
-            name={profile_Data.name}
-            subtitle={profile_Data.email}
+            name={userProfile?.name}
+            subtitle={userProfile?.email}
             edit
           />
           <Text
-            style={{
-              marginTop: 20,
-              fontSize: 18,
-              color: Colors.black,
-              fontWeight: '600',
-              marginLeft:10
-            }}>
+            style={styles.post}>
             Post History
           </Text>
-            <Posts UserPost={UserPost} profile_Data={profile_Data} />
+          <Posts UserPost={UserPost} profile_Data={profile_Data} />
 
         </View>
       </ScrollView>
     </AppBackground>
   );
 };
+
+export default React.memo(Profile)

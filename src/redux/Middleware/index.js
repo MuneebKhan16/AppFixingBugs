@@ -1,16 +1,24 @@
 import {createStore, applyMiddleware} from 'redux';
-import {persistStore, persistReducer} from 'redux-persist';
+import {persistStore, persistReducer, createTransform} from 'redux-persist';
 
 import thunk from 'redux-thunk';
-import allReducers from '../reducers/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {stringify, parse} from 'flatted';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
+import allReducers from '../reducers/index';
+
+const transformCircular = createTransform(
+  (inboundState, key) => stringify(inboundState),
+  (outboundState, key) => parse(outboundState),
+);
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   stateReconciler: autoMergeLevel2,
   timeout: null,
+  transforms: [transformCircular],
+  blacklist: ['loader', 'socket'],
 };
 
 const persistedReducer = persistReducer(persistConfig, allReducers);

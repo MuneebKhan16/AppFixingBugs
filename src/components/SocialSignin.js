@@ -1,19 +1,15 @@
-// npm i @react-native-google-signin/google-signin react-native-fbsdk-next @invertase/react-native-apple-authentication
-// npm i @react-native-firebase/app @react-native-firebase/auth
-
-import Toast from 'react-native-toast-message';
+/* eslint-disable prettier/prettier */
 import Auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {AccessToken, LoginManager, Settings} from 'react-native-fbsdk-next';
-import {appleAuth} from '@invertase/react-native-apple-authentication';
-import {socialSignin} from '../redux/APIs';
+//import { appleAuth } from '@invertase/react-native-apple-authentication';
 
 GoogleSignin.configure({
   webClientId:
-    '163536674995-l46h1pcokmjeg25tlc7k53hj3d0qbume.apps.googleusercontent.com',
+    '267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com',
 });
 
-Settings.setAppID('1101411500700897');
+Settings.setAppID('1284024702540652');
 
 const Google = async () => {
   try {
@@ -22,22 +18,23 @@ const Google = async () => {
       userInfo.idToken,
     );
     const userAuth = await Auth().signInWithCredential(googleCredential);
-    const access_token = await (await userAuth.user.getIdToken()).toString();
 
-    await socialSignin(access_token, 'google');
+    const {uid, email, displayName, photoURL, emailVerified} =
+      userAuth.user._user;
+
+    if (emailVerified === true) {
+      return {uid: uid, Email: email, Name: displayName, Pic: photoURL};
+    }
   } catch (error) {
-    Toast.show({
-      text1: 'Unable sign in with Google',
-      type: 'error',
-      visibilityTime: 3000,
-    });
+    console.log(error);
   }
 };
 
-const Facebook = () => {
-  LoginManager.logInWithPermissions(['public_profile'])
+const Facebook = async () => {
+  return LoginManager.logInWithPermissions(['public_profile'])
     .then(async login => {
       if (login.isCancelled) {
+        return;
       } else {
         try {
           const fbAuth = await AccessToken.getCurrentAccessToken();
@@ -45,43 +42,38 @@ const Facebook = () => {
             fbAuth.accessToken,
           );
           const userAuth = await Auth().signInWithCredential(fbCredential);
-
-          await socialSignin(userAuth, 'facebook');
+          const {uid, providerData, displayName, photoURL, emailVerified} =
+            userAuth?.user?._user;
+          if (emailVerified === true) {
+            return {uid: uid, Email: email, Name: displayName, Pic: photoURL};
+          }
         } catch (error) {
           console.log(error);
-          Toast.show({
-            text1: 'Unable to sign in with Facebook',
-            type: 'error',
-            visibilityTime: 3000,
-          });
         }
       }
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+    });
 };
 
-const Apple = async () => {
-  // performs login request
-  try {
-    const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: appleAuth.Operation.LOGIN,
-      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-    });
-    const {identityToken, nonce} = appleAuthRequestResponse;
-    const appleCredential = Auth?.AppleAuthProvider?.credential(
-      identityToken,
-      nonce,
-    );
-    const credentialState = await Auth()?.signInWithCredential(appleCredential);
-    await socialSignin(credentialState, 'apple');
-  } catch (error) {
-    console.log(error);
-    Toast.show({
-      text1: 'Unable to sign in with Apple',
-      type: 'error',
-      visibilityTime: 3000,
-    });
-  }
-};
+// const Apple = async type => {
+//     try {
+//         const appleAuthRequestResponse = await appleAuth.performRequest({
+//             requestedOperation: appleAuth.Operation.LOGIN,
+//             requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+//         });
+//         const { identityToken, nonce } = appleAuthRequestResponse;
+//         const appleCredential = Auth?.AppleAuthProvider?.credential(
+//             identityToken,
+//             nonce,
+//         );
+//         const userAuth = await Auth()?.signInWithCredential(appleCredential);
+//         const { uid, email } = userAuth?.user;
+//         console.log('userAuth', userAuth);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
-export default {Google, Apple, Facebook};
+export default {Google, Facebook};

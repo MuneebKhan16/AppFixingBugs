@@ -9,12 +9,13 @@ const ProfileImage = ({size = 150, imageUri, name = ' ', style}) => {
         source={{uri: imageUri}}
         style={[
           {
-            width: 280,
+            width: 300,
             height: size,
             resizeMode: 'cover',
             borderRadius:10,
             borderColor:Colors.purple,
             borderWidth:3,
+            alignSelf:"center",
             
           },
           style,
@@ -25,27 +26,17 @@ const ProfileImage = ({size = 150, imageUri, name = ' ', style}) => {
     <View
       style={[
         {
-          width: 280,
+          width: 300,
           height: size,
           borderRadius: 10,
           borderWidth:3,
           borderColor: Colors.purple,
           alignItems: 'center',
           justifyContent: 'center',
+          alignSelf:"center"
         },
         style,
       ]}>
-      {/* <Text
-        numberOfLines={1}
-        style={{
-          color: Colors.primary,
-          fontSize: size * 0.75,
-          fontWeight: '800',
-          width: '100%',
-          textAlign: 'center',
-        }}>
-        {name[0].toUpperCase()}
-      </Text> */}
     </View>
   );
 };

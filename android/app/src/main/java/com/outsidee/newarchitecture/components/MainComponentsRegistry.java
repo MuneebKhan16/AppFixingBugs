@@ -1,4 +1,4 @@
-package com.outsidee.newarchitecture.components;
+package com.celectstudios.outsideee.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

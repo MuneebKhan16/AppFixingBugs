@@ -1,4 +1,4 @@
-import Auth from './Auth';
+import AuthStack from './Auth';
 import {UserAuthStack,ScreenStack,EventScreenStack} from './UserScreens';
 
-export {Auth, UserAuthStack,ScreenStack,EventScreenStack};
+export {AuthStack, UserAuthStack,ScreenStack,EventScreenStack};

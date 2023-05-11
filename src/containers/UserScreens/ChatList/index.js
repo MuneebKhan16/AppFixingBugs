@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+import React, {useCallback, useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,93 +8,89 @@ import {
   SafeAreaView,
   Dimensions,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import { useSelector } from 'react-redux';
+import {useFocusEffect} from '@react-navigation/native';
 import {Colors, NavService} from '../../../config';
 import AppBackground from '../../../components/AppBackground';
 import Search from '../../../components/Search';
 import Images from '../../../assets/Images';
 import ChatComponent from '../../../components/ChatComponent';
 import Icons from '../../../assets/Icons';
-// import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import {Chats} from './Dummydata';
+import {chatList} from '../../../redux/APIs/index';
+import {styles} from './chatlist_style';
 
-const index = ({navigation, route}) => {
-  const Chats = [
-    {
-      image: Images.avatar,
-      name: 'Jhon Kelvin',
-      msg: 'How are you?',
-    },
-    {
-      image: Images.avatar,
-      name: 'Jhon Kelvin',
-      msg: 'How are you?',
-    },
-    {
-      image: Images.avatar,
-      name: 'Jhon Kelvin',
-      msg: 'How are you?',
-    },
-    {
-      image: Images.avatar,
-      name: 'Jhon Kelvin',
-      msg: 'How are you?',
-    },
-    {
-      image: Images.avatar,
-      name: 'Jhon Kelvin',
-      msg: 'How are you?',
-    },
-    {
-      image: Images.avatar,
-      name: 'Jhon Kelvin',
-      msg: 'How are you?',
-    },
-   
-   
-  ];
+const ChatList = ({navigation, route}) => {
+  const user = useSelector(state => state.reducer.user);
+  // const socket = useSelector(state => state.reducer.socket);
+  const [conversationList, setConversationList] = useState([]);
+  useFocusEffect(
+    useCallback(() => {
+      chatList(user?.id)
+        .then(res =>  setConversationList(res?.conversations))
+        .catch(error => console.log('error', error));
+    }, []),
+  );
 
+  // const sender_id = user?.id;
+  // // const receiver_id = chatUser?.id;
+  // const response = () => {
+  //   socket?.emit('GetConversations', {
+  //     sender_id: sender_id,
+  //   });
+  //   socket?.on('ConversationList', data => {
+  //   });
+  // }
+
+  // setConversationList(response);
+  // console.log(conversationList);
   return (
     <AppBackground title={'Message'} back={false} profile={false} home>
-      <SafeAreaView style={{flex: 1}}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            // backgroundColor: Colors.backgroundColor,
-            // back
-          }}>
-          <View
-            style={{
-              marginTop:25,
-              width: '110%',
-            }}>
+      <SafeAreaView style={styles.flex}>
+        <View style={styles.container}>
+          <View style={styles.content}>
             <Search />
           </View>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            data={Chats}
-            style={{
-              width: Dimensions.get('window').width * 1,
-              paddingTop: 5,
-              marginLeft:30
-            }}
-            renderItem={({item}) => (
-              <ChatComponent
-                onPress={() => {
-                  navigation.navigate('ChatScreen');
-                }}
-                image={item.image}
-                msg={item.msg}
-                name={item.name}
+          <View style={{marginTop:60}}>
+            {
+              conversationList?.length > 0 ? 
+              (
+                <FlatList
+                showsVerticalScrollIndicator={false}
+                data={conversationList}
+                style={styles.list}
+                renderItem={({item, index}) => (                 
+                  <>
+                  {
+                    item !== null ? 
+                    (
+                      <ChatComponent
+                        item={item}
+                        index={index}
+                        navigation={navigation}
+                      />
+
+                    ) 
+                    : 
+                    (
+                      null
+                    )
+                  }
+                  </>
+                )}
               />
-            )}
-          />
+              ) 
+              :
+               (
+                    <Text>No Chat Found</Text>
+               )
+            }
+         
+          </View>
         </View>
       </SafeAreaView>
     </AppBackground>
   );
 };
 
-export default index;
-
-const styles = StyleSheet.create({});
+export default React.memo(ChatList);

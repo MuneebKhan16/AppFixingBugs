@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, {Component,useEffect} from 'react';
 import {View, Text, Image, ScrollView, TouchableOpacity,Animated} from 'react-native';
 import {Colors, NavService} from '../../../config';
@@ -10,37 +11,7 @@ import {ProfileTextInput} from '../../../components/CustomTextInput';
 import { resetPassword } from '../../../redux/APIs';
 import { schema } from '../../../config/validation';
 import Toast from 'react-native-toast-message';
-
-const FadeInView = props => {
-  const anim = new Animated.Value(0);
-  const duration = 2000;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(anim, {
-        toValue: -15,
-        duration: duration,
-        useNativeDriver: true,
-      }),
-    ).start();
-    setTimeout(
-      () =>
-        anim.stopAnimation(({Value}) => console.log('Final Value: ' + Value)),
-      2000,
-    );
-  }, []);
-  return (
-    <View style={{}}>
-      <Animated.View
-        style={{
-          ...props.style,
-          transform: [{translateY: anim}],
-        }}>
-        {props.children}
-      </Animated.View>
-    </View>
-  );
-};
+import AuthBackground from '../../../components/AuthBackground';
 
 class App extends Component {
   state = {
@@ -49,63 +20,60 @@ class App extends Component {
     visible1: false,
     visible2: false,
   };
-  onSubmit = () => {
-    const {password,  confirmPassword,otp,email} = this.state;
-    if (!password && ! confirmPassword) {
-      Toast.show({
-        text1: 'Please enter all fields',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    } 
   
-
-    else if (!password) {
-      Toast.show({
-        text1: 'Password is required',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
-    else if (!schema.validate(password)) {
-      Toast.show({
-        text1: 'Password not valid (Use atleast one UpperCase Letter, one number and one special character',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
-    // else if (confirmPassword) {
-    //   Toast.show({
-    //     text1: 'Confirm password is required',
-    //     type: 'error',
-    //     visibilityTime: 3000,
-    //   });
-    // } 
-    else if (password !==  confirmPassword) {
-      Toast.show({
-        text1: 'Password and confirm password must be same',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    } else {
-      resetPassword(password,confirmPassword,otp,email)
-
-    }
-  };
+    onSubmit = () => {
+      const {password,  confirmPassword,otp,email} = this.state;
+      if (!password && ! confirmPassword) {
+        Toast.show({
+          text1: 'Please enter all fields',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      } 
+    
+  
+      else if (!password) {
+        Toast.show({
+          text1: 'Password is required',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      }
+      else if (!schema.validate(password)) {
+        Toast.show({
+          text1: 'Password not valid (Use atleast one UpperCase Letter, one number and one special character',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      }
+      else if (password !==  confirmPassword) {
+        Toast.show({
+          text1: 'Password and confirm password must be same',
+          type: 'error',
+          visibilityTime: 1500,
+        });
+      } else {
+        const email = this?.props?.route?.params?.email
+        const otp = this?.props?.route?.params?.otp
+        const password = this.state.password
+        resetPassword(password,otp,email)
+  
+      }
+    };
   render() {
-    const {password, confirmPassword} = this.state;
 
+    const {password, confirmPassword} = this.state;
+        
     return (
-      <AppBackground back profile={false} title={'Reset Password'}>
+      <AuthBackground back profile={false} title={'Reset Password'}>
         <CustomBackground>
           <View
             style={{
               flex: 1,
               alignItems: 'center',
               width: '90%',
-              top: -15,
             }}>
-            <FadeInView
+            <View
               style={{
                 alignItems: 'center',
                 width: '100%',
@@ -138,14 +106,13 @@ class App extends Component {
                   marginTop: '10%',
                 }}
                 title="CONTINUE"
-                // onPress={() => NavService.navigate('Login')}
               onPress={this.onSubmit}
 
               />
-            </FadeInView>
+            </View>
           </View>
         </CustomBackground>
-      </AppBackground>
+      </AuthBackground>
     );
   }
 }

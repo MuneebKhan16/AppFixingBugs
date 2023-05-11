@@ -26,7 +26,7 @@ function dispatch(action) {
 export default async function putApi(
   endpoint,
   params = null,
-  sucessToast = true,
+  sucessToast = false,
 ) {
   storeUpdate();
   dispatch({type: 'LOADER_START'});

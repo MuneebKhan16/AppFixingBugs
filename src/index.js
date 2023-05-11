@@ -1,67 +1,85 @@
-import React, { Component } from 'react';
+/* eslint-disable prettier/prettier */
+import React, {Component} from 'react';
 
 // Navigation here
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import { NavService } from './config';
-import { ImageBackground } from 'react-native';
-import { connect } from 'react-redux';
-import Images from './assets/Images';
+import {NavService, Common} from './config';
+import {connect} from 'react-redux';
+import {io} from 'socket.io-client';
+import {store} from './redux';
 
 //Screens
-import { Auth, ScreenStack, EventScreenStack } from './containers';
+import {AuthStack, ScreenStack, EventScreenStack} from './containers';
 
 const Stack = createNativeStackNavigator();
 
+const saveSocket = () => {
+  const socket = io.connect(Common.socketURL);
+  socket.on('connect', () => {
+    if (socket.connected) {
+      store.dispatch({type: 'SET_SOCKET', payload: socket});
+    } else {
+      store.dispatch({type: 'SET_SOCKET', payload: false});
+    }
+  });
+};
+
 class Navigation extends Component {
-  state = {
-    ready: true,
-    initialRouteName: 'Auth',
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   componentDidMount() {
+    saveSocket();
     setTimeout(() => {
       SplashScreen.hide();
-    }, 2500)
+    }, 2500);
   }
   render() {
-    const { initialRouteName, ready } = this.state;
-    if (!ready) return null;
     return (
       <NavigationContainer
         ref={ref => NavService.setTopLevelNavigator(ref)}
-        screenOptions={{ animation: 'simple_push' }}>
+        screenOptions={{animation: 'simple_push'}}>
         <Stack.Navigator
           screenOptions={{
-            contentStyle: { backgroundColor: 'transparent' },
+            contentStyle: {backgroundColor: 'transparent'},
             animation: 'simple_push',
-          }}
-          initialRouteName={initialRouteName}>
-          <Stack.Screen
-            name="Auth"
-            component={Auth}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ScreenStack"
-            component={ScreenStack}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventScreenStack"
-            component={EventScreenStack}
-            options={{ headerShown: false }}
-          />
+          }}>
+          {this?.props?.api_token ? (
+            <>
+              <Stack.Screen
+                name="ScreenStack"
+                component={ScreenStack}
+                options={{headerShown: false}}
+              />
+              <Stack.Screen
+                name="EventScreenStack"
+                component={EventScreenStack}
+                options={{headerShown: false}}
+              />
+            </>
+          ) : (
+            <Stack.Screen
+              name="AuthStack"
+              component={AuthStack}
+              options={{headerShown: false}}
+            />
+          )}
         </Stack.Navigator>
       </NavigationContainer>
     );
   }
 }
 
-function mapStateToProps({ reducer: { user } }) {
+const mapStateToProps = state => {
   return {
-    user,
+    api_token: state?.reducer?.user?.api_token,
+    user: state?.reducer?.user,
   };
-}
+};
 
 export default connect(mapStateToProps)(Navigation);

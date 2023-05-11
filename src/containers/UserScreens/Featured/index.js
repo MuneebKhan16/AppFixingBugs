@@ -10,12 +10,10 @@ import {
 import React, { useEffect, useState } from 'react';
 import { localevents } from '../../../redux/APIs/index'
 import AppBackground from '../../../components/AppBackground';
-import { Featureddata } from '../../../config/Dummydata/Dummydata';
 import { Colors, NavService } from '../../../config';
-import RNBounceable from "@freakycoder/react-native-bounceable";
 import { useSelector } from 'react-redux'
 import Icons from '../../../assets/Icons';
-
+import { styles } from './featured_style';
 const Featured = () => {
   const [feature, Setfeatured] = useState([]);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
@@ -33,81 +31,46 @@ const Featured = () => {
         data={feature}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <View style={{ marginTop: 30, marginHorizontal: 8 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.container}>
+            <View style={styles.header}>
               <Text
-                style={{ fontSize: 16, color: Colors.black, fontWeight: 'bold' }}>
+                style={styles.title}>
                 {item.event_title}
               </Text>
               <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  position: 'absolute',
-                  right: 5,
-                }}>
-                <Image source={Icons.starFilled} style={{ width: 18, height: 18 }} />
+                style={styles.filled}>
+                <Image source={Icons.starFilled} style={styles.icnfilled} />
                 <Text
-                  style={{
-                    marginLeft: 10,
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: '700',
-                  }}>
+                  style={styles.review}>
                   {item.rating_count + " " + "Reviews"}
                 </Text>
               </View>
             </View>
-            <RNBounceable onPress={() => NavService.navigate('Review',item)}>
+            <TouchableOpacity onPress={() => NavService.navigate('Review', item)}>
               <ImageBackground
-                source={{ uri : `${BaseUrl}${item.event_image}`}}
-                style={{ width: '100%', height: 150, marginTop: 10 }}
-                imageStyle={{ borderRadius: 10 }}>
-                <View style={{
-                  width: 38,
-                  height: 38,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 10,
-                  position: 'absolute',
-                  right: 10,
-                }}>
+                source={{ uri: `${BaseUrl}${item.event_image}` }}
+                style={styles.img}
+                imageStyle={styles.border}>
+                <View style={styles.imgbg}>
                   <Image
-                    source={item.event_image}
-                    style={{
-                      width: 22,
-                      height: 22,
-                      resizeMode: 'contain',
-
-                    }}
+                    source={Icons.starEmpty}
+                    style={styles.empty}
                   />
                 </View>
 
                 <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderRadius: 10,
-                    position: 'absolute',
-                    bottom: 8,
-                    left: 8,
-                  }}>
+                  style={styles.icnloc}>
                   <Image
                     source={Icons.location}
-                    style={{
-                      tintColor: Colors.white, width: 22,
-                      height: 22,
-                      resizeMode: 'contain',
-                    }}
+                    style={styles.location}
                   />
-                  <Text style={{ color: Colors.white, fontWeight: 'bold' }}>
+                  <Text style={styles.locationtxt} numberOfLines={1} ellipsizeMode='head'>
                     {' '}
                     {item.event_location}
                   </Text>
                 </View>
               </ImageBackground>
-            </RNBounceable>
+            </TouchableOpacity>
           </View>
         )
         }
@@ -117,6 +80,5 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default React.memo(Featured);
 
-const styles = StyleSheet.create({});

@@ -1,105 +1,80 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
-import Images from '../assets/Images';
+import React ,{useContext} from 'react';
 import { Colors, NavService } from '../config';
 import Icons from '../assets/Icons';
 import StarRating from 'react-native-star-rating';
 import { useSelector } from 'react-redux';
-import RNBounceable from '@freakycoder/react-native-bounceable';
-
+import { backgroundUpload } from 'react-native-compressor';
+import eventContext from '../containers/EventScreens/eventContext';
 const Mainprofile = props => {
   const profile_Data = useSelector((state) => state.reducer.user);
+  const { userProfile } = useContext(eventContext);
+
+  console.log('userProfile',userProfile)
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
   const [starCount, setStarCount] = React.useState(1);
-  const { name, subtitle, center, row, top, star, edit, inc, size, txt,location } = props;
-  console.log("jjjjj",starCount)
+  const { name, subtitle, center, row, top, star, edit, inc, size, txt, location } = props;
   return (
     <View
       style={{
         alignItems: center ? 'center' : null,
         flexDirection: row ? 'row' : null,
         marginLeft: 5,
-        marginTop: 25,
+        marginTop: 15
       }}>
       {top ? (
-        <View style={{
-          alignItems: 'center',
-          width: 80,
-          height: 80,
-          justifyContent: 'center',
-          borderRadius: 40,
-          borderWidth: 2,
-          borderColor: Colors.purple,
-
-        }}>
-        <Image
-          source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
-          resizeMode='center'
-          style={{
-            width: 75,
-            height: 75,
-            borderRadius:40
-           
-          }}
-        />
+        <View style={styles.container}>
+          <Image
+            source={{ uri:  userProfile?.profile_picture  ?  `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
+            resizeMode='center'
+            style={styles.pic}
+          />
         </View>
       ) : (
-        <View>
+        <View  style={{marginBottom:10}}>
           <Image
-           source={{ uri : `${BaseUrl}${profile_Data?.profile_picture}`}}
+            source={{ uri:  userProfile?.profile_picture  ?  `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
             style={{
-              width: inc ? 50 : 100,
-              height: inc ? 50 : 100,
+              width: inc ? 50 : 75,
+              height: inc ? 50 : 75,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
+              marginBottom:10
+              
             }}
           />
           {edit ? (
-            <RNBounceable
-              onPress={() => NavService.navigate('EditProfile')}
-              style={{
-                backgroundColor: Colors.purple,
-                padding: 8,
-                alignItems: 'center',
-                bottom: 5,
-                position: 'absolute',
-                right: 0,
-                width: 30,
-                height: 30,
-                justifyContent: 'center',
-                borderRadius: 40,
-              }}>
+            <TouchableOpacity
+            onPress={() => NavService.navigate('EditProfile')}
+              style={styles.profilepic}>
               <Image
                 source={Icons.edit}
-                style={{
-                  width: 15,
-                  height: 15,
-                  resizeMode: 'contain',
-                }}
+                style={styles.edit}
               />
-            </RNBounceable>
+            </TouchableOpacity>
           ) : null}
         </View>
       )}
       <View
         style={{
           marginLeft: row ? 10 : null,
-          marginTop: top ? 10 : null,
         }}>
         <Text
           style={{
-            textAlign: txt ? 'center' : null,
-            fontSize: txt ? 18 : 16,
+            fontSize: txt ? 18 : 19,
             fontWeight: '700',
-            color: Colors.black,
+            color: Colors.black,            
+            textAlign: row ? null : 'center',
+            textTransform: 'capitalize',
+
           }}>
           {props?.name}
         </Text>
         {star ? (
           <StarRating
             fullStar={Icons.starFilled}
-            // halfStar={Icons.star_half}
             emptyStar={Icons.starEmpty}
             starSize={14}
             disabled={false}
@@ -110,8 +85,10 @@ const Mainprofile = props => {
         ) : (
           <Text
             style={{
-              fontSize: size ? 14 : 18,
-              color: Colors.black,
+              fontSize: size ? 18 : 17,
+              color: Colors.darkGray,
+              fontWeight: '400',
+
             }}>
             {props?.subtitle}
           </Text>
@@ -119,20 +96,13 @@ const Mainprofile = props => {
       </View>
       {inc ? (
         <View
-          style={{
-            flexDirection: 'row',
-            right: 4,
-            height: 50,
-            alignItems: 'center',
-            borderRadius: 10,
-            position: 'absolute',
-          }}>
+          style={styles.mark}>
           <Image
             source={Icons.marker}
             resizeMode="center"
-            style={{ width: 25, height: 30, right: 5 }}
+            style={styles.marker}
           />
-          <Text style={{ fontSize: 18, color: Colors.black }}>
+          <Text style={styles.location} numberOfLines={1} >
             {props.location}
           </Text>
         </View>
@@ -143,4 +113,53 @@ const Mainprofile = props => {
 
 export default Mainprofile;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: Colors.purple,
+
+  },
+  pic: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth:2,
+    borderColor:Colors.purple,
+    
+    
+  },
+  profilepic: {
+    padding: 12,
+    alignItems: 'center',
+    width: 25,
+    height: 25,
+    justifyContent: 'center',
+    borderRadius: 40,
+    top: -30,
+    left: 47,
+    backgroundColor: Colors.purple
+
+  },
+  edit: {
+    width: 12,
+    height: 12,
+    resizeMode: 'contain',
+    
+  },
+  mark: {
+    flexDirection: 'row',
+    right: 0,
+    height: 50,
+    alignItems: 'center',
+    borderRadius: 10,
+    position: 'absolute',
+
+  },
+  marker: { width: 30, height: 30, },
+  location: { fontSize: 14, color: Colors.black,  fontWeight: '600', ellipsizeMode:'middle',maxWidth:150 },
+});

@@ -1,69 +1,40 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import RNBounceable from '@freakycoder/react-native-bounceable';
+import {useSelector} from 'react-redux';
 import Icons from '../assets/Icons';
-import {Colors} from '../config';
+import {Colors, Common} from '../config';
 import Images from '../assets/Images';
-import RNBounceable from "@freakycoder/react-native-bounceable";
 
 const ChatComponent = props => {
-  const {image, name, msg, onPress} = props;
+  const user = useSelector(state => state.reducer.user);
+  const {item, index, navigation} = props;
+  const configureData =
+    user?.id == item?.user_receiver?.id
+      ? item?.user_sender
+      : item?.user_receiver;
+  // console.log('item', item);
+
 
   return (
     <RNBounceable
-      onPress={onPress}
-      style={{
-        width: '100%',
-        // height: 70,
-        padding: 3,
-        flexDirection: 'row',
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.grey,
-        marginVertical: 10,
-      }}>
-      <View
-        style={{
-          flex: 2,
-          height:55,
-          justifyContent:'center'
-        }}>
+      onPress={() =>
+        navigation.navigate('ChatScreen', {
+          chatUser: configureData,
+          conversation_id: item?.conversation_id,
+        })
+      }
+      style={styles.maincontainer}>
+      <View style={styles.container}>
         <Image
-          style={{
-            height: 55,
-            width: 45,
-            alignSelf: 'center',
-            borderRadius: 60,
-
-          }}
-          source={image}
+          style={styles.img}
+          source={{uri: configureData?.profile_picture ?  Common.ImageURL + configureData?.profile_picture : "https://picsum.photos/200/300" }}
         />
       </View>
-      <View
-        style={{
-          flex: 8,
-         
-        }}>
-        <Text
-          style={{
-            flex: 2.5,
-            // paddingBottom: 6,
-            fontSize: 16,
-            fontWeight: '800',
-            color: Colors.black,
-            paddingLeft: 4,
-            marginBottom: 2
-          }}>
-          {name}
-        </Text>
-        <Text
-          numberOfLines={2}
-          style={{
-            flex: 7.5,
-            paddingLeft: 4,
-            maxWidth: 280,
-            color: Colors.darkGray,
-            marginBottom: 10
-          }}>
-          {msg}
+      <View style={styles.flex}>
+        <Text style={styles.txt}>{configureData?.name}</Text>
+        <Text numberOfLines={2} style={styles.msg}>
+          {item?.message}
         </Text>
       </View>
     </RNBounceable>
@@ -72,4 +43,46 @@ const ChatComponent = props => {
 
 export default ChatComponent;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  maincontainer: {
+    width: '100%',
+    padding: 3,
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.grey,
+marginVertical:5,
+  },
+  container: {
+    flex: 2,
+    height: 55,
+    justifyContent: 'center',
+    
+  },
+  img: {
+    height: 45,
+    width: 45,
+    alignSelf: 'center',
+    borderRadius: 60,
+    borderColor:Colors.purple,
+    borderWidth:2
+  },
+  txt: {
+    flex: 2.5,
+    // paddingBottom: 6,
+    fontSize: 16,
+    fontWeight: '800',
+    color: Colors.black,
+    paddingLeft: 4,
+    marginBottom: 2,
+    marginTop:8
+  },
+  msg: {
+    flex: 7.5,
+    paddingLeft: 4,
+    maxWidth: 280,
+    color: Colors.darkGray,
+  },
+  flex: {
+    flex: 8,
+  },
+});

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "267078628700",
+    "project_id": "outsideee-31b3d",
+    "storage_bucket": "outsideee-31b3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267078628700:android:f904d38dbad0dc61aebd99",
+        "android_client_info": {
+          "package_name": "com.celectstudios.outsideee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267078628700-3bnjiprci7139gaqu2creipubfu8juhb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.celectstudios.outsideee",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "267078628700-vml9d497rbkm59a29ngmltkfjfqscies.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE5rQ48xFzc9gHiK2M0mA-rIoAJGTdd5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "267078628700-a9tmeavh3tpmntugs9ksq2nqtt18sp77.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "267078628700-vjs0s1omkabh7bebhnn3bdmqh6r6c8em.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.celectstudios.outsideee"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

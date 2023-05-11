@@ -1,58 +1,67 @@
 import React from 'react';
-import {ImageBackground, ScrollView, View,Text,Image} from 'react-native';
+import { ImageBackground, ScrollView, View, Text, Image ,StyleSheet} from 'react-native';
 import Images from '../assets/Images';
-import {Colors} from '../config';
+import { Colors } from '../config';
 import Logo from './Logo';
 
-export default ({children,background}) => {
+export default ({ children, background }) => {
   return (
     background ?
-    <View style={{flex: 1, }}>
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        bounces={false}
-        showsVerticalScrollIndicator={false}
-        style={{flex: 1}}
-        contentContainerStyle={{
-          alignItems: 'center',
-          flexGrow: 1,
-        }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          {/* <ImageBackground source={Images.elipse} resizeMode="contain">
-            <Image source={Images.cemra} style={{resizeMode:'center'}}/>
-          </ImageBackground> */}
-        </View>
-        <View style={{flex: 1,marginTop:30}}>{children}</View>
-      </ScrollView >
-    </View>
-    :
-    <View style={{flex: 1,marginTop:15}}>
-   
-      <ScrollView
-        keyboardShouldPersistTaps="handled"
-        bounces={false}
-        showsVerticalScrollIndicator={false}
-        style={{flex: 1}}
-        contentContainerStyle={{
-          alignItems: 'center',
-          flexGrow: 1,
-        }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            height:140
-          }}>
-          <Logo size={180} />
-        </View>
-        <View style={{flex: 1,marginTop:10}}>{children}</View>
-      </ScrollView>
-    </View>
+      <View style={styles.flex}>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          style={styles.flex}
+          contentContainerStyle={styles.content}>
+          <View
+            style={styles.container}>
+          </View>
+          <View style={styles.main}>{children}</View>
+        </ScrollView >
+      </View>
+      :
+      <View style={styles.maincontent}>
+
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          bounces={false}
+          showsVerticalScrollIndicator={false}
+          style={styles.flex}
+          contentContainerStyle={styles.mainlogo}>
+          <View
+            style={styles.logo}>
+            <Logo size={180} />
+          </View>
+          <View style={styles.child}>{children}</View>
+        </ScrollView>
+      </View>
   );
 };
+
+
+const styles = StyleSheet.create({
+  flex:{flex:1},
+  content:{
+    alignItems: 'center',
+    flexGrow: 1,
+  },
+  container:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  main:{ flex: 1, marginTop: 30 },
+  maincontent:{ flex: 1, marginTop: 15 },
+  mainlogo:{
+    alignItems: 'center',
+    flexGrow: 1,
+  },
+  logo:{
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 140
+  },
+  child:{ flex: 1, }
+})

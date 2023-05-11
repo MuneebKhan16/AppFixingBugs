@@ -2,20 +2,13 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  Switch,
-  FlatList,
-  Image,
-  TouchableOpacity,
   ScrollView,
-  StyleSheet
 } from 'react-native';
 import Icons from '../../../assets/Icons';
 import AppBackground from '../../../components/AppBackground';
-import CustomButton from '../../../components/CustomButton';
-import { Colors, NavService } from '../../../config';
 import Mainprofile from '../../../components/Mainprofile';
 import Heading from '../../../components/Heading';
-
+import { styles } from './creator_styles';
 const Aboutthecreator = () => {
   return (
     <AppBackground
@@ -24,35 +17,20 @@ const Aboutthecreator = () => {
       notification={false}
       back
       home>
-      <ScrollView style={{ marginTop: 20 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.main} showsVerticalScrollIndicator={false}>
         <Mainprofile
           txt
           center
           top
           subtitle="johnsmith@gmail.com"
         />
-        <View style={{ marginTop: 30 }}>
+        <View style={styles.top}>
           <Heading name="Facebook.com" icon={Icons.fbk} />
           <Heading name="Twitter.com" icon={Icons.twitter} />
           <Heading name="Instagram" icon={Icons.instagram} />
         </View>
-        <Text style={{
-          marginLeft: 14,
-          marginTop: 20,
-          color: Colors.purple,
-          fontWeight: 'bold',
-          fontSize: 20,
-          fontStyle: 'italic'
-        }}>Description From The Author</Text>
-        <Text style={{
-          textDecorationLine:'underline',
-          fontWeight:'500',
-          marginTop:10,
-          fontSize:18,
-          color:'#5A5A5A',
-          marginLeft:10,
-          marginRight:2
-        }}>
+        <Text style={styles.heading}>Description From The Author</Text>
+        <Text style={styles.subheading}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
         </Text>
       </ScrollView>
@@ -60,6 +38,5 @@ const Aboutthecreator = () => {
   )
 }
 
-export default Aboutthecreator
+export default React.memo(Aboutthecreator)
 
-const styles = StyleSheet.create({})
