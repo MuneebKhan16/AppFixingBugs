@@ -30,6 +30,7 @@ import Mymdll from '../../../components/Mymdll';
 import { styles } from './eventpost_styles';
 import { post_events } from '../../../redux/APIs'
 import GooglePlaceAutocomplete from '../../../components/Google_Location'
+import Pickeventdate from '../../../components/Pickeventdate';
 const EventPost = props => {
   const { user } = props;
   const actionSheetStateRef = useRef();
@@ -132,7 +133,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{ flex: 1, height: 280 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1,}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -151,6 +152,7 @@ const EventPost = props => {
 
             <View style={styles.picker}>
               <CustomImagePicker
+              uploadVideo
                 onImageChange={(path, mime) => {
                   setSelectedImage({ path, mime });
                 }}>
@@ -163,6 +165,20 @@ const EventPost = props => {
           </View>
           <View style={styles.top}>
             <TextInput
+              style={styles.maincontainer}
+              onChangeText={title => setTitle(title)}
+              value={title}
+              placeholder="Name of Location"
+              placeholderTextColor={Colors.black}
+            />
+             <TextInput
+              style={styles.maincontainer}
+              onChangeText={title => setTitle(title)}
+              value={title}
+              placeholder="Name of Location"
+              placeholderTextColor={Colors.black}
+            />
+             <TextInput
               style={styles.maincontainer}
               onChangeText={title => setTitle(title)}
               value={title}
@@ -202,6 +218,7 @@ const EventPost = props => {
               />
             </View>
             <PickerComptwo />
+            <Pickeventdate />
             <CustomButton
               buttonStyle={styles.btn}
               title="Posts"
@@ -209,14 +226,13 @@ const EventPost = props => {
             />
           </View>
         </View>
-      </ScrollView>
       {/* Modal */}
       <Modal
         isVisible={popUp}
         style={styles.modal}
         backdropOpacity={0.7}
-
-      >
+        
+        >
         <View style={styles.posting}>
           {/* <TouchableOpacity 
           onPress={() => togglePopUp()}
@@ -233,8 +249,8 @@ const EventPost = props => {
             borderRadius:10,
            
           }}>
-            <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
-          </TouchableOpacity> */}
+          <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
+        </TouchableOpacity> */}
           <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
         </View>
         <View style={styles.category}>
@@ -249,7 +265,7 @@ const EventPost = props => {
             {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
-            <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
+          <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
           </View>
 
         </View>
@@ -260,9 +276,10 @@ const EventPost = props => {
           }}
           title="Close"
           onPress={() => togglePopUp()}
-        />
+          />
 
       </Modal>
+          </ScrollView>
     </AppBackground>
   );
 };

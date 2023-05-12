@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React ,{useContext} from 'react';
+import React, { useContext } from 'react';
 import { Colors, NavService } from '../config';
 import Icons from '../assets/Icons';
 import StarRating from 'react-native-star-rating';
@@ -11,7 +11,7 @@ const Mainprofile = props => {
   const profile_Data = useSelector((state) => state.reducer.user);
   const { userProfile } = useContext(eventContext);
 
-  console.log('userProfile',userProfile)
+  console.log('userProfile', userProfile)
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
   const [starCount, setStarCount] = React.useState(1);
   const { name, subtitle, center, row, top, star, edit, inc, size, txt, location } = props;
@@ -26,28 +26,28 @@ const Mainprofile = props => {
       {top ? (
         <View style={styles.container}>
           <Image
-            source={{ uri:  userProfile?.profile_picture  ?  `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
+            source={{ uri: userProfile?.profile_picture ? `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
             resizeMode='center'
             style={styles.pic}
           />
         </View>
       ) : (
-        <View  style={{marginBottom:10}}>
+        <View style={{ marginBottom: 10, }}>
           <Image
-            source={{ uri:  userProfile?.profile_picture  ?  `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
+            source={{ uri: userProfile?.profile_picture ? `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
             style={{
               width: inc ? 50 : 75,
               height: inc ? 50 : 75,
               borderRadius: 50,
               borderWidth: 2,
               borderColor: Colors.purple,
-              marginBottom:10
-              
+              marginBottom: 10,
+
             }}
           />
           {edit ? (
             <TouchableOpacity
-            onPress={() => NavService.navigate('EditProfile')}
+              onPress={() => NavService.navigate('EditProfile')}
               style={styles.profilepic}>
               <Image
                 source={Icons.edit}
@@ -65,7 +65,7 @@ const Mainprofile = props => {
           style={{
             fontSize: txt ? 18 : 19,
             fontWeight: '700',
-            color: Colors.black,            
+            color: Colors.black,
             textAlign: row ? null : 'center',
             textTransform: 'capitalize',
 
@@ -97,14 +97,16 @@ const Mainprofile = props => {
       {inc ? (
         <View
           style={styles.mark}>
-          <Image
-            source={Icons.marker}
-            resizeMode="center"
-            style={styles.marker}
-          />
-          <Text style={styles.location} numberOfLines={1} >
-            {props.location}
-          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 18 }}>
+            <Image
+              source={Icons.marker}
+              resizeMode="center"
+              style={styles.marker}
+            />
+            <Text style={styles.location} numberOfLines={1} >
+              {props.location}
+            </Text>
+          </View>
         </View>
       ) : null}
     </View>
@@ -128,10 +130,10 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    borderWidth:2,
-    borderColor:Colors.purple,
-    
-    
+    borderWidth: 2,
+    borderColor: Colors.purple,
+
+
   },
   profilepic: {
     padding: 12,
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     resizeMode: 'contain',
-    
+
   },
   mark: {
     flexDirection: 'row',
@@ -159,7 +161,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     position: 'absolute',
 
+
   },
   marker: { width: 30, height: 30, },
-  location: { fontSize: 14, color: Colors.black,  fontWeight: '600', ellipsizeMode:'middle',maxWidth:150 },
+  location: { fontSize: 14, color: Colors.black, fontWeight: '600', ellipsizeMode: 'middle', maxWidth: 150 },
 });

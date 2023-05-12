@@ -47,6 +47,5 @@ export const styles = StyleSheet.create({
   center: { alignSelf: 'center' },
   txt: {
     fontSize: 20, marginLeft: 10, color: Colors.white, 
-    textTransform: 'capitalize',
   }
 })

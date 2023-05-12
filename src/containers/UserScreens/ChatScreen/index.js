@@ -55,7 +55,7 @@ const ChatScreen = (props) => {
     if (message.length > 0) {
       loaderStart();
       var payload = ''
-      if(conversation_id != null ){ // chat through search user: already existing chats 
+      if(conversation_id != null ){ 
       payload = {
           sender_id: sender_id,
           receiver_id: receiver_id,
@@ -64,7 +64,7 @@ const ChatScreen = (props) => {
           msg_type: 'text',
         };
       }
-      else{  // direct chat through event page :totally new chat initiation
+      else{  
       payload = {
           sender_id: user?.id,
           receiver_id: props?.route?.params?.id,

@@ -78,5 +78,7 @@ eventlist:require('./eventlist.png'),
 homelist:require('./homelist.png'),
 chatlist:require('./chalist.png'),
 subscription:require('./subcription.png'),
-null:require('../Icons/null.png')
+null:require('../Icons/null.png'),
+left:require('../Icons/left.png'),
+right:require('../Icons/right.png')
 };
