@@ -14,21 +14,25 @@ import AppBackground from '../../../components/AppBackground';
 import Mainprofile from '../../../components/Mainprofile';
 import Posts from '../../../components/Posts';
 import { useSelector } from 'react-redux';
-import { get_reviews_event } from '../../../redux/APIs/index'
+import { get_reviews_event ,delete_rating } from '../../../redux/APIs/index'
 import eventContext from '../../EventScreens/eventContext';
 const { width, height } = Dimensions.get('window');
 import { styles } from './profile_style';
 const Profile = props => {
   const [UserPost, setUserPost] = useState([]);
-  const profile_Data = useSelector((state) => state.reducer.user)
+  const [deletePost, setdeletePost] = useState('')
+  const profile_Data = useSelector((state) => state?.reducer?.user)
   const { userProfile } = useContext(eventContext);
 
-  console.log('userProfile',userProfile)
+  console.log('objectsss',UserPost)
 
   useEffect(() => {
     get_reviews_event(profile_Data.api_token).then((res) => setUserPost(res.Data));
-  }, [])
-console.log('profile_Data',profile_Data)
+    if(deletePost){
+      delete_rating(deletePost) && get_reviews_event(profile_Data.api_token).then((res) => setUserPost(res.Data));
+    }
+  }, [deletePost])
+
   return (
     <AppBackground title={'User Profile'} home setting>
       <ScrollView
@@ -46,7 +50,21 @@ console.log('profile_Data',profile_Data)
             style={styles.post}>
             Post History
           </Text>
-          <Posts UserPost={UserPost} profile_Data={profile_Data} />
+          {
+            UserPost && UserPost.length > 0 ? 
+            (
+              <Posts UserPost={UserPost} profile_Data={profile_Data} setdeletePost={setdeletePost} />
+            )
+            :
+            (
+              
+                <View style={styles.container1}>
+                  <Text style={styles.txtheadersty}>No User Data Available</Text>
+                </View>
+                
+
+            )
+          }
 
         </View>
       </ScrollView>

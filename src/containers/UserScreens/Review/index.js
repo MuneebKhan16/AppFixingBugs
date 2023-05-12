@@ -70,7 +70,7 @@ const Review = (props) => {
           style={styles.post}>
           Ratings & Posts
         </Text>
-        {<EventsPosts datas={filteringData} />}
+        <EventsPosts datas={filteringData} />
 
       </ScrollView>
       <CustomButton

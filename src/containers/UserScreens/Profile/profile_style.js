@@ -12,5 +12,7 @@ export const styles = StyleSheet.create({
         textTransform: 'capitalize',
       },
       btm:{marginBottom: 5},
-      top:{marginTop: 10}
+      top:{marginTop: 10},
+      container1: { paddingTop: 200, justifyContent: 'center', alignItems: 'center', flex: 1, },
+  txtheadersty: { fontSize: 25, fontWeight: 'bold', color: Colors.black }
 })

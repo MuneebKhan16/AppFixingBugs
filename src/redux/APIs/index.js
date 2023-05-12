@@ -455,3 +455,21 @@ export async function showprofiledetail() {
   const data = await getApi('show-profile');
   return data;
 }
+
+export async function delete_rating(id){
+
+  const params = {
+    id : id
+  }
+  const data = await postApi('delete-rating',params)
+  if (data?.status == 1) {
+    Toast.show({
+      text1: data.message,
+      type: 'success',
+      visibilityTime: 2000,
+    });
+   
+  }
+  get_reviews_event()
+ 
+}

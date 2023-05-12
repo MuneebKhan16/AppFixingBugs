@@ -7,7 +7,8 @@ import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config/Common'
 import FastImage from 'react-native-fast-image'
-const Posts = ({ UserPost, profile_Data }) => {
+import { TouchableOpacity } from 'react-native-gesture-handler';
+const Posts = ({ UserPost, profile_Data , setdeletePost }) => {
   const [starCount, setStarCount] = useState(1);
 
   const ConvertTimeStamp = (date) => {
@@ -16,6 +17,12 @@ const Posts = ({ UserPost, profile_Data }) => {
     const readable = hours + " " + "Hours" + ' ' + 'ago';
     return readable;
   }
+
+  const handleDelete =  (data) => {
+    const rating_id = data?.id;
+    setdeletePost(rating_id)
+  }
+
   return (
 
 
@@ -64,11 +71,16 @@ const Posts = ({ UserPost, profile_Data }) => {
                     resizeMode="stretch"
                     style={styles.img}
                   /> */}
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 10 }}>
 
-                  <Text
-                    style={styles.tags}>
-                    {"#" + " " + data.tags}
-                  </Text>
+                    <Text
+                      style={styles.tags}>
+                      {"#" + " " + data.tags}
+                    </Text>
+                    <TouchableOpacity onPress={() => handleDelete(data)}>
+                      <Image resizeMode='contain' source={Icons.bin} style={{ width: 25, height: 25, marginRight: 5, tintColor: Colors.purple }} />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             )
@@ -127,7 +139,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#000',
     marginLeft: 12,
-    marginTop: 10,
 
     textTransform: 'capitalize',
   },
@@ -137,5 +148,5 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   container1: { paddingTop: 200, justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { fontSize: 25, fontWeight: 'bold',color:Colors.black }
+  txtheadersty: { fontSize: 25, fontWeight: 'bold', color: Colors.black }
 });
