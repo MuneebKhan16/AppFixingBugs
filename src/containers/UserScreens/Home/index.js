@@ -38,6 +38,7 @@ export class Home extends Component {
   state = {
     popUp: true,
     location: '',
+    Locations: '',
     date: false,
     isVisible: false,
     selectedId: '',
@@ -45,6 +46,7 @@ export class Home extends Component {
     categoryid: null,
     feature: [],
     text: '',
+    u: '',
     isFocused: false,
     modalVisible: false,
     geolocation: false,
@@ -98,7 +100,9 @@ export class Home extends Component {
     console.log("345",url)
     const data = await fetch(url);
     const resp = await data.json();
-    this.setState({ text : JSON.stringify(resp?.results[0]?.formatted_address)})
+    this.setState({ text : JSON.stringify(resp?.results[0]?.formatted_address).replace(/['"]/g, '')})
+
+  
   }
   setGeoLocation = async (geolocation) => {
 
@@ -141,6 +145,7 @@ export class Home extends Component {
       categoryid,
       feature,
       text,
+      u,
       isFocused,
       modalVisible,
     } = this.state;
@@ -206,9 +211,11 @@ export class Home extends Component {
               <View>
                 <Text style={styles.mdltxt}>Please enter the location</Text>
                 <Btn Setlocations={this.setGeoLocation} />
-                {
-                  this.state.geolocation ?
+              
+                 {
+                  this.state.geolocation ? 
                   (
+                    <>
                     <GooglePlaceAutocomplete
                       callback={(address, geometry) =>
                         console.log('address, geometry', address, geometry)
@@ -228,12 +235,13 @@ export class Home extends Component {
                         borderColor: Colors.lightGrey
                       }}
                       iconColor
-                      placeholder={text !== '' ? text  : 'Current Location'}
+                      // placeholder={text !== '' ? text  : 'Current Location'}
+                      placeholder={
+                        text !== '' ? text.split(' ').slice(0,1).pop()+" "+text.split(' ').slice(1,2).pop()+" "+text.split(' ').slice(2,3).pop() : 'Address'
+                      }
+                    
                     
                     />
-                  )
-                  :
-                  (
                     <View style={{ flexDirection:"row" ,justifyContent:'space-between' }}>
                     <GooglePlaceAutocomplete
                       callback={(address, geometry) =>
@@ -254,7 +262,9 @@ export class Home extends Component {
                         borderColor: Colors.lightGrey
                       }}
                       iconColor
-                      placeholder={text !== '' ? text  : 'City'}
+                      placeholder={
+                        text.split(' ').length > 1 ? text.split(' ').slice(-4, -3).pop() : 'City'
+                      }
                     
                     />
                     <GooglePlaceAutocomplete
@@ -276,13 +286,118 @@ export class Home extends Component {
                       borderColor: Colors.lightGrey
                     }}
                     iconColor
-                    placeholder={text !== '' ? text  : 'State'}
+                    
+                    placeholder={ 
+                        // s = text.split(' ').map(data => data)
+
+                        text.split(' ').length > 1 ? text.split(' ').slice(-2, -1).pop() : 'State'
+                     }
+
                   
+                    
                   />
                     </View>
+                    </>
                   )
-                }
-                {console.log('bvcxz',text)}
+                  :
+                  (
+                    <>
+                       <GooglePlaceAutocomplete
+                      callback={(address, geometry) => {
+                        console.log('address, geometry', address, geometry)
+                        this.setState({ Locations :address})
+                      }
+                      }
+                      onPress={(data, details = null) => {
+                        console.log(data, details);
+                        // const { lat, lng } = details.geometry.location;
+                        // console.log(lat, lng );
+                      }}
+                      
+                    
+                      wrapperStyles={{
+                        width: '100%',
+                      }}
+                      inputStyles={{
+                        borderWidth: 1,
+                        borderColor: Colors.lightGrey
+                      }}
+                      iconColor
+                      placeholder={
+                    
+                        this.state.Locations.split(' ').length > 1 ? this.state.Locations.split(' ').slice(-3, -2).pop() : 'Address'
+                        
+                      }
+                    
+                    
+                    />
+                    <View style={{ flexDirection:"row" ,justifyContent:'space-between' }}>
+                    <GooglePlaceAutocomplete
+                      callback={(address, geometry) => {
+                        console.log('address, geometry', address, geometry)
+                        this.setState({ Locations :address})
+                      }
+                      }
+                      onPress={(data, details = null) => {
+                        console.log(data, details);
+                        // const { lat, lng } = details.geometry.location;
+                        // console.log(lat, lng );
+                      }}
+                      
+                    
+                      wrapperStyles={{
+                        width: '49%',
+                      }}
+                      inputStyles={{
+                        borderWidth: 1,
+                        borderColor: Colors.lightGrey
+                      }}
+                      iconColor
+                      placeholder={
+                        this.state.Locations ? this.state.Locations.split(' ').slice(-5, -4).pop()+" "+ this.state.Locations.split(' ').slice(-4, -3).pop() : 'City'
+                      }
+                    
+                    />
+                    <GooglePlaceAutocomplete
+                    callback={(address, geometry) => {
+                      console.log('address, geometry', address, geometry)
+                      this.setState({ Locations :address})
+                    }
+                    }
+                    onPress={(data, details = null) => {
+                      console.log(data, details);
+                      // const { lat, lng } = details.geometry.location;
+                      // console.log(lat, lng );
+                    }}
+                    
+                  
+                    wrapperStyles={{
+                      width: '49%',
+                    }}
+                    inputStyles={{
+                      borderWidth: 1,
+                      borderColor: Colors.lightGrey
+                    }}
+                    iconColor
+                    
+                    placeholder={ 
+                        
+
+                        this.state.Locations.split(' ').length > 1 ? this.state.Locations.split(' ').slice(-3, -2).pop() : 'State'
+                     }
+
+                  
+                    
+                  />
+                    </View>
+                    </>
+                  )
+                 }
+                
+                  
+               {/* {console.log('bvcxz', text ,"jjjj", text.split(' ').slice( 0 ,3) , "kkk" , text.split(' ').slice( 0 ,3).pop())}  */}
+               {console.log('bvcxz', this.state.Locations )} 
+
                 {/* {text.length <= 0 ? (
                   <Text style={{color: Colors?.purple, fontSize: 16}}>
                     Address required

@@ -12,8 +12,6 @@ const GooglePlaceAutocomplete = ({
   inputStyles,
   placeholder,
   iconColor,
-  currentLocationLabel,
-  currentLocation
 }) => {
   return (
     <View style={[styles.geoLocationView, wrapperStyles]}>
@@ -23,8 +21,8 @@ const GooglePlaceAutocomplete = ({
         disableScroll
         enablePoweredByContainer={false}
         keepResultsAfterBlur={true}
-        currentLocation={true}
-        currentLocationLabel= {currentLocationLabel ? currentLocationLabel :  'Current location' }
+     
+     
         listViewDisplayed={false}
         placeholder={placeholder ? placeholder : 'Address'}
         placeholderTextColor={iconColor ? Colors.primary : Colors.black}

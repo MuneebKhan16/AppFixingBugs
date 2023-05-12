@@ -29,6 +29,7 @@ import { store } from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import { styles } from './eventpost_styles';
 import { post_events } from '../../../redux/APIs'
+import Pickeventdate from '../../../components/Pickeventdate';
 import GooglePlaceAutocomplete from '../../../components/Google_Location'
 const EventPost = props => {
   const { user } = props;
@@ -38,6 +39,9 @@ const EventPost = props => {
   const [text, settext] = useState();
 
   const [location, setLocation] = useState(null);
+  const [city, setCity] = useState(null);
+  const [states, setStates] = useState(null);
+
   const [currentlocation, setcurrentlocation] = useState(null);
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -132,7 +136,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{ flex: 1, height: 280 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1, }} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -174,15 +178,16 @@ const EventPost = props => {
               setSelectedData={setSelectedData}
             />
 
+            
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ?
                 <Text style={{ color: '#000' }}>
-                  {location}
+                  {location.split(' ').slice(0,1).pop()+" "+location.split(' ').slice(1,2).pop()+" "+location.split(' ').slice(2,3).pop()+" "+location.split(' ').slice(3,4).pop()+" "+location.split(' ').slice(4,5).pop()+" "+location.split(' ').slice(5,6).pop()+" "+location.split(' ').slice(6,7).pop()}
                 </Text>
                 : currentlocation ?
                   <Text style={{ color: '#000' }}>
-                    {currentlocation}
+                    {currentlocation.split(' ').slice(0,1).pop()+" "+currentlocation.split(' ').slice(1,2).pop()+" "+currentlocation.split(' ').slice(2,3).pop()}
                   </Text>
                   : null
               }
@@ -198,6 +203,55 @@ const EventPost = props => {
               />
             </TouchableOpacity>
 
+            <View style={{flexDirection:'row',alignItems:'center'}}>
+            <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
+              {location ?
+                <Text style={{ color: '#000' }}>
+                  { location.split(' ').slice(-5, -4).pop()+" "+location.split(' ').slice(-4, -3).pop()}
+                </Text>
+                : currentlocation ?
+                  <Text style={{ color: '#000' }}>
+                    {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-4, -3).pop() : 'City'}
+                    
+                  </Text>
+                  : null
+              }
+
+              <Image source={Icons.marker} style={styles.marker} />
+              <Mymdll
+                isVisible={isModalVisible}
+                onClose={handleCloseModal}
+                setLocation={setLocation}
+                location={location}
+                currentlocation={currentlocation}
+                setcurrentlocation={setcurrentlocation}
+              />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
+              {location ?
+                <Text style={{ color: '#000' }}>
+                  {location.split(' ').slice(-3, -2).pop()}
+                </Text>
+                : currentlocation ?
+                  <Text style={{ color: '#000' }}>
+                   {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
+                  </Text>
+                  : null
+              }
+
+              <Image source={Icons.marker} style={styles.marker} />
+              <Mymdll
+                isVisible={isModalVisible}
+                onClose={handleCloseModal}
+                setLocation={setLocation}
+                location={location}
+                currentlocation={currentlocation}
+                setcurrentlocation={setcurrentlocation}
+              />
+            </TouchableOpacity>
+           
+            </View>
             <View style={styles.descp}>
               <TextInput
                 placeholder="Description"
@@ -209,6 +263,7 @@ const EventPost = props => {
               />
             </View>
             <PickerComptwo />
+            <Pickeventdate />
             <CustomButton
               buttonStyle={styles.btn}
               title="Posts"

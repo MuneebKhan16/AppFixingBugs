@@ -43,7 +43,7 @@ const MyMdl = ({ isVisible, onClose , setLocation,location ,currentlocation ,set
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
     const data = await fetch(url);
     const resp = await data.json();
-    const currentLocation = JSON.stringify(resp?.results[0]?.formatted_address);
+    const currentLocation = JSON.stringify(resp?.results[0]?.formatted_address).replace(/['"]/g, '');
     setcurrentlocation(currentLocation)
     return currentLocation;
   } catch (error) {
@@ -86,6 +86,7 @@ const MyMdl = ({ isVisible, onClose , setLocation,location ,currentlocation ,set
                   inputStyles={{
                     borderWidth: 1,
                     borderColor: Colors.lightGrey,
+                    
                   }}
                   iconColor
                   placeholder={ location !== '' ?  location  : currentlocation !== '' ? currentlocation : 'Address'}
@@ -93,7 +94,7 @@ const MyMdl = ({ isVisible, onClose , setLocation,location ,currentlocation ,set
                 />
         {/* Single */}
   
-     
+     {console.log('currentlocation',currentlocation)}
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
           <Text style={styles.closeButtonText}>{textInputEditable == false ? 'Done' : 'Close'}</Text>
         </TouchableOpacity>
