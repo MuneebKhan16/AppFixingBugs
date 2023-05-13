@@ -31,6 +31,7 @@ import Event from './Event';
 import Review from './Review';
 import Post from './Post';
 import Aboutthecreator from './AbouttheCreator';
+import Subscription from './Subscriptions';
 // import TermsConditions from './TermsConditions';
 // EventScreens
 import EventHome from '../EventScreens/EventHome';
@@ -204,7 +205,11 @@ const ScreenStack = () => {
           options={{headerShown: false}}
         />
       
-      
+      <Stack.Screen
+          name="Subscription"
+          component={Subscription}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Review"
           component={Review}

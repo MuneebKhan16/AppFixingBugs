@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View,Dimensions } from 'react-native'
 import { Colors, NavService } from '../../../config';
-const {width,height} = Dimensions.get('window')
+const { width, height } = Dimensions.get('window');
+
 export const styles = StyleSheet.create({
   cancel: {
     color: 'rgb(0,88,200)',
@@ -82,7 +84,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    height:height * 1.1
+    height:height * 1.2
+    
   },
   searchBox: {
     width: '90%',
@@ -103,7 +106,7 @@ export const styles = StyleSheet.create({
     height: 1,
     color: Colors.black
   },
-  description: {
+  descriptions: {
     fontSize: 16,
     color:Colors.black,
     marginLeft:10
@@ -131,7 +134,7 @@ export const styles = StyleSheet.create({
     height: 50,
     color: Colors.black
   },
-  city:{
+  citys:{
     backgroundColor: '#ededed',
     marginTop: 10,
     width:140,
@@ -141,7 +144,7 @@ export const styles = StyleSheet.create({
     color: Colors.black,
     justifyContent:'center'
   },
-  state:{
+  states:{
     backgroundColor: '#ededed',
     marginTop: 10,
     width: 150,

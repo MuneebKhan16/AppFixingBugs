@@ -1,3 +1,4 @@
+
 export default Icons = {
   user: require('./user.png'),
   profile: require('./profile.png'),
@@ -79,5 +80,6 @@ homelist:require('./homelist.png'),
 chatlist:require('./chalist.png'),
 subscription:require('./subcription.png'),
 null:require('../Icons/null.png'),
-current:require('../Icons/icons8-my-location-50.png')
+left:require('../Icons/left.png'),
+right:require('../Icons/right.png')
 };

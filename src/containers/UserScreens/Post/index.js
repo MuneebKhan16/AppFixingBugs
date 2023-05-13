@@ -29,7 +29,8 @@ class Post extends Component {
     isChecked: false,
     isChecked1: false,
     isChecked2: false,
-    checkbox: Checkbox
+    checkbox: Checkbox,
+    selectedVideo:null
 
   };
   constructor(props) {
@@ -71,7 +72,7 @@ class Post extends Component {
 
 
     const { id } = this.props.user
-    const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox } = this.state
+    const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox,selectedVideo } = this.state
 
     if (!selectedImage) {
       return Toast.show({
@@ -133,7 +134,7 @@ class Post extends Component {
   }
   render() {
 
-    const { userImage, selectedImage, } =
+    const { userImage, selectedImage,selectedVideo } =
       this.state;
     const { user } = this.props
 
@@ -163,9 +164,9 @@ class Post extends Component {
           </View>
           <ActionSheet
             ref={this.actionSheetStateRef}
-            containerStyle={{backgroundColor: 'transparent'}}>
-            <View style={{padding: 10, paddingBottom: 20}}>
-            <TouchableOpacity
+            containerStyle={{ backgroundColor: 'transparent' }}>
+            <View style={{ padding: 10, paddingBottom: 20 }}>
+              <TouchableOpacity
                 onPress={() => actionSheetStateRef.current.hide()}
                 style={{
                   backgroundColor: 'white',
@@ -190,14 +191,22 @@ class Post extends Component {
               <ProfileImage
                 name={user?.name}
                 imageUri={selectedImage ? selectedImage.path : userImage}
+                videoUri={selectedVideo ? selectedVideo.path : null}
               />
               <View
                 style={styles.picker}>
                 <CustomImagePicker
-                 onImageChange={(path, mime) => {
-                  console.log('path', path);
-                  this.setState({selectedImage: {path, mime}});
-                }}>
+                  uploadVideo
+                  onImageChange={(path, mime) => {
+                    console.log('path', path);
+                    if (mime.startsWith('image/')) {
+                      this.setState({ selectedImage: { path, mime }, selectedVideo: null });
+                    } else if (mime.startsWith('video/')) {
+                      this.setState({ selectedVideo: { path, mime }, selectedImage: null });
+                    }
+
+                  }}>
+                    
                   <View style={styles.item}>
                     <Image
                       source={Icons.upload}

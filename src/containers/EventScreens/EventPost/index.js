@@ -30,7 +30,8 @@ import Mymdll from '../../../components/Mymdll';
 import { styles } from './eventpost_styles';
 import { post_events } from '../../../redux/APIs'
 import Pickeventdate from '../../../components/Pickeventdate';
-import GooglePlaceAutocomplete from '../../../components/Google_Location'
+
+
 const EventPost = props => {
   const { user } = props;
   const actionSheetStateRef = useRef();
@@ -51,6 +52,8 @@ const EventPost = props => {
   const [state, setState] = useState(user?.state);
   const [userImage, setUserImage] = useState(user?.image);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedVideo, setselectedVideo] = useState(null);
+
   const [selectedItem, setSelectedItem] = useState(null);
 
   const handleSelect = item => {
@@ -136,7 +139,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{ flex: 1, }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1,}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -151,12 +154,22 @@ const EventPost = props => {
             <ProfileImage
               name={user?.name}
               imageUri={selectedImage ? selectedImage.path : userImage}
-            />
+              videoUri={selectedVideo ? selectedVideo.path : null}
+
+           />
 
             <View style={styles.picker}>
               <CustomImagePicker
+              uploadVideo
                 onImageChange={(path, mime) => {
                   setSelectedImage({ path, mime });
+                  if (mime.startsWith('image/')) {
+                    setSelectedImage({ path, mime });
+                    setselectedVideo(null);
+                  } else if (mime.startsWith('video/')) {
+                    setselectedVideo({ path, mime });
+                    setSelectedImage(null);
+                  }
                 }}>
                 <View style={styles.mime}>
                   <Image source={Icons.upload} style={styles.upload} />
@@ -167,6 +180,20 @@ const EventPost = props => {
           </View>
           <View style={styles.top}>
             <TextInput
+              style={styles.maincontainer}
+              onChangeText={title => setTitle(title)}
+              value={title}
+              placeholder="Name of Location"
+              placeholderTextColor={Colors.black}
+            />
+             <TextInput
+              style={styles.maincontainer}
+              onChangeText={title => setTitle(title)}
+              value={title}
+              placeholder="Name of Location"
+              placeholderTextColor={Colors.black}
+            />
+             <TextInput
               style={styles.maincontainer}
               onChangeText={title => setTitle(title)}
               value={title}
@@ -204,7 +231,7 @@ const EventPost = props => {
             </TouchableOpacity>
 
             <View style={{flexDirection:'row',alignItems:'center'}}>
-            <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
+            <TouchableOpacity style={styles.citys} onPress={handleOpenModal}>
               {location ?
                 <Text style={{ color: '#000' }}>
                   { location.split(' ').slice(-5, -4).pop()+" "+location.split(' ').slice(-4, -3).pop()}
@@ -228,7 +255,7 @@ const EventPost = props => {
               />
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
+            <TouchableOpacity style={styles.states} onPress={handleOpenModal}>
               {location ?
                 <Text style={{ color: '#000' }}>
                   {location.split(' ').slice(-3, -2).pop()}
@@ -256,7 +283,7 @@ const EventPost = props => {
               <TextInput
                 placeholder="Description"
                 multiline={true}
-                style={styles.description}
+                style={styles.descriptions}
                 onChangeText={dec => setDec(dec)}
                 value={dec}
                 placeholderTextColor={Colors.black}
@@ -271,14 +298,13 @@ const EventPost = props => {
             />
           </View>
         </View>
-      </ScrollView>
       {/* Modal */}
       <Modal
         isVisible={popUp}
         style={styles.modal}
         backdropOpacity={0.7}
-
-      >
+        
+        >
         <View style={styles.posting}>
           {/* <TouchableOpacity 
           onPress={() => togglePopUp()}
@@ -295,8 +321,8 @@ const EventPost = props => {
             borderRadius:10,
            
           }}>
-            <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
-          </TouchableOpacity> */}
+          <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
+        </TouchableOpacity> */}
           <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
         </View>
         <View style={styles.category}>
@@ -311,7 +337,7 @@ const EventPost = props => {
             {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
-            <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
+          <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
           </View>
 
         </View>
@@ -322,9 +348,10 @@ const EventPost = props => {
           }}
           title="Close"
           onPress={() => togglePopUp()}
-        />
+          />
 
       </Modal>
+          </ScrollView>
     </AppBackground>
   );
 };

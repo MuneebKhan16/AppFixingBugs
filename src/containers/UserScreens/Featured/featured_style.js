@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
       height: 18,
       resizeMode: 'contain',
     },
-    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 16,  textTransform: 'capitalize', },
+    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 16,  width:280 },
     border:{ borderRadius: 10 }
   });
   
