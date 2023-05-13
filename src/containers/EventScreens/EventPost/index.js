@@ -35,9 +35,9 @@ import Pickeventdate from '../../../components/Pickeventdate';
 const EventPost = props => {
   const { user } = props;
   const actionSheetStateRef = useRef();
-  const [isLoading, setIsLoading] = useState(false);
+  
   const [popUp, setPopUp] = useState(true);
-  const [text, settext] = useState();
+  
 
   const [location, setLocation] = useState(null);
   const [city, setCity] = useState(null);
@@ -93,37 +93,45 @@ const EventPost = props => {
       });
     }
 
-    if (!location) {
-      return Toast.show({
-        text1: 'No Location Found',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
+    // if (!location) {
+    //   return Toast.show({
+    //     text1: 'No Location Found',
+    //     type: 'error',
+    //     visibilityTime: 3000,
+    //   });
+    // }
 
-    if (!selectedImage) {
-      return Toast.show({
-        text1: 'No Image Found',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
+    // if (!selectedImage) {
+    //   return Toast.show({
+    //     text1: 'No Image Found',
+    //     type: 'error',
+    //     visibilityTime: 3000,
+    //   });
+    // }
 
+    const imagesandvideos = []
+    const eventImages = {
+      uri: selectedImage ? selectedImage?.path : selectedVideo?.path,
+      name: 'event',
+      type: selectedImage ? selectedImage?.mime : selectedVideo?.mime,
+    };
+    imagesandvideos.push(eventImages)
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
-    const event_image = {
-      uri: selectedImage?.path,
-      name: `rating`,
-      type: selectedImage?.mime,
-    };
+    const event_image = imagesandvideos;
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
-    const event_location = location;
-    console.log('first', location)
+    const event_location = currentlocation ? 
+    currentlocation.split(' ').slice(0,1).pop()+" "+currentlocation.split(' ').slice(1,2).pop()+" "+currentlocation.split(' ').slice(2,3).pop() : 
+    location.split(' ').slice(0,1).pop()+" "+location.split(' ').slice(1,2).pop()+" "+location.split(' ').slice(2,3).pop()+" "+location.split(' ').slice(3,4).pop()+" "+location.split(' ').slice(4,5).pop()+" "+location.split(' ').slice(5,6).pop()+" "+location.split(' ').slice(6,7).pop()
+    const state = currentlocation.split(' ').slice(-2, -1).pop();
+    const city = currentlocation.split(' ').slice(-4, -3).pop();
+    const event_date = '12-02-2023'
 
-    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location)
+    console.log('rty', event_title, event_type, event_description, event_image, user_id, category_id, event_location,state,city,event_date)
 
+    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location,state,city,event_date)
 
   };
 
@@ -186,20 +194,7 @@ const EventPost = props => {
               placeholder="Name of Location"
               placeholderTextColor={Colors.black}
             />
-             <TextInput
-              style={styles.maincontainer}
-              onChangeText={title => setTitle(title)}
-              value={title}
-              placeholder="Name of Location"
-              placeholderTextColor={Colors.black}
-            />
-             <TextInput
-              style={styles.maincontainer}
-              onChangeText={title => setTitle(title)}
-              value={title}
-              placeholder="Name of Location"
-              placeholderTextColor={Colors.black}
-            />
+             
             <PickerCompone
               categories={Categorys}
               setSelectedData={setSelectedData}
@@ -262,7 +257,7 @@ const EventPost = props => {
                 </Text>
                 : currentlocation ?
                   <Text style={{ color: '#000' }}>
-                   {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
+                   { currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
                   </Text>
                   : null
               }

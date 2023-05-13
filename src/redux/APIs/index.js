@@ -401,6 +401,9 @@ export async function post_events(
   user_id,
   category_id,
   event_location,
+  state,
+  city,
+  event_date
 ) {
 
   if (
@@ -409,21 +412,28 @@ export async function post_events(
     event_description != null &&
     event_image != null &&
     category_id != null &&
-    event_location != null
+    event_location != null &&
+    state != null &&
+    city != null &&
+    event_date != null
   ) {
     const params = new FormData();
     params.append('event_title', event_title);
     params.append('event_type', event_type);
     params.append('event_description', event_description);
-    params.append('event_image', event_image);
+    params.append('event_image',  event_image);
     params.append('user_id', user_id);
     params.append('category_id', category_id);
     params.append('event_location', event_location);
+    params.append('state', state);
+    params.append('city', city);
+    params.append('event_date', event_date);
 
-    // console.log('object09876',params)
+
+     console.log('object09876',params)
 
     const data = await postApi('add-event', params);
-
+    console.log('pppp',data)
     if (data.status == 1) {
       NavService.navigate('TabComp', data);
       return data;
