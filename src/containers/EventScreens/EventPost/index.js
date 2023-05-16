@@ -49,7 +49,7 @@ const EventPost = props => {
   const [userImage, setUserImage] = useState(user?.image);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const handleSelect = item => {
     setSelectedItem(item);
   };
@@ -148,6 +148,7 @@ const EventPost = props => {
             <ProfileImage
               name={user?.name}
               imageUri={selectedImage ? selectedImage.path : userImage}
+              videoUri={selectedVideo ? selectedVideo.path : null}
             />
 
             <View style={styles.picker}>
@@ -155,6 +156,13 @@ const EventPost = props => {
               uploadVideo
                 onImageChange={(path, mime) => {
                   setSelectedImage({ path, mime });
+                  if (mime.startsWith('image/')) {
+                    setSelectedImage({ path, mime });
+                    setSelectedVideo(null);
+                  } else if (mime.startsWith('video/')) {
+                    setSelectedVideo({ path, mime });
+                    setSelectedImage(null);
+                  }
                 }}>
                 <View style={styles.mime}>
                   <Image source={Icons.upload} style={styles.upload} />
@@ -171,20 +179,7 @@ const EventPost = props => {
               placeholder="Name of Location"
               placeholderTextColor={Colors.black}
             />
-             <TextInput
-              style={styles.maincontainer}
-              onChangeText={title => setTitle(title)}
-              value={title}
-              placeholder="Name of Location"
-              placeholderTextColor={Colors.black}
-            />
-             <TextInput
-              style={styles.maincontainer}
-              onChangeText={title => setTitle(title)}
-              value={title}
-              placeholder="Name of Location"
-              placeholderTextColor={Colors.black}
-            />
+           
             <PickerCompone
               categories={Categorys}
               setSelectedData={setSelectedData}

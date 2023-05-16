@@ -43,6 +43,7 @@ const ProfileImage = ({ size = 150, imageUri, videoUri, name = ' ', style }) => 
       >
         <Video
           source={{ uri: videoUri }}
+          volume={0}
           style={{
             width: 300,
             height: size,

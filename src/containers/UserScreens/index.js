@@ -32,7 +32,7 @@ import Review from './Review';
 import Post from './Post';
 import Aboutthecreator from './AbouttheCreator';
 import Subscription from './Subscriptions';
-// import TermsConditions from './TermsConditions';
+import Help from './Help';
 // EventScreens
 import EventHome from '../EventScreens/EventHome';
 import EventProfile from '../EventScreens/EventProfile';
@@ -41,11 +41,9 @@ import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
 import EditProfile from '../EventScreens/EditProfile'
 import eventContext from '../EventScreens/eventContext'
-// import TermsConditions from '../EventScreens/EventTerms&Condition';
-// import PrivacyPolicy from '../EventScreens/EventPrivayPoicy';
 import EventTermsConditions from '../EventScreens/EventTerms&Condition'
 import EventPrivacyPolicy from '../EventScreens/EventPrivayPoicy'
-
+import EventSubscription from '../EventScreens/EventSubscription';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 import { show_eventCreater_event , get_reviews_event ,Get_All_Categories , showprofiledetail } from '../../redux/APIs';
@@ -220,7 +218,11 @@ const ScreenStack = () => {
           component={Post}
           options={{headerShown: false}}
         />
-        
+          <Stack.Screen
+          name="Help"
+          component={Help}
+          options={{headerShown: false}}
+        />
       </Stack.Navigator>
       </eventContext.Provider>
     </ImageBackground>
@@ -363,6 +365,12 @@ const getProfile = async () => {
               component={EventPrivacyPolicy}
               options={{headerShown: false}}
             />
+              <Stack.Screen
+              name="EventSubscription"
+              component={EventSubscription}
+              options={{headerShown: false}}
+            />
+           
           </Stack.Navigator>
     </eventContext.Provider>
         </ImageBackground>

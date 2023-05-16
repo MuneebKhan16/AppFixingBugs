@@ -75,6 +75,7 @@ const Review = (props) => {
         <>
           <Video
             repeat={true}
+            volume={0}
             source={item.source}
             style={{
               height: 220,

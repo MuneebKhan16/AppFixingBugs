@@ -22,7 +22,7 @@ const Data = [
         name: 'Lorem ipsum dolor text sieut amet'
     },
 ]
-const Subscription = () => {
+const EventSubscription = () => {
 
     return (
         <AppBackground
@@ -129,7 +129,7 @@ const Subscription = () => {
 
 
 const { width, height } = Dimensions.get('window');
-export default Subscription
+export default EventSubscription
 
 const styles = StyleSheet.create({
     container: {
