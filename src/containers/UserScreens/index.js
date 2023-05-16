@@ -32,7 +32,7 @@ import Review from './Review';
 import Post from './Post';
 import Aboutthecreator from './AbouttheCreator';
 import Subscription from './Subscriptions';
-// import TermsConditions from './TermsConditions';
+import Help from './Help'
 // EventScreens
 import EventHome from '../EventScreens/EventHome';
 import EventProfile from '../EventScreens/EventProfile';
@@ -41,11 +41,9 @@ import EventReview from '../EventScreens/EventReview';
 import EventPost from '../EventScreens/EventPost';
 import EditProfile from '../EventScreens/EditProfile'
 import eventContext from '../EventScreens/eventContext'
-// import TermsConditions from '../EventScreens/EventTerms&Condition';
-// import PrivacyPolicy from '../EventScreens/EventPrivayPoicy';
 import EventTermsConditions from '../EventScreens/EventTerms&Condition'
 import EventPrivacyPolicy from '../EventScreens/EventPrivayPoicy'
-
+import EventSubscription from '../EventScreens/EventSubscription';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 import { show_eventCreater_event, get_reviews_event, Get_All_Categories, showprofiledetail } from '../../redux/APIs';
@@ -184,45 +182,49 @@ const ScreenStack = () => {
             options={{ headerShown: false }}
           />
 
+        <Stack.Screen
+          name="TermsConditions"
+          component={TermsConditions}
+          options={{headerShown: false}}
+        />
+       
+        <Stack.Screen
+          name="Event"
+          component={Event}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChatScreen"
+          component={ChatScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Setting"
+          component={SettingsStack}
+          options={{headerShown: false}}
+        />
+      
+      <Stack.Screen
+          name="Subscription"
+          component={Subscription}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Review"
+          component={Review}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Post"
+          component={Post}
+          options={{headerShown: false}}
+        />
           <Stack.Screen
-            name="TermsConditions"
-            component={TermsConditions}
-            options={{ headerShown: false }}
-          />
-
-          <Stack.Screen
-            name="Event"
-            component={Event}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ChatScreen"
-            component={ChatScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Setting"
-            component={SettingsStack}
-            options={{ headerShown: false }}
-          />
-
-          <Stack.Screen
-            name="Subscription"
-            component={Subscription}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Review"
-            component={Review}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Post"
-            component={Post}
-            options={{ headerShown: false }}
-          />
-
-        </Stack.Navigator>
+          name="Help"
+          component={Help}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
       </eventContext.Provider>
     </ImageBackground>
   );
@@ -301,75 +303,79 @@ const EventScreenStack = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <ImageBackground source={Images.bg} style={{ flex: 1 }}>
-      <eventContext.Provider value={{ showEvents, UserPost, Categorys, userProfile }}>
-        <Stack.Navigator
-          screenOptions={{
-            contentStyle: { backgroundColor: 'transparent' },
-            animation: 'simple_push',
-            gestureEnabled: false,
-          }}
-          initialRouteName="TabComp">
-          <Stack.Screen
-            name="TabComp"
-            component={TabStackComp}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventHome"
-            component={EventHome}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventProfile"
-            component={EventProfile}
-            options={{ headerShown: false }}
-            initialParams={{ events: showEvents }}
-          />
-          <Stack.Screen
-            name="EditProfile"
-            component={EditProfile}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventSetting"
-            component={EventSetting}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="ChatScreen"
-            component={ChatScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventReview"
-            component={EventReview}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventPost"
-            component={EventPost}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Aboutthecreator"
-            component={Aboutthecreator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventTermsConditions"
-            component={EventTermsConditions}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="EventPrivacyPolicy"
-            component={EventPrivacyPolicy}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </eventContext.Provider>
-
-    </ImageBackground>
+        <ImageBackground source={Images.bg} style={{flex: 1}}>
+    <eventContext.Provider value={{showEvents , UserPost ,Categorys , userProfile}}>
+          <Stack.Navigator
+            screenOptions={{
+              contentStyle: {backgroundColor: 'transparent'},
+              animation: 'simple_push',
+              gestureEnabled: false,
+            }}
+            initialRouteName="TabComp">
+            <Stack.Screen
+              name="TabComp"
+              component={TabStackComp}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EventHome"
+              component={EventHome}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EventProfile"
+              component={EventProfile}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EventSetting"
+              component={EventSetting}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="ChatScreen"
+              component={ChatScreen}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EventReview"
+              component={EventReview}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="EventPost"
+              component={EventPost}
+              options={{headerShown: false}}
+            />
+              <Stack.Screen
+              name="Aboutthecreator"
+              component={Aboutthecreator}
+              options={{headerShown: false}}
+            />
+              <Stack.Screen
+              name="EventTermsConditions"
+              component={EventTermsConditions}
+              options={{headerShown: false}}
+            />
+             <Stack.Screen
+              name="EventPrivacyPolicy"
+              component={EventPrivacyPolicy}
+              options={{headerShown: false}}
+            />
+              <Stack.Screen
+              name="EventSubscription"
+              component={EventSubscription}
+              options={{headerShown: false}}
+            />
+           
+          </Stack.Navigator>
+    </eventContext.Provider>
+        </ImageBackground>
   );
 };
 

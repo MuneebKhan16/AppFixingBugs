@@ -30,7 +30,7 @@ const EventHome = (props) => {
     NavService.navigate('EventReview', item)
   };
 
-
+  console.log('showEvents',)
 
 
   return (
@@ -59,27 +59,21 @@ const EventHome = (props) => {
                         </Text>
                       </View>
                     </View>
-                    <TouchableOpacity onPress={() => EventReview(item)}>
-                      <FastImage
-                        source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
-                        style={styles.imgback}
-                        imageStyle={styles.img}
-                      >
-                        <View style={styles.loc}>
-                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
-                          <Text style={styles.loctxt} numberOfLines={1} >{' '}{item.event_location}</Text>
-                        </View>
-                      </FastImage>
-                      {/* <ImageBackground
-                         source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` || `${dummy.dummy}` }}
-                        style={styles.imgback}
-                        imageStyle={styles.img} >
-                        <View style={styles.loc}>
-                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
-                          <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
-                        </View>
-                      </ImageBackground> */}
-                    </TouchableOpacity>
+                    {item?.images?.map((data, index) => (
+                       <TouchableOpacity onPress={() => EventReview(item)}>
+                        <FastImage
+                          key={index}
+                          source={{ uri: `${ImageURL?.ImageURL}${data?.event_images}` }}
+                          style={styles.imgback}
+                          imageStyle={styles.img}
+                        >
+                          <View style={styles.loc}>
+                            <Image source={Icons.location} resizeMode="contain" style={styles.location} />
+                            <Text style={styles.loctxt} numberOfLines={1}>{' '}{item.event_location}</Text>
+                          </View>
+                        </FastImage>
+                       </TouchableOpacity>
+                    ))}
                   </View>
                 )}
               />

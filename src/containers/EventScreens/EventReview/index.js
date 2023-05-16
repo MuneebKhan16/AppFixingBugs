@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView,TouchableOpacity } from 'react-native';
 import React,{useState,useEffect} from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Images from '../../../assets/Images';
@@ -10,6 +10,7 @@ import { styles } from './eventreview_style';
 import  ImageURL from '../../../config/Common'
 import EventsPosts from '../../../components/EventsPosts';
 import { get_reviews_event } from '../../../redux/APIs/index'
+import FastImage from 'react-native-fast-image'
 import { useSelector } from 'react-redux'
 const EventReview = (props) => {
   
@@ -33,12 +34,21 @@ const EventReview = (props) => {
  
 
   return (
-    <AppBackground back home>
+    <AppBackground back home >
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
-        <Image
-          source={{ uri :`${ImageURL?.ImageURL}${PassedData?.event_image }`}}
-          style={styles.imgbg}
-        />
+    {console.log('PassedData',PassedData)}
+    {PassedData?.images?.map((data, index) => (
+                       <TouchableOpacity>
+                        <FastImage
+                          key={index}
+                          source={{ uri: `${ImageURL?.ImageURL}${data?.event_images}` }}
+                          style={styles.imgbg}
+                          
+                          imageStyle={styles.img}
+                       />
+                       </TouchableOpacity>
+                    ))}
+        
         <View style={styles.titlehdr}>
           <Text style={styles.title}>
             {PassedData?.event_title} .

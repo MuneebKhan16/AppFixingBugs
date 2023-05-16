@@ -30,7 +30,7 @@ class Post extends Component {
     isChecked1: false,
     isChecked2: false,
     checkbox: Checkbox,
-    selectedVideo:null
+    selectedVideo: null
 
   };
   constructor(props) {
@@ -72,7 +72,7 @@ class Post extends Component {
 
 
     const { id } = this.props.user
-    const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox,selectedVideo } = this.state
+    const { selectedImage, starCount, isChecked, isChecked1, isChecked2, checkbox, selectedVideo } = this.state
 
     if (!selectedImage) {
       return Toast.show({
@@ -134,7 +134,7 @@ class Post extends Component {
   }
   render() {
 
-    const { userImage, selectedImage,selectedVideo } =
+    const { userImage, selectedImage, selectedVideo } =
       this.state;
     const { user } = this.props
 
@@ -206,7 +206,6 @@ class Post extends Component {
                     }
 
                   }}>
-                    
                   <View style={styles.item}>
                     <Image
                       source={Icons.upload}
@@ -218,7 +217,6 @@ class Post extends Component {
               </View>
             </View>
             <View style={styles.center}>
-
               <View style={styles.box}>
                 <CheckBox
                   disabled={false}
@@ -227,10 +225,7 @@ class Post extends Component {
                   tintColors={{ true: 'white', false: 'black' }}
                 />
                 <Text style={styles.txt}>{Checkbox.first}</Text>
-
               </View>
-
-
               <View style={styles.check}>
                 <CheckBox
                   disabled={false}

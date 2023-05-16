@@ -27,8 +27,8 @@ const EventSetting = () => {
       <Heading name="Terms & Condition" icon={Icons.information} onpress="EventTermsConditions" />
       <Heading name="Policies" icon={Icons.policies} onpress="EventPrivacyPolicy"/>
       <Heading name="Help" icon={Icons.help} />
-      <Heading name="Subscription" icon={Icons.subscription} />
-      <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator" />
+      <Heading name="Subscription" icon={Icons.subscription} onpress="EventSubscription" />
+      {/* <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator" /> */}
       <CustomButton
         buttonStyle={styles.btm}
         title="Logout"

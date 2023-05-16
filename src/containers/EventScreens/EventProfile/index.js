@@ -176,19 +176,22 @@ console.log('fetchEvents',fetchEvents)
                           </Text>
                         </View>
                       </View>
-                      <TouchableOpacity >
+                      {item?.images?.map((data, index) => (
+                       <TouchableOpacity>
                         <FastImage
-                          source={{ uri: item?.event_image ? `${ImageURL?.ImageURL}${item?.event_image}` : `${DummyURL.dummy}` }}
+                          key={index}
+                          source={{ uri: `${ImageURL?.ImageURL}${data?.event_images}` }}
                           style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10 }}
+                          
                           imageStyle={styles.img}
                         >
                           <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 12, left: 5, }}>
                             <Image source={Icons.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 20, height: 20, }} />
-                            <Text style={{ color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', fontSize: 17, width: 250 }} numberOfLines={1} >{' '}{item?.event_location}</Text>
+                            <Text style={{ color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', fontSize: 17, width: 250 }} numberOfLines={1}>{' '}{item.event_location}</Text>
                           </View>
                         </FastImage>
-
-                      </TouchableOpacity>
+                       </TouchableOpacity>
+                    ))}
                       <TouchableOpacity style={{alignItems:'center',marginTop:10}} onPress={() => Delete_Event(item)} >
                       <Image  source={Icons.bin} style={{width:30,height:30,tintColor:Colors.purple}} resizeMode='contain'/>
 
@@ -213,4 +216,3 @@ console.log('fetchEvents',fetchEvents)
 };
 
 export default React.memo(EventProfile);
-

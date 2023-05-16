@@ -42,6 +42,7 @@ export function AppBackground({
   filter = false,
   chat = false,
   setting = false,
+  editicn = false,
   home,
   Eventuser
 }) {
@@ -317,6 +318,33 @@ export function AppBackground({
               />
             </RNBounceable>
           )}
+           {/* {editicn && (
+            <RNBounceable
+              activeOpacity={0.8}
+              onPress={() => {
+                // NavService.navigate('ChatScreen',Eventuser);
+              }}
+              style={{
+                position: 'absolute',
+                right: 20,
+                width: 38,
+                height: 38,
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 10,
+                // backgroundColor: Colors.white,
+              }}>
+              <Image
+                source={Icons.edite}
+                style={{
+                  width: 25,
+                  height: 25,
+                  resizeMode: 'contain',
+                  tintColor: Colors.purple,
+                }}
+              />
+            </RNBounceable>
+          )} */}
         </>
       </View>
       <View
