@@ -31,6 +31,7 @@ import { styles } from './eventpost_styles';
 import { post_events } from '../../../redux/APIs'
 import GooglePlaceAutocomplete from '../../../components/Google_Location'
 import Pickeventdate from '../../../components/Pickeventdate';
+import Swiper from 'react-native-swiper';
 const EventPost = props => {
   const { user } = props;
   const actionSheetStateRef = useRef();
@@ -38,8 +39,11 @@ const EventPost = props => {
   const [popUp, setPopUp] = useState(true);
   const [text, settext] = useState();
 
-  const [location, setLocation] = useState('');
-  const [loc, setLoc] = useState([]);
+  const [location, setLocation] = useState(null);
+  const [city, setCity] = useState(null);
+  const [states, setStates] = useState(null);
+
+  const [currentlocation, setcurrentlocation] = useState(null);
   const [date, setDate] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
@@ -133,7 +137,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{ flex: 1,}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1, }} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -145,26 +149,86 @@ const EventPost = props => {
             </View>
           </ActionSheet>
           <View style={styles.user}>
-            <ProfileImage
-              name={user?.name}
-              imageUri={selectedImage ? selectedImage.path : userImage}
-              videoUri={selectedVideo ? selectedVideo.path : null}
-            />
+            {/* {selectedImage?.length > 0 ? (
+              <Swiper style={{backgroundColor:'red'}}>
+                {selectedImage.map((image) => (
+                  <ProfileImage
+                    key={image.path} // Add a unique key prop for each image
+                    name={user?.name}
+                    imageUri={image.path}
+                    videoUri={selectedVideo ? selectedVideo.path : null}
+                  />
+                ))}
+              </Swiper>
+            ) : (
+              <ProfileImage
+                name={user?.name}
+                imageUri={selectedImage ? selectedImage.path : userImage}
+                videoUri={selectedVideo ? selectedVideo.path : null}
+              />
+            )} */}
+            {
+              selectedImage?.length > 0 ? selectedImage.map((image) => {
+                return (
+                  <ProfileImage
+                    name={user?.name}
+                    imageUri={image ? image.path : userImage}
+                    videoUri={selectedVideo ? selectedVideo.path : null}
+                  />
+                )
+              }) :
+                <ProfileImage
+                  name={user?.name}
+                  imageUri={selectedImage ? selectedImage.path : userImage}
+                  videoUri={selectedVideo ? selectedVideo.path : null}
+                />
+            }
+            {/* {
+              selectedVideo?.length > 0 ? selectedVideo.map((video) => {
+                return (
+                  <ProfileImage
+                    name={user?.name}
+                    imageUri={selectedImage ? selectedImage.path : userImage}
+                    videoUri={video ? video.path : null}
+                  />
+                )
+              }) :
+                <ProfileImage
+                  name={user?.name}
+                  imageUri={selectedImage ? selectedImage.path : userImage}
+                  videoUri={selectedVideo ? selectedVideo.path : null}
+                />
+            } */}
 
             <View style={styles.picker}>
               <CustomImagePicker
-              uploadVideo
+                isMultiple
+                uploadVideo
                 onImageChange={(path, mime) => {
-                  setSelectedImage({ path, mime });
+                  // setSelectedImage({ path, mime });
                   if (mime.startsWith('image/')) {
-                    setSelectedImage({ path, mime });
-                    setSelectedVideo(null);
+                    if (Array.isArray(path)) {
+                      setSelectedImage(path);
+                      setSelectedVideo(null);
+                    } else {
+
+                      setSelectedImage([{ path, mime }]);
+                      setSelectedVideo(null);
+
+                    }
                   } else if (mime.startsWith('video/')) {
-                    setSelectedVideo({ path, mime });
-                    setSelectedImage(null);
+                    if (Array.isArray(path)) {
+                      setSelectedVideo(path);
+                      setSelectedImage(null);
+
+                    } else {
+                      setSelectedVideo([{ path, mime }]);
+                      setSelectedImage(null);
+                    }
                   }
                 }}>
-                <View style={styles.mime}>
+                {/* <View style={styles.mime}> */}
+                <View style={[styles.mime, { height: 50 }]}>
                   <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text>
                 </View>
@@ -179,19 +243,25 @@ const EventPost = props => {
               placeholder="Name of Location"
               placeholderTextColor={Colors.black}
             />
-           
+
             <PickerCompone
               categories={Categorys}
               setSelectedData={setSelectedData}
             />
 
 
+
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-              <Text style={{ color: '#000' }}>
-                {location ? location : 'Location'}
-              </Text>
-              {console.log('nnnn', location)}
-              <Image source={Icons.marker} style={styles.marker} />
+              {location ?
+                <Text style={{ color: '#000' }}>
+                  {location.split(' ').slice(0, 1).pop() + " " + location.split(' ').slice(1, 2).pop() + " " + location.split(' ').slice(2, 3).pop() + " " + location.split(' ').slice(3, 4).pop() + " " + location.split(' ').slice(4, 5).pop() + " " + location.split(' ').slice(5, 6).pop() + " " + location.split(' ').slice(6, 7).pop()}
+                </Text>
+                : currentlocation ?
+                  <Text style={{ color: '#000' }}>
+                    {currentlocation.split(' ').slice(0, 1).pop() + " " + currentlocation.split(' ').slice(1, 2).pop() + " " + currentlocation.split(' ').slice(2, 3).pop()}
+                  </Text>
+                  : null
+              }
 
               <Image source={Icons.marker} style={styles.marker} />
               <Mymdll
@@ -199,9 +269,60 @@ const EventPost = props => {
                 onClose={handleCloseModal}
                 setLocation={setLocation}
                 location={location}
+                currentlocation={currentlocation}
+                setcurrentlocation={setcurrentlocation}
               />
             </TouchableOpacity>
 
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
+                {location ?
+                  <Text style={{ color: '#000' }}>
+                    {location.split(' ').slice(-5, -4).pop() + " " + location.split(' ').slice(-4, -3).pop()}
+                  </Text>
+                  : currentlocation ?
+                    <Text style={{ color: '#000' }}>
+                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-4, -3).pop() : 'City'}
+
+                    </Text>
+                    : null
+                }
+
+                <Image source={Icons.marker} style={styles.marker} />
+                <Mymdll
+                  isVisible={isModalVisible}
+                  onClose={handleCloseModal}
+                  setLocation={setLocation}
+                  location={location}
+                  currentlocation={currentlocation}
+                  setcurrentlocation={setcurrentlocation}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
+                {location ?
+                  <Text style={{ color: '#000' }}>
+                    {location.split(' ').slice(-3, -2).pop()}
+                  </Text>
+                  : currentlocation ?
+                    <Text style={{ color: '#000' }}>
+                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
+                    </Text>
+                    : null
+                }
+
+                <Image source={Icons.marker} style={styles.marker} />
+                <Mymdll
+                  isVisible={isModalVisible}
+                  onClose={handleCloseModal}
+                  setLocation={setLocation}
+                  location={location}
+                  currentlocation={currentlocation}
+                  setcurrentlocation={setcurrentlocation}
+                />
+              </TouchableOpacity>
+
+            </View>
             <View style={styles.descp}>
               <TextInput
                 placeholder="Description"
@@ -221,15 +342,15 @@ const EventPost = props => {
             />
           </View>
         </View>
-      {/* Modal */}
-      <Modal
-        isVisible={popUp}
-        style={styles.modal}
-        backdropOpacity={0.7}
-        
+        {/* Modal */}
+        <Modal
+          isVisible={popUp}
+          style={styles.modal}
+          backdropOpacity={0.7}
+
         >
-        <View style={styles.posting}>
-          {/* <TouchableOpacity 
+          <View style={styles.posting}>
+            {/* <TouchableOpacity 
           onPress={() => togglePopUp()}
           style={{
             marginVertical: 10,
@@ -246,35 +367,35 @@ const EventPost = props => {
           }}>
           <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
         </TouchableOpacity> */}
-          <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
-        </View>
-        <View style={styles.category}>
-          <View style={{ marginTop: 10 }}>
-            <Text style={styles.modaltxt}>1-Name of Location (mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}>2-Upload Clear Photo of Building (Mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}>3-Operating Hours (Mandatory){'\n'}</Text>
-            <Text style={styles.modaltxt}>4-Helpful Tips in Description field such as Parking tips, Crowd (Age, Music Genre) on SpecificNights if Differs, Dress code,{'\n'}</Text>
-            <Text style={styles.modaltxt}>5-Flyers, Pictures and videos of your most recent nights or events! (helpful)
-              & Don’t forget you may purchase optimization to have your events featured on main home
-              page!{'\n'}</Text>
-            {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
+            <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
+          </View>
+          <View style={styles.category}>
+            <View style={{ marginTop: 10 }}>
+              <Text style={styles.modaltxt}>1-Name of Location (mandatory){'\n'}</Text>
+              <Text style={styles.modaltxt}>2-Upload Clear Photo of Building (Mandatory){'\n'}</Text>
+              <Text style={styles.modaltxt}>3-Operating Hours (Mandatory){'\n'}</Text>
+              <Text style={styles.modaltxt}>4-Helpful Tips in Description field such as Parking tips, Crowd (Age, Music Genre) on SpecificNights if Differs, Dress code,{'\n'}</Text>
+              <Text style={styles.modaltxt}>5-Flyers, Pictures and videos of your most recent nights or events! (helpful)
+                & Don’t forget you may purchase optimization to have your events featured on main home
+                page!{'\n'}</Text>
+              {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
           <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
-          </View>
+            </View>
 
-        </View>
-        <CustomButton
-          buttonStyle={{
-            alignSelf: 'center',
-            width: 360
-          }}
-          title="Close"
-          onPress={() => togglePopUp()}
+          </View>
+          <CustomButton
+            buttonStyle={{
+              alignSelf: 'center',
+              width: '90%'
+            }}
+            title="Close"
+            onPress={() => togglePopUp()}
           />
 
-      </Modal>
-          </ScrollView>
+        </Modal>
+      </ScrollView>
     </AppBackground>
   );
 };

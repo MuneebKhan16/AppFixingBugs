@@ -1586,6 +1586,11 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/eslint-plugin/-/eslint-plugin-1.2.0.tgz"
   "version" "1.2.0"
 
+"@react-native-community/geolocation@^3.0.6":
+  "integrity" "sha512-+iidKFgw1HxCJSHVnlywAKu6uerdpDAKTXLRnlsUdhgqtgTiIixb496Z267iPVFmIO1bp4lOU6UiwzmvcyXdbg=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/geolocation/-/geolocation-3.0.6.tgz"
+  "version" "3.0.6"
+
 "@react-native-firebase/app@^14.11.1", "@react-native-firebase/app@14.12.0":
   "integrity" "sha512-r/4eP96U3StUs9t3QSlNwCIjjZpEAzI0u8GF8VlNNgrFxUKQXmwe63dRXQXVrI03MxnHgg87OpoWgIxhRlC9Rg=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/app/-/app-14.12.0.tgz"
@@ -6944,6 +6949,8 @@
   "version" "0.1.2"
 
 "react-native-reanimated@^2.8.0", "react-native-reanimated@>= 1.0.0":
+  "integrity" "sha512-bVy+FUEaHXq4i+aPPqzGeor1rG4scgVNBbBz21ohvC7iMpB9IIgvGsmy1FAoodZhZ5sa3EPF67Rcec76F1PXlQ=="
+  "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.17.0.tgz"
   "version" "2.17.0"
   dependencies:
     "@babel/plugin-transform-object-assign" "^7.16.7"

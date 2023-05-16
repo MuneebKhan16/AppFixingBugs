@@ -21,6 +21,8 @@ const GooglePlaceAutocomplete = ({
         disableScroll
         enablePoweredByContainer={false}
         keepResultsAfterBlur={true}
+     
+     
         listViewDisplayed={false}
         placeholder={placeholder ? placeholder : 'Address'}
         placeholderTextColor={iconColor ? Colors.primary : Colors.black}

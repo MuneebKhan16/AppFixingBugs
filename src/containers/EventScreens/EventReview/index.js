@@ -33,7 +33,7 @@ const EventReview = (props) => {
  
 
   return (
-    <AppBackground back home >
+    <AppBackground back home editicn>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         <Image
           source={{ uri :`${ImageURL?.ImageURL}${PassedData?.event_image }`}}

@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View,Dimensions } from 'react-native'
 import { Colors, NavService } from '../../../config';
-const { width, height } = Dimensions.get('window');
-
+const {width,height} = Dimensions.get('window')
 export const styles = StyleSheet.create({
   cancel: {
     color: 'rgb(0,88,200)',
@@ -51,7 +50,6 @@ export const styles = StyleSheet.create({
   },
   btn: {
     alignSelf: 'center',
-    top: 20,
     width: 300
   },
   sheet: { backgroundColor: 'transparent' },
@@ -85,7 +83,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     height:height * 1.1
-    
   },
   searchBox: {
     width: '90%',
@@ -108,10 +105,54 @@ export const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color:Colors.black
+    color:Colors.black,
+    marginLeft:10
   },
   selectedPlace: {
     marginTop: 10,
     alignItems: 'center',
   },
+  city:{
+    backgroundColor: '#ededed',
+    marginTop: 10,
+    width: 150,
+    paddingLeft: 15,
+    borderRadius: 10,
+    height: 50,
+    color: Colors.black,
+    marginRight:5
+  },
+  state:{
+    backgroundColor: '#ededed',
+    marginTop: 10,
+    width: 150,
+    paddingLeft: 15,
+    borderRadius: 10,
+    height: 50,
+    color: Colors.black
+  },
+  city:{
+    backgroundColor: '#ededed',
+    marginTop: 10,
+    width:140,
+    paddingLeft: 15,
+    borderRadius: 10,
+    height: 50,
+    color: Colors.black,
+    justifyContent:'center'
+  },
+  state:{
+    backgroundColor: '#ededed',
+    marginTop: 10,
+    width: 150,
+    paddingLeft: 15,
+    borderRadius: 10,
+    height: 50,
+    color: Colors.black,
+    marginLeft:10,
+    justifyContent:'center'
+
+  }
+
+  
 })

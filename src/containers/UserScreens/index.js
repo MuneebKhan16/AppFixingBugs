@@ -44,6 +44,9 @@ import eventContext from '../EventScreens/eventContext'
 import EventTermsConditions from '../EventScreens/EventTerms&Condition'
 import EventPrivacyPolicy from '../EventScreens/EventPrivayPoicy'
 import EventSubscription from '../EventScreens/EventSubscription';
+// import Editevent from '../EventScreens/Editevent';
+// import EditEvent from '../EventScreens/EditEvent'
+import Editevent from '../EventScreens/Editevent';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 import { show_eventCreater_event , get_reviews_event ,Get_All_Categories , showprofiledetail } from '../../redux/APIs';
@@ -368,6 +371,11 @@ const getProfile = async () => {
               <Stack.Screen
               name="EventSubscription"
               component={EventSubscription}
+              options={{headerShown: false}}
+            />
+              <Stack.Screen
+              name="Editevent"
+              component={Editevent}
               options={{headerShown: false}}
             />
            

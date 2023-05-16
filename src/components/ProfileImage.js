@@ -3,7 +3,7 @@ import { Image, Text, View } from 'react-native';
 import Video from 'react-native-video';
 import { Colors } from '../config';
 
-const ProfileImage = ({ size = 150, imageUri, videoUri, name = ' ', style }) => {
+const ProfileImage = ({ size = 150, imageUri, videoUri , name = ' ', style }) => {
   if (imageUri) {
     return (
       <Image
@@ -36,6 +36,7 @@ const ProfileImage = ({ size = 150, imageUri, videoUri, name = ' ', style }) => 
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'center',
+
             
           },
           style,
@@ -67,6 +68,7 @@ const ProfileImage = ({ size = 150, imageUri, videoUri, name = ' ', style }) => 
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'center',
+            
           },
           style,
         ]}

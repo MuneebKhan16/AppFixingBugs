@@ -1,9 +1,13 @@
 import {StyleSheet, Text, View, Image, Switch} from 'react-native';
 import React, {useState} from 'react';
 import {Colors} from '../config';
-const Btn = () => {
+const Btn = ({Setlocations}) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = () => {
+    setIsEnabled(previousState => !previousState);
+    Setlocations(previousState => !previousState);
+    
+  }
 
   return (
     <View style={styles.maincontainer}>

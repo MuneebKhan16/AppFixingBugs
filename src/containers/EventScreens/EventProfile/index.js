@@ -56,7 +56,9 @@ const EventProfile = () => {
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginTop: 30
+          marginTop: 30,
+          marginRight:10
+
 
         }}>
           <Text
@@ -67,30 +69,32 @@ const EventProfile = () => {
             style={styles.hd3}>
             No. of Attendance
           </Text>
-        </View>
+              </View>
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginTop: 15
-
+          marginTop: 15,
+          marginRight:10
+          
         }}>
           <View style={{
             padding: 10,
-            width: 160,
             alignItems: 'center',
             borderRadius: 10,
             borderWidth: 2,
-            borderColor: Colors.purple
+            borderColor: Colors.purple,
+            width:'40%'
           }}>
             <Text style={styles.txt}>{showEvents?.length}</Text>
           </View>
           <View style={{
             padding: 10,
-            width: 170,
             alignItems: 'center',
             borderRadius: 10,
             borderWidth: 2,
-            borderColor: Colors.purple
+            borderColor: Colors.purple,
+            width:'50%'
+
           }}>
             <Text style={styles.txt}>{UserPost?.length}</Text>
           </View>

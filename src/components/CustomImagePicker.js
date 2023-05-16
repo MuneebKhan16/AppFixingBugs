@@ -1,4 +1,4 @@
-import React, { useRef , useState} from 'react';
+import React, { useRef, useState } from 'react';
 import { Text, TouchableOpacity, View, } from 'react-native';
 import * as ImageCropPicker from 'react-native-image-crop-picker';
 import Video from 'react-native-video';
@@ -8,7 +8,7 @@ const CustomImagePicker = ({
   children,
   onImageChange = () => { },
   uploadVideo = false,
-  isMultiple = false,
+  isMultiple = true,
   style,
 }) => {
   const actionSheetRef = useRef(null);
@@ -25,19 +25,31 @@ const CustomImagePicker = ({
     } else if (method === 'gallery') {
       ImageCropPicker.openPicker({
         multiple: isMultiple,
-        mediaType: 'photo',
+        mediaType: 'any',
       }).then(async (image) => {
         actionSheetRef.current.hide();
         // Perform additional operations on the image if needed
-        onImageChange(image.path, image.mime, 'photo');
+        if (isMultiple) {
+          onImageChange(image, 'image/')
+        } else {
+          // onImageChange(image.path, image.mime, 'photo');
+          
+        }
       });
     } else if (method === 'video') {
+
       ImageCropPicker.openPicker({
-        mediaType: 'video',
+        multiple: isMultiple,
+        mediaType: 'any',
       }).then(async (video) => {
         actionSheetRef.current.hide();
+        if (isMultiple) {
+          onImageChange(video, 'video/')
+        } else {
+          onImageChange(video.path, video.mime, 'video');
+
+        }
         // Perform additional operations on the video if needed
-        onImageChange(video.path, video.mime, 'video');
       });
     }
   };

@@ -1,3 +1,6 @@
+
+
+
 import {
     StyleSheet,
     Text,
@@ -109,4 +112,3 @@ import {
       tintColor:Colors.darkGray
     }
   });
-  
