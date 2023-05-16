@@ -9,6 +9,7 @@ import { Alert, Keyboard } from 'react-native';
 import { Platform } from 'react-native';
 import { saveUser, saveToken, addReviews } from '../actions';
 import { cleanSingle } from 'react-native-image-crop-picker';
+import axios from 'axios';
 
 var passwordValidator = require('password-validator');
 var schema = new passwordValidator();
@@ -406,39 +407,41 @@ export async function post_events(
   event_date
 ) {
 
-  if (
-    event_title != null &&
-    event_type != null &&
-    event_description != null &&
-    event_image != null &&
-    category_id != null &&
-    event_location != null &&
-    state != null &&
-    city != null &&
-    event_date != null
-  ) {
+  console.log(
+    event_title,
+    event_type,
+    event_description,
+    event_image,
+    user_id,
+    category_id,
+    event_location,
+    state,
+    city,
+    event_date
+  )
+
     const params = new FormData();
     params.append('event_title', event_title);
     params.append('event_type', event_type);
     params.append('event_description', event_description);
-    params.append('event_image',  event_image);
+    params.append('event_image', event_image);
     params.append('user_id', user_id);
     params.append('category_id', category_id);
     params.append('event_location', event_location);
     params.append('state', state);
     params.append('city', city);
     params.append('event_date', event_date);
-
+    // console.log(event_image);  
 
      console.log('object09876',params)
 
     const data = await postApi('add-event', params);
     console.log('pppp',data)
-    if (data.status == 1) {
+    if ( data !== null && typeof data === 'object' && data.status == 1) {
       NavService.navigate('TabComp', data);
-      return data;
+      return data
     }
-  } else {
+   else {
     console.log('No Data Posted')
     // return
     // Toast.show({

@@ -42,9 +42,9 @@ const EventPost = props => {
   const [location, setLocation] = useState(null);
   const [city, setCity] = useState(null);
   const [states, setStates] = useState(null);
-
+  const [date, setDate] = useState('');
   const [currentlocation, setcurrentlocation] = useState(null);
-  const [date, setDate] = useState(false);
+
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
   const [title, setTitle] = useState('');
@@ -115,11 +115,18 @@ const EventPost = props => {
       name: 'event',
       type: selectedImage ? selectedImage?.mime : selectedVideo?.mime,
     };
-    imagesandvideos.push(eventImages)
+    imagesandvideos.push(eventImages);
+
+    // const eventImages = {
+    //   uri: selectedImage ? selectedImage?.path : selectedVideo?.path,
+    //   name: 'event',
+    //   type: selectedImage ? selectedImage?.mime : selectedVideo?.mime,
+    // };
+   
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
-    const event_image = imagesandvideos;
+    const event_image = eventImages
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = currentlocation ? 
@@ -127,11 +134,11 @@ const EventPost = props => {
     location.split(' ').slice(0,1).pop()+" "+location.split(' ').slice(1,2).pop()+" "+location.split(' ').slice(2,3).pop()+" "+location.split(' ').slice(3,4).pop()+" "+location.split(' ').slice(4,5).pop()+" "+location.split(' ').slice(5,6).pop()+" "+location.split(' ').slice(6,7).pop()
     const state = currentlocation.split(' ').slice(-2, -1).pop();
     const city = currentlocation.split(' ').slice(-4, -3).pop();
-    const event_date = '12-02-2023'
+    const event_date =  date.toLocaleDateString();
 
     console.log('rty', event_title, event_type, event_description, event_image, user_id, category_id, event_location,state,city,event_date)
 
-    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location,state,city,event_date)
+    post_events(event_title, event_type, event_description,  event_image, user_id, category_id, event_location,state,city,event_date)
 
   };
 
@@ -161,8 +168,8 @@ const EventPost = props => {
           <View style={styles.user}>
             <ProfileImage
               name={user?.name}
-              imageUri={selectedImage ? selectedImage.path : userImage}
-              videoUri={selectedVideo ? selectedVideo.path : null}
+              imageUri={selectedImage ? selectedImage?.path : userImage}
+              videoUri={selectedVideo ? selectedVideo?.path : null}
 
            />
 
@@ -285,7 +292,7 @@ const EventPost = props => {
               />
             </View>
             <PickerComptwo />
-            <Pickeventdate />
+            <Pickeventdate date={date} setDate={setDate} />
             <CustomButton
               buttonStyle={styles.btn}
               title="Posts"

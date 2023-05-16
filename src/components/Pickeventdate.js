@@ -12,8 +12,8 @@ import {
   import DateTimePickerModal from 'react-native-modal-datetime-picker';
   import Icons from '../assets/Icons';
   import { Colors } from '../config';
-  const Pickeventdate = () => {
-    const [date, setDate] = useState('');
+  const Pickeventdate = ({date , setDate}) => {
+    
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
    
     const [isFocused, setIsFocused] = useState(false);
@@ -26,6 +26,7 @@ import {
     };
   
     const handleConfirm = date => {
+   
       setDate(date);
       hideDatePicker();
     };
@@ -36,7 +37,9 @@ import {
         ? `${tempDate[0]} ${tempDate[1]} ${tempDate[2]} ${tempDate[3]}`
         : '';
     };
-  
+    
+    console.log("mnbvcxz0",date)
+
     return (
       <>
         <View style={styles.container}>
