@@ -36,9 +36,9 @@ export default async function postApi(
   }
   try {
     const headers = {
-      //'Content-Type': 'multipart/form-data',
-      Authorization: 'Bearer ' + user_authentication,
-      'Content-Type': 'multipart/form-data,octet-stream',
+      'Content-Type': 'multipart/form-data',
+      // Authorization: 'Bearer ' + user_authentication,
+      // 'Content-Type': 'multipart/form-data,octet-stream',
     };
     const response = await axios.post(endpoint, params, {headers});
     dispatch({type: 'LOADER_STOP'});
