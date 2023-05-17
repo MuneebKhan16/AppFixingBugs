@@ -233,7 +233,8 @@ export class Home extends Component {
                       }}
                       inputStyles={{
                         borderWidth: 1,
-                        borderColor: Colors.lightGrey
+                        borderColor: Colors.lightGrey,
+
                       }}
                       iconColor
                       // placeholder={text !== '' ? text  : 'Current Location'}
@@ -257,10 +258,12 @@ export class Home extends Component {
                     
                       wrapperStyles={{
                         width: '49%',
+
                       }}
                       inputStyles={{
                         borderWidth: 1,
-                        borderColor: Colors.lightGrey
+                        borderColor: Colors.lightGrey,
+
                       }}
                       iconColor
                       placeholder={
