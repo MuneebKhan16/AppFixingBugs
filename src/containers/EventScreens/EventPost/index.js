@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import {
   StyleSheet,
   View,
@@ -148,13 +147,12 @@ const EventPost = props => {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-          <View style={styles.user}>
+          <View style={{ marginTop: 40, height: 150 }}>
             {selectedImage?.length > 0 ? (
-              <Swiper style={{ height: 150 }} dotColor={Colors.grey}
-                activeDotColor={Colors.purple}>
+              <Swiper style={{ height: 150 }} activeDotColor='transparent' dotColor='transparent'>
                 {selectedImage.map((image) => (
                   <ProfileImage
-                    key={image.path} // Add a unique key prop for each image
+                    key={image.path} 
                     name={user?.name}
                     imageUri={image.path}
                     videoUri={selectedVideo ? selectedVideo.path : null}
@@ -222,23 +220,25 @@ const EventPost = props => {
                     setSelectedImage(null);
                   }
                 }}>
-                {/* <View style={styles.mime}>
-                  <Image source={Icons.upload} style={styles.upload} />
-                  <Text style={styles.txtclr}>Upload</Text>
-                </View> */}
-                <View style={styles.mime}>
+                {/* <View style={styles.mime}> */}
+                <View style={[styles.mime, { height: 50, }]}>
                   {!selectedImage ? (
                     <>
-                      <Image source={Icons.upload} style={styles.upload} />
-                      <Text style={styles.txtclr}>Upload</Text>
+                      <TouchableOpacity>
+                        <Image source={Icons.upload} style={styles.upload} />
+                        <Text style={styles.txtclr}>Upload</Text>
+                      </TouchableOpacity>
                     </>
                   ) : (
-                    <TouchableOpacity  style={{alignItems:'center',marginBottom:80}}>
-                      <Image source={Icons.upload} style={{ width: 20, height: 20, tintColor: Colors.white ,}} />
+                    <>
+                      <TouchableOpacity style={{marginTop:-40}}>
+                        <Image source={Icons.upload} style={{ width: 50, height: 20, resizeMode: 'contain', color: Colors.black, }} />
+                      </TouchableOpacity>
                       <Text style={styles.txtclr}>Upload</Text>
-
-                    </TouchableOpacity>
+                    </>
                   )}
+                  {/* <Image source={Icons.upload} style={styles.upload} />
+                  <Text style={styles.txtclr}>Upload</Text> */}
                 </View>
               </CustomImagePicker>
             </View>

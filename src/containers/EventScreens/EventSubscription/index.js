@@ -32,7 +32,7 @@ const EventSubscription = () => {
             back
             home>
 
-            <View style={{ marginTop: 20, height: 400, }}>
+            <View style={{ marginTop: 20, height: 500, }}>
                 <Swiper style={styles.wrapper} showsButtons={false} dotColor={Colors.grey} activeDotColor={Colors.purple} >
                     <View style={styles.slide1}>
                         <Text style={styles.text}>Basic Plan</Text>
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     wrapper: {
-        height: 350,
+        height: 500,
         marginTop: 30,
 
     },

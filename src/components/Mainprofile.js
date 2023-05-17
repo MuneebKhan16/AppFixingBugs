@@ -164,6 +164,6 @@ const styles = StyleSheet.create({
 
 
   },
-  marker: { width: 30, height: 30, },
+  marker: { width: 20, height: 20, marginRight:5 },
   location: { fontSize: 14, color: Colors.black, fontWeight: '600', ellipsizeMode: 'middle', maxWidth: 150 },
 });

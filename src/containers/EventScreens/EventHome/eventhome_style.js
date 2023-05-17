@@ -27,6 +27,6 @@ export const styles = StyleSheet.create({
     container:{ marginBottom: 10, marginTop: 10, },
     img:{ borderRadius: 10 },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},
-    txtheadersty:{fontSize:25,fontWeight:'bold', textTransform: 'capitalize',}
+    txtheadersty:{fontSize:20,fontWeight:'bold', textTransform: 'capitalize',}
   });
   

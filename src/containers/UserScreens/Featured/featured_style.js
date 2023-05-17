@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Colors, NavService } from '../../../config';
 
 export const styles = StyleSheet.create({
-    container: { marginTop: 30, marginHorizontal: 8 },
+    container: { marginTop: 30, marginHorizontal: 0 },
     header: { flexDirection: 'row', alignItems: 'center' },
     title: { fontSize: 16, color: Colors.black, fontWeight: 'bold', marginLeft: 8,  },
     filled: {
@@ -48,7 +48,7 @@ export const styles = StyleSheet.create({
       height: 18,
       resizeMode: 'contain',
     },
-    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 16,  width:280 },
+    locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 16,  width:'88%', marginLeft:5},
     border:{ borderRadius: 10 }
   });
   

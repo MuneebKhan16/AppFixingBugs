@@ -24,9 +24,8 @@ const CustomImagePicker = ({
       });
     } else if (method === 'gallery') {
       ImageCropPicker.openPicker({
-      
         multiple: isMultiple,
-        mediaType: 'any',
+        mediaType: 'photo',
       }).then(async (image) => {
         actionSheetRef.current.hide();
         // Perform additional operations on the image if needed

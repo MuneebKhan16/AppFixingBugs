@@ -188,11 +188,23 @@ class Post extends Component {
           <View
             style={styles.profile}>
             <View style={styles.btm}>
-              <ProfileImage
-                name={user?.name}
-                imageUri={selectedImage ? selectedImage.path : userImage}
+             
+               {
+              selectedImage?.length > 0 ? selectedImage.map((image) => {
+                return (
+                  <ProfileImage
+                    name={user?.name}
+                    imageUri={image ? image.path : userImage}
+                    videoUri={selectedVideo ? selectedVideo.path : null}
+                  />
+                )
+              }) :
+                <ProfileImage
+                  name={user?.name}
+                  imageUri={selectedImage ? selectedImage.path : userImage}
                 videoUri={selectedVideo ? selectedVideo.path : null}
-              />
+                />
+            }
               <View
                 style={styles.picker}>
                 <CustomImagePicker
@@ -200,10 +212,28 @@ class Post extends Component {
                   onImageChange={(path, mime) => {
                     console.log('path', path);
                     if (mime.startsWith('image/')) {
-                      this.setState({ selectedImage: { path, mime }, selectedVideo: null });
+                      if (Array.isArray(path)) {
+                        this.setState({
+                          selectedImage: [path[0]], // Select only the first image in the array
+                          selectedVideo: null,
+                        });
+                      } else {
+                        this.setState({
+                          selectedImage: [{ path, mime }],
+                          selectedVideo: null,
+                        });
+                      }
                     } else if (mime.startsWith('video/')) {
-                      this.setState({ selectedVideo: { path, mime }, selectedImage: null });
+                      this.setState({
+                        selectedVideo: { path, mime },
+                        selectedImage: null,
+                      });
                     }
+                    // if (mime.startsWith('image/')) {
+                    //   this.setState({ selectedImage: { path, mime }, selectedVideo: null });
+                    // } else if (mime.startsWith('video/')) {
+                    //   this.setState({ selectedVideo: { path, mime }, selectedImage: null });
+                    // }
 
                   }}>
                   <View style={styles.item}>
