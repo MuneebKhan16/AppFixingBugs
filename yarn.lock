@@ -1065,10 +1065,45 @@
     xcode "^3.0.1"
     xml2js "0.4.23"
 
+"@expo/config-plugins@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-6.0.1.tgz"
+  integrity sha512-6mqZutxeibXFeqFfoZApFUEH2n1RxGXYMHCdJrDj4eXDBBFZ3aJ0XBoroZcHHHvfRieEsf54vNyJoWp7JZGj8g==
+  dependencies:
+    "@expo/config-types" "^48.0.0"
+    "@expo/json-file" "~8.2.37"
+    "@expo/plist" "^0.0.20"
+    "@expo/sdk-runtime-versions" "^1.0.0"
+    "@react-native/normalize-color" "^2.0.0"
+    chalk "^4.1.2"
+    debug "^4.3.1"
+    find-up "~5.0.0"
+    getenv "^1.0.0"
+    glob "7.1.6"
+    resolve-from "^5.0.0"
+    semver "^7.3.5"
+    slash "^3.0.0"
+    xcode "^3.0.1"
+    xml2js "0.4.23"
+
 "@expo/config-types@^45.0.0":
   version "45.0.0"
   resolved "https://registry.npmjs.org/@expo/config-types/-/config-types-45.0.0.tgz"
   integrity sha512-/QGhhLWyaGautgEyU50UJr5YqKJix5t77ePTwreOVAhmZH+ff3nrrtYTTnccx+qF08ZNQmfAyYMCD3rQfzpiJA==
+
+"@expo/config-types@^48.0.0":
+  version "48.0.0"
+  resolved "https://registry.npmjs.org/@expo/config-types/-/config-types-48.0.0.tgz"
+  integrity sha512-DwyV4jTy/+cLzXGAo1xftS6mVlSiLIWZjl9DjTCLPFVgNYQxnh7htPilRv4rBhiNs7KaznWqKU70+4zQoKVT9A==
+
+"@expo/json-file@~8.2.37":
+  version "8.2.37"
+  resolved "https://registry.npmjs.org/@expo/json-file/-/json-file-8.2.37.tgz"
+  integrity sha512-YaH6rVg11JoTS2P6LsW7ybS2CULjf40AbnAHw2F1eDPuheprNjARZMnyHFPkKv7GuxCy+B9GPcbOKgc4cgA80Q==
+  dependencies:
+    "@babel/code-frame" "~7.10.4"
+    json5 "^2.2.2"
+    write-file-atomic "^2.3.0"
 
 "@expo/json-file@8.2.36":
   version "8.2.36"
@@ -1078,6 +1113,15 @@
     "@babel/code-frame" "~7.10.4"
     json5 "^1.0.1"
     write-file-atomic "^2.3.0"
+
+"@expo/plist@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.npmjs.org/@expo/plist/-/plist-0.0.20.tgz"
+  integrity sha512-UXQ4LXCfTZ580LDHGJ5q62jSTwJFFJ1GqBu8duQMThiHKWbMJ+gajJh6rsB6EJ3aLUr9wcauxneL5LVRFxwBEA==
+  dependencies:
+    "@xmldom/xmldom" "~0.7.7"
+    base64-js "^1.2.3"
+    xmlbuilder "^14.0.0"
 
 "@expo/plist@0.0.18":
   version "0.0.18"
@@ -1951,7 +1995,7 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-"@xmldom/xmldom@~0.7.0":
+"@xmldom/xmldom@~0.7.0", "@xmldom/xmldom@~0.7.7":
   version "0.7.10"
   resolved "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.7.10.tgz"
   integrity sha512-hb9QhOg5MGmpVkFcoZ9XJMe1em5gd0e2eqqjK87O1dwULedXsnY/Zg/Ju6lcohA+t6jVkmKpe7I1etqhvdRdrQ==
@@ -5205,7 +5249,7 @@ json5@^1.0.1:
   dependencies:
     minimist "^1.2.0"
 
-json5@^2.2.1:
+json5@^2.2.1, json5@^2.2.2:
   version "2.2.3"
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
@@ -6887,6 +6931,13 @@ react-native-gradle-plugin@^0.0.6:
   resolved "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz"
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
+react-native-iap@^12.10.5:
+  version "12.10.5"
+  resolved "https://registry.npmjs.org/react-native-iap/-/react-native-iap-12.10.5.tgz"
+  integrity sha512-KVIgIiz3EE0esPVSZiavKSN2NeUarURA5JJUh6XUGXSsM9YTS3pZaJZpHo8Z62vbsXceg17N5soCnlyvaNmIIQ==
+  dependencies:
+    "@expo/config-plugins" "^6.0.1"
+
 react-native-image-crop-picker@^0.37.3:
   version "0.37.3"
   resolved "https://registry.npmjs.org/react-native-image-crop-picker/-/react-native-image-crop-picker-0.37.3.tgz"
@@ -7060,7 +7111,7 @@ react-native-webview@^12.0.2:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.69 || 1000.0.0", react-native@^0.68.2, "react-native@>= 0.54.0", "react-native@>= 0.59", "react-native@>= 0.62", react-native@>=0.20.0, react-native@>=0.23.1, react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.55, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.59, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.x, react-native@>=0.65.0:
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.69 || 1000.0.0", react-native@^0.68.2, "react-native@>= 0.54.0", "react-native@>= 0.59", "react-native@>= 0.62", react-native@>=0.20.0, react-native@>=0.23.1, react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.55, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.59, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.x, react-native@>=0.65.0, react-native@>=0.65.1:
   version "0.68.2"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.68.2.tgz"
   integrity sha512-qNMz+mdIirCEmlrhapAtAG+SWVx6MAiSfCbFNhfHqiqu1xw1OKXdzIrjaBEPihRC2pcORCoCHduHGQe/Pz9Yuw==
@@ -7151,7 +7202,7 @@ react-transition-group@4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@*, "react@^16.0.0 || ^17.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17 || ^18", react@^17.0.0, react@^18.2.0, "react@>= 16.3.0", "react@>= 16.x.x", react@>=0.14.8, react@>=16, react@>=16.0, react@>=16.3.0, react@>=16.6.0, react@17.0.2:
+react@*, "react@^16.0.0 || ^17.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17 || ^18", react@^17.0.0, react@^18.2.0, "react@>= 16.3.0", "react@>= 16.x.x", react@>=0.14.8, react@>=16, react@>=16.0, react@>=16.13.1, react@>=16.3.0, react@>=16.6.0, react@17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
