@@ -160,7 +160,7 @@ const Review = (props) => {
           <View style={{ position: 'absolute', right: 0, flexDirection: 'row', alignItems: 'center' }}>
             <Image
               source={Icons.marker}
-              resizeMode="center"
+              resizeMode="contain"
               style={styles.marker}
             />
             <Text style={styles.location} numberOfLines={1} >

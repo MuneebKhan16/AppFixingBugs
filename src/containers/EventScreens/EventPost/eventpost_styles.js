@@ -86,7 +86,8 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    height: 850
+    height: 1200,
+    // flex:1
   },
   searchBox: {
     width: '90%',

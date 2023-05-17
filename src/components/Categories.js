@@ -86,12 +86,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: Colors.purple,
+    
   },
   imgbg: {
     borderRadius: 10,
     shadowColor: '#000',
     flex: 1,
-    paddingRight: 10,
+    width:'100%'
+    
  },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', },
