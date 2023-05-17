@@ -206,7 +206,7 @@ const EventPost = props => {
                 onImageChange={(path, mime) => {
                   // setSelectedImage({ path, mime });
                   if (mime.startsWith('image/')) {
-                    if (Array.isArray(path)) {
+                    if (Array.isArray(path.slice(0, 10))) {
                       setSelectedImage(path);
                       setSelectedVideo(null);
                     } else {
