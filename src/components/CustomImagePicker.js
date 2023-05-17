@@ -24,6 +24,7 @@ const CustomImagePicker = ({
       });
     } else if (method === 'gallery') {
       ImageCropPicker.openPicker({
+      
         multiple: isMultiple,
         mediaType: 'any',
       }).then(async (image) => {
@@ -36,20 +37,14 @@ const CustomImagePicker = ({
           
         }
       });
-    } else if (method === 'video') {
-
+    }
+    else if (method === 'video') {
       ImageCropPicker.openPicker({
-        multiple: isMultiple,
-        mediaType: 'any',
+        mediaType: 'video',
       }).then(async (video) => {
         actionSheetRef.current.hide();
-        if (isMultiple) {
-          onImageChange(video, 'video/')
-        } else {
-          onImageChange(video.path, video.mime, 'video');
-
-        }
         // Perform additional operations on the video if needed
+        onImageChange(video.path, video.mime, 'video');
       });
     }
   };

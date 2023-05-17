@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { get_reviews_event } from '../../../redux/APIs/index'
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo,useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import { Colors, NavService } from '../../../config';
 import EventsPosts from '../../../components/EventsPosts';
@@ -23,7 +23,8 @@ import ImageURL from '../../../config/Common'
 import Video from 'react-native-video';
 import FastImage from 'react-native-fast-image';
 import { color } from 'react-native-reanimated';
-
+import Images from '../../../assets/Images';
+import eventContext from '../../EventScreens/eventContext';
 const { width, height } = Dimensions.get('window');
 
 const MEDIA = [
@@ -37,6 +38,9 @@ const Review = (props) => {
   const profile_Data = useSelector((state) => state.reducer.user)
   const { user, event_title, event_location, event_image, id } = props.route.params;
   const [UserPost, setUserPost] = useState([]);
+  const { userProfile } = useContext(eventContext);
+  const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
+
   const datahandle = () => {
     get_reviews_event(profile_Data?.api_token)
       .then((res) => {
@@ -138,15 +142,39 @@ const Review = (props) => {
             />
           </View>
         </Swiper> */}
-        <View style={styles.topmerge}>
-          <Mainprofile
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, }}>
+          <Image source={{ uri: userProfile?.profile_picture ? `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }} style={{
+            width: 50,
+            height: 50,
+            borderRadius: 50,
+            borderWidth: 2,
+            borderColor: Colors.purple,
+            marginBottom: 10,
+          }} />
+          <Text style={{
+            marginLeft: 8, fontSize: 16,
+            color: Colors.black,
+            fontWeight: '600',
+            marginBottom: 3
+          }}>{user?.name}</Text>
+          <View style={{ position: 'absolute', right: 0, flexDirection: 'row', alignItems: 'center' }}>
+            <Image
+              source={Icons.marker}
+              resizeMode="center"
+              style={styles.marker}
+            />
+            <Text style={styles.location} numberOfLines={1} >
+              {event_location}
+            </Text>
+          </View>
+          {/* <Mainprofile
             center
             name={user?.name}
             row
             inc
             size
             location={event_location}
-          />
+          /> */}
         </View>
         <Text
           style={styles.post}>

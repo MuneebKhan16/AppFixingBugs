@@ -40,7 +40,7 @@ export default Icons = {
   delete:require('../Icons/delete.png'),
   date:require('../Icons/date.png'),
   lock:require('../Icons/lock.png'),
-  subscription:require('../Icons/Subtraction.png'),
+  subtract:require('../Icons/Subtraction.png'),
   icn:require('../Icons/icn.png'),
   wallet:require('../Icons/wallet.png'),
   phone:require('../Icons/phone.png'),

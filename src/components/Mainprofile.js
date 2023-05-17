@@ -60,6 +60,7 @@ const Mainprofile = props => {
       <View
         style={{
           marginLeft: row ? 10 : null,
+          marginTop:20
         }}>
         <Text
           style={{

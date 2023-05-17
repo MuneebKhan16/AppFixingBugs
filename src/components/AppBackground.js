@@ -66,7 +66,7 @@ export function AppBackground({
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalVisible, setIsModalVisible] = useState(false);
 
-  console.log('kl',`${Dummy.dummy}`)
+  console.log('kl', `${Dummy.dummy}`)
 
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -74,7 +74,7 @@ export function AppBackground({
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
-  }; 
+  };
   return home ? (
     <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View
@@ -122,7 +122,7 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: user?.profile_picture  ? `${ImageURL?.ImageURL}${user?.profile_picture}`  : "https://picsum.photos/200/300"}}
+                source={{ uri: user?.profile_picture ? `${ImageURL?.ImageURL}${user?.profile_picture}` : "https://picsum.photos/200/300" }}
                 style={{
                   height: 40,
                   width: 40,
@@ -241,21 +241,21 @@ export function AppBackground({
                       fontSize: 16,
                       fontWeight: 'bold',
                       textTransform: 'capitalize',
-                      color:Colors.black
+                      color: Colors.black
                     }}>Filters</Text>
-                    <TouchableOpacity 
-                    onPress={handleOpenModal}
-                    style={{
-                      borderColor: Colors.black,
-                      borderWidth: 1,
-                      width: '96%',
-                      borderRadius: 10,
-                      height: 45,
-                      marginTop: 25,
-                      bottom: 5,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    }}>
+                    <TouchableOpacity
+                      onPress={handleOpenModal}
+                      style={{
+                        borderColor: Colors.black,
+                        borderWidth: 1,
+                        width: '96%',
+                        borderRadius: 10,
+                        height: 45,
+                        marginTop: 25,
+                        bottom: 5,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
                       <Image
                         source={Icons.location}
                         style={{
@@ -266,19 +266,19 @@ export function AppBackground({
                           tintColor: Colors.purple,
                         }}
                       />
-                        <TextInput
-                          editable={false}
-                          style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
-                          placeholder={location ? location.name : 'Location'}
-                          placeholderTextColor={Colors.black}
-                          secureTextEntry={!isFocused}
-                          onFocus={() => setIsFocused(true)}
-                          onBlur={() => setIsFocused(false)}
-                          onChangeText={location => setLocation(location)}
-                          value={location}
-                        />
+                      <TextInput
+                        editable={false}
+                        style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
+                        placeholder={location ? location.name : 'Location'}
+                        placeholderTextColor={Colors.black}
+                        secureTextEntry={!isFocused}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={() => setIsFocused(false)}
+                        onChangeText={location => setLocation(location)}
+                        value={location}
+                      />
                     </TouchableOpacity>
-                    <Mymdll isVisible={ModalVisible} onClose={handleCloseModal} setLocation={setLocation}  />
+                    <Mymdll isVisible={ModalVisible} onClose={handleCloseModal} setLocation={setLocation} />
                     <Pickdate />
                     <CustomButton
                       buttonStyle={{
@@ -296,7 +296,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
-                NavService.navigate('ChatScreen',Eventuser);
+                NavService.navigate('ChatScreen', Eventuser);
               }}
               style={{
                 position: 'absolute',
@@ -319,7 +319,7 @@ export function AppBackground({
               />
             </RNBounceable>
           )}
-           {editicn && (
+          {editicn && (
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
@@ -346,7 +346,7 @@ export function AppBackground({
               />
             </RNBounceable>
           )}
-           {save && (
+          {save && (
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
@@ -362,7 +362,7 @@ export function AppBackground({
                 borderRadius: 10,
                 // backgroundColor: Colors.white,
               }}>
-                <Text style={{textDecorationLine:'underline',color:Colors.purple,fontWeight:'bold',fontSize:16}}>Save</Text>
+              <Text style={{ textDecorationLine: 'underline', color: Colors.purple, fontWeight: 'bold', fontSize: 16, }}>Save</Text>
               {/* <Image
                 source={Icons.edite}
                 style={{

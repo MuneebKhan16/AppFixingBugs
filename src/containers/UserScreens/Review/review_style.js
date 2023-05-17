@@ -97,5 +97,8 @@ export const styles = StyleSheet.create({
   
       elevation: 5,
     },
+    marker: { width: 30, height: 30, },
+    location: { fontSize: 14, color: Colors.black, fontWeight: '600', ellipsizeMode: 'middle', maxWidth: 150 },
+  
   
   });

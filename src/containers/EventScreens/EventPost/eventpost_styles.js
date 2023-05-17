@@ -53,9 +53,9 @@ export const styles = StyleSheet.create({
     width: 300
   },
   sheet: { backgroundColor: 'transparent' },
-  top: { marginTop: 50, alignSelf: 'center',height:500 },
-  user: { marginTop: 40 },
-  mime: { alignItems: 'center', justifyContent: 'center', width: 300, height: 150 },
+  top: { marginTop: 20, alignSelf: 'center',height:500 },
+  user: { marginTop: 40,height:150, },
+  mime: { alignItems: 'center', width: 300, height: 150,justifyContent:'center' },
   upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black, },
   modal: { margin: 0, padding: 0 },
   posting:

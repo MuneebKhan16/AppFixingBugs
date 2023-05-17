@@ -149,8 +149,9 @@ const EventPost = props => {
             </View>
           </ActionSheet>
           <View style={styles.user}>
-            {/* {selectedImage?.length > 0 ? (
-              <Swiper style={{backgroundColor:'red'}}>
+            {selectedImage?.length > 0 ? (
+              <Swiper style={{ height: 150 }} dotColor={Colors.grey}
+                activeDotColor={Colors.purple}>
                 {selectedImage.map((image) => (
                   <ProfileImage
                     key={image.path} // Add a unique key prop for each image
@@ -166,8 +167,8 @@ const EventPost = props => {
                 imageUri={selectedImage ? selectedImage.path : userImage}
                 videoUri={selectedVideo ? selectedVideo.path : null}
               />
-            )} */}
-            {
+            )}
+            {/* {
               selectedImage?.length > 0 ? selectedImage.map((image) => {
                 return (
                   <ProfileImage
@@ -182,7 +183,7 @@ const EventPost = props => {
                   imageUri={selectedImage ? selectedImage.path : userImage}
                   videoUri={selectedVideo ? selectedVideo.path : null}
                 />
-            }
+            } */}
             {/* {
               selectedVideo?.length > 0 ? selectedVideo.map((video) => {
                 return (
@@ -217,20 +218,27 @@ const EventPost = props => {
 
                     }
                   } else if (mime.startsWith('video/')) {
-                    if (Array.isArray(path)) {
-                      setSelectedVideo(path);
-                      setSelectedImage(null);
-
-                    } else {
-                      setSelectedVideo([{ path, mime }]);
-                      setSelectedImage(null);
-                    }
+                    setSelectedVideo({ path, mime });
+                    setSelectedImage(null);
                   }
                 }}>
-                {/* <View style={styles.mime}> */}
-                <View style={[styles.mime, { height: 50 }]}>
+                {/* <View style={styles.mime}>
                   <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text>
+                </View> */}
+                <View style={styles.mime}>
+                  {!selectedImage ? (
+                    <>
+                      <Image source={Icons.upload} style={styles.upload} />
+                      <Text style={styles.txtclr}>Upload</Text>
+                    </>
+                  ) : (
+                    <TouchableOpacity  style={{alignItems:'center',marginBottom:80}}>
+                      <Image source={Icons.upload} style={{ width: 20, height: 20, tintColor: Colors.white ,}} />
+                      <Text style={styles.txtclr}>Upload</Text>
+
+                    </TouchableOpacity>
+                  )}
                 </View>
               </CustomImagePicker>
             </View>
