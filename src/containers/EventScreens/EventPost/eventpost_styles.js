@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View,Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { Colors, NavService } from '../../../config';
-const {width,height} = Dimensions.get('window')
+const { width, height } = Dimensions.get('window')
 export const styles = StyleSheet.create({
   cancel: {
     color: 'rgb(0,88,200)',
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     width: 300
   },
   sheet: { backgroundColor: 'transparent' },
-  top: { marginTop: 50, alignSelf: 'center',height:500 },
+  top: { marginTop: 50, alignSelf: 'center', height: 500 },
   user: { marginTop: 40 },
   mime: { alignItems: 'center', justifyContent: 'center', width: 300, height: 150 },
   upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black, },
@@ -64,25 +64,26 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     paddingVertical: 20,
-    width: '95%', 
+    width: '95%',
     alignSelf: 'center'
   },
-  requriment: { fontSize: 17, color: Colors.white, fontWeight: 'bold',marginLeft:20 },
-  category: { backgroundColor: Colors.purple, 
-    borderBottomLeftRadius: 10, 
-    borderBottomRightRadius: 10, 
-    width: '95%', 
-    alignSelf: 'center', 
+  requriment: { fontSize: 17, color: Colors.white, fontWeight: 'bold', marginLeft: 20 },
+  category: {
+    backgroundColor: Colors.purple,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    width: '95%',
+    alignSelf: 'center',
     alignItems: 'center',
-     justifyContent: 'center',
-     },
+    justifyContent: 'center',
+  },
   modaltxt: { color: Colors.white, fontWeight: '700', fontSize: 16, paddingHorizontal: 10, textTransform: 'capitalize' },
 
   txtclr: { color: Colors.black },
   container: {
     flex: 1,
     alignItems: 'center',
-    height:height * 1.1
+    height: 850
   },
   searchBox: {
     width: '90%',
@@ -105,14 +106,14 @@ export const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    color:Colors.black,
-    marginLeft:10
+    color: Colors.black,
+    marginLeft: 10
   },
   selectedPlace: {
     marginTop: 10,
     alignItems: 'center',
   },
-  city:{
+  city: {
     backgroundColor: '#ededed',
     marginTop: 10,
     width: 150,
@@ -120,9 +121,9 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     color: Colors.black,
-    marginRight:5
+    marginRight: 5
   },
-  state:{
+  state: {
     backgroundColor: '#ededed',
     marginTop: 10,
     width: 150,
@@ -131,17 +132,17 @@ export const styles = StyleSheet.create({
     height: 50,
     color: Colors.black
   },
-  city:{
+  city: {
     backgroundColor: '#ededed',
     marginTop: 10,
-    width:140,
+    width: 140,
     paddingLeft: 15,
     borderRadius: 10,
     height: 50,
     color: Colors.black,
-    justifyContent:'center'
+    justifyContent: 'center'
   },
-  state:{
+  state: {
     backgroundColor: '#ededed',
     marginTop: 10,
     width: 150,
@@ -149,10 +150,10 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     color: Colors.black,
-    marginLeft:10,
-    justifyContent:'center'
+    marginLeft: 10,
+    justifyContent: 'center'
 
   }
 
-  
+
 })
