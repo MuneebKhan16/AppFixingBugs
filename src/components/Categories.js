@@ -34,7 +34,7 @@ const Categories = props => {
       style={styles.touchable}>
 
       <ImageBackground
-        resizeMode='contain'
+        resizeMode='cover'
         // source={Images.grid}
         source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
@@ -86,12 +86,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: Colors.purple,
+    
   },
   imgbg: {
     borderRadius: 10,
     shadowColor: '#000',
     flex: 1,
-    paddingRight: 10,
+
+    
  },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', },

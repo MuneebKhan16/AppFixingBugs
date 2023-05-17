@@ -178,7 +178,7 @@ const EventProfile = () => {
                         marginTop: 20,
                         borderBottomWidth: 1,
                         borderBottomColor: Colors.grey,
-                        height: 260
+                        height: 260,
                       }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                           <Text
@@ -202,7 +202,6 @@ const EventProfile = () => {
                                 fontSize: 18,
                                 color: Colors.black,
                                 fontWeight: 'bold',
-                                marginRight: 5
                               }}>
                               {item?.rating_avg.map((data) => data.rating_count) || 0}{" "} Reviews
                             </Text>
@@ -211,7 +210,7 @@ const EventProfile = () => {
                         <TouchableOpacity >
                           <FastImage
                             source={{ uri: item?.event_image ? `${ImageURL?.ImageURL}${item?.event_image}` : `${DummyURL.dummy}` }}
-                            style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10 }}
+                            style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10 ,borderWidth:2,borderColor:Colors.purple}}
                             imageStyle={styles.img}
                           >
                             <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 12, left: 5, }}>

@@ -44,7 +44,7 @@ const Posts = (props) => {
                     <Image
                       source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                       style={styles.pic}
-                      resizeMode="center"
+                      resizeMode="cover"
                     />
                     <View>
                       <Text
@@ -76,7 +76,7 @@ const Posts = (props) => {
                       priority: FastImage.priority.normal,
                     }}
                     style={styles.rating}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                   />
                   {/* <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
@@ -148,6 +148,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 10,
     height: 180,
+    borderWidth:2,
+    borderColor:Colors.purple
   },
   tags: {
     fontWeight: 'bold',

@@ -38,27 +38,6 @@ export const styles = StyleSheet.create({
     self:{ alignSelf: 'center' },
     clr:{ Color: '#fff' },
     wrapper: {},
-    // slide1: {
-    //   flex: 1,
-    //   justifyContent: 'center',
-    //   alignItems: 'center',
-    //   backgroundColor: '#9DD6EB',
-    // },
-    // slide2: {
-    //   flex: 1,
-    //   justifyContent: 'center',
-    //   alignItems: 'center',
-    //   backgroundColor: '#97CAE5',
-    //   transform: [{ translateX: -10 }],
-    //   marginLeft:20
-    // },
-    // slide3: {
-    //   flex: 1,
-    //   justifyContent: 'center',
-    //   alignItems: 'center',
-    //   backgroundColor: '#92BBD9',
-    //   marginLeft:10
-    // },
     text: {
       color: '#fff',
       fontSize: 30,
@@ -97,7 +76,7 @@ export const styles = StyleSheet.create({
   
       elevation: 5,
     },
-    marker: { width: 30, height: 30, },
+    marker: { width: 25, height: 25,marginRight:5 },
     location: { fontSize: 14, color: Colors.black, fontWeight: '600', ellipsizeMode: 'middle', maxWidth: 150 },
   
   

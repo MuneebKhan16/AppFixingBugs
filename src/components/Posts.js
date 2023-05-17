@@ -31,7 +31,7 @@ const Posts = ({ UserPost, profile_Data }) => {
                   <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                     style={styles.container}
-                    resizeMode="center"
+                    resizeMode="cover"
                   />
                   <View style={{ marginLeft: 10 }}>
                     <Text
@@ -121,7 +121,9 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 10,
     width: '98%',
-    marginLeft: 5
+    marginLeft: 5,
+    borderWidth:2,
+    borderColor:Colors.purple
   },
   tags: {
     fontWeight: '700',
