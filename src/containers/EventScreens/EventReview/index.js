@@ -37,10 +37,7 @@ const EventReview = ({navigation, route}) => {
   // );
 
   return (
-    <AppBackground
-      back
-      home
-      editicn={eventDetail?.user_id == user?.id ? true : false}>
+    <AppBackground back home editicn>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         {eventDetail?.images?.length > 0 ? (
           <Swiper
