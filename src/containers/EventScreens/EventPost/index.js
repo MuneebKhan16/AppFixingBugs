@@ -177,38 +177,6 @@ const EventPost = props => {
                 videoUri={selectedVideo ? selectedVideo.path : null}
               />
             )}
-            {/* {
-              selectedImage?.length > 0 ? selectedImage.map((image) => {
-                return (
-                  <ProfileImage
-                    name={user?.name}
-                    imageUri={image ? image.path : userImage}
-                    videoUri={selectedVideo ? selectedVideo.path : null}
-                  />
-                )
-              }) :
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
-                />
-            } */}
-            {/* {
-              selectedVideo?.length > 0 ? selectedVideo.map((video) => {
-                return (
-                  <ProfileImage
-                    name={user?.name}
-                    imageUri={selectedImage ? selectedImage.path : userImage}
-                    videoUri={video ? video.path : null}
-                  />
-                )
-              }) :
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
-                />
-            } */}
 
             <View style={styles.picker}>
               <CustomImagePicker

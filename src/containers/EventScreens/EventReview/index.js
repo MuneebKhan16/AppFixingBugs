@@ -16,10 +16,7 @@ import {get_reviews_event} from '../../../redux/APIs/index';
 
 const EventReview = ({navigation, route}) => {
   const token = useSelector(state => state.reducer.user.api_token);
-  const user = useSelector(state => state.reducer.user);
-  console.log('user', user, 'user');
   const {eventDetail} = route?.params;
-  const PassedData = [];
   const [UserPost, setUserPost] = useState([]);
   console.log('eventDetail', eventDetail, 'eventDetail');
   useEffect(() => {
@@ -37,7 +34,7 @@ const EventReview = ({navigation, route}) => {
   // );
 
   return (
-    <AppBackground back home editicn>
+    <AppBackground back home editicn editParams={eventDetail}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         {eventDetail?.images?.length > 0 ? (
           <Swiper
