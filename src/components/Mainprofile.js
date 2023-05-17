@@ -27,7 +27,7 @@ const Mainprofile = props => {
         <View style={styles.container}>
           <Image
             source={{ uri: userProfile?.profile_picture ? `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }}
-            resizeMode='center'
+            resizeMode='cover'
             style={styles.pic}
           />
         </View>
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     borderRadius: 40,
-    borderWidth: 2,
-    borderColor: Colors.purple,
+    // borderWidth: 2,
+    // borderColor: Colors.purple,
 
   },
   pic: {

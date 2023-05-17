@@ -382,6 +382,10 @@ PODS:
   - react-native-fbsdk-next/Share (7.3.3):
     - FBSDKShareKit (~> 12.3.2)
     - React-Core
+  - react-native-geolocation (3.0.6):
+    - React-Core
+  - react-native-image-picker (5.3.1):
+    - React-Core
   - react-native-safe-area-context (4.3.1):
     - RCT-Folly
     - RCTRequired
@@ -389,6 +393,11 @@ PODS:
     - React
     - ReactCommon/turbomodule/core
   - react-native-splash-screen (3.3.0):
+    - React-Core
+  - react-native-video (5.2.1):
+    - React-Core
+    - react-native-video/Video (= 5.2.1)
+  - react-native-video/Video (5.2.1):
     - React-Core
   - react-native-webview (12.0.2):
     - React-Core
@@ -483,6 +492,8 @@ PODS:
     - React-Core
   - RNGoogleSignin (9.0.2):
     - GoogleSignIn (~> 6.2)
+    - React-Core
+  - RNIap (12.10.5):
     - React-Core
   - RNImageCropPicker (0.37.3):
     - React-Core
@@ -584,8 +595,11 @@ DEPENDENCIES:
   - react-native-compressor (from `../node_modules/react-native-compressor`)
   - react-native-date-picker (from `../node_modules/react-native-date-picker`)
   - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
+  - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -609,6 +623,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
+  - RNIap (from `../node_modules/react-native-iap`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -701,10 +716,16 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-date-picker"
   react-native-fbsdk-next:
     :path: "../node_modules/react-native-fbsdk-next"
+  react-native-geolocation:
+    :path: "../node_modules/@react-native-community/geolocation"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -751,6 +772,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
+  RNIap:
+    :path: "../node_modules/react-native-iap"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNReanimated:
@@ -818,8 +841,11 @@ SPEC CHECKSUMS:
   react-native-compressor: 2b33a85a50fddb4587165df3d4a79f9d9b8e13ef
   react-native-date-picker: 93e43b3084cea595b4d68b1405d6d99849663bd6
   react-native-fbsdk-next: 6d497a06fc5c33360f5794b4428a0236789a60e6
+  react-native-geolocation: 0f7fe8a4c2de477e278b0365cce27d089a8c5903
+  react-native-image-picker: ec9b713e248760bfa0f879f0715391de4651a7cb
   react-native-safe-area-context: 6c12e3859b6f27b25de4fee8201cfb858432d8de
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
+  react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
   react-native-webview: 203b6a1c7507737f777c91d7e10c30e7e67c1a17
   React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
   React-RCTActionSheet: 547fe42fdb4b6089598d79f8e1d855d7c23e2162
@@ -843,6 +869,7 @@ SPEC CHECKSUMS:
   RNFBAuth: 50ac123123b27241927e639c0ac9c8af17f05aa1
   RNGestureHandler: 61628a2c859172551aa2100d3e73d1e57878392f
   RNGoogleSignin: 22e468a9474dbcb8618d8847205ad4f0b2575d13
+  RNIap: c397f49db45af3b10dca64b2325f21bb8078ad21
   RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
   RNReanimated: 1f117be601c59177816351a965bc57320b766c15
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
@@ -854,6 +881,6 @@ SPEC CHECKSUMS:
   Yoga: 99652481fcd320aefa4a7ef90095b95acd181952
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 2950dbfe2e87bb8bc27102b743fa655973618309
+PODFILE CHECKSUM: cc1d9d140f330ac553fc6b2e512e3d504e673c76
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

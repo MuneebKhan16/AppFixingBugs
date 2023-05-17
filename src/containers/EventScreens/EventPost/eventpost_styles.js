@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { Colors, NavService } from '../../../config';
+import { Platform } from 'react-native';
 const { width, height } = Dimensions.get('window')
 export const styles = StyleSheet.create({
   cancel: {
@@ -86,7 +87,10 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    height: 850
+    height: Platform.select({
+      android: 850,
+      ios: 1200,
+    }),
   },
   searchBox: {
     width: '90%',
