@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { NavService } from '../../config';
+import {NavService} from '../../config';
 import Toast from 'react-native-toast-message';
-import { store } from '../index';
+import {store} from '../index';
 import postApi from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
 import * as EmailValidator from 'email-validator';
-import { Alert, Keyboard } from 'react-native';
-import { Platform } from 'react-native';
-import { saveUser, saveToken, addReviews } from '../actions';
-import { cleanSingle } from 'react-native-image-crop-picker';
+import {Alert, Keyboard} from 'react-native';
+import {Platform} from 'react-native';
+import {saveUser, saveToken, addReviews} from '../actions';
+import {cleanSingle} from 'react-native-image-crop-picker';
 
 var passwordValidator = require('password-validator');
 var schema = new passwordValidator();
@@ -18,10 +18,10 @@ function dispatch(action) {
   store.dispatch(action);
 }
 export function loaderStart() {
-  dispatch({ type: 'LOADER_START' });
+  dispatch({type: 'LOADER_START'});
 }
 export function loaderStop() {
-  dispatch({ type: 'LOADER_STOP' });
+  dispatch({type: 'LOADER_STOP'});
 }
 
 // Common APIs
@@ -54,11 +54,11 @@ export async function socialSignin(access_token, provider, name, email) {
     //   type: 'success',
     //   visibilityTime: 5000,
     // });
-    NavService.reset(0, [{ name: 'AppStack' }]);
+    NavService.reset(0, [{name: 'AppStack'}]);
   } else {
     Toast.show({
       text1: data.message,
-      textStyle: { textAlign: 'center' },
+      textStyle: {textAlign: 'center'},
       type: 'error',
       visibilityTime: 5000,
     });
@@ -100,7 +100,7 @@ export async function login(email, password, setLogin) {
 
       // return { api_token: data?.Data?.api_token }
     }
-  } catch (err) { }
+  } catch (err) {}
 }
 
 export async function signup(
@@ -138,7 +138,7 @@ export async function signup(
   };
   const data = await postApi('signup', params);
   if (data?.status == 1) {
-    NavService.reset(0, [{ name: 'Login' }]);
+    NavService.reset(0, [{name: 'Login'}]);
     // Toast.show({
     //   text1: data.message,
     //   type: 'success',
@@ -164,9 +164,9 @@ export async function verifyCode(otp, user_id) {
   if (data?.status == 1) {
     dispatch({
       type: 'SAVE_USER',
-      payload: { ...data?.data, api_token: data?.access_token },
+      payload: {...data?.data, api_token: data?.access_token},
     });
-    NavService.reset(0, [{ name: 'Introduction' }]);
+    NavService.reset(0, [{name: 'Introduction'}]);
   }
 }
 
@@ -225,7 +225,7 @@ export async function verifyForgetPasswordCode(otp) {
   if (data?.status == 1) {
     Keyboard.dismiss;
     setTimeout(() => {
-      NavService.navigate('ResetPassword', { email });
+      NavService.navigate('ResetPassword', {email});
     }, 100);
   }
 }
@@ -297,9 +297,9 @@ export async function changePassword(
 export async function logout() {
   const data = await postApi('logout');
 
-  dispatch({ type: 'LOGOUT' });
+  dispatch({type: 'LOGOUT'});
   setTimeout(() => {
-    NavService.reset(0, [{ name: 'Auth' }]);
+    NavService.reset(0, [{name: 'Auth'}]);
   }, 1000);
 }
 
@@ -318,7 +318,6 @@ export async function updateProfile(
   params.append('address', address);
   params.append('profile_picture', profile_picture);
   params.append('auth_token', auth_token);
-
 
   const data = await postApi('update-profile', params);
   console.log('object', data);
@@ -339,7 +338,7 @@ export async function localevents(api_token) {
 }
 
 export async function categoryevents(api_token, category_id) {
-  const params = { category_id };
+  const params = {category_id};
   const data = await postApi('category-events', params);
   return data;
 }
@@ -348,7 +347,7 @@ export async function chatList(senderId) {
   return data;
 }
 export async function createChatConnection(senderAndRecieverId) {
-  const data = await postApi('chat', { conversation_id: senderAndRecieverId });
+  const data = await postApi('chat', {conversation_id: senderAndRecieverId});
   return data;
 }
 export async function get_reviews_event() {
@@ -383,10 +382,11 @@ export async function post_reviews(
   params.append('rating', rating);
   params.append('review', review || 'miss');
   params.append('event_id', event_id);
-
+  console.log('rating_image', rating_image);
   const data = await postApi('add-rating', params);
 
   if (data.status == 1) {
+    console.log('data', data, 'data');
     NavService.navigate('Tab');
     return data;
   }
@@ -402,42 +402,44 @@ export async function post_events(
   category_id,
   event_location,
 ) {
-
-  if (
-    event_title != null &&
-    event_type != null &&
-    event_description != null &&
-    event_image != null &&
-    category_id != null &&
-    event_location != null
-  ) {
-    const params = new FormData();
-    params.append('event_title', event_title);
-    params.append('event_type', event_type);
-    params.append('event_description', event_description);
-    params.append('event_image', event_image);
-    params.append('user_id', user_id);
-    params.append('category_id', category_id);
-    params.append('event_location', event_location);
-
-    // console.log('object09876',params)
-
-    const data = await postApi('add-event', params);
-    
-    if (data.status == 1) {
-      NavService.navigate('TabComp', data);
-      return data;
-    }
-  } else {
-    console.log('No Data Posted')
-    // return
-    // Toast.show({
-    //   text1: 'No Events',
-    //   type: 'error',
-    //   visibilityTime: 3000,
-    // });
+  const params = new FormData();
+  params.append('event_title', event_title);
+  params.append('event_type', event_type);
+  params.append('event_description', event_description);
+  // params.append('event_image', event_image);
+  if (event_image?.length) {
+    const result = event_image?.map((asset, index) => {
+      params.append(`event_image[${index + 1}]`, {
+        uri: asset?.path,
+        name: `EventAsset${Date.now()}.${asset?.mime.slice(
+          asset?.mime.lastIndexOf('/') + 1,
+        )}`,
+        type: asset?.mime,
+      });
+      console.log('image data', {
+        uri: asset?.path,
+        name: `EventAsset${Date.now()}.${asset?.mime.slice(
+          asset?.mime.lastIndexOf('/') + 1,
+        )}`,
+        type: asset?.mime,
+      });
+    });
+    await Promise.all(result);
   }
+  params.append('user_id', user_id);
+  params.append('category_id', 1);
+  params.append('event_location', event_location);
+  params.append('state', 'New Jersey');
+  params.append('city', 'San Fransisco');
 
+  console.log('object09876', params);
+
+  const data = await postApi('add-event', params);
+
+  if (data.status == 1) {
+    NavService.navigate('TabComp', data);
+    return data;
+  }
 }
 
 export async function show_eventCreater_event(user_id) {
