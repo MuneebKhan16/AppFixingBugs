@@ -423,7 +423,7 @@ export async function post_events(
     // console.log('object09876',params)
 
     const data = await postApi('add-event', params);
-
+    
     if (data.status == 1) {
       NavService.navigate('TabComp', data);
       return data;
