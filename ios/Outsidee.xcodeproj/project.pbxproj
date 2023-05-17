@@ -15,6 +15,7 @@
 		5C11CFD02A0487A400E02DB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C11CFCF2A0487A400E02DB9 /* GoogleService-Info.plist */; };
 		7699B88040F8A987B510C191 /* libPods-Outsidee-OutsideeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Outsidee-OutsideeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		ABF707032A155AFE00276849 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF707022A155AFE00276849 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-Outsidee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Outsidee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Outsidee/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Outsidee-OutsideeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsidee-OutsideeTests.release.xcconfig"; path = "Target Support Files/Pods-Outsidee-OutsideeTests/Pods-Outsidee-OutsideeTests.release.xcconfig"; sourceTree = "<group>"; };
+		ABF707022A155AFE00276849 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-Outsidee.a in Frameworks */,
+				ABF707032A155AFE00276849 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABF707022A155AFE00276849 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-Outsidee.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Outsidee-OutsideeTests.a */,
@@ -505,7 +509,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsidee/Outsidee.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 696PA32759;
+				DEVELOPMENT_TEAM = N35Z4A9JLM;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Outsidee/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outsidee;
@@ -519,7 +523,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsidee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsideee;
 				PRODUCT_NAME = Outsidee;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -535,7 +539,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsidee/Outsidee.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 696PA32759;
+				DEVELOPMENT_TEAM = N35Z4A9JLM;
 				INFOPLIST_FILE = Outsidee/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outsidee;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -548,7 +552,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsidee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsideee;
 				PRODUCT_NAME = Outsidee;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
