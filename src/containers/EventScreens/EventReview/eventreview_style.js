@@ -13,14 +13,14 @@ export const styles = StyleSheet.create({
   },
   date: {fontSize: 17, color: Colors.darkGray, marginLeft: 5},
   subtitle: {marginTop: 10, fontSize: 17, color: Colors.black, marginLeft: 5},
-  markericn: {flexDirection: 'row', alignItems: 'center', marginTop: 10},
+  markericn: {flexDirection: 'row', alignItems: 'center', marginTop: 5,},
   markericnhdr: {
-    alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    width: 30,
+    width: 25,
     height: 38,
     borderRadius: 10,
+    alignItems:'center'
   },
   marker: {
     width: 18,
@@ -29,9 +29,9 @@ export const styles = StyleSheet.create({
   },
   subcontent: {
     color: Colors.black,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
-    width: 250,
+    width: 300,
   },
   heading: {
     marginVertical: 5,

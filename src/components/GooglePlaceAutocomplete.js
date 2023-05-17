@@ -22,10 +22,11 @@ const GooglePlaceAutocomplete = ({
         enablePoweredByContainer={false}
         keepResultsAfterBlur={true}
      
-     
         listViewDisplayed={false}
         placeholder={placeholder ? placeholder : 'Address'}
+        
         placeholderTextColor={iconColor ? Colors.primary : Colors.black}
+        
         onPress={(data, details = null) => {
           const {formatted_address, geometry,location} = details;
           callback(formatted_address, geometry,location);
@@ -52,6 +53,9 @@ const GooglePlaceAutocomplete = ({
             color: iconColor ? Colors?.black : Colors?.black,
             // backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
+            backgroundColor:'red',
+            
+            
           },
           description: {color: iconColor ? Colors.purple : Colors.black},
         }}

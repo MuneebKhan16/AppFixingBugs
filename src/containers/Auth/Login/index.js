@@ -22,8 +22,8 @@ class Login extends Component {
   }
 
   state = {
-    email: 'daina@gog.com',
-    password: 'Abcd123@',
+    email: 'trump@gmail.com',
+    password: 'Abcd@123',
     visible: false
   };
   onSubmit = () => {

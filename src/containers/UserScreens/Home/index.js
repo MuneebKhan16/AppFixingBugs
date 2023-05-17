@@ -263,7 +263,7 @@ export class Home extends Component {
                       inputStyles={{
                         borderWidth: 1,
                         borderColor: Colors.lightGrey,
-
+                        
                       }}
                       iconColor
                       placeholder={
