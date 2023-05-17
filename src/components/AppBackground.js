@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import ImageURL from '../config/Common';
 import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
+import { themes } from '../config/globalFonts/globalFonts';
 
 
 export function AppBackground({
@@ -100,9 +101,9 @@ export function AppBackground({
             <Text
               style={{
                 color: Colors.black,
-                fontWeight: 'bold',
-                fontSize: 20,
+                fontSize: themes?.fontSize?.headingSize,
                 textTransform: 'capitalize',
+                fontFamily: themes?.font?.black
               }}>
               {title}
             </Text>

@@ -5,6 +5,7 @@ const { width } = Dimensions.get('screen');
 import Icons from '../assets/Icons';
 import LinearGradient from 'react-native-linear-gradient';
 import RNBounceable from "@freakycoder/react-native-bounceable";
+import { themes } from '../config/globalFonts/globalFonts';
 
 export default function CustomButton(props) {
   const { color, title, onPress, buttonStyle, textStyle, disabled, nextBtn } =
@@ -34,7 +35,10 @@ export default function CustomButton(props) {
           buttonStyle,
         ]}
       >
-        <Text style={[{ fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', }, textStyle]}>
+        <Text style={[{
+          fontSize: themes?.fontSize?.large,
+          fontFamily: themes?.font?.black, color: Colors.white,  textTransform: 'capitalize',
+        }, textStyle]}>
           {title}
         </Text>
         {nextBtn && (

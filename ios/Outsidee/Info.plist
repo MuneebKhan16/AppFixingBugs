@@ -84,5 +84,44 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Nexa-Trial-Black.ttf</string>
+		<string>Nexa-Trial-BlackItalic.ttf</string>
+		<string>Nexa-Trial-Bold.ttf</string>
+		<string>Nexa-Trial-BoldItalic.ttf</string>
+		<string>Nexa-Trial-Book.ttf</string>
+		<string>Nexa-Trial-BookItalic.ttf</string>
+		<string>Nexa-Trial-ExtraBold.ttf</string>
+		<string>Nexa-Trial-ExtraBoldItalic.ttf</string>
+		<string>Nexa-Trial-ExtraLight.ttf</string>
+		<string>Nexa-Trial-ExtraLightItalic.ttf</string>
+		<string>Nexa-Trial-Heavy.ttf</string>
+		<string>Nexa-Trial-HeavyItalic.ttf</string>
+		<string>Nexa-Trial-Light.ttf</string>
+		<string>Nexa-Trial-LightItalic.ttf</string>
+		<string>Nexa-Trial-Regular.ttf</string>
+		<string>Nexa-Trial-RegularItalic.ttf</string>
+		<string>Nexa-Trial-Thin.ttf</string>
+		<string>Nexa-Trial-ThinItalic.ttf</string>
+		<string>NexaText-Trial-Black.ttf</string>
+		<string>NexaText-Trial-BlackItalic.ttf</string>
+		<string>NexaText-Trial-Bold.ttf</string>
+		<string>NexaText-Trial-BoldItalic.ttf</string>
+		<string>NexaText-Trial-Book.ttf</string>
+		<string>NexaText-Trial-BookItalic.ttf</string>
+		<string>NexaText-Trial-ExtraBold.ttf</string>
+		<string>NexaText-Trial-ExtraBoldItalic.ttf</string>
+		<string>NexaText-Trial-ExtraLight.ttf</string>
+		<string>NexaText-Trial-ExtraLightItalic.ttf</string>
+		<string>NexaText-Trial-Heavy.ttf</string>
+		<string>NexaText-Trial-HeavyItalic.ttf</string>
+		<string>NexaText-Trial-Light.ttf</string>
+		<string>NexaText-Trial-LightItalic.ttf</string>
+		<string>NexaText-Trial-Regular.ttf</string>
+		<string>NexaText-Trial-RegularItalic.ttf</string>
+		<string>NexaText-Trial-Thin.ttf</string>
+		<string>NexaText-Trial-ThinItalic.ttf</string>
+	</array>
 </dict>
 </plist>
