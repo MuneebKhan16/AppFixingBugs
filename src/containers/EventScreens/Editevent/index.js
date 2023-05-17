@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import { Colors, NavService, Common } from '../../../config';
+import {Colors, NavService, Common} from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from '../EventPost/PickerCompone';
 import PickerComptwo from '../EventPost/PickerComptwo';
@@ -21,19 +21,19 @@ import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
-import { store } from '../../../redux/index';
+import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
-import { styles } from '../EventPost/eventpost_styles';
-import { post_events } from '../../../redux/APIs'
-import GooglePlaceAutocomplete from '../../../components/Google_Location'
+import {styles} from '../EventPost/eventpost_styles';
+import {post_events} from '../../../redux/APIs';
+import GooglePlaceAutocomplete from '../../../components/Google_Location';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
-const Editevent = props => {
-  const { user } = props;
+const Editevent = ({navigation, route}) => {
+  const {eventDetail} = route?.params;
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
@@ -58,8 +58,8 @@ const Editevent = props => {
     setSelectedItem(item);
   };
   const [selectedData, setSelectedData] = useState(null);
-  const users = useSelector((state) => state?.reducer?.user)
-  const { Categorys } = useContext(eventContext);
+  const users = useSelector(state => state?.reducer?.user);
+  const {Categorys} = useContext(eventContext);
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
@@ -118,11 +118,17 @@ const Editevent = props => {
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;
-    console.log('first', location)
+    console.log('first', location);
 
-    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location)
-
-
+    post_events(
+      event_title,
+      event_type,
+      event_description,
+      event_image,
+      user_id,
+      category_id,
+      event_location,
+    );
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -134,10 +140,10 @@ const Editevent = props => {
   const handleCloseModal = () => {
     setIsModalVisible(false);
   };
-
+  console.log('eventDetail', eventDetail, 'eventDetail');
   return (
     <AppBackground title={'Edit'} home back save>
-      <ScrollView style={{ flex: 1, }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -167,22 +173,23 @@ const Editevent = props => {
                   videoUri={selectedVideo ? selectedVideo.path : null}
                 />
               )} */}
-            {
-              selectedImage?.length > 0 ? selectedImage.map((image) => {
+            {selectedImage?.length > 0 ? (
+              selectedImage.map(image => {
                 return (
                   <ProfileImage
                     name={user?.name}
                     imageUri={image ? image.path : userImage}
                     videoUri={selectedVideo ? selectedVideo?.path : null}
                   />
-                )
-              }) :
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo?.path : null}
-                />
-            }
+                );
+              })
+            ) : (
+              <ProfileImage
+                name={user?.name}
+                imageUri={selectedImage ? selectedImage.path : userImage}
+                videoUri={selectedVideo ? selectedVideo?.path : null}
+              />
+            )}
             {/* {
                 selectedVideo?.length > 0 ? selectedVideo.map((video) => {
                   return (
@@ -211,25 +218,23 @@ const Editevent = props => {
                       setSelectedImage(path);
                       setSelectedVideo(null);
                     } else {
-
-                      setSelectedImage([{ path, mime }]);
+                      setSelectedImage([{path, mime}]);
                       setSelectedVideo(null);
-
                     }
                   } else if (mime.startsWith('video/')) {
-                    setSelectedVideo({ path, mime });
+                    setSelectedVideo({path, mime});
                     setSelectedImage(null);
                   }
                 }}>
                 {/* <View style={styles.mime}> */}
-                <View style={[styles.mime, { height: 50 }]}>
+                <View style={[styles.mime, {height: 50}]}>
                   <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text>
                 </View>
               </CustomImagePicker>
             </View>
           </View>
-          <View style={{ marginTop: 60, alignSelf: 'center', height: 500, }}>
+          <View style={{marginTop: 60, alignSelf: 'center', height: 500}}>
             <TextInput
               style={styles.maincontainer}
               onChangeText={title => setTitle(title)}
@@ -243,19 +248,32 @@ const Editevent = props => {
               setSelectedData={setSelectedData}
             />
 
-
-
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-              {location ?
-                <Text style={{ color: '#000' }}>
-                  {location.split(' ').slice(0, 1).pop() + " " + location.split(' ').slice(1, 2).pop() + " " + location.split(' ').slice(2, 3).pop() + " " + location.split(' ').slice(3, 4).pop() + " " + location.split(' ').slice(4, 5).pop() + " " + location.split(' ').slice(5, 6).pop() + " " + location.split(' ').slice(6, 7).pop()}
+              {location ? (
+                <Text style={{color: '#000'}}>
+                  {location.split(' ').slice(0, 1).pop() +
+                    ' ' +
+                    location.split(' ').slice(1, 2).pop() +
+                    ' ' +
+                    location.split(' ').slice(2, 3).pop() +
+                    ' ' +
+                    location.split(' ').slice(3, 4).pop() +
+                    ' ' +
+                    location.split(' ').slice(4, 5).pop() +
+                    ' ' +
+                    location.split(' ').slice(5, 6).pop() +
+                    ' ' +
+                    location.split(' ').slice(6, 7).pop()}
                 </Text>
-                : currentlocation ?
-                  <Text style={{ color: '#000' }}>
-                    {currentlocation.split(' ').slice(0, 1).pop() + " " + currentlocation.split(' ').slice(1, 2).pop() + " " + currentlocation.split(' ').slice(2, 3).pop()}
-                  </Text>
-                  : null
-              }
+              ) : currentlocation ? (
+                <Text style={{color: '#000'}}>
+                  {currentlocation.split(' ').slice(0, 1).pop() +
+                    ' ' +
+                    currentlocation.split(' ').slice(1, 2).pop() +
+                    ' ' +
+                    currentlocation.split(' ').slice(2, 3).pop()}
+                </Text>
+              ) : null}
 
               <Image source={Icons.marker} style={styles.marker} />
               <Mymdll
@@ -268,19 +286,21 @@ const Editevent = props => {
               />
             </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
-                {location ?
-                  <Text style={{ color: '#000' }}>
-                    {location.split(' ').slice(-5, -4).pop() + " " + location.split(' ').slice(-4, -3).pop()}
+                {location ? (
+                  <Text style={{color: '#000'}}>
+                    {location.split(' ').slice(-5, -4).pop() +
+                      ' ' +
+                      location.split(' ').slice(-4, -3).pop()}
                   </Text>
-                  : currentlocation ?
-                    <Text style={{ color: '#000' }}>
-                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-4, -3).pop() : 'City'}
-
-                    </Text>
-                    : null
-                }
+                ) : currentlocation ? (
+                  <Text style={{color: '#000'}}>
+                    {currentlocation.split(' ').length > 1
+                      ? currentlocation.split(' ').slice(-4, -3).pop()
+                      : 'City'}
+                  </Text>
+                ) : null}
 
                 <Image source={Icons.marker} style={styles.marker} />
                 <Mymdll
@@ -294,16 +314,17 @@ const Editevent = props => {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
-                {location ?
-                  <Text style={{ color: '#000' }}>
+                {location ? (
+                  <Text style={{color: '#000'}}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
-                  : currentlocation ?
-                    <Text style={{ color: '#000' }}>
-                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
-                    </Text>
-                    : null
-                }
+                ) : currentlocation ? (
+                  <Text style={{color: '#000'}}>
+                    {currentlocation.split(' ').length > 1
+                      ? currentlocation.split(' ').slice(-2, -1).pop()
+                      : 'State'}
+                  </Text>
+                ) : null}
 
                 <Image source={Icons.marker} style={styles.marker} />
                 <Mymdll
@@ -315,7 +336,6 @@ const Editevent = props => {
                   setcurrentlocation={setcurrentlocation}
                 />
               </TouchableOpacity>
-
             </View>
             <View style={styles.descp}>
               <TextInput
@@ -337,7 +357,6 @@ const Editevent = props => {
           </View>
         </View>
         {/* Modal */}
-
       </ScrollView>
     </AppBackground>
   );

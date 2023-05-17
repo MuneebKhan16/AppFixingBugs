@@ -26,7 +26,7 @@ const EventHome = props => {
   const {showEvents} = useContext(eventContext);
 
   const EventReview = item => {
-    NavService.navigate('EventReview', item);
+    NavService.navigate('EventReview', {eventDetail: item});
   };
 
   return (
@@ -59,7 +59,7 @@ const EventHome = props => {
                     activeDotColor="transparent"
                     dotColor="transparent">
                     {item?.images.map((data, index) => (
-                      <TouchableOpacity onPress={() => EventReview(data)}>
+                      <TouchableOpacity onPress={() => EventReview(item)}>
                         <FastImage
                           key={index}
                           source={{
