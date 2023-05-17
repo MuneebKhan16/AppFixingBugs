@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
       fontSize: 20,
       
       marginBottom:5,
-      marginRight:25,
+      marginRight:18,
 
     },
     txt: { fontSize: 20, fontWeight: 'bold', marginBottom:5 , textTransform: 'capitalize',color:Colors.darkGray},

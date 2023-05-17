@@ -121,7 +121,9 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 10,
     width: '98%',
-    marginLeft: 5
+    marginLeft: 5,
+    borderWidth:2,
+    borderColor:Colors.purple
   },
   tags: {
     fontWeight: '700',
