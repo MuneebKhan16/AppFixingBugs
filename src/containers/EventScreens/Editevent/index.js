@@ -16,53 +16,36 @@ import {Colors, NavService, Common} from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from '../EventPost/PickerCompone';
 import PickerComptwo from '../EventPost/PickerComptwo';
-import PickerLocation from '../EventPost/PickerLocation';
 import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
-import Modal from 'react-native-modal';
 import {useSelector} from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
-import axios from 'axios';
 import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import {styles} from '../EventPost/eventpost_styles';
 import {post_events} from '../../../redux/APIs';
-import GooglePlaceAutocomplete from '../../../components/Google_Location';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
+import ImageURL from '../../../config/Common';
+
 const Editevent = ({navigation, route}) => {
   const {eventDetail} = route?.params;
+  const token = useSelector(state => state.reducer.user.api_token);
+  const user = useSelector(state => state.reducer.user);
   const actionSheetStateRef = useRef();
-  const [isLoading, setIsLoading] = useState(false);
-  const [popUp, setPopUp] = useState(true);
-  const [text, settext] = useState();
-
   const [location, setLocation] = useState(null);
-  const [city, setCity] = useState(null);
-  const [states, setStates] = useState(null);
-
-  const [currentlocation, setcurrentlocation] = useState(null);
-  const [date, setDate] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedId, setSelectedId] = useState('');
-  const [title, setTitle] = useState('');
-  const [dec, setDec] = useState('');
-  const [state, setState] = useState(user?.state);
-  const [userImage, setUserImage] = useState(user?.image);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const handleSelect = item => {
-    setSelectedItem(item);
-  };
+  const [currentlocation, setcurrentlocation] = useState(
+    eventDetail?.event_location,
+  );
+  const [title, setTitle] = useState(eventDetail?.event_title);
+  const [dec, setDec] = useState(eventDetail?.event_description);
+  const [selectedImage, setSelectedImage] = useState(eventDetail?.images);
   const [selectedData, setSelectedData] = useState(null);
-  const users = useSelector(state => state?.reducer?.user);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const {Categorys} = useContext(eventContext);
-  const togglePopUp = () => {
-    setPopUp(previousState => previousState?.popUp);
-  };
+
   function dispatch(action) {
     store.dispatch(action);
   }
@@ -115,7 +98,7 @@ const Editevent = ({navigation, route}) => {
       name: `rating`,
       type: selectedImage?.mime,
     };
-    const user_id = users?.id;
+    const user_id = user?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;
     console.log('first', location);
@@ -130,9 +113,6 @@ const Editevent = ({navigation, route}) => {
       event_location,
     );
   };
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const handleOpenModal = () => {
     setIsModalVisible(true);
   };
@@ -154,87 +134,98 @@ const Editevent = ({navigation, route}) => {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-          <View style={styles.user}>
-            {/* {selectedImage?.length > 0 ? (
-                <Swiper style={{backgroundColor:'red'}}>
-                  {selectedImage.map((image) => (
-                    <ProfileImage
-                      key={image.path} // Add a unique key prop for each image
-                      name={user?.name}
-                      imageUri={image.path}
-                      videoUri={selectedVideo ? selectedVideo.path : null}
-                    />
-                  ))}
-                </Swiper>
-              ) : (
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
-                />
-              )} */}
+          <View style={{marginTop: 40, height: 150}}>
             {selectedImage?.length > 0 ? (
-              selectedImage.map(image => {
-                return (
+              <Swiper
+                style={{height: 150}}
+                activeDotColor="transparent"
+                dotColor="transparent">
+                {selectedImage.map(image => (
                   <ProfileImage
+                    key={image.path}
                     name={user?.name}
-                    imageUri={image ? image.path : userImage}
-                    videoUri={selectedVideo ? selectedVideo?.path : null}
+                    imageUri={
+                      !image?.event_images.includes('mp4')
+                        ? `${ImageURL?.ImageURL}${image?.event_images}`
+                        : null
+                    }
+                    videoUri={
+                      image?.event_images.startsWith('mp4')
+                        ? `${ImageURL?.ImageURL}${image?.event_images}`
+                        : null
+                    }
                   />
-                );
-              })
+                ))}
+              </Swiper>
             ) : (
               <ProfileImage
                 name={user?.name}
-                imageUri={selectedImage ? selectedImage.path : userImage}
-                videoUri={selectedVideo ? selectedVideo?.path : null}
+                imageUri={
+                  !image?.event_images.includes('mp4')
+                    ? image.event_images
+                    : null
+                }
+                videoUri={
+                  image?.event_images.startsWith('mp4')
+                    ? image.event_images
+                    : null
+                }
               />
             )}
-            {/* {
-                selectedVideo?.length > 0 ? selectedVideo.map((video) => {
-                  return (
-                    <ProfileImage
-                      name={user?.name}
-                      imageUri={selectedImage ? selectedImage.path : userImage}
-                      videoUri={video ? video.path : null}
-                    />
-                  )
-                }) :
-                  <ProfileImage
-                    name={user?.name}
-                    imageUri={selectedImage ? selectedImage.path : userImage}
-                    videoUri={selectedVideo ? selectedVideo.path : null}
-                  />
-              } */}
 
             <View style={styles.picker}>
               <CustomImagePicker
                 isMultiple
                 uploadVideo
                 onImageChange={(path, mime) => {
-                  // setSelectedImage({ path, mime });
                   if (mime.startsWith('image/')) {
-                    if (Array.isArray(path)) {
-                      setSelectedImage(path);
-                      setSelectedVideo(null);
+                    if (Array.isArray(path.slice(0, 10))) {
+                      const currentGalleryAsset = [...selectedImage];
+                      const mergedUpdatedAsset = [
+                        ...currentGalleryAsset,
+                        ...path,
+                      ];
+                      setSelectedImage(mergedUpdatedAsset);
                     } else {
-                      setSelectedImage([{path, mime}]);
-                      setSelectedVideo(null);
+                      const currentGalleryAsset = [...selectedImage];
+                      currentGalleryAsset.push({path, mime});
+                      setSelectedImage(currentGalleryAsset);
                     }
                   } else if (mime.startsWith('video/')) {
-                    setSelectedVideo({path, mime});
-                    setSelectedImage(null);
+                    const currentGalleryAsset = [...selectedImage];
+                    currentGalleryAsset.push({path, mime});
+                    setSelectedImage(currentGalleryAsset);
                   }
                 }}>
-                {/* <View style={styles.mime}> */}
                 <View style={[styles.mime, {height: 50}]}>
-                  <Image source={Icons.upload} style={styles.upload} />
-                  <Text style={styles.txtclr}>Upload</Text>
+                  {!selectedImage ? (
+                    <>
+                      <TouchableOpacity>
+                        <Image source={Icons.upload} style={styles.upload} />
+                        <Text style={styles.txtclr}>Upload</Text>
+                      </TouchableOpacity>
+                    </>
+                  ) : (
+                    <>
+                      <TouchableOpacity style={{marginTop: -40}}>
+                        <Image
+                          source={Icons.upload}
+                          style={{
+                            width: 50,
+                            height: 20,
+                            resizeMode: 'contain',
+                            color: Colors.black,
+                          }}
+                        />
+                      </TouchableOpacity>
+                      <Text style={styles.txtclr}>Upload</Text>
+                    </>
+                  )}
                 </View>
               </CustomImagePicker>
             </View>
           </View>
-          <View style={{marginTop: 60, alignSelf: 'center', height: 500}}>
+          <View style={{marginTop: 30, alignSelf: 'center', height: 500}}>
             <TextInput
               style={styles.maincontainer}
               onChangeText={title => setTitle(title)}
@@ -347,7 +338,7 @@ const Editevent = ({navigation, route}) => {
                 placeholderTextColor={Colors.black}
               />
             </View>
-            <PickerComptwo />
+            {/* <PickerComptwo /> */}
             <Pickeventdate />
             <CustomButton
               buttonStyle={styles.btn}

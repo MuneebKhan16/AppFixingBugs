@@ -1,13 +1,13 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import {Image, Text, View} from 'react-native';
 import Video from 'react-native-video';
-import { Colors } from '../config';
+import {Colors} from '../config';
 
-const ProfileImage = ({ size = 150, imageUri, videoUri , name = ' ', style }) => {
+const ProfileImage = ({size = 150, imageUri, videoUri, name = ' ', style}) => {
   if (imageUri) {
     return (
       <Image
-        source={{ uri: imageUri }}
+        source={{uri: imageUri}}
         style={[
           {
             width: 300,
@@ -17,7 +17,6 @@ const ProfileImage = ({ size = 150, imageUri, videoUri , name = ' ', style }) =>
             borderColor: Colors.purple,
             borderWidth: 3,
             alignSelf: 'center',
-            
           },
           style,
         ]}
@@ -36,14 +35,11 @@ const ProfileImage = ({ size = 150, imageUri, videoUri , name = ' ', style }) =>
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'center',
-
-            
           },
           style,
-        ]}
-      >
+        ]}>
         <Video
-          source={{ uri: videoUri }}
+          source={{uri: videoUri}}
           volume={0}
           style={{
             width: 300,
@@ -68,18 +64,14 @@ const ProfileImage = ({ size = 150, imageUri, videoUri , name = ' ', style }) =>
             alignItems: 'center',
             justifyContent: 'center',
             alignSelf: 'center',
-            
           },
           style,
-        ]}
-      >
-      </View>
+        ]}></View>
     );
   }
 };
 
 export default ProfileImage;
-
 
 // const ProfileImage = ({size = 150, imageUri, name = ' ', style}) => {
 //   if (imageUri)
@@ -95,7 +87,7 @@ export default ProfileImage;
 //             borderColor:Colors.purple,
 //             borderWidth:3,
 //             alignSelf:"center",
-            
+
 //           },
 //           style,
 //         ]}
@@ -119,5 +111,3 @@ export default ProfileImage;
 //     </View>
 //   );
 // };
-
-
