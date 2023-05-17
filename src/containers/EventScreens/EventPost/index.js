@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import { Colors, NavService, Common } from '../../../config';
+import {Colors, NavService, Common} from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
@@ -20,19 +20,19 @@ import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
-import { store } from '../../../redux/index';
+import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
-import { styles } from './eventpost_styles';
-import { post_events } from '../../../redux/APIs'
-import GooglePlaceAutocomplete from '../../../components/Google_Location'
+import {styles} from './eventpost_styles';
+import {post_events} from '../../../redux/APIs';
+import GooglePlaceAutocomplete from '../../../components/Google_Location';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
 const EventPost = props => {
-  const { user } = props;
+  const {user} = props;
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
@@ -50,15 +50,15 @@ const EventPost = props => {
   const [dec, setDec] = useState('');
   const [state, setState] = useState(user?.state);
   const [userImage, setUserImage] = useState(user?.image);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const handleSelect = item => {
     setSelectedItem(item);
   };
   const [selectedData, setSelectedData] = useState(null);
-  const users = useSelector((state) => state?.reducer?.user)
-  const { Categorys } = useContext(eventContext);
+  const users = useSelector(state => state?.reducer?.user);
+  const {Categorys} = useContext(eventContext);
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
@@ -98,7 +98,7 @@ const EventPost = props => {
       });
     }
 
-    if (!selectedImage) {
+    if (selectedImage?.length == 0) {
       return Toast.show({
         text1: 'No Image Found',
         type: 'error',
@@ -109,19 +109,23 @@ const EventPost = props => {
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
-    const event_image = {
-      uri: selectedImage?.path,
-      name: `rating`,
-      type: selectedImage?.mime,
-    };
+    // if(selectedImage?.length > 0){
+    //   selectedImage?.map((asset,index)=>{})
+    // }
+    const event_image = selectedImage;
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;
-    console.log('first', location)
 
-    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location)
-
-
+    post_events(
+      event_title,
+      event_type,
+      event_description,
+      event_image,
+      user_id,
+      category_id,
+      event_location,
+    );
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -136,7 +140,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{ flex: 1, }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -147,15 +151,22 @@ const EventPost = props => {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-          <View style={{ marginTop: 40, height: 150 }}>
+          <View style={{marginTop: 40, height: 150}}>
             {selectedImage?.length > 0 ? (
-              <Swiper style={{ height: 150 }} activeDotColor='transparent' dotColor='transparent'>
-                {selectedImage.map((image) => (
+              <Swiper
+                style={{height: 150}}
+                activeDotColor="transparent"
+                dotColor="transparent">
+                {selectedImage.map(image => (
                   <ProfileImage
-                    key={image.path} 
+                    key={image.path}
                     name={user?.name}
-                    imageUri={image.path}
-                    videoUri={selectedVideo ? selectedVideo.path : null}
+                    imageUri={
+                      image?.mime.startsWith('image/') ? image.path : null
+                    }
+                    videoUri={
+                      image?.mime.startsWith('video/') ? image.path : null
+                    }
                   />
                 ))}
               </Swiper>
@@ -207,21 +218,25 @@ const EventPost = props => {
                   // setSelectedImage({ path, mime });
                   if (mime.startsWith('image/')) {
                     if (Array.isArray(path.slice(0, 10))) {
-                      setSelectedImage(path);
-                      setSelectedVideo(null);
+                      const currentGalleryAsset = [...selectedImage];
+                      const mergedUpdatedAsset = [
+                        ...currentGalleryAsset,
+                        ...path,
+                      ];
+                      setSelectedImage(mergedUpdatedAsset);
                     } else {
-
-                      setSelectedImage([{ path, mime }]);
-                      setSelectedVideo(null);
-
+                      const currentGalleryAsset = [...selectedImage];
+                      currentGalleryAsset.push({path, mime});
+                      setSelectedImage(currentGalleryAsset);
                     }
                   } else if (mime.startsWith('video/')) {
-                    setSelectedVideo({ path, mime });
-                    setSelectedImage(null);
+                    const currentGalleryAsset = [...selectedImage];
+                    currentGalleryAsset.push({path, mime});
+                    setSelectedImage(currentGalleryAsset);
                   }
                 }}>
                 {/* <View style={styles.mime}> */}
-                <View style={[styles.mime, { height: 50, }]}>
+                <View style={[styles.mime, {height: 50}]}>
                   {!selectedImage ? (
                     <>
                       <TouchableOpacity>
@@ -231,8 +246,16 @@ const EventPost = props => {
                     </>
                   ) : (
                     <>
-                      <TouchableOpacity style={{marginTop:-40}}>
-                        <Image source={Icons.upload} style={{ width: 50, height: 20, resizeMode: 'contain', color: Colors.black, }} />
+                      <TouchableOpacity style={{marginTop: -40}}>
+                        <Image
+                          source={Icons.upload}
+                          style={{
+                            width: 50,
+                            height: 20,
+                            resizeMode: 'contain',
+                            color: Colors.black,
+                          }}
+                        />
                       </TouchableOpacity>
                       <Text style={styles.txtclr}>Upload</Text>
                     </>
@@ -257,19 +280,32 @@ const EventPost = props => {
               setSelectedData={setSelectedData}
             />
 
-
-
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-              {location ?
-                <Text style={{ color: '#000' }}>
-                  {location.split(' ').slice(0, 1).pop() + " " + location.split(' ').slice(1, 2).pop() + " " + location.split(' ').slice(2, 3).pop() + " " + location.split(' ').slice(3, 4).pop() + " " + location.split(' ').slice(4, 5).pop() + " " + location.split(' ').slice(5, 6).pop() + " " + location.split(' ').slice(6, 7).pop()}
+              {location ? (
+                <Text style={{color: '#000'}}>
+                  {location.split(' ').slice(0, 1).pop() +
+                    ' ' +
+                    location.split(' ').slice(1, 2).pop() +
+                    ' ' +
+                    location.split(' ').slice(2, 3).pop() +
+                    ' ' +
+                    location.split(' ').slice(3, 4).pop() +
+                    ' ' +
+                    location.split(' ').slice(4, 5).pop() +
+                    ' ' +
+                    location.split(' ').slice(5, 6).pop() +
+                    ' ' +
+                    location.split(' ').slice(6, 7).pop()}
                 </Text>
-                : currentlocation ?
-                  <Text style={{ color: '#000' }}>
-                    {currentlocation.split(' ').slice(0, 1).pop() + " " + currentlocation.split(' ').slice(1, 2).pop() + " " + currentlocation.split(' ').slice(2, 3).pop()}
-                  </Text>
-                  : null
-              }
+              ) : currentlocation ? (
+                <Text style={{color: '#000'}}>
+                  {currentlocation.split(' ').slice(0, 1).pop() +
+                    ' ' +
+                    currentlocation.split(' ').slice(1, 2).pop() +
+                    ' ' +
+                    currentlocation.split(' ').slice(2, 3).pop()}
+                </Text>
+              ) : null}
 
               <Image source={Icons.marker} style={styles.marker} />
               <Mymdll
@@ -282,19 +318,21 @@ const EventPost = props => {
               />
             </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
-                {location ?
-                  <Text style={{ color: '#000' }}>
-                    {location.split(' ').slice(-5, -4).pop() + " " + location.split(' ').slice(-4, -3).pop()}
+                {location ? (
+                  <Text style={{color: '#000'}}>
+                    {location.split(' ').slice(-5, -4).pop() +
+                      ' ' +
+                      location.split(' ').slice(-4, -3).pop()}
                   </Text>
-                  : currentlocation ?
-                    <Text style={{ color: '#000' }}>
-                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-4, -3).pop() : 'City'}
-
-                    </Text>
-                    : null
-                }
+                ) : currentlocation ? (
+                  <Text style={{color: '#000'}}>
+                    {currentlocation.split(' ').length > 1
+                      ? currentlocation.split(' ').slice(-4, -3).pop()
+                      : 'City'}
+                  </Text>
+                ) : null}
 
                 <Image source={Icons.marker} style={styles.marker} />
                 <Mymdll
@@ -308,16 +346,17 @@ const EventPost = props => {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
-                {location ?
-                  <Text style={{ color: '#000' }}>
+                {location ? (
+                  <Text style={{color: '#000'}}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
-                  : currentlocation ?
-                    <Text style={{ color: '#000' }}>
-                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
-                    </Text>
-                    : null
-                }
+                ) : currentlocation ? (
+                  <Text style={{color: '#000'}}>
+                    {currentlocation.split(' ').length > 1
+                      ? currentlocation.split(' ').slice(-2, -1).pop()
+                      : 'State'}
+                  </Text>
+                ) : null}
 
                 <Image source={Icons.marker} style={styles.marker} />
                 <Mymdll
@@ -329,7 +368,6 @@ const EventPost = props => {
                   setcurrentlocation={setcurrentlocation}
                 />
               </TouchableOpacity>
-
             </View>
             <View style={styles.descp}>
               <TextInput
@@ -351,12 +389,7 @@ const EventPost = props => {
           </View>
         </View>
         {/* Modal */}
-        <Modal
-          isVisible={popUp}
-          style={styles.modal}
-          backdropOpacity={0.7}
-
-        >
+        <Modal isVisible={popUp} style={styles.modal} backdropOpacity={0.7}>
           <View style={styles.posting}>
             {/* <TouchableOpacity 
           onPress={() => togglePopUp()}
@@ -375,33 +408,45 @@ const EventPost = props => {
           }}>
           <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
         </TouchableOpacity> */}
-            <Text style={styles.requriment}>Requirements and Tips for Posting{'   '}</Text>
+            <Text style={styles.requriment}>
+              Requirements and Tips for Posting{'   '}
+            </Text>
           </View>
           <View style={styles.category}>
-            <View style={{ marginTop: 10 }}>
-              <Text style={styles.modaltxt}>1-Name of Location (mandatory){'\n'}</Text>
-              <Text style={styles.modaltxt}>2-Upload Clear Photo of Building (Mandatory){'\n'}</Text>
-              <Text style={styles.modaltxt}>3-Operating Hours (Mandatory){'\n'}</Text>
-              <Text style={styles.modaltxt}>4-Helpful Tips in Description field such as Parking tips, Crowd (Age, Music Genre) on SpecificNights if Differs, Dress code,{'\n'}</Text>
-              <Text style={styles.modaltxt}>5-Flyers, Pictures and videos of your most recent nights or events! (helpful)
-                & Don’t forget you may purchase optimization to have your events featured on main home
-                page!{'\n'}</Text>
+            <View style={{marginTop: 10}}>
+              <Text style={styles.modaltxt}>
+                1-Name of Location (mandatory){'\n'}
+              </Text>
+              <Text style={styles.modaltxt}>
+                2-Upload Clear Photo of Building (Mandatory){'\n'}
+              </Text>
+              <Text style={styles.modaltxt}>
+                3-Operating Hours (Mandatory){'\n'}
+              </Text>
+              <Text style={styles.modaltxt}>
+                4-Helpful Tips in Description field such as Parking tips, Crowd
+                (Age, Music Genre) on SpecificNights if Differs, Dress code,
+                {'\n'}
+              </Text>
+              <Text style={styles.modaltxt}>
+                5-Flyers, Pictures and videos of your most recent nights or
+                events! (helpful) & Don’t forget you may purchase optimization
+                to have your events featured on main home page!{'\n'}
+              </Text>
               {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
           <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
             </View>
-
           </View>
           <CustomButton
             buttonStyle={{
               alignSelf: 'center',
-              width: '90%'
+              width: '90%',
             }}
             title="Close"
             onPress={() => togglePopUp()}
           />
-
         </Modal>
       </ScrollView>
     </AppBackground>
