@@ -31,7 +31,7 @@ const Posts = ({ UserPost, profile_Data }) => {
                   <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
                     style={styles.container}
-                    resizeMode="center"
+                    resizeMode="cover"
                   />
                   <View style={{ marginLeft: 10 }}>
                     <Text

@@ -17,14 +17,13 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       color: Colors.black,
       fontWeight: 'bold',
-      textTransform: 'capitalize',
     },
     empty: {
       width: 22,
       height: 22,
       resizeMode: 'contain',
     },
-    img: { width: '100%', height: 180, marginTop: 10 },
+    img: { width: '100%', height: 200, marginTop: 10 ,},
     imgbg: {
       width: 38,
       height: 38,
@@ -41,7 +40,6 @@ export const styles = StyleSheet.create({
       borderRadius: 10,
       position: 'absolute',
       bottom: 10,
-      left: 8,
     },
     location: {
       tintColor: Colors.white, width: 18,
@@ -49,6 +47,6 @@ export const styles = StyleSheet.create({
       resizeMode: 'contain',
     },
     locationtxt: { color: Colors.white, fontWeight: 'bold', fontSize: 16,  width:'88%', marginLeft:5},
-    border:{ borderRadius: 10 }
+    border:{ borderRadius: 10,borderWidth:2,borderColor:Colors.purple }
   });
   

@@ -22,6 +22,8 @@ export const styles = StyleSheet.create({
     height: 150,
     marginTop: 10,
     borderRadius: 10,
+    borderWidth:2,
+    borderColor:Colors.purple
 
   },
   icnstrempty: {

@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { get_reviews_event } from '../../../redux/APIs/index'
-import React, { useEffect, useState, useMemo,useContext } from 'react';
+import React, { useEffect, useState, useMemo, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import { Colors, NavService } from '../../../config';
 import EventsPosts from '../../../components/EventsPosts';
@@ -110,8 +110,8 @@ const Review = (props) => {
           <Swiper
             dotColor='transparent'
             activeDotColor='transparent'
-            nextButton={<Text style={{ fontSize: 70, marginRight: 20 }}>›</Text>}
-            prevButton={<Text style={{ fontSize: 70, marginLeft: 10 }}>‹</Text>}
+            nextButton={<Text style={{ fontSize: 70, marginRight: 20, color: Colors.white }}>›</Text>}
+            prevButton={<Text style={{ fontSize: 70, marginLeft: 10, color: Colors.white }}>‹</Text>}
             style={{
               justifyContent: 'center',
               alignItems: 'center',
@@ -150,6 +150,7 @@ const Review = (props) => {
             borderWidth: 2,
             borderColor: Colors.purple,
             marginBottom: 10,
+            
           }} />
           <Text style={{
             marginLeft: 8, fontSize: 16,
