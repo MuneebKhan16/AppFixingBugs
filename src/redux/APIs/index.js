@@ -408,8 +408,15 @@ export async function post_events(
   params.append('event_description', event_description);
   // params.append('event_image', event_image);
   if (event_image?.length) {
-    const result = event_image?.map(asset => {
-      params.append('event_image', {
+    const result = event_image?.map((asset, index) => {
+      params.append(`event_image[${index + 1}]`, {
+        uri: asset?.path,
+        name: `EventAsset${Date.now()}.${asset?.mime.slice(
+          asset?.mime.lastIndexOf('/') + 1,
+        )}`,
+        type: asset?.mime,
+      });
+      console.log('image data', {
         uri: asset?.path,
         name: `EventAsset${Date.now()}.${asset?.mime.slice(
           asset?.mime.lastIndexOf('/') + 1,
@@ -420,8 +427,10 @@ export async function post_events(
     await Promise.all(result);
   }
   params.append('user_id', user_id);
-  params.append('category_id', category_id);
+  params.append('category_id', 1);
   params.append('event_location', event_location);
+  params.append('state', 'New Jersey');
+  params.append('city', 'San Fransisco');
 
   console.log('object09876', params);
 

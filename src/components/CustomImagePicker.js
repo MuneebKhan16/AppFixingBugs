@@ -1,7 +1,10 @@
 import React, {useRef, useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import * as ImageCropPicker from 'react-native-image-crop-picker';
-import Video from 'react-native-video';
+import {
+  Image as ImageCompressor,
+  Video as VideoCompressor,
+} from 'react-native-compressor';
 import ActionSheet from 'react-native-actions-sheet';
 
 const CustomImagePicker = ({
@@ -20,7 +23,12 @@ const CustomImagePicker = ({
       }).then(async image => {
         actionSheetRef.current.hide();
         // Perform additional operations on the image if needed
-        onImageChange(image.path, image.mime, 'any');
+        const result = await ImageCompressor.compress(image.path, {
+          maxHeight: 400,
+          maxWidth: 400,
+          quality: 1,
+        });
+        onImageChange(result, image.mime, 'any');
       });
     } else if (method === 'gallery') {
       ImageCropPicker.openPicker({
@@ -32,7 +40,12 @@ const CustomImagePicker = ({
         if (isMultiple) {
           onImageChange(image, 'image/');
         } else {
-          // onImageChange(image.path, image.mime, 'photo');
+          const result = await ImageCompressor.compress(image.path, {
+            maxHeight: 400,
+            maxWidth: 400,
+            quality: 1,
+          });
+          onImageChange(result, image.mime, 'photo');
         }
       });
     } else if (method === 'video') {
@@ -41,7 +54,10 @@ const CustomImagePicker = ({
       }).then(async video => {
         actionSheetRef.current.hide();
         // Perform additional operations on the video if needed
-        onImageChange(video.path, video.mime, 'video');
+        const result = await VideoCompressor.compress(video.path, {
+          compressionMethod: 'auto',
+        });
+        onImageChange(result, video.mime, 'video');
       });
     }
   };

@@ -27,7 +27,7 @@ const PickerCompone = props => {
         color: 'white',
         fontSize: 20,
         backgroundColor: '#ededed',
-        // height: 60,
+        height: 60,
       }}
       mode="dropdown">
       <Picker.Item
