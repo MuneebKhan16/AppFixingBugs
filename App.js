@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import Toast from 'react-native-toast-message';
 import Nav from './src';
 import {store} from './src/redux';
+// import {store} from './src/redux';
 import {Loader} from './src/config';
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
