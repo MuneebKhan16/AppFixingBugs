@@ -26,7 +26,7 @@ const EventHome = props => {
   const { showEvents } = useContext(eventContext);
 
   const EventReview = item => {
-    NavService.navigate('EventReview', item);
+    NavService.navigate('EventReview', {eventDetail: item});
   };
 
   return (
