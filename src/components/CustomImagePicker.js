@@ -5,6 +5,7 @@ import {
   Image as ImageCompressor,
   Video as VideoCompressor,
 } from 'react-native-compressor';
+import Toast from 'react-native-toast-message';
 import ActionSheet from 'react-native-actions-sheet';
 
 const CustomImagePicker = ({
@@ -51,13 +52,24 @@ const CustomImagePicker = ({
     } else if (method === 'video') {
       ImageCropPicker.openPicker({
         mediaType: 'video',
+        includeExif: true,
       }).then(async video => {
         actionSheetRef.current.hide();
-        // Perform additional operations on the video if needed
-        const result = await VideoCompressor.compress(video.path, {
-          compressionMethod: 'auto',
-        });
-        onImageChange(result, video.mime, 'video');
+        const duration = video?.duration / 1000;
+        if (duration <= 15) {
+          // Perform additional operations on the video if needed
+          const result = await VideoCompressor.compress(video.path, {
+            compressionMethod: 'auto',
+          });
+          onImageChange(result, video.mime, 'video');
+        } else {
+          Toast.show({
+            text1: 'Video duration can not be greater than 15 seconds',
+            type: 'error',
+            visibilityTime: 5000,
+          });
+          return;
+        }
       });
     }
   };
