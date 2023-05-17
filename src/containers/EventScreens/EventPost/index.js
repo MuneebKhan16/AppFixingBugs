@@ -98,13 +98,13 @@ const EventPost = props => {
       });
     }
 
-    if (!selectedImage) {
-      return Toast.show({
-        text1: 'No Image Found',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
+    // if (!selectedImage) {
+    //   return Toast.show({
+    //     text1: 'No Image Found',
+    //     type: 'error',
+    //     visibilityTime: 3000,
+    //   });
+    // }
 
     const event_title = title;
     const event_type = 'local';
