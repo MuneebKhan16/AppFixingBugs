@@ -203,13 +203,13 @@ const EventPost = props => {
                     setSelectedImage(currentGalleryAsset);
                   }
                 }}>
-                   <View style={styles.item}>
-                    <Image source={Icons.upload} style={styles.uploadimg} />
-                    <Text style={styles.upload}>Upload</Text>
-                  </View>
+                <View style={styles.item}>
+                  <Image source={Icons.upload} style={styles.uploadimg} />
+                  <Text style={styles.upload}>Upload</Text>
+                </View>
                 {/* <View style={styles.mime}> */}
                 {/* <View style={[styles.mime, {height: 50}]}> */}
-                  {/* {!selectedImage ? (
+                {/* {!selectedImage ? (
                     <>
                       <TouchableOpacity style={{marginTop:40,backgroundColor:'red'}}>
                         <Image source={Icons.upload} style={styles.upload} />
@@ -232,7 +232,7 @@ const EventPost = props => {
                       <Text style={styles.txtclr}>Upload</Text>
                     </>
                   )} */ }
-                  {/* <Image source={Icons.upload} style={styles.upload} />
+                {/* <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text> */}
                 {/* </View> */}
               </CustomImagePicker>
@@ -254,7 +254,7 @@ const EventPost = props => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{color: '#000',width:250}}numberOfLines={1}>
+                <Text style={{ color: '#000', width: 250 }} numberOfLines={1}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -270,7 +270,7 @@ const EventPost = props => {
                     location.split(' ').slice(6, 7).pop()}
                 </Text>
               ) : currentlocation ? (
-                <Text style={{ color: '#000', width:250}}numberOfLines={1}>
+                <Text style={{ color: '#000', width: 250 }} numberOfLines={1}>
                   {currentlocation.split(' ').slice(0, 1).pop() +
                     ' ' +
                     currentlocation.split(' ').slice(1, 2).pop() +
@@ -293,13 +293,13 @@ const EventPost = props => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{color: '#000',width:95}} numberOfLines={1}>
+                  <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
                     {location.split(' ').slice(-5, -4).pop() +
                       ' ' +
                       location.split(' ').slice(-4, -3).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{ color: '#000',width:95}} numberOfLines={1}>
+                  <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-4, -3).pop()
                       : 'City'}
@@ -319,11 +319,11 @@ const EventPost = props => {
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{color: '#000',width:95}} numberOfLines={1}>
+                  <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{ color: '#000',width:95}} numberOfLines={1}>
+                  <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-2, -1).pop()
                       : 'State'}
@@ -375,8 +375,7 @@ const EventPost = props => {
             justifyContent: 'center',
             height:28,
             marginTop:15,
-            borderRadius:10,
-           
+            borderRadius:10,      
           }}>
           <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
         </TouchableOpacity> */}
@@ -385,7 +384,7 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               <Text style={styles.modaltxt}>
                 1- Name of Location (mandatory){'\n'}
               </Text>
