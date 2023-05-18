@@ -225,7 +225,6 @@ export function AppBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-                backgroundColor: Colors.white,
               }}>
               <Image
                 source={Icons.filter}
@@ -275,7 +274,7 @@ export function AppBackground({
                         style={{
                           width: 22,
                           height: 22,
-                          marginLeft: 12,
+                          marginLeft: 10,
                           resizeMode: 'contain',
                           tintColor: Colors.purple,
                         }}
@@ -289,12 +288,12 @@ export function AppBackground({
                           width: '80%',
                           color: Colors.black,
                           fontSize: 17,
-                          fontWeight: '700',
+                          marginLeft:15,
                         }}
                         placeholder={location ? location.name : 'Location'}
                         placeholderTextColor={Colors.black}
                         // secureTextEntry={!isFocused}
-                        onFocus={() => setIsFocused(true)}
+                        // onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         onChangeText={location => setLocation(location)}
                         value={location}
