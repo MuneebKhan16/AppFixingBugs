@@ -1,8 +1,15 @@
 /* eslint-disable prettier/prettier */
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,UIManager,LayoutAnimation} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {Colors} from '../../../config';
+if (
+  Platform.OS === 'android' &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
 const PickerCompone = props => {
   const {categories, setSelectedData} = props;
 
@@ -16,9 +23,25 @@ const PickerCompone = props => {
   useEffect(() => {
     handletransfer();
   }, [selectedLanguage]);
+  const [pickerHeight, setPickerHeight] = useState(); // Default height
+
+  const pickerStyle = {
+    marginTop: 10,
+    width: 300,
+    backgroundColor: '#ededed',
+    borderRadius: 10,
+    height: pickerHeight,
+  };
+
+  const calculatePickerHeight = (event) => {
+    const { height } = event.nativeEvent.layout;
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut); // Animate height change
+    setPickerHeight(height);
+  };
 
   return (
     <Picker
+    
       style={styles.container}
       color={Colors.grey}
       selectedValue={selectedLanguage}
@@ -27,7 +50,6 @@ const PickerCompone = props => {
         color: 'white',
         fontSize: 20,
         backgroundColor: '#ededed',
-        height: 60,
       }}
       mode="dropdown">
       <Picker.Item

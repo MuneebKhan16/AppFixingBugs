@@ -7123,7 +7123,11 @@ react-native-webview@^12.0.2:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
+<<<<<<< HEAD
 react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.69 || 1000.0.0", react-native@^0.68.2, "react-native@>= 0.54.0", "react-native@>= 0.59", "react-native@>= 0.62", react-native@>=0.20.0, react-native@>=0.23.1, react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.44.1, react-native@>=0.55, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.59, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.x, react-native@>=0.65.0, react-native@>=0.65.1:
+=======
+react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.69 || 1000.0.0", react-native@^0.68.2, "react-native@>= 0.54.0", "react-native@>= 0.59", "react-native@>= 0.62", react-native@>=0.20.0, react-native@>=0.23.1, react-native@>=0.40.0, react-native@>=0.42.0, react-native@>=0.55, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.59, react-native@>=0.60.0, react-native@>=0.63.3, react-native@>=0.63.x, react-native@>=0.65.0, react-native@>=0.65.1:
+>>>>>>> 3933c05ac443285dba1532e30e828a27b6eb5899
   version "0.68.2"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.68.2.tgz"
   integrity sha512-qNMz+mdIirCEmlrhapAtAG+SWVx6MAiSfCbFNhfHqiqu1xw1OKXdzIrjaBEPihRC2pcORCoCHduHGQe/Pz9Yuw==

@@ -89,7 +89,6 @@ const Review = (props) => {
             }}
             resizeMode="cover"
           />
-
         </>
 
       );
@@ -132,17 +131,6 @@ const Review = (props) => {
           </Swiper>
         </View>
 
-        {/* <Swiper
-          style={styles.swiper}
-          showsButtons={false}
-          buttonWrapperStyle={styles.clr}>
-          <View style={styles.slide1}>
-            <Image
-              source={{ uri: `${ImageURL?.ImageURL}${event_image}` }}
-              style={styles.img}
-            />
-          </View>
-        </Swiper> */}
         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, }}>
           <Image source={{ uri: userProfile?.profile_picture ? `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }} style={{
             width: 50,

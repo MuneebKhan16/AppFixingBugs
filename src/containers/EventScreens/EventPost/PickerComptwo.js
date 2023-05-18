@@ -6,6 +6,7 @@ import {Picker} from '@react-native-picker/picker';
 const PickerComptwo = () => {
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [selectedPicker, setSelectedPicker] = useState();
+  
   return (
     <Picker
       style={{
@@ -13,7 +14,6 @@ const PickerComptwo = () => {
         width: 300,
         backgroundColor: '#ededed',
         borderRadius: 10,
-        height: 60,
       }}
       color={Colors.grey}
       selectedValue={selectedPicker}
