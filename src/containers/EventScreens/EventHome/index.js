@@ -8,6 +8,7 @@ import {
   ImageBackground,
   BackHandler,
   Alert,
+  ActivityIndicator
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import React, { useState, useEffect, useContext } from 'react';
@@ -21,12 +22,12 @@ import { show_eventCreater_event } from '../../../redux/APIs';
 import Icons from '../../../assets/Icons';
 import eventContext from '../eventContext';
 import FastImage from 'react-native-fast-image';
-
+import Video from 'react-native-video'
 const EventHome = props => {
   const { showEvents } = useContext(eventContext);
 
   const EventReview = item => {
-    NavService.navigate('EventReview', {eventDetail: item});
+    NavService.navigate('EventReview', { eventDetail: item });
   };
 
   return (
@@ -62,41 +63,60 @@ const EventHome = props => {
                         activeDotColor="transparent"
                         dotColor="transparent">
                         {item?.images.map((data, index) => (
-                          <TouchableOpacity onPress={() => EventReview(data)}>
-                            <FastImage
-                              key={index}
-                              source={{
-                                uri: `${ImageURL?.ImageURL}${data?.event_images}`,
-                              }}
-                              style={styles.imgback}
-                              imageStyle={styles.img}>
-                              <View style={styles.loc}>
-                                <Image
-                                  source={Icons.location}
-                                  resizeMode="contain"
-                                  style={styles.location}
-                                />
-                                <Text style={styles.loctxt} numberOfLines={1}>
-                                  {' '}
-                                  {item.event_location}
-                                </Text>
-                              </View>
-                            </FastImage>
+                          <TouchableOpacity onPress={() => EventReview({data,item})}>
+                            
+                            {
+                              data?.event_images?.split('.')[1] == 'mp4' ?
+                                (
+                                  
+                                    <Video
+                                      source={{ uri:'https://api.myprojectstaging.com/outsideee/public/images/events/rating-5761684362950.mp4' }}
+                                      volume={0}      
+                                      style={styles.imgback}
+                                      resizeMode="cover"
+                                      //  controls={true}
+                                    />
+                                   
+                                  
+                                )
+                                :
+                                (
+                                  <FastImage
+                                    key={index}
+                                    source={{
+                                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                                    }}
+                                    style={styles.imgback}
+                                    imageStyle={styles.img}>
+                                    <View style={styles.loc}>
+                                      <Image
+                                        source={Icons.location}
+                                        resizeMode="contain"
+                                        style={styles.location}
+                                      />
+                                      <Text style={styles.loctxt} numberOfLines={1}>
+                                        {' '}
+                                        {item.event_location}
+                                      </Text>
+                                    </View>
+                                  </FastImage>
+                                )
+                            }
                           </TouchableOpacity>
                         ))}
                       </Swiper>
                     ) : null}
                   </View>
-            
-  )
-}
-/>
-        </View >
-      ) : (
-  <View style={styles.container1}>
-    <Text style={styles.txtheadersty}>No Events Available</Text>
-  </View>
-)}
+
+                )
+                }
+              />
+            </View >
+          ) : (
+            <View style={styles.container1}>
+              <Text style={styles.txtheadersty}>No Events Available</Text>
+            </View>
+          )}
     </AppBackground >
   );
 };

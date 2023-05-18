@@ -66,7 +66,7 @@ export function AppBackground({
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalVisible, setIsModalVisible] = useState(false);
 
-  console.log('kl', `${Dummy.dummy}`);
+  
 
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -75,6 +75,14 @@ export function AppBackground({
   const handleCloseModal = () => {
     setIsModalVisible(false);
   };
+
+
+  const handleUpdate = () => {
+    save(true)
+  }
+
+
+
   return home ? (
     <View style={{flex: 1, backgroundColor: Colors.offWhite}}>
       <View style={styles.maincontainer}>
@@ -372,9 +380,7 @@ export function AppBackground({
           {save && (
             <RNBounceable
               activeOpacity={0.8}
-              onPress={() => {
-                // NavService.navigate('Editevent',);
-              }}
+              onPress={() => handleUpdate()}
               style={{
                 position: 'absolute',
                 right: 20,

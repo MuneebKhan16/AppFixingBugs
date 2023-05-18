@@ -94,7 +94,7 @@ const MyMdl = ({ isVisible, onClose , setLocation,location ,currentlocation ,set
                 />
         {/* Single */}
   
-     {console.log('currentlocation',currentlocation)}
+     {/* {console.log('currentlocation',currentlocation)} */}
         <TouchableOpacity style={styles.closeButton} onPress={onClose}>
           <Text style={styles.closeButtonText}>{textInputEditable == false ? 'Done' : 'Close'}</Text>
         </TouchableOpacity>

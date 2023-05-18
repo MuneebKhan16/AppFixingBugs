@@ -36,12 +36,12 @@ const EventReview = ({navigation, route}) => {
   return (
     <AppBackground back home editicn editParams={eventDetail}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
-        {eventDetail?.images?.length > 0 ? (
+        {eventDetail?.item?.images?.length > 0 ? (
           <Swiper
             style={{height: 185}}
             activeDotColor="transparent"
             dotColor="transparent">
-            {eventDetail?.images.map((data, index) => (
+            {eventDetail?.item?.images?.map((data, index) => (
               <FastImage
                 key={index}
                 source={{
@@ -53,23 +53,19 @@ const EventReview = ({navigation, route}) => {
             ))}
           </Swiper>
         ) : null}
-        {/* <Image
-          source={{uri: `${ImageURL?.ImageURL}${PassedData?.event_image}`}}
-          style={styles.imgbg}
-        /> */}
         <View style={styles.titlehdr}>
-          <Text style={styles.title}>{eventDetail?.event_title} .</Text>
+          <Text style={styles.title}>{eventDetail?.item.event_title} .</Text>
           <Text style={styles.date}>
-            {DateReadbleFunction(eventDetail?.created_at)}{' '}
+            {DateReadbleFunction(eventDetail?.item?.created_at)}{' '}
           </Text>
         </View>
-        <Text style={styles.subtitle}>{eventDetail.event_description}</Text>
+        <Text style={styles.subtitle}>{eventDetail?.item?.event_description}</Text>
         <View style={styles.markericn}>
           <View style={styles.markericnhdr}>
             <Image source={Icons.marker} style={styles.marker} />
           </View>
           <Text style={styles.subcontent} numberOfLines={1}>
-            {eventDetail.event_location}
+            {eventDetail?.item?.event_location}
           </Text>
         </View>
         <Text style={styles.heading}>Ratings & Post</Text>

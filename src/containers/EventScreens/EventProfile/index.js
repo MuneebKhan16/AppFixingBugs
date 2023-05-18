@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
@@ -10,10 +11,13 @@ import FastImage from 'react-native-fast-image'
 import { Colors, NavService } from '../../../config';
 import ImageURL from '../../../config/Common';
 import DummyURL from '../../../config/Common';
-import Icons from '../../../assets/Icons'
+import Icons from '../../../assets/Icons';
+import Swiper from 'react-native-swiper';
+import Video from 'react-native-video'
+import postApi from '../../../redux/RequestTypes/post';
 const EventProfile = () => {
   const { showEvents, UserPost } = useContext(eventContext);
-
+  const [fetchEvents, setfetchEvents] = useState([]);
   const { userProfile } = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
 
@@ -24,6 +28,19 @@ const EventProfile = () => {
     const date = dateIn
     const dates = new Date(date);
     return dates?.toLocaleDateString();
+  }
+
+  const Delete_Event = async (item) => {
+    const id = item.id
+   
+    const params = {
+      id : id
+    }
+    const data = await  postApi('delete-event',params);
+    if(data.status == 1){
+      setfetchEvents(fetchEvents.filter((fetchEvent) => console.log(fetchEvent)));
+    }
+   
   }
 
   return (
@@ -207,20 +224,55 @@ const EventProfile = () => {
                             </Text>
                           </View>
                         </View>
-                        <TouchableOpacity >
-                          <FastImage
-                            source={{ uri: item?.event_image ? `${ImageURL?.ImageURL}${item?.event_image}` : `${DummyURL.dummy}` }}
-                            style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10 ,borderWidth:2,borderColor:Colors.purple}}
-                            imageStyle={styles.img}
-                          >
-                            <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 12, left: 5, }}>
-                              <Image source={Icons.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 20, height: 20, }} />
-                              <Text style={{ color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', fontSize: 17, width: 250 }} numberOfLines={1} >{' '}{item?.event_location}</Text>
-                            </View>
-                          </FastImage>
-
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 10 }}>
+                        {item?.images?.length > 0 ? (
+                      <Swiper
+                        style={{ height: 180 }}
+                        activeDotColor="transparent"
+                        dotColor="transparent">
+                        {item?.images.map((data, index) => (
+                          <TouchableOpacity >
+                            {
+                              data?.event_images?.split('.')[1] == 'mp4' ?
+                                (
+                                  
+                                    <Video
+                                      source={{ uri: `${ImageURL?.ImageURL}+${data?.event_images}` }}
+                                      volume={0}      
+                                      style={styles.imgback}
+                                      resizeMode="cover"
+                                      //  controls={true}
+                                    />
+                                   
+                                  
+                                )
+                                :
+                                (
+                                  <FastImage
+                                    key={index}
+                                    source={{
+                                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                                    }}
+                                    style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10 }}
+                                    imageStyle={styles.img}>
+                                    <View style={styles.loc}>
+                                      <Image
+                                        source={Icons.location}
+                                        resizeMode="contain"
+                                        style={styles.location}
+                                      />
+                                      <Text style={styles.loctxt} numberOfLines={1}>
+                                        {' '}
+                                        {item.event_location}
+                                      </Text>
+                                    </View>
+                                  </FastImage>
+                                )
+                            }
+                          </TouchableOpacity>
+                        ))}
+                      </Swiper>
+                    ) : null}
+                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 10 }} onPress={() => Delete_Event(item)}>
                           <Image source={Icons.bin} style={{ width: 30, height: 30, tintColor: Colors.purple }} resizeMode='contain' />
 
                         </TouchableOpacity>

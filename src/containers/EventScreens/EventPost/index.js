@@ -348,7 +348,7 @@ const EventPost = props => {
               />
             </View>
             <PickerComptwo />
-            <Pickeventdate />
+            <Pickeventdate date={date} setDate={setDate} />
             <CustomButton
               buttonStyle={styles.btn}
               title="Posts"
