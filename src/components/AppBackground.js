@@ -24,6 +24,9 @@ import ImageURL from '../config/Common';
 import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
 import Datepick from './Datepick';
+import { themes } from '../config/globalFonts/globalFonts';
+
+
 export function AppBackground({
   editeIcon,
   route,
@@ -99,9 +102,9 @@ export function AppBackground({
             <Text
               style={{
                 color: Colors.black,
-                fontWeight: 'bold',
-                fontSize: 20,
+                fontSize: themes?.fontSize?.large,
                 textTransform: 'capitalize',
+                fontFamily: themes?.font?.black
               }}>
               {title}
             </Text>

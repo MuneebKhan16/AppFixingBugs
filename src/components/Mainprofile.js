@@ -7,6 +7,7 @@ import StarRating from 'react-native-star-rating';
 import { useSelector } from 'react-redux';
 import { backgroundUpload } from 'react-native-compressor';
 import eventContext from '../containers/EventScreens/eventContext';
+import { themes } from '../config/globalFonts/globalFonts';
 const Mainprofile = props => {
   const profile_Data = useSelector((state) => state.reducer.user);
   const { userProfile } = useContext(eventContext);
@@ -60,12 +61,12 @@ const Mainprofile = props => {
       <View
         style={{
           marginLeft: row ? 10 : null,
-          marginTop:20
+          marginTop: 20
         }}>
         <Text
           style={{
-            fontSize: txt ? 18 : 19,
-            fontWeight: '700',
+            fontSize: themes?.fontSize?.large,
+            fontFamily: themes?.font?.extraBold,
             color: Colors.black,
             textAlign: row ? null : 'center',
             textTransform: 'capitalize',
@@ -86,9 +87,9 @@ const Mainprofile = props => {
         ) : (
           <Text
             style={{
-              fontSize: size ? 18 : 17,
+              fontSize: themes?.fontSize?.small,
+              fontFamily: themes?.font?.regular,
               color: Colors.darkGray,
-              fontWeight: '400',
 
             }}>
             {props?.subtitle}
@@ -123,9 +124,6 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: 'center',
     borderRadius: 40,
-    // borderWidth: 2,
-    // borderColor: Colors.purple,
-
   },
   pic: {
     width: 80,
@@ -133,8 +131,6 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     borderWidth: 2,
     borderColor: Colors.purple,
-
-
   },
   profilepic: {
     padding: 12,
@@ -146,13 +142,11 @@ const styles = StyleSheet.create({
     top: -30,
     left: 47,
     backgroundColor: Colors.purple
-
   },
   edit: {
     width: 12,
     height: 12,
     resizeMode: 'contain',
-
   },
   mark: {
     flexDirection: 'row',
@@ -161,9 +155,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     position: 'absolute',
-
-
   },
-  marker: { width: 20, height: 20, marginRight:5 },
-  location: { fontSize: 14, color: Colors.black, fontWeight: '600', ellipsizeMode: 'middle', maxWidth: 150 },
+  marker: { width: 20, height: 20, marginRight: 5 },
+  location: {
+    fontSize: themes?.fontSize?.small,
+    fontFamily: themes?.font?.regular,
+    color: Colors.black,
+    ellipsizeMode: 'middle',
+    maxWidth: 150
+  },
 });

@@ -1,0 +1,217 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Black.ttf",
+      "sha1": "8ce57532a808692beec5ea5f250823921620a4ec"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-BlackItalic.ttf",
+      "sha1": "c27dc43057843208ca60a0c6772a14a5100b83eb"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Bold.ttf",
+      "sha1": "d5d92cca2e778cfcbad167a0a679c04af1328f4b"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-BoldItalic.ttf",
+      "sha1": "97e6163fad75e77342254ebe2452e24db3e832d8"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Book.ttf",
+      "sha1": "14c28508855c564f5d83c545a7243c786c457bb0"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-BookItalic.ttf",
+      "sha1": "1aa965dd59c88ba89f76d3d2adc25e26bc86b145"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-ExtraBold.ttf",
+      "sha1": "2ef421e54b07a81963ae02a0b0c20b0f573c7841"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-ExtraBoldItalic.ttf",
+      "sha1": "fa46ef7f38ca41809ebb997899faeb5573b865ef"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-ExtraLight.ttf",
+      "sha1": "87fdd9b70aa43088abc9218bb1658c1bef6c390b"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-ExtraLightItalic.ttf",
+      "sha1": "9091ace5aa5810600c168dcc6946cf9c687851d1"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Heavy.ttf",
+      "sha1": "05548af334f25369b59030427a23073767ba185c"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-HeavyItalic.ttf",
+      "sha1": "7fb79226ed2c51b4b404a7d935b440b284b159bc"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Light.ttf",
+      "sha1": "ac199a58a39117723ef3b2a0afb67dfc0bd90f5a"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-LightItalic.ttf",
+      "sha1": "f3ec004dcac0c0a5eaf9b847d6f0122a2b4b7fd5"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Regular.ttf",
+      "sha1": "4daa329a0a8ec3b99e7661849616cd1a9191399e"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-RegularItalic.ttf",
+      "sha1": "1f3ddd4378666071ccbfff6362aa9753cf80eb84"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-Thin.ttf",
+      "sha1": "81888533fc85ec8444e2900d2ae5848cd03279d6"
+    },
+    {
+      "path": "src/assets/fonts/Nexa-Trial-ThinItalic.ttf",
+      "sha1": "39800b09c9498c5c829dca8016f4dc228c54ea30"
+    },
+    {
+      "path": "src/assets/fonts/NexaBlack.otf",
+      "sha1": "fd5f0815e900bb92705cc7f1de78b33719b09600"
+    },
+    {
+      "path": "src/assets/fonts/NexaBlackItalic.otf",
+      "sha1": "f68b0487ceb4e848717f5f2c887756aded6a5f17"
+    },
+    {
+      "path": "src/assets/fonts/NexaBold.otf",
+      "sha1": "314a9320e40fbad1bedd829caf62102a5d3d5d61"
+    },
+    {
+      "path": "src/assets/fonts/NexaBoldItalic.otf",
+      "sha1": "2af4c4583d58bbc696e20d8583eb3cd2567e9a53"
+    },
+    {
+      "path": "src/assets/fonts/NexaBook.otf",
+      "sha1": "d33b46029eb22212176a2db09cfd8d4b39dd7ea7"
+    },
+    {
+      "path": "src/assets/fonts/NexaBookItalic.otf",
+      "sha1": "5ed43f8bd8c0d5de2afd10907404c1207288ce15"
+    },
+    {
+      "path": "src/assets/fonts/NexaHeavy.otf",
+      "sha1": "2d8284d2ab9facd5e3bfea93571f312c44f800ad"
+    },
+    {
+      "path": "src/assets/fonts/NexaHeavyItalic.otf",
+      "sha1": "f9e9d2df80a48dc997137d7ffe061a15018cf4c5"
+    },
+    {
+      "path": "src/assets/fonts/NexaLight.otf",
+      "sha1": "0d1e39a7f64ada86e8a89c28ef73fe48bae1a947"
+    },
+    {
+      "path": "src/assets/fonts/NexaLightItalic.otf",
+      "sha1": "5b3b5918b17f9cb51151ca956f230627c2466aa8"
+    },
+    {
+      "path": "src/assets/fonts/NexaRegular.otf",
+      "sha1": "c1ede6cb7b94c9d694c978e87244e6488600ad8f"
+    },
+    {
+      "path": "src/assets/fonts/NexaRegularItalic.otf",
+      "sha1": "8658ba7f4eb7ef19eb4461abaf409595e4f8eb10"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Black.ttf",
+      "sha1": "9bd7f8a7a41beaaaf3e904e29ddb2393fe18ba09"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-BlackItalic.ttf",
+      "sha1": "6eb7d9f6236bb8239680d2ab62440954ed91c2e7"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Bold.ttf",
+      "sha1": "70d1b65ad6ab28e7246c3eb9127ba865529febc6"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-BoldItalic.ttf",
+      "sha1": "f929e23a6b5641a5b71ca9fbba1533873f8ca18d"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Book.ttf",
+      "sha1": "b42b0bc3ef80028544e084c8d467b2fb87b00d01"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-BookItalic.ttf",
+      "sha1": "eb809113dd699eb32cb255fe81ef54e4edc97586"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-ExtraBold.ttf",
+      "sha1": "0dd58089a54b38ae9fe00c3c156f4e3693af92b4"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-ExtraBoldItalic.ttf",
+      "sha1": "c31d8209213da585fa10be0350fa9ae40a60f902"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-ExtraLight.ttf",
+      "sha1": "565180670d7ce2db78e5a877c25d74d750e94a26"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-ExtraLightItalic.ttf",
+      "sha1": "3803e791f3e5ebac47cd8c7967745e289252de31"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Heavy.ttf",
+      "sha1": "c1ec3be61c7363de1160968afcb7e8a5078da39b"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-HeavyItalic.ttf",
+      "sha1": "bee9c9b23a1effd099feb2545f7734b87984bb08"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Light.ttf",
+      "sha1": "d45844839d9e6e4f0669766de16b80628def4ba4"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-LightItalic.ttf",
+      "sha1": "763a8fe26c3ef14e380247dca5db2a0749f26a2c"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Regular.ttf",
+      "sha1": "e4e41122f679467839fec90be89589458a0b9aa5"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-RegularItalic.ttf",
+      "sha1": "96752b30f5211faf48334e80ec1ac8a5c3fb13cb"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-Thin.ttf",
+      "sha1": "a118ab1df55be84aaf9db454a85db09be923476a"
+    },
+    {
+      "path": "src/assets/fonts/NexaText-Trial-ThinItalic.ttf",
+      "sha1": "1123864a772e7ce60f3a33cb8139ef19aee17404"
+    },
+    {
+      "path": "src/assets/fonts/NexaThin.otf",
+      "sha1": "04f19daa1e78ebd3935bb9a24c823ab9d8e964f0"
+    },
+    {
+      "path": "src/assets/fonts/NexaThinItalic.otf",
+      "sha1": "bed97c0720c26b9b4a11c8d0b7c505a0128dff93"
+    },
+    {
+      "path": "src/assets/fonts/NexaXBold.otf",
+      "sha1": "400454d2484bc64bab9cabbb2d9479a6f54d3c84"
+    },
+    {
+      "path": "src/assets/fonts/NexaXBoldItalic.otf",
+      "sha1": "523a9a69e83da4d453bd2e1a6a4f6dca996b6317"
+    },
+    {
+      "path": "src/assets/fonts/SEGOEUI.TTF",
+      "sha1": "280935e382b62fe953a4efe09b2bbf8d34b0f14a"
+    }
+  ]
+}

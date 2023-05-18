@@ -82,7 +82,7 @@ const ChatList = ({navigation, route}) => {
               ) 
               :
                (
-                    <Text>No Chat Found</Text>
+                    <Text style={styles.txtheadersty}>No Chat Found</Text>
                )
             }
          

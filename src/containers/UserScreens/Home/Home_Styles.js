@@ -1,12 +1,13 @@
 import { Text, StyleSheet, View } from 'react-native'
 import { Colors, NavService, Shadows } from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 
 export const styles = StyleSheet.create({
   header:
   {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: themes?.fontSize?.large,
+    fontFamily: themes?.font?.extraBold,
     color: Colors.black,
     marginLeft: 20,
     textTransform: 'capitalize',
@@ -22,8 +23,8 @@ export const styles = StyleSheet.create({
     height: 150,
     marginTop: 10,
     borderRadius: 10,
-    borderWidth:2,
-    borderColor:Colors.purple
+    borderWidth: 2,
+    borderColor: Colors.purple
 
   },
   icnstrempty: {
@@ -45,8 +46,8 @@ export const styles = StyleSheet.create({
     bottom: 10,
     alignSelf: 'center',
     color: Colors.white,
-    fontWeight: 'bold',
-    fontSize: 18,
+    fontFamily: themes?.font?.black,
+    fontSize: themes?.fontSize?.medium,
     marginHorizontal: 5,
     textAlign: 'center'
   },
@@ -84,8 +85,25 @@ export const styles = StyleSheet.create({
   imgbg: { borderRadius: 10, },
   mdltxtheader: { marginTop: 20, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 10, paddingLeft: 10, },
   mdlimg: { width: 20, height: 20, },
-  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: 20, fontWeight: '600', marginVertical: 20, },
+  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: themes?.fontSize?.large, fontFamily: themes?.font?.extraBold, marginVertical: 20, },
   txtinputadrs: { borderColor: 'grey', borderRadius: 10, width: '88%', color: Colors.darkGray, marginLeft: 10, fontSize: 16, fontWeight: '600', height: 45 },
   container1: { justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
+  txtheadersty: {
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.italic,
+    color: 'grey'
+  },
+  textInput: {
+    // // Custom text input styles
+    // // Example styles:
+    // borderRadius: 10,
+    // borderWidth: 2,
+    // borderColor: 'gray',
+    // backgroundColor: 'white',
+    // height: 40,
+    // color: 'black',
+    // fontSize: 16,
+    // paddingLeft: 10,
+    backgroundColor:'red'
+  },
 })

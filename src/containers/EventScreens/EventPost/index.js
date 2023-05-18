@@ -203,20 +203,12 @@ const EventPost = props => {
                     setSelectedImage(currentGalleryAsset);
                   }
                 }}>
-                <View style={[styles.mime, { height: 150,marginTop:60, }]}>
-
-                    <Image
-                      source={Icons.upload}
-                      style={{
-                        width: 50,
-                        height: 20,
-                        resizeMode: 'contain',
-                        color: Colors.black,
-                      }}
-                    />
-                    <Text style={styles.txtclr}>Upload</Text>
-                  {/* <View style={styles.mime}> */}
-
+                   <View style={styles.item}>
+                    <Image source={Icons.upload} style={styles.uploadimg} />
+                    <Text style={styles.upload}>Upload</Text>
+                  </View>
+                {/* <View style={styles.mime}> */}
+                {/* <View style={[styles.mime, {height: 50}]}> */}
                   {/* {!selectedImage ? (
                     <>
                       <TouchableOpacity style={{marginTop:40,backgroundColor:'red'}}>
@@ -226,7 +218,7 @@ const EventPost = props => {
                     </>
                   ) : (
                     <>
-                      <TouchableOpacity style={{}}>
+                      <TouchableOpacity style={{marginTop: -40}}>
                         <Image
                           source={Icons.upload}
                           style={{
@@ -239,10 +231,10 @@ const EventPost = props => {
                       </TouchableOpacity>
                       <Text style={styles.txtclr}>Upload</Text>
                     </>
-                  )} */}
+                  )} */ }
                   {/* <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text> */}
-                </View>
+                {/* </View> */}
               </CustomImagePicker>
             </View>
           </View>
@@ -262,7 +254,7 @@ const EventPost = props => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{ color: '#000',width:250 }} numberOfLines={1}>
+                <Text style={{color: '#000',width:250}}numberOfLines={1}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -278,7 +270,7 @@ const EventPost = props => {
                     location.split(' ').slice(6, 7).pop()}
                 </Text>
               ) : currentlocation ? (
-                <Text style={{ color: '#000' }}>
+                <Text style={{ color: '#000', width:250}}numberOfLines={1}>
                   {currentlocation.split(' ').slice(0, 1).pop() +
                     ' ' +
                     currentlocation.split(' ').slice(1, 2).pop() +
@@ -301,13 +293,13 @@ const EventPost = props => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{ color: '#000',width:100 }} numberOfLines={1}>
+                  <Text style={{color: '#000',width:95}} numberOfLines={1}>
                     {location.split(' ').slice(-5, -4).pop() +
                       ' ' +
                       location.split(' ').slice(-4, -3).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000',width:95}} numberOfLines={1}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-4, -3).pop()
                       : 'City'}
@@ -327,11 +319,11 @@ const EventPost = props => {
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{ color: '#000',width:100 }} numberOfLines={1}>
+                  <Text style={{color: '#000',width:95}} numberOfLines={1}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000',width:95}} numberOfLines={1}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-2, -1).pop()
                       : 'State'}
@@ -393,23 +385,23 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               <Text style={styles.modaltxt}>
-                1-Name of Location (mandatory){'\n'}
+                1- Name of Location (mandatory){'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                2-Upload Clear Photo of Building (Mandatory){'\n'}
+                2- Upload Clear Photo of Building (Mandatory){'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                3-Operating Hours (Mandatory){'\n'}
+                3- Operating Hours (Mandatory){'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                4-Helpful Tips in Description field such as Parking tips, Crowd
+                4- Helpful Tips in Description field such as Parking tips, Crowd
                 (Age, Music Genre) on SpecificNights if Differs, Dress code,
                 {'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                5-Flyers, Pictures and videos of your most recent nights or
+                5- Flyers, Pictures and videos of your most recent nights or
                 events! (helpful) & Don’t forget you may purchase optimization
                 to have your events featured on main home page!{'\n'}
               </Text>
@@ -422,7 +414,7 @@ const EventPost = props => {
           <CustomButton
             buttonStyle={{
               alignSelf: 'center',
-              width: '90%',
+              width: '95%',
             }}
             title="Close"
             onPress={() => togglePopUp()}

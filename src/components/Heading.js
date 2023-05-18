@@ -10,6 +10,7 @@ import React from 'react';
 import { Colors, NavService } from '../config';
 import Icons from '../assets/Icons';
 import { useState } from 'react';
+import { themes } from '../config/globalFonts/globalFonts';
 const Heading = props => {
   const { name, switchs, icon, tintclr, onpress } = props;
   const [isEnabled, setIsEnabled] = useState(false);
@@ -71,8 +72,8 @@ const styles = StyleSheet.create({
   },
   name: {
     marginLeft: 10,
-    fontWeight: '600',
-    fontSize: 18,
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.bold,
     color: Colors.black,
     textTransform: 'capitalize',
   }

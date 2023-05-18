@@ -10,6 +10,7 @@ import { NavService, Colors } from '../../../config';
 import { useSelector } from 'react-redux'
 import { logoutUser } from '../../../redux/actions';
 import eventContext from '../../EventScreens/eventContext';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 const EventSetting = () => {
   const { userProfile } = useContext(eventContext);
@@ -42,16 +43,17 @@ const EventSetting = () => {
           </View>
 
           <Text style={{
-            fontSize: 19,
-            fontWeight: '700',
+            fontFamily: themes?.font?.black,
+            fontSize: themes?.fontSize?.medium,
             color: Colors.black,
             textTransform: 'capitalize',
             marginTop: 10
           }}>{user_id?.name}</Text>
           <Text style={{
-            fontSize: 18,
+            fontSize: themes?.fontSize?.extraVSmall,
+            fontFamily: themes?.font?.regular,
             color: Colors.darkGray,
-            fontWeight: '400',
+
 
           }}>{user_id?.email}</Text>
         </View>
