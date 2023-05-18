@@ -1,6 +1,7 @@
 export default Icons = {
   user: require('./user.png'),
   profile: require('./profile.png'),
+  playIcon: require('./playIcon.png'),
   menu: require('./information.png'),
   notification: require('./notification.png'),
   search: require('./search.png'),

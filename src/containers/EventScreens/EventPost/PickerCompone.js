@@ -4,10 +4,9 @@ import React, {useState, useEffect} from 'react';
 import {Picker} from '@react-native-picker/picker';
 import {Colors} from '../../../config';
 const PickerCompone = props => {
-  const {categories, setSelectedData} = props;
+  const {categories, selectedData, setSelectedData} = props;
 
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const [selectedPicker, setSelectedPicker] = useState(categories);
 
   const handletransfer = () => {
     setSelectedData(selectedLanguage);
@@ -16,7 +15,7 @@ const PickerCompone = props => {
   useEffect(() => {
     handletransfer();
   }, [selectedLanguage]);
-
+  console.log('selectedData', selectedData);
   return (
     <Picker
       style={styles.container}
@@ -31,7 +30,7 @@ const PickerCompone = props => {
       }}
       mode="dropdown">
       <Picker.Item
-        label="Select an Option"
+        label={selectedData ? selectedData : 'Select an Option'}
         value="null"
         color={'black'}
         style={{fontWeight: 'bold', backgroundColor: '#ededed'}}

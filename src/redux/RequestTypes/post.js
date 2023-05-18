@@ -38,12 +38,12 @@ export default async function postApi(
     const headers = {
       Authorization: 'Bearer ' + user_authentication,
       'Content-Type': 'multipart/form-data',
-     accept: 'application/json',
+      accept: 'application/json',
       // 'Content-Type': 'multipart/form-data,octet-stream',
     };
     const response = await axios.post(endpoint, params, {headers});
-    console.log("response postApi " + response);
-    console.log("params postApi " + params);
+    console.log('response postApi ' + response);
+    console.log('params postApi ' + params);
     dispatch({type: 'LOADER_STOP'});
     {
       sucessToast
@@ -56,10 +56,7 @@ export default async function postApi(
     }
     return response.data;
   } catch (e) {
-    console.log(
-      'error',
-      e.response,
-    );
+    console.log('error', e.response);
     dispatch({type: 'LOADER_STOP'});
     if (
       e.message.includes('timeout of ') &&
@@ -94,5 +91,82 @@ export default async function postApi(
       });
     }
     return null;
+  }
+}
+export async function fetchApi(
+  endpoint,
+  params = null,
+  successToast = true,
+  startLoader = true,
+  token = null,
+  stopLoader = true,
+) {
+  let state = store.getState()?.reducer;
+  let user_authentication = state?.user?.api_token;
+  if (startLoader) {
+    dispatch({type: 'LOADER_START'});
+  }
+  try {
+    const response = await fetch(Common.baseURL + endpoint, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${user_authentication}`,
+      },
+      body: params,
+    });
+    if (stopLoader) {
+      dispatch({type: 'LOADER_STOP'});
+    }
+    let json = await response.json();
+    successToast
+      ? Toast.show({
+          text1: response.data.message,
+          type: 'success',
+          visibilityTime: 5000,
+        })
+      : null;
+
+    return json;
+  } catch (e) {
+    console.log('error', e);
+    dispatch({type: 'LOADER_STOP'});
+    if (
+      e.message.includes('timeout of ') &&
+      e.message.includes('ms exceeded')
+    ) {
+      Toast.show({
+        text1: "Can't connect to server",
+        textStyle: {textAlign: 'center'},
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    } else if (e.response?.data?.message) {
+      Toast.show({
+        text1: e.response.data.message,
+        textStyle: {textAlign: 'center'},
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    } else if (e.response?.data?.message) {
+      Toast.show({
+        text1: e.response.data.message,
+        textStyle: {textAlign: 'center'},
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    } else {
+      Toast.show({
+        text1: e.message,
+        textStyle: {textAlign: 'center'},
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    }
+    return null;
+  } finally {
+    dispatch({type: 'LOADER_STOP'});
   }
 }
