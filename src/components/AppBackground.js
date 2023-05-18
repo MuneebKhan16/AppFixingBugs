@@ -282,7 +282,7 @@ export function AppBackground({
                         }}
                       />
                       <TextInput
-                      numberOfLines={1}
+                        numberOfLines={1}
                         editable={true}
                         style={{
                           borderColor: 'gray',
@@ -290,8 +290,8 @@ export function AppBackground({
                           width: '80%',
                           color: Colors.black,
                           fontSize: 17,
-                          marginLeft:15,
-                          
+                          marginLeft: 15,
+
                         }}
                         placeholder={'City'}
                         placeholderTextColor={Colors.black}
@@ -303,7 +303,6 @@ export function AppBackground({
                       />
                     </View>
                     <View
-                      // onPress={handleOpenModal}
                       style={{
                         borderColor: Colors.black,
                         borderWidth: 1,
@@ -326,7 +325,7 @@ export function AppBackground({
                         }}
                       />
                       <TextInput
-                      numberOfLines={1}
+                        numberOfLines={1}
                         editable={true}
                         style={{
                           borderColor: 'gray',
@@ -334,24 +333,17 @@ export function AppBackground({
                           width: '80%',
                           color: Colors.black,
                           fontSize: 17,
-                          marginLeft:15,
-                          
+                          marginLeft: 15,
+
                         }}
                         placeholder={'State'}
                         placeholderTextColor={Colors.black}
-                        // secureTextEntry={!isFocused}
-                        // onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         onChangeText={State => setstate(State)}
                         value={State}
                       />
                     </View>
 
-                    {/* <Mymdll
-                      isVisible={ModalVisible}
-                      onClose={handleCloseModal}
-                      setLocation={setLocation}
-                    /> */}
                     <Datepick />
                     <CustomButton
                       buttonStyle={{
