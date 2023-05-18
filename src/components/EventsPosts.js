@@ -161,5 +161,5 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   container1: { paddingTop: 100, justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
+  txtheadersty: { fontSize: 20, fontWeight: 'bold' }
 });

@@ -167,9 +167,9 @@ export function AppBackground({
               }}
               style={{
                 position: 'absolute',
-                right: 30,
-                width: 38,
-                height: 38,
+                right: 20,
+                width: 40,
+                height: 40,
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
@@ -193,7 +193,7 @@ export function AppBackground({
               }}
               style={{
                 position: 'absolute',
-                right: 30,
+                right: 25,
                 width: 38,
                 height: 38,
                 alignItems: 'center',
