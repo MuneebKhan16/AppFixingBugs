@@ -65,11 +65,14 @@ const Posts = ({ UserPost, profile_Data }) => {
                     resizeMode="stretch"
                     style={styles.img}
                   /> */}
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, alignItems: 'center' }}>
+                    <Text
+                      style={styles.tags}>
+                      {"#" + " " + data.tags}
+                    </Text>
+                    <Image source={Icons.delete} resizeMode='contain' style={{ width: 20, height: 20, tintColor: Colors.purple }} />
+                  </View>
 
-                  <Text
-                    style={styles.tags}>
-                    {"#" + " " + data.tags}
-                  </Text>
                 </View>
               </View>
             )
@@ -123,8 +126,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '98%',
     marginLeft: 5,
-    borderWidth:2,
-    borderColor:Colors.purple
+    borderWidth: 2,
+    borderColor: Colors.purple
   },
   tags: {
     fontWeight: '700',
@@ -140,9 +143,9 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   container1: { paddingTop: 200, justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { 
+  txtheadersty: {
     fontSize: themes?.fontSize?.medium,
-    fontFamily:themes?.font?.italic,
-    color:'grey'
+    fontFamily: themes?.font?.italic,
+    color: 'grey'
   }
 });

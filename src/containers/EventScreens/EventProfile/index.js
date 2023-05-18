@@ -1,10 +1,8 @@
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
-import Mainprofile from '../../../components/Mainprofile';
 import { useSelector } from 'react-redux';
 import { styles } from './eventprofile_style';
-import { show_eventCreater_event } from '../../../redux/APIs'
 import eventContext from '../eventContext';
 import FastImage from 'react-native-fast-image'
 import { Colors, NavService } from '../../../config';
@@ -12,6 +10,7 @@ import ImageURL from '../../../config/Common';
 import DummyURL from '../../../config/Common';
 import Icons from '../../../assets/Icons'
 import { themes } from '../../../config/globalFonts/globalFonts';
+
 const EventProfile = () => {
   const { showEvents, UserPost } = useContext(eventContext);
 
@@ -216,7 +215,7 @@ const EventProfile = () => {
                             imageStyle={styles.img}
                           >
                             <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 12, left: 5, }}>
-                              <Image source={Icons.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 20, height: 20,  }} />
+                              <Image source={Icons.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 20, height: 20, }} />
                               <Text style={{
                                 color: Colors.white, textTransform: 'capitalize', fontFamily: themes?.font?.bold,
                                 fontSize: themes?.fontSize?.medium, width: 250
@@ -225,8 +224,8 @@ const EventProfile = () => {
                           </FastImage>
 
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 12 }}>
-                          <Image source={Icons.bin} style={{ width: 25, height: 25, tintColor: Colors.purple }} resizeMode='contain' />
+                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 10, }}>
+                          <Image source={Icons.delete} style={{ width: 20, height: 20, tintColor: Colors.purple }} resizeMode='contain' />
 
                         </TouchableOpacity>
                       </View>

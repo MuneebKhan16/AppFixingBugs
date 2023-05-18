@@ -72,7 +72,7 @@ const GooglePlaceAutocomplete = ({
           // // backgroundColor: iconColor ? Colors.white : Colors.black,
           // width: '100%',
           // // Other text input styles...
-          backgroundColor:'red'
+          // backgroundColor:'red'
         }}
         query={{
           key: Common?.GEOCODE_API_KEY,

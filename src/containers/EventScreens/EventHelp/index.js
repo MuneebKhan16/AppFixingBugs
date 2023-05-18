@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import React from 'react'
 import AppBackground from '../../../components/AppBackground'
+import { Colors } from '../../../config'
 const EventHelp = () => {
     return (
         <AppBackground title={'Help'} back home>
             <ScrollView showsVerticalScrollIndicator={false} >
-                <Text style={{ marginTop: 25 }}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                <Text style={{ marginTop: 25,color:Colors.black }}>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                     eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                     enim ad minim veniam, quis nostrud exercitation ullamco laboris
                     nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
