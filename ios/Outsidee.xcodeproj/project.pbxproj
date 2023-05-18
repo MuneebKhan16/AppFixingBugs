@@ -509,7 +509,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsidee/Outsidee.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N35Z4A9JLM;
+				DEVELOPMENT_TEAM = LNXLQPMD85;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Outsidee/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outsidee;
@@ -523,7 +523,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsideee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outside;
 				PRODUCT_NAME = Outsidee;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -539,7 +539,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsidee/Outsidee.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N35Z4A9JLM;
+				DEVELOPMENT_TEAM = LNXLQPMD85;
 				INFOPLIST_FILE = Outsidee/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outsidee;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -552,7 +552,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsideee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outside;
 				PRODUCT_NAME = Outsidee;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
