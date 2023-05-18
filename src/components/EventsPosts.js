@@ -159,8 +159,6 @@ fontFamily:themes?.font?.bold,
     color: '#000',
     marginLeft: 12,
     marginTop: 10,
-
-    fontSize: 16,
     textTransform: 'capitalize',
   },
   container1: { paddingTop: 100, justifyContent: 'center', alignItems: 'center', flex: 1, },

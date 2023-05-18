@@ -13,7 +13,7 @@ import {
 import Swiper from 'react-native-swiper';
 import React, { useState, useEffect, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
-import { NavService } from '../../../config';
+import { Common, NavService } from '../../../config';
 import { styles } from './eventhome_style';
 import { useSelector } from 'react-redux';
 import ImageURL from '../../../config/Common';
@@ -69,7 +69,7 @@ const EventHome = props => {
                               data?.event_images?.split('.')[1] == 'mp4' ?
                                 (
                                     <Video
-                                      source={{ uri:'https://api.myprojectstaging.com/outsideee/public/images/events/rating-5761684362950.mp4' }}
+                                      source={{ uri: !data?.event_images ?  `${Common?.dummyVideo}`  : `${ImageURL?.ImageURL}${data?.event_images}` }}
                                       volume={0}      
                                       style={styles.imgback}
                                       resizeMode="cover"
