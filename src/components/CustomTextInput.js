@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
-import {TouchableOpacity, View, Image, TextInput, Text} from 'react-native';
-import {Colors, Icons} from '../config';
-import {Fumi} from './AnimatedTextInput';
+import React, { useState } from 'react';
+import { TouchableOpacity, View, Image, TextInput, Text } from 'react-native';
+import { Colors, Icons } from '../config';
+import { Fumi } from './AnimatedTextInput';
+import { themes } from '../config/globalFonts/globalFonts';
 
 export default function CustomTextInput(props) {
   const [hidden, setHidden] = useState(props?.isPassword);
-  const {containerStyle, types} = props;
+  const { containerStyle, types } = props;
   return (
-    <View style={{width: '100%', marginTop: 20}}>
+    <View style={{ width: '100%', marginTop: 20 }}>
       <View
         style={[
           {
@@ -52,7 +53,7 @@ export default function CustomTextInput(props) {
               color: props.grey ? Colors.grey : Colors.white,
               fontSize: 14,
             }}
-            labelStyle={{color: props.grey ? Colors.grey : Colors.white}}
+            labelStyle={{ color: props.grey ? Colors.grey : Colors.white }}
             secureTextEntry={hidden}
             {...props}
           />
@@ -79,13 +80,14 @@ export default function CustomTextInput(props) {
   );
 }
 export function ProfileTextInput(props) {
-  const {icon, heading} = props;
+  const { icon, heading } = props;
   return (
-    <View style={{marginTop: 10}}>
+    <View style={{ marginTop: 10 }}>
       <Text
         style={{
           color: Colors.black,
-          fontWeight: '700',
+          fontSize: themes?.fontSize?.small,
+          fontFamily: themes?.font?.bold
         }}>
         {heading}
       </Text>
@@ -97,7 +99,7 @@ export function ProfileTextInput(props) {
           flexDirection: 'row',
           alignItems: 'center',
           backgroundColor: Colors.white,
-          marginTop: 5,
+          marginTop: 8,
         }}>
         <Image
           source={icon}
@@ -114,9 +116,10 @@ export function ProfileTextInput(props) {
             height: 50,
             color: Colors.black,
             marginLeft: 10,
-            fontWeight: '600',
+            fontSize: themes?.fontSize?.small,
+            fontFamily: themes?.font?.regular
           }}
-          placeholderTextColor={'#7E7E7E'}
+          placeholderTextColor={'grey'}
           {...props}
         />
       </View>

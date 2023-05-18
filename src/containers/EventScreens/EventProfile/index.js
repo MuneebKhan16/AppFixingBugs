@@ -11,6 +11,7 @@ import { Colors, NavService } from '../../../config';
 import ImageURL from '../../../config/Common';
 import DummyURL from '../../../config/Common';
 import Icons from '../../../assets/Icons'
+import { themes } from '../../../config/globalFonts/globalFonts';
 const EventProfile = () => {
   const { showEvents, UserPost } = useContext(eventContext);
 
@@ -70,17 +71,16 @@ const EventProfile = () => {
             </View>
 
             <Text style={{
-              fontSize: 19,
-              fontWeight: '700',
+              fontSize: themes?.fontSize?.large,
+              fontFamily: themes?.font?.extraBold,
               color: Colors.black,
               // textAlign: row ? null : 'center',
               textTransform: 'capitalize',
             }}>{userData?.name}</Text>
             <Text style={{
-              fontSize: 18,
+              fontSize: themes?.fontSize?.extraVSmall,
+              fontFamily: themes?.font?.regular,
               color: Colors.darkGray,
-              fontWeight: '400',
-
             }}>{userData?.email}</Text>
           </View>
         </View>
@@ -114,7 +114,7 @@ const EventProfile = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginTop: 30,
-            marginRight: 10
+            marginRight: 10,
 
 
           }}>
@@ -142,7 +142,7 @@ const EventProfile = () => {
               borderColor: Colors.purple,
               width: '40%'
             }}>
-              <Text style={styles.txt}>{showEvents?.length}</Text>
+              <Text style={[styles.txt, { color: Colors.purple }]}>{showEvents?.length}</Text>
             </View>
             <View style={{
               padding: 10,
@@ -153,7 +153,7 @@ const EventProfile = () => {
               width: '50%'
 
             }}>
-              <Text style={styles.txt}>{UserPost?.length}</Text>
+              <Text style={[styles.txt, { color: Colors.purple }]}>{UserPost?.length}</Text>
             </View>
           </View>
 
@@ -183,8 +183,9 @@ const EventProfile = () => {
                         <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                           <Text
                             style={{
-                              fontSize: 19, color: Colors.black,
-                              fontWeight: 'bold', textTransform: 'capitalize',
+                              fontFamily: themes?.font?.black,
+                              fontSize: themes?.fontSize?.medium, color: Colors.black,
+                              textTransform: 'capitalize',
                             }}>
                             {item?.event_title}
                           </Text>
@@ -199,9 +200,10 @@ const EventProfile = () => {
                             <Text
                               style={{
                                 marginLeft: 10,
-                                fontSize: 18,
+                                fontSize: themes?.fontSize?.medium,
+                                fontFamily: themes?.font?.extraBold,
                                 color: Colors.black,
-                                fontWeight: 'bold',
+
                               }}>
                               {item?.rating_avg.map((data) => data.rating_count) || 0}{" "} Reviews
                             </Text>
@@ -210,18 +212,21 @@ const EventProfile = () => {
                         <TouchableOpacity >
                           <FastImage
                             source={{ uri: item?.event_image ? `${ImageURL?.ImageURL}${item?.event_image}` : `${DummyURL.dummy}` }}
-                            style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10 ,borderWidth:2,borderColor:Colors.purple}}
+                            style={{ width: '100%', height: 170, marginTop: 10, borderRadius: 10, borderWidth: 2, borderColor: Colors.purple }}
                             imageStyle={styles.img}
                           >
                             <View style={{ flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 12, left: 5, }}>
-                              <Image source={Icons.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 20, height: 20, }} />
-                              <Text style={{ color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', fontSize: 17, width: 250 }} numberOfLines={1} >{' '}{item?.event_location}</Text>
+                              <Image source={Icons.location} resizeMode="contain" style={{ tintColor: Colors.white, width: 20, height: 20,  }} />
+                              <Text style={{
+                                color: Colors.white, textTransform: 'capitalize', fontFamily: themes?.font?.bold,
+                                fontSize: themes?.fontSize?.medium, width: 250
+                              }} numberOfLines={1} >{' '}{item?.event_location}</Text>
                             </View>
                           </FastImage>
 
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 10 }}>
-                          <Image source={Icons.bin} style={{ width: 30, height: 30, tintColor: Colors.purple }} resizeMode='contain' />
+                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 12 }}>
+                          <Image source={Icons.bin} style={{ width: 25, height: 25, tintColor: Colors.purple }} resizeMode='contain' />
 
                         </TouchableOpacity>
                       </View>
