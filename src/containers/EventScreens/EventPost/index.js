@@ -378,8 +378,7 @@ const EventPost = props => {
             justifyContent: 'center',
             height:28,
             marginTop:15,
-            borderRadius:10,
-           
+            borderRadius:10,      
           }}>
           <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
         </TouchableOpacity> */}
@@ -388,7 +387,7 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               <Text style={styles.modaltxt}>
                 1- Name of Location (mandatory){'\n'}
               </Text>

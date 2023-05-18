@@ -195,7 +195,7 @@ export function AppBackground({
               }}
               style={{
                 position: 'absolute',
-                right: 30,
+                right: 25,
                 width: 38,
                 height: 38,
                 alignItems: 'center',

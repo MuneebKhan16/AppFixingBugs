@@ -96,13 +96,6 @@ const Profile = props => {
             </View>
 
           </View>
-          {/* <Mainprofile
-            center
-            row
-            name={userProfile?.name}
-            subtitle={userProfile?.email}
-            edit
-          /> */}
           <Text
             style={styles.post}>
             Post History

@@ -104,6 +104,6 @@ export const styles = StyleSheet.create({
     // color: 'black',
     // fontSize: 16,
     // paddingLeft: 10,
-    backgroundColor:'red'
+    // backgroundColor:'red'
   },
 })

@@ -67,17 +67,6 @@ const Event = (props) => {
                         <Text style={styles.loctxt} numberOfLines={1} >{item.event_location}</Text>
                       </View>
                     </FastImage>
-                    {/* <ImageBackground
-                      source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
-                      style={styles.img}
-                      imageStyle={styles.border}>
-                      <View style={styles.loccontainer}>
-                        <View style={styles.locsub}>
-                          <Image source={Icons.location} resizeMode="contain" style={styles.location} />
-                        </View>
-                        <Text style={styles.loctxt}>{' '}{item.event_location}</Text>
-                      </View>
-                    </ImageBackground> */}
 
                   </RNBounceable>
                 </View>

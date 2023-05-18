@@ -85,7 +85,7 @@ import {
     textInput: {
       width: '100%',
       marginLeft: 10,
-      backgroundColor:'red'
+      // backgroundColor:'red'
     },
     content: {
       flexDirection: 'row',
