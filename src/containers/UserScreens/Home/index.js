@@ -239,6 +239,7 @@ export class Home extends Component {
                       iconColor
                       // placeholder={text !== '' ? text  : 'Current Location'}
                       placeholder={
+                        
                         text !== '' ? text.split(' ').slice(0,1).pop()+" "+text.split(' ').slice(1,2).pop()+" "+text.split(' ').slice(2,3).pop() : 'Address'
                       }
                     
@@ -267,9 +268,12 @@ export class Home extends Component {
                       inputStyles={{
                         borderWidth: 1,
                         borderColor: Colors.lightGrey,
+                        
                       }}
                       iconColor
+                      
                       placeholder={
+                        
                         text.split(' ').length > 1 ? text.split(' ').slice(-4, -3).pop() : 'City'
                         
                       }

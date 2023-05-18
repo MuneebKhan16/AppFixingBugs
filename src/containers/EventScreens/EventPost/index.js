@@ -262,7 +262,7 @@ const EventPost = props => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{ color: '#000' }}>
+                <Text style={{ color: '#000',width:250 }} numberOfLines={1}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -301,7 +301,7 @@ const EventPost = props => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000',width:100 }} numberOfLines={1}>
                     {location.split(' ').slice(-5, -4).pop() +
                       ' ' +
                       location.split(' ').slice(-4, -3).pop()}
@@ -327,7 +327,7 @@ const EventPost = props => {
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000',width:100 }} numberOfLines={1}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
                 ) : currentlocation ? (

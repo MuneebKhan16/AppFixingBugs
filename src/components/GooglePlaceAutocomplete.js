@@ -52,6 +52,7 @@ const GooglePlaceAutocomplete = ({
             borderRadius: 10,
             height: 40,
             color: iconColor ? Colors?.black : Colors?.black,
+            
             // backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
             
@@ -62,11 +63,13 @@ const GooglePlaceAutocomplete = ({
         textInputProps={{
           placeholderTextColor: iconColor ? Colors.black : Colors.black,
           // paddingLeft: 25,
+
         }}
         query={{
           key: Common?.GEOCODE_API_KEY,
           language: 'en',
           types: 'premise',
+          
         }}
       />
     </View>
@@ -83,6 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: Colors.black,
     borderWidth: 1,
+
   },
   textInput: {
     flex: 1,
