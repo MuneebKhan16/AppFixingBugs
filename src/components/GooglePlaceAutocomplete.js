@@ -22,10 +22,11 @@ const GooglePlaceAutocomplete = ({
         enablePoweredByContainer={false}
         keepResultsAfterBlur={true}
      
-     
         listViewDisplayed={false}
         placeholder={placeholder ? placeholder : 'Address'}
+        
         placeholderTextColor={iconColor ? Colors.primary : Colors.black}
+        
         onPress={(data, details = null) => {
           const {formatted_address, geometry,location} = details;
           callback(formatted_address, geometry,location);
@@ -42,27 +43,42 @@ const GooglePlaceAutocomplete = ({
               marginBottom: 5,
               marginLeft: 15,
               marginRight: 5,
+              
             }}
           />
         )}
         styles={{
           textInput: {
             borderRadius: 10,
-            height: 40,
+            height: 45,
             color: iconColor ? Colors?.black : Colors?.black,
             // backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
+            
+            
           },
           description: {color: iconColor ? Colors.purple : Colors.black},
         }}
         textInputProps={{
           placeholderTextColor: iconColor ? Colors.black : Colors.black,
+          maxLength: 30,
           // paddingLeft: 25,
+
+        }}
+        textInputStyle={{
+          // borderRadius: 10,
+          // height: 40,
+          // color: iconColor ? Colors.black : Colors.black,
+          // // backgroundColor: iconColor ? Colors.white : Colors.black,
+          // width: '100%',
+          // // Other text input styles...
+          backgroundColor:'red'
         }}
         query={{
           key: Common?.GEOCODE_API_KEY,
           language: 'en',
           types: 'premise',
+          
         }}
       />
     </View>
@@ -79,10 +95,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: Colors.black,
     borderWidth: 1,
+
   },
   textInput: {
     flex: 1,
-    height: 55,
+    height: 50,
     color: Colors?.black,
     borderRadius: 10,
     borderWidth: 2,

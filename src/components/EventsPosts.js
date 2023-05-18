@@ -7,6 +7,7 @@ import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config//Common'
 import FastImage from 'react-native-fast-image'
+import { themes } from '../config/globalFonts/globalFonts';
 // check
 const Posts = (props) => {
 
@@ -39,7 +40,7 @@ const Posts = (props) => {
                   style={styles.mainprofile}>
                   <View
                     style={styles.container}>
-                             { console.log(ImageURL?.ImageURL +data?.user?.profile_picture+ " pic ")}
+                    {console.log(ImageURL?.ImageURL + data?.user?.profile_picture + " pic ")}
 
                     <Image
                       source={{ uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}` }}
@@ -86,7 +87,7 @@ const Posts = (props) => {
 
                   <Text
                     style={styles.tags}>
-                    {"#" + " " + data.tags}
+                    {data.tags}
                   </Text>
                 </View>
               )
@@ -131,13 +132,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     color: Colors.black,
-    fontWeight: '700',
-
     textTransform: 'capitalize',
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily: themes?.font?.regular,
   },
   name: {
     color: Colors.black,
-    fontWeight: 'bold',
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.extraBold,
     marginLeft: 10,
 
     textTransform: 'capitalize',
@@ -148,11 +150,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginTop: 10,
     height: 180,
-    borderWidth:2,
-    borderColor:Colors.purple
+    borderWidth: 2,
+    borderColor: Colors.purple
   },
   tags: {
-    fontWeight: 'bold',
+    fontSize: themes?.fontSize?.small,
+fontFamily:themes?.font?.bold,
     color: '#000',
     marginLeft: 12,
     marginTop: 10,
@@ -161,5 +164,9 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   container1: { paddingTop: 100, justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { fontSize: 25, fontWeight: 'bold' }
+  txtheadersty: { 
+    fontSize: themes?.fontSize?.medium,
+    fontFamily:themes?.font?.italic,
+    color:'grey'
+     }
 });

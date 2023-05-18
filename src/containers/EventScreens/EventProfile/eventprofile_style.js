@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Colors } from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,29 +10,32 @@ export const styles = StyleSheet.create({
   },
   hd1: {
     color: Colors.black,
-    fontWeight: 'bold',
-    fontSize: 20,
-    
-    marginBottom:5
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.extraBold,
+
+
+    marginBottom: 5
   },
   hd2: {
     color: Colors.black,
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginLeft:5
+    fontSize: themes?.fontSize?.small,
+    fontFamily: themes?.font?.extraBold,
+    marginBottom: 5
 
   },
   hd3: {
     color: Colors.black,
-    fontWeight: 'bold',
-    fontSize: 20,
-    
-    marginBottom:5,
-    marginRight:25,
+    fontSize: themes?.fontSize?.small,
+    fontFamily: themes?.font?.extraBold,
+    marginRight: 5,
+    marginBottom: 5,
 
   },
-  txt: { fontSize: 20, fontWeight: 'bold', marginBottom:5 , textTransform: 'capitalize',color:Colors.darkGray},
-  content:{ marginTop: 20 ,},
-  hdcontent:{ alignSelf: 'center',alignItems:'center' },
-  });
-  
+  txt: {
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.extraBold, marginBottom: 5, textTransform: 'capitalize', color: Colors.darkGray
+  },
+  content: { marginTop: 20, },
+  hdcontent: { alignSelf: 'center', alignItems: 'center' },
+
+});

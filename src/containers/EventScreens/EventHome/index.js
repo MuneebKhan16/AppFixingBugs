@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+// / eslint-disable prettier/prettier /
 import {
   Text,
   View,
@@ -68,7 +68,6 @@ const EventHome = props => {
                             {
                               data?.event_images?.split('.')[1] == 'mp4' ?
                                 (
-                                  
                                     <Video
                                       source={{ uri:'https://api.myprojectstaging.com/outsideee/public/images/events/rating-5761684362950.mp4' }}
                                       volume={0}      
@@ -76,8 +75,7 @@ const EventHome = props => {
                                       resizeMode="cover"
                                       //  controls={true}
                                     />
-                                   
-                                  
+                                 
                                 )
                                 :
                                 (

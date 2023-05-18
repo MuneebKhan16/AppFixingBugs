@@ -56,17 +56,17 @@ const Event = (props) => {
                   </View>
                   <RNBounceable onPress={() => NavService.navigate('Review', item)}>
                     <FastImage
-                       source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
-                       style={styles.img}
-                       imageStyle={styles.border}
+                      source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
+                      style={styles.img}
+                      imageStyle={styles.border}
                     >
-                        <View style={styles.loccontainer}>
+                      <View style={styles.loccontainer}>
                         <View style={styles.locsub}>
                           <Image source={Icons.location} resizeMode="contain" style={styles.location} />
                         </View>
                         <Text style={styles.loctxt} numberOfLines={1} >{item.event_location}</Text>
                       </View>
-                      </FastImage>
+                    </FastImage>
                     {/* <ImageBackground
                       source={{ uri: `${ImageURL?.ImageURL}${item?.event_image}` }}
                       style={styles.img}

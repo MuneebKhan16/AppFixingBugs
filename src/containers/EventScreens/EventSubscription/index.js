@@ -9,7 +9,7 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   initConnection,
   getProducts,
@@ -24,27 +24,10 @@ import {
 } from 'react-native-iap';
 import AppBackground from '../../../components/AppBackground';
 import Swiper from 'react-native-swiper';
-import {Colors} from '../../../config';
-import {loaderStart, loaderStop} from '../../../redux/APIs';
+import { Colors } from '../../../config';
+import { loaderStart, loaderStop } from '../../../redux/APIs';
 import Icons from '../../../assets/Icons';
-const Data = [
-  {
-    id: 1,
-    name: 'Lorem ipsum dolor text sieut amet',
-  },
-  {
-    id: 2,
-    name: 'Lorem ipsum dolor text sieut amet',
-  },
-  {
-    id: 3,
-    name: 'Lorem ipsum dolor text sieut amet',
-  },
-  {
-    id: 4,
-    name: 'Lorem ipsum dolor text sieut amet',
-  },
-];
+
 const productIds = Platform.select({
   ios: ['Featured_15'],
   android: ['Featured_15'],
@@ -189,192 +172,109 @@ const EventSubscription = () => {
       notification={false}
       back
       home>
-      <View style={{marginTop: 20, height: 500}}>
-        <Swiper
-          style={styles.wrapper}
-          showsButtons={false}
+      <View style={{ height: 400, borderRadius: 10, marginTop: 30 }}>
+        <Swiper style={styles.wrapper} showsButtons={false} 
+        activeDotColor={Colors.purple}
+        // "transparent"
           dotColor={Colors.grey}
-          activeDotColor={Colors.purple}>
+          // "transparent"
+          >
+            {/* //////////////////////////////// */}
           <View style={styles.slide1}>
-            <Text style={styles.text}>Basic Plan</Text>
+            <Text style={styles.text}>Featured Post</Text>
             <View
-              style={{
-                marginVertical: 15,
-                backgroundColor: Colors.purple,
-                width: '100%',
-                paddingVertical: 15,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              style={styles.maincontent}>
               <Text
-                style={{color: Colors.white, fontSize: 24, fontWeight: 'bold'}}>
-                $9.99
+                style={styles.txt}>
+                $15
               </Text>
             </View>
-            <FlatList
-              data={Data}
-              renderItem={({item}) => (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginVertical: 4,
-                    marginRight: 15,
-                  }}>
-                  <View
-                    style={{
-                      backgroundColor: Colors.purple,
-                      padding: 3,
-                      borderRadius: 10,
-                    }}>
-                    <Image
-                      source={Icons.check}
-                      resizeMode="contain"
-                      style={{width: 10, height: 10, tintColor: Colors.white}}
-                    />
-                  </View>
-                  <Text
-                    style={{marginLeft: 5, fontSize: 18, color: Colors.black}}>
-                    {item.name}
-                  </Text>
-                </View>
-              )}
-            />
-            <TouchableOpacity
-              style={{
-                borderRadius: 10,
-                width: '80%',
-                backgroundColor: Colors.purple,
-                padding: 15,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 25,
-              }}>
+            <View
+              style={styles.container}>
+              <View
+                style={styles.maincontainer}>
+                <Image
+                  source={Icons.check}
+                  resizeMode="contain"
+                  style={styles.check}
+                />
+              </View>
               <Text
-                style={{color: Colors.white, fontSize: 16, fontWeight: 'bold'}}>
+                style={styles.descrption}>
+                Feature your event across the top and on the featured events page
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.btncontent}>
+              <Text
+                style={styles.btn}>
                 Buy
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Basic Plan</Text>
+          {/* //////////////////////////////////////////////////// */}
+          <View style={styles.slide2}>
+          <Text style={styles.text}>Month-to-Month</Text>
             <View
-              style={{
-                marginVertical: 15,
-                backgroundColor: Colors.purple,
-                width: '100%',
-                paddingVertical: 15,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              style={styles.maincontent}>
               <Text
-                style={{color: Colors.white, fontSize: 24, fontWeight: 'bold'}}>
-                $9.99
+                style={styles.txt}>
+               $80
               </Text>
             </View>
-            <FlatList
-              data={Data}
-              renderItem={({item}) => (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginVertical: 4,
-                    marginRight: 15,
-                  }}>
-                  <View
-                    style={{
-                      backgroundColor: Colors.purple,
-                      padding: 3,
-                      borderRadius: 10,
-                    }}>
-                    <Image
-                      source={Icons.check}
-                      resizeMode="contain"
-                      style={{width: 10, height: 10, tintColor: Colors.white}}
-                    />
-                  </View>
-                  <Text
-                    style={{marginLeft: 5, fontSize: 18, color: Colors.black}}>
-                    {item.name}
-                  </Text>
-                </View>
-              )}
-            />
-            <TouchableOpacity
-              style={{
-                borderRadius: 10,
-                width: '80%',
-                backgroundColor: Colors.purple,
-                padding: 15,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 25,
-              }}>
+            <View
+              style={styles.container}>
+              <View
+                style={styles.maincontainer}>
+                <Image
+                  source={Icons.check}
+                  resizeMode="contain"
+                  style={styles.check}
+                />
+              </View>
               <Text
-                style={{color: Colors.white, fontSize: 16, fontWeight: 'bold'}}>
-                Buy
+                style={styles.descrption}>
+                Subscribe a month-to-month package to avail all the features
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.btncontent}>
+              <Text
+                style={styles.btn}>
+                Subscribe
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Basic Plan</Text>
+          {/* //////////////////////////////////////// */}
+          <View style={styles.slide3}>
+          <Text style={styles.text}>Monthly recurring</Text>
             <View
-              style={{
-                marginVertical: 15,
-                backgroundColor: Colors.purple,
-                width: '100%',
-                paddingVertical: 15,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              style={styles.maincontent}>
               <Text
-                style={{color: Colors.white, fontSize: 24, fontWeight: 'bold'}}>
-                $9.99
+                style={styles.txt}>
+              $60
               </Text>
             </View>
-            <FlatList
-              data={Data}
-              renderItem={({item}) => (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginVertical: 4,
-                    marginRight: 15,
-                  }}>
-                  <View
-                    style={{
-                      backgroundColor: Colors.purple,
-                      padding: 3,
-                      borderRadius: 10,
-                    }}>
-                    <Image
-                      source={Icons.check}
-                      resizeMode="contain"
-                      style={{width: 10, height: 10, tintColor: Colors.white}}
-                    />
-                  </View>
-                  <Text
-                    style={{marginLeft: 5, fontSize: 18, color: Colors.black}}>
-                    {item.name}
-                  </Text>
-                </View>
-              )}
-            />
-            <TouchableOpacity
-              style={{
-                borderRadius: 10,
-                width: '80%',
-                backgroundColor: Colors.purple,
-                padding: 15,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: 25,
-              }}>
+            <View
+              style={styles.container}>
+              <View
+                style={styles.maincontainer}>
+                <Image
+                  source={Icons.check}
+                  resizeMode="contain"
+                  style={styles.check}
+                />
+              </View>
               <Text
-                style={{color: Colors.white, fontSize: 16, fontWeight: 'bold'}}>
-                Buy
+                style={styles.descrption}>
+                Subscribe a monthly recurring package to avail all the features
+              </Text>
+            </View>
+            <TouchableOpacity
+              style={styles.btncontent}>
+              <Text
+                style={styles.btn}>
+                Subscribe
               </Text>
             </TouchableOpacity>
           </View>
@@ -384,61 +284,85 @@ const EventSubscription = () => {
   );
 };
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 export default EventSubscription;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 30,
-    alignSelf: 'center',
-  },
-  swiper: {
-    width: 370,
-    height: height * 0.4, // Adjust the height as needed
-    marginTop: 180,
-  },
-  slide: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-    borderRadius: 10,
-  },
-  text: {
-    color: Colors.black,
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  wrapper: {
-    height: 500,
-    marginTop: 30,
-  },
+  wrapper: {},
   slide1: {
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: Colors.purple,
-    marginHorizontal: 15,
-    paddingVertical: 8,
+    backgroundColor: '#ffffff',
+    height: 400,
     borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors.purple,
+    height: 500,
   },
   slide2: {
-    justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    backgroundColor: 'grey',
-
-    marginHorizontal: 15,
-    paddingVertical: 8,
+    backgroundColor: '#ffffff',
+    height: 400,
     borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors.purple,
+    height: 500,
   },
   slide3: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    height: 400,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors.purple,
+    height: 500,
+  },
+  text: {
+    color: '#000',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20
+  },
+  maincontent:
+  {
+    marginVertical: 15,
+    backgroundColor: Colors.purple,
+    width: '100%',
+    paddingVertical: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'grey',
-
-    marginHorizontal: 15,
-    paddingVertical: 8,
-    borderRadius: 10,
   },
+  txt: {
+    color: Colors.white, fontSize: 24, fontWeight: 'bold'
+  },
+  btncontent: {
+    borderRadius: 10,
+    width: '85%',
+    backgroundColor: Colors.purple,
+    padding: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 25,
+    position: 'absolute',
+    bottom: 50
+  },
+
+  btn: { color: Colors.white, fontSize: 16, fontWeight: 'bold' },
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  maincontainer: {
+    backgroundColor: Colors.purple,
+    padding: 3,
+    borderRadius: 10,
+    marginBottom: 15
+  },
+  check: { width: 10, height: 10, tintColor: Colors.white },
+  descrption: { marginLeft: 5, fontSize: 18, color: Colors.black, width: '80%' }
+
+
+
 });

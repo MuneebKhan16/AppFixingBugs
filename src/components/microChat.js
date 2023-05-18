@@ -5,6 +5,7 @@ import { Colors } from '../config';
 import Images from '../assets/Images';
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import ImageURL from '../config/Common'
+import { themes } from '../config/globalFonts/globalFonts';
 
 const MicroChat = props => {
   const { image, name, msg, onPress } = props;
@@ -21,7 +22,7 @@ const MicroChat = props => {
         <Image
           resizeMode="center"
           style={styles.img}
-          source={{ uri : `${ImageURL.ImageURL}${image}` ??  image}}
+          source={{ uri: `${ImageURL.ImageURL}${image}` ?? image }}
         />
       </View>
       <View
@@ -30,7 +31,7 @@ const MicroChat = props => {
           style={styles.txt}>
           {msg}
         </Text>
-       
+
 
       </View>
     </RNBounceable>
@@ -61,9 +62,12 @@ const styles = StyleSheet.create({
   msg: {
     padding: 1,
     backgroundColor: Colors.purple,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius:20,
     width: '80%',
+    fontSize: themes?.fontSize?.medium,
+    fontFamily:themes?.font?.regular,
   },
   txt: {
     // flex: 8,
@@ -71,8 +75,8 @@ const styles = StyleSheet.create({
     paddingTop: 2,
     maxWidth: 260,
     color: Colors.white,
-    fontSize: 14,
-    fontWeight: '600',
-    margin:10
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily: themes?.font?.light,
+    margin: 10
   }
 });
