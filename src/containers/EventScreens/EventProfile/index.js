@@ -114,7 +114,7 @@ const EventProfile = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             marginTop: 30,
-            marginRight: 10
+            marginRight: 10,
 
 
           }}>
@@ -220,8 +220,8 @@ const EventProfile = () => {
                           </FastImage>
 
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 10 }}>
-                          <Image source={Icons.bin} style={{ width: 30, height: 30, tintColor: Colors.purple }} resizeMode='contain' />
+                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 12 }}>
+                          <Image source={Icons.bin} style={{ width: 25, height: 25, tintColor: Colors.purple }} resizeMode='contain' />
 
                         </TouchableOpacity>
                       </View>

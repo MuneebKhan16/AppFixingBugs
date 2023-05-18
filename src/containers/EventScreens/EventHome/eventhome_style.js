@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     textTransform: 'capitalize',
     fontSize: 17,
-    width: 250,
+    width: 240,
   },
   container: {marginBottom: 10, marginTop: 10},
   img: {borderRadius: 10},

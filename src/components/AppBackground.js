@@ -1,5 +1,5 @@
 // eslint-disable prettier/prettier /
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -10,20 +10,20 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Icons from '../assets/Icons';
 import Images from '../assets/Images';
-import {Colors, NavService} from '../config';
+import { Colors, NavService } from '../config';
 import RNBounceable from '@freakycoder/react-native-bounceable';
 import Modal from 'react-native-modal';
 import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
-import {TextInput} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import { TextInput } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 import ImageURL from '../config/Common';
 import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
-
+import Datepick from './Datepick';
 export function AppBackground({
   editeIcon,
   route,
@@ -33,7 +33,7 @@ export function AppBackground({
   nav = '',
   rightIcon = Images.avatar,
   marginHorizontal,
-  rightIconNav = () => {},
+  rightIconNav = () => { },
   profile = false,
   edit = false,
   notification = false,
@@ -51,8 +51,8 @@ export function AppBackground({
     nav.length
       ? NavService.navigate(nav)
       : back
-      ? NavService.goBack()
-      : NavService.navigate;
+        ? NavService.goBack()
+        : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector(state => state.reducer.user);
@@ -76,7 +76,7 @@ export function AppBackground({
     setIsModalVisible(false);
   };
   return home ? (
-    <View style={{flex: 1, backgroundColor: Colors.offWhite}}>
+    <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View style={styles.maincontainer}>
         <>
           <TouchableOpacity
@@ -166,7 +166,7 @@ export function AppBackground({
               }}
               style={{
                 position: 'absolute',
-                right: 30,
+                right: 15,
                 width: 38,
                 height: 38,
                 alignItems: 'center',
@@ -259,7 +259,7 @@ export function AppBackground({
                       style={{
                         borderColor: Colors.black,
                         borderWidth: 1,
-                        width: '96%',
+                        width: '100%',
                         borderRadius: 10,
                         height: 45,
                         marginTop: 25,
@@ -278,19 +278,19 @@ export function AppBackground({
                         }}
                       />
                       <TextInput
+                      numberOfLines={1}
                         editable={false}
                         style={{
                           borderColor: 'gray',
                           borderRadius: 10,
-                          width: '82%',
+                          width: '80%',
                           color: Colors.black,
-                          marginLeft: 10,
                           fontSize: 17,
                           fontWeight: '700',
                         }}
                         placeholder={location ? location.name : 'Location'}
                         placeholderTextColor={Colors.black}
-                        secureTextEntry={!isFocused}
+                        // secureTextEntry={!isFocused}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         onChangeText={location => setLocation(location)}
@@ -302,7 +302,7 @@ export function AppBackground({
                       onClose={handleCloseModal}
                       setLocation={setLocation}
                     />
-                    <Pickdate />
+                    <Datepick />
                     <CustomButton
                       buttonStyle={{
                         width: 280,
@@ -346,7 +346,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
-                NavService.navigate('Editevent', {eventDetail: editParams});
+                NavService.navigate('Editevent', { eventDetail: editParams });
               }}
               style={{
                 position: 'absolute',
@@ -418,7 +418,7 @@ export function AppBackground({
       </View>
     </View>
   ) : (
-    <ImageBackground source={Images.bg} style={{flex: 1}}>
+    <ImageBackground source={Images.bg} style={{ flex: 1 }}>
       <View style={styles.maincontainer}>
         <>
           {back && (

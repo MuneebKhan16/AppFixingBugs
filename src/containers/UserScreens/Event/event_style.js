@@ -37,6 +37,6 @@ export const styles = StyleSheet.create({
     top:{ marginTop: 30 },
     border:{ borderRadius: 20 },
     container1:{justifyContent:'center',alignItems:'center',flex:1,},
-    txtheadersty:{fontSize:25,fontWeight:'bold'}
+    txtheadersty:{fontSize:20,fontWeight:'bold'}
   });
   

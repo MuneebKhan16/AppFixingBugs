@@ -43,6 +43,7 @@ const GooglePlaceAutocomplete = ({
               marginBottom: 5,
               marginLeft: 15,
               marginRight: 5,
+              
             }}
           />
         )}
@@ -53,7 +54,6 @@ const GooglePlaceAutocomplete = ({
             color: iconColor ? Colors?.black : Colors?.black,
             // backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
-            backgroundColor:'red',
             
             
           },

@@ -160,7 +160,10 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     justifyContent: 'center'
 
-  }
+  },
+  item: { alignItems: 'center', justifyContent: 'center', width: 300, height: 150 },
+  uploadimg: { width: 20, height: 20, resizeMode: 'contain' },
+
 
 
 })

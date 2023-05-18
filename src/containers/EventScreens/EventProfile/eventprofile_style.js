@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     hd2: {
       color: Colors.black,
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 16,
       
       marginBottom:5
 
@@ -25,10 +25,9 @@ export const styles = StyleSheet.create({
     hd3: {
       color: Colors.black,
       fontWeight: 'bold',
-      fontSize: 20,
-      
+      fontSize: 16,
+      marginRight:5,
       marginBottom:5,
-      marginRight:18,
 
     },
     txt: { fontSize: 20, fontWeight: 'bold', marginBottom:5 , textTransform: 'capitalize',color:Colors.darkGray},

@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
     width: 250,
   },
   scrlcontainer: { marginTop: 10 },
-  modal: { margin: 0, padding: 0 },
+  modal: { margin: 0, padding: 0, },
   txtinput: { fontSize: 20, marginLeft: 30, },
   btnstyle: {
     marginTop: '5%',

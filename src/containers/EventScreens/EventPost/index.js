@@ -8,10 +8,10 @@ import {
   FlatList,
   ScrollView,
 } from 'react-native';
-import React, {useState, useRef, useEffect, useContext} from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import {Colors, NavService, Common} from '../../../config';
+import { Colors, NavService, Common } from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
@@ -20,19 +20,19 @@ import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
-import {store} from '../../../redux/index';
+import { store } from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
-import {styles} from './eventpost_styles';
-import {post_events} from '../../../redux/APIs';
+import { styles } from './eventpost_styles';
+import { post_events } from '../../../redux/APIs';
 import GooglePlaceAutocomplete from '../../../components/Google_Location';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
 const EventPost = props => {
-  const {user} = props;
+  const { user } = props;
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
@@ -58,7 +58,7 @@ const EventPost = props => {
   };
   const [selectedData, setSelectedData] = useState(null);
   const users = useSelector(state => state?.reducer?.user);
-  const {Categorys} = useContext(eventContext);
+  const { Categorys } = useContext(eventContext);
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
@@ -140,7 +140,7 @@ const EventPost = props => {
 
   return (
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -151,10 +151,10 @@ const EventPost = props => {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-          <View style={{marginTop: 40, height: 150}}>
+          <View style={{ marginTop: 40, height: 150 }}>
             {selectedImage?.length > 0 ? (
               <Swiper
-                style={{height: 150}}
+                style={{ height: 150 }}
                 activeDotColor="transparent"
                 dotColor="transparent">
                 {selectedImage.map(image => (
@@ -194,27 +194,39 @@ const EventPost = props => {
                       setSelectedImage(mergedUpdatedAsset);
                     } else {
                       const currentGalleryAsset = [...selectedImage];
-                      currentGalleryAsset.push({path, mime});
+                      currentGalleryAsset.push({ path, mime });
                       setSelectedImage(currentGalleryAsset);
                     }
                   } else if (mime.startsWith('video/')) {
                     const currentGalleryAsset = [...selectedImage];
-                    currentGalleryAsset.push({path, mime});
+                    currentGalleryAsset.push({ path, mime });
                     setSelectedImage(currentGalleryAsset);
                   }
                 }}>
-                {/* <View style={styles.mime}> */}
-                <View style={[styles.mime, {height: 50}]}>
-                  {!selectedImage ? (
+                <View style={[styles.mime, { height: 150,marginTop:60, }]}>
+
+                    <Image
+                      source={Icons.upload}
+                      style={{
+                        width: 50,
+                        height: 20,
+                        resizeMode: 'contain',
+                        color: Colors.black,
+                      }}
+                    />
+                    <Text style={styles.txtclr}>Upload</Text>
+                  {/* <View style={styles.mime}> */}
+
+                  {/* {!selectedImage ? (
                     <>
-                      <TouchableOpacity>
+                      <TouchableOpacity style={{marginTop:40,backgroundColor:'red'}}>
                         <Image source={Icons.upload} style={styles.upload} />
                         <Text style={styles.txtclr}>Upload</Text>
                       </TouchableOpacity>
                     </>
                   ) : (
                     <>
-                      <TouchableOpacity style={{marginTop: -40}}>
+                      <TouchableOpacity style={{}}>
                         <Image
                           source={Icons.upload}
                           style={{
@@ -227,7 +239,7 @@ const EventPost = props => {
                       </TouchableOpacity>
                       <Text style={styles.txtclr}>Upload</Text>
                     </>
-                  )}
+                  )} */}
                   {/* <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text> */}
                 </View>
@@ -250,7 +262,7 @@ const EventPost = props => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{color: '#000'}}>
+                <Text style={{ color: '#000' }}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -266,7 +278,7 @@ const EventPost = props => {
                     location.split(' ').slice(6, 7).pop()}
                 </Text>
               ) : currentlocation ? (
-                <Text style={{color: '#000'}}>
+                <Text style={{ color: '#000' }}>
                   {currentlocation.split(' ').slice(0, 1).pop() +
                     ' ' +
                     currentlocation.split(' ').slice(1, 2).pop() +
@@ -286,16 +298,16 @@ const EventPost = props => {
               />
             </TouchableOpacity>
 
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{ color: '#000' }}>
                     {location.split(' ').slice(-5, -4).pop() +
                       ' ' +
                       location.split(' ').slice(-4, -3).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{ color: '#000' }}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-4, -3).pop()
                       : 'City'}
@@ -315,11 +327,11 @@ const EventPost = props => {
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{ color: '#000' }}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{ color: '#000' }}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-2, -1).pop()
                       : 'State'}
@@ -381,7 +393,7 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               <Text style={styles.modaltxt}>
                 1-Name of Location (mandatory){'\n'}
               </Text>

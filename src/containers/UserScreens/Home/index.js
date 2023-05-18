@@ -246,28 +246,32 @@ export class Home extends Component {
                     />
                     <View style={{ flexDirection:"row" ,justifyContent:'space-between' }}>
                     <GooglePlaceAutocomplete
+                    
                       callback={(address, geometry) =>
                         console.log('address, geometry', address, geometry)
+                        
                       }
                       onPress={(data, details = null) => {
                         console.log(data, details);
+                        
                         // const { lat, lng } = details.geometry.location;
                         // console.log(lat, lng );
                       }}
                       
                     
                       wrapperStyles={{
-                        width: '49%',
+                        width: '50%',
+                        
 
                       }}
                       inputStyles={{
                         borderWidth: 1,
                         borderColor: Colors.lightGrey,
-                        
                       }}
                       iconColor
                       placeholder={
                         text.split(' ').length > 1 ? text.split(' ').slice(-4, -3).pop() : 'City'
+                        
                       }
                     
                     />
