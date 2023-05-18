@@ -2,13 +2,12 @@
 import {NavService} from '../../config';
 import Toast from 'react-native-toast-message';
 import {store} from '../index';
-import postApi from '../RequestTypes/post';
+import postApi, {fetchApi} from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
 import * as EmailValidator from 'email-validator';
 import {Alert, Keyboard} from 'react-native';
 import {Platform} from 'react-native';
 import {saveUser, saveToken, addReviews} from '../actions';
-import {cleanSingle} from 'react-native-image-crop-picker';
 
 var passwordValidator = require('password-validator');
 var schema = new passwordValidator();
@@ -402,6 +401,7 @@ export async function post_events(
   user_id,
   category_id,
   event_location,
+  event_date,
 ) {
   const params = new FormData();
   params.append('event_title', event_title);
@@ -428,12 +428,16 @@ export async function post_events(
     await Promise.all(result);
   }
   params.append('user_id', user_id);
-  params.append('category_id', 1);
+  params.append('category_id', category_id);
   params.append('event_location', event_location);
   params.append('state', 'New Jersey');
   params.append('city', 'San Fransisco');
+  params.append('event_date', event_date);
 
   console.log('object09876', params);
+
+  // const data = await fetchApi('add-event', params);
+  // console.log('fetch api result data', data, 'fetch api result data');
 
   const data = await postApi('add-event', params);
 

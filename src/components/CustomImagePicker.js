@@ -7,6 +7,7 @@ import {
 } from 'react-native-compressor';
 import Toast from 'react-native-toast-message';
 import ActionSheet from 'react-native-actions-sheet';
+import {loaderStart, loaderStop} from '../redux/actions';
 
 const CustomImagePicker = ({
   children,
@@ -39,14 +40,29 @@ const CustomImagePicker = ({
         actionSheetRef.current.hide();
         // Perform additional operations on the image if needed
         if (isMultiple) {
-          onImageChange(image, 'image/');
+          loaderStart();
+          let reducedImages = [];
+          let result = await image?.map(async currentAsset => {
+            const reducedAsset = await ImageCompressor.compress(
+              currentAsset.path,
+              {
+                maxHeight: 400,
+                maxWidth: 400,
+                quality: 1,
+              },
+            );
+            reducedImages.push({path: reducedAsset, mime: currentAsset?.mime});
+          });
+          await Promise.all(result);
+          onImageChange(reducedImages, 'image/');
+          loaderStop();
         } else {
           const result = await ImageCompressor.compress(image.path, {
             maxHeight: 400,
             maxWidth: 400,
             quality: 1,
           });
-          onImageChange(result, image.mime, 'photo');
+          onImageChange(result, image.mime, 'image/');
         }
       });
     } else if (method === 'video') {
@@ -58,14 +74,17 @@ const CustomImagePicker = ({
         const duration = video?.duration / 1000;
         if (duration <= 15) {
           // Perform additional operations on the video if needed
-          const result = await VideoCompressor.compress(video.path, {
-            compressionMethod: 'auto',minimumFileSizeForCompress:5
-          },
-          (progress) => {
-            console.log({ compression: progress * 100 });
-          });
-          console.log("video size is ",video.size + " " + video.mime);
-          console.log("video is ",video);
+          const result = await VideoCompressor.compress(
+            video.path,
+            {
+              compressionMethod: 'auto',
+            },
+            progress => {
+              console.log({compression: progress * 100});
+            },
+          );
+          console.log('video size is ', video.size + ' ' + video.mime);
+          console.log('video is ', video);
           onImageChange(result, video.mime, 'video');
         } else {
           Toast.show({

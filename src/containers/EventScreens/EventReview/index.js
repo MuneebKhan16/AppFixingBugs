@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import {Dimensions, Text, View, Image, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 import Swiper from 'react-native-swiper';
 import FastImage from 'react-native-fast-image';
@@ -12,7 +12,10 @@ import Icons from '../../../assets/Icons';
 import {styles} from './eventreview_style';
 import ImageURL from '../../../config/Common';
 import EventsPosts from '../../../components/EventsPosts';
+import VideoPlayer from '../../../components/VideoPlayer';
 import {get_reviews_event} from '../../../redux/APIs/index';
+
+const {width, height} = Dimensions.get('screen');
 
 const EventReview = ({navigation, route}) => {
   const token = useSelector(state => state.reducer.user.api_token);
@@ -32,7 +35,7 @@ const EventReview = ({navigation, route}) => {
   // UserPost.filter(
   //   data => data.event_id === props.route.params.id,
   // );
-
+  console.log('eventDetail', eventDetail, 'eventDetail');
   return (
     <AppBackground back home editicn editParams={eventDetail}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
@@ -42,14 +45,40 @@ const EventReview = ({navigation, route}) => {
             activeDotColor="transparent"
             dotColor="transparent">
             {eventDetail?.images.map((data, index) => (
-              <FastImage
-                key={index}
-                source={{
-                  uri: `${ImageURL?.ImageURL}${data?.event_images}`,
-                }}
-                style={styles.imgback}
-                imageStyle={styles.img}
-              />
+              <React.Fragment>
+                {data?.event_images?.split('.')[1] == 'mp4' ? (
+                  <View style={{height: height * 0.21, width: width * 0.9}}>
+                    <VideoPlayer
+                      video={`${ImageURL?.ImageURL}${data?.event_images}`}
+                      style={{
+                        width: width * 0.9,
+                        height: height * 0.3,
+                      }}
+                      mediaPlaybackRequiresUserAction={true}
+                      allowsInlineMediaPlayback={true}
+                      javaScriptEnabled={true}
+                      allowsFullscreenVideo={true}
+                      domStorageEnabled={true}
+                      injectedJavaScript={`
+                                 document.getElementsByTagName("video")[0].removeAttribute("autoplay");
+                                 document.getElementsByTagName("video")[0].style.objectFit = "cover";
+                                 document.getElementsByTagName("video")[0].style.width = "100%";
+                                 document.getElementsByTagName("video")[0].style.height = "100%";
+                             `}
+                      allowFileAccess={false}
+                    />
+                  </View>
+                ) : (
+                  <FastImage
+                    key={index}
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                    }}
+                    style={styles.imgback}
+                    imageStyle={styles.img}
+                  />
+                )}
+              </React.Fragment>
             ))}
           </Swiper>
         ) : null}

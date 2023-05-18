@@ -44,6 +44,7 @@ const Editevent = ({navigation, route}) => {
   const [selectedImage, setSelectedImage] = useState(eventDetail?.images);
   const [selectedData, setSelectedData] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [date, setDate] = useState(eventDetail?.event_date);
   const {Categorys} = useContext(eventContext);
 
   function dispatch(action) {
@@ -121,6 +122,7 @@ const Editevent = ({navigation, route}) => {
     setIsModalVisible(false);
   };
   console.log('eventDetail', eventDetail, 'eventDetail');
+  console.log('date', date, 'date');
   return (
     <AppBackground title={'Edit'} home back save>
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
@@ -149,6 +151,7 @@ const Editevent = ({navigation, route}) => {
                         ? `${ImageURL?.ImageURL}${image?.event_images}`
                         : null
                     }
+                    showAssetDeleteIcon={true}
                     videoUri={
                       image?.event_images.startsWith('mp4')
                         ? `${ImageURL?.ImageURL}${image?.event_images}`
@@ -173,7 +176,7 @@ const Editevent = ({navigation, route}) => {
               />
             )}
 
-            <View style={styles.picker}>
+            <View style={{backgroundColor: 'red'}}>
               <CustomImagePicker
                 isMultiple
                 uploadVideo
@@ -198,29 +201,7 @@ const Editevent = ({navigation, route}) => {
                   }
                 }}>
                 <View style={[styles.mime, {height: 50}]}>
-                  {!selectedImage ? (
-                    <>
-                      <TouchableOpacity>
-                        <Image source={Icons.upload} style={styles.upload} />
-                        <Text style={styles.txtclr}>Upload</Text>
-                      </TouchableOpacity>
-                    </>
-                  ) : (
-                    <>
-                      <TouchableOpacity style={{marginTop: -40}}>
-                        <Image
-                          source={Icons.upload}
-                          style={{
-                            width: 50,
-                            height: 20,
-                            resizeMode: 'contain',
-                            color: Colors.black,
-                          }}
-                        />
-                      </TouchableOpacity>
-                      <Text style={styles.txtclr}>Upload</Text>
-                    </>
-                  )}
+                  <Text>Upload New Images</Text>
                 </View>
               </CustomImagePicker>
             </View>
@@ -236,6 +217,7 @@ const Editevent = ({navigation, route}) => {
 
             <PickerCompone
               categories={Categorys}
+              selectedData={eventDetail?.event_type}
               setSelectedData={setSelectedData}
             />
 
@@ -339,7 +321,7 @@ const Editevent = ({navigation, route}) => {
               />
             </View>
             {/* <PickerComptwo /> */}
-            <Pickeventdate />
+            <Pickeventdate date={date} setDate={setDate} />
             <CustomButton
               buttonStyle={styles.btn}
               title="Delete"
