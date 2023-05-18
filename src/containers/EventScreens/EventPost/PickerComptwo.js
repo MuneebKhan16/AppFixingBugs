@@ -19,7 +19,7 @@ const PickerComptwo = () => {
       selectedValue={selectedPicker}
       onValueChange={(itemValue, itemIndex) => setSelectedPicker(itemValue)}
       itemStyle={{color: 'white', fontSize: 20, backgroundColor: '#ededed'}}
-      mode="dropdown">
+      mode="dialog">
       <Picker.Item
         label="Event Occurrence"
         value="Event Occurrence"
