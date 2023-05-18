@@ -383,6 +383,7 @@ export async function post_reviews(
   params.append('review', review || 'miss');
   params.append('event_id', event_id);
   console.log('rating_image', rating_image);
+
   const data = await postApi('add-rating', params);
 
   if (data.status == 1) {

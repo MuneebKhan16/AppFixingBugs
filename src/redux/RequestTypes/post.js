@@ -36,11 +36,14 @@ export default async function postApi(
   }
   try {
     const headers = {
+      Authorization: 'Bearer ' + user_authentication,
       'Content-Type': 'multipart/form-data',
-      // Authorization: 'Bearer ' + user_authentication,
+     accept: 'application/json',
       // 'Content-Type': 'multipart/form-data,octet-stream',
     };
     const response = await axios.post(endpoint, params, {headers});
+    console.log("response postApi " + response);
+    console.log("params postApi " + params);
     dispatch({type: 'LOADER_STOP'});
     {
       sucessToast
@@ -54,9 +57,8 @@ export default async function postApi(
     return response.data;
   } catch (e) {
     console.log(
-      'e.response?.data?.error?.message',
+      'error',
       e.response,
-      'e.response?.data?.error?.message',
     );
     dispatch({type: 'LOADER_STOP'});
     if (

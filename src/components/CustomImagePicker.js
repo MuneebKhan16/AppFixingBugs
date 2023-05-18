@@ -59,8 +59,13 @@ const CustomImagePicker = ({
         if (duration <= 15) {
           // Perform additional operations on the video if needed
           const result = await VideoCompressor.compress(video.path, {
-            compressionMethod: 'auto',
+            compressionMethod: 'auto',minimumFileSizeForCompress:5
+          },
+          (progress) => {
+            console.log({ compression: progress * 100 });
           });
+          console.log("video size is ",video.size + " " + video.mime);
+          console.log("video is ",video);
           onImageChange(result, video.mime, 'video');
         } else {
           Toast.show({
