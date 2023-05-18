@@ -1,9 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
-import {Colors, NavService} from '../../../config';
+import { StyleSheet, Text, View } from 'react-native';
+import { Colors, NavService } from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 export const styles = StyleSheet.create({
-  maincontainer: {marginTop: 25, marginHorizontal: 20},
-  content: {flexDirection: 'row', alignItems: 'center'},
+  maincontainer: { marginTop: 25, marginHorizontal: 20 },
+  content: { flexDirection: 'row', alignItems: 'center' },
   title: {
     fontSize: 19,
     color: Colors.black,
@@ -17,7 +18,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     right: 5,
   },
-  review: {width: 13, height: 13},
+  review: { width: 13, height: 13 },
   txt: {
     marginLeft: 10,
     fontSize: 18,
@@ -40,7 +41,7 @@ export const styles = StyleSheet.create({
     bottom: 12,
     left: 5,
   },
-  location: {tintColor: Colors.white, width: 20, height: 20},
+  location: { tintColor: Colors.white, width: 20, height: 20 },
   loctxt: {
     color: Colors.white,
     fontWeight: 'bold',
@@ -48,8 +49,12 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     width: 250,
   },
-  container: {marginBottom: 10, marginTop: 10},
-  img: {borderRadius: 10},
-  container1: {justifyContent: 'center', alignItems: 'center', flex: 1},
-  txtheadersty: {fontSize: 20, fontWeight: 'bold', textTransform: 'capitalize'},
+  container: { marginBottom: 10, marginTop: 10 },
+  img: { borderRadius: 10 },
+  container1: { justifyContent: 'center', alignItems: 'center', flex: 1 },
+  txtheadersty: {
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.italic,
+    color: 'grey'
+  },
 });

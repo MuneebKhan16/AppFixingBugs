@@ -101,7 +101,7 @@ export function AppBackground({
             <Text
               style={{
                 color: Colors.black,
-                fontSize: themes?.fontSize?.headingSize,
+                fontSize: themes?.fontSize?.large,
                 textTransform: 'capitalize',
                 fontFamily: themes?.font?.black
               }}>

@@ -74,6 +74,54 @@
       "sha1": "39800b09c9498c5c829dca8016f4dc228c54ea30"
     },
     {
+      "path": "src/assets/fonts/NexaBlack.otf",
+      "sha1": "fd5f0815e900bb92705cc7f1de78b33719b09600"
+    },
+    {
+      "path": "src/assets/fonts/NexaBlackItalic.otf",
+      "sha1": "f68b0487ceb4e848717f5f2c887756aded6a5f17"
+    },
+    {
+      "path": "src/assets/fonts/NexaBold.otf",
+      "sha1": "314a9320e40fbad1bedd829caf62102a5d3d5d61"
+    },
+    {
+      "path": "src/assets/fonts/NexaBoldItalic.otf",
+      "sha1": "2af4c4583d58bbc696e20d8583eb3cd2567e9a53"
+    },
+    {
+      "path": "src/assets/fonts/NexaBook.otf",
+      "sha1": "d33b46029eb22212176a2db09cfd8d4b39dd7ea7"
+    },
+    {
+      "path": "src/assets/fonts/NexaBookItalic.otf",
+      "sha1": "5ed43f8bd8c0d5de2afd10907404c1207288ce15"
+    },
+    {
+      "path": "src/assets/fonts/NexaHeavy.otf",
+      "sha1": "2d8284d2ab9facd5e3bfea93571f312c44f800ad"
+    },
+    {
+      "path": "src/assets/fonts/NexaHeavyItalic.otf",
+      "sha1": "f9e9d2df80a48dc997137d7ffe061a15018cf4c5"
+    },
+    {
+      "path": "src/assets/fonts/NexaLight.otf",
+      "sha1": "0d1e39a7f64ada86e8a89c28ef73fe48bae1a947"
+    },
+    {
+      "path": "src/assets/fonts/NexaLightItalic.otf",
+      "sha1": "5b3b5918b17f9cb51151ca956f230627c2466aa8"
+    },
+    {
+      "path": "src/assets/fonts/NexaRegular.otf",
+      "sha1": "c1ede6cb7b94c9d694c978e87244e6488600ad8f"
+    },
+    {
+      "path": "src/assets/fonts/NexaRegularItalic.otf",
+      "sha1": "8658ba7f4eb7ef19eb4461abaf409595e4f8eb10"
+    },
+    {
       "path": "src/assets/fonts/NexaText-Trial-Black.ttf",
       "sha1": "9bd7f8a7a41beaaaf3e904e29ddb2393fe18ba09"
     },
@@ -144,6 +192,22 @@
     {
       "path": "src/assets/fonts/NexaText-Trial-ThinItalic.ttf",
       "sha1": "1123864a772e7ce60f3a33cb8139ef19aee17404"
+    },
+    {
+      "path": "src/assets/fonts/NexaThin.otf",
+      "sha1": "04f19daa1e78ebd3935bb9a24c823ab9d8e964f0"
+    },
+    {
+      "path": "src/assets/fonts/NexaThinItalic.otf",
+      "sha1": "bed97c0720c26b9b4a11c8d0b7c505a0128dff93"
+    },
+    {
+      "path": "src/assets/fonts/NexaXBold.otf",
+      "sha1": "400454d2484bc64bab9cabbb2d9479a6f54d3c84"
+    },
+    {
+      "path": "src/assets/fonts/NexaXBoldItalic.otf",
+      "sha1": "523a9a69e83da4d453bd2e1a6a4f6dca996b6317"
     },
     {
       "path": "src/assets/fonts/SEGOEUI.TTF",

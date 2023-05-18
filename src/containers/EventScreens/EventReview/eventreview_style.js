@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 export const styles = StyleSheet.create({
   scroll: {marginTop: 20},
@@ -43,7 +44,11 @@ export const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   container1: {justifyContent: 'center', alignItems: 'center', flex: 1},
-  txtheadersty: {fontSize: 25, fontWeight: 'bold'},
+  txtheadersty: {
+    fontSize: themes?.fontSize?.medium,
+    fontFamily:themes?.font?.italic,
+    color:'grey'
+  },
   imgback: {
     width: '100%',
     height: 170,

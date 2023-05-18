@@ -1,13 +1,13 @@
 import { RFPercentage } from 'react-native-responsive-fontsize';
 export const themes = {
     font: {
-        black: 'Nexa-Trial-Black',
-        italic: 'Nexa-Trial-BlackItalic',
-        regular: 'Nexa-Trial-Regular',
-        light: 'Nexa-Trial-Light',
-        extraLight: 'Nexa-Trial-ExtraLight',
-        bold: 'Nexa-Trial-Bold',
-        extraBold: 'Nexa-Trial-ExtraBold'
+        black: 'NexaBlack',
+        italic: 'NexaBlackItalic',
+        regular: 'NexaRegular',
+        light: 'NexaLight',
+        extraLight: 'NexaThin',
+        bold: 'NexaBold',
+        extraBold: 'NexaHeavy'
 
     },
     font2: {

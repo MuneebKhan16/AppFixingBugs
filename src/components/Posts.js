@@ -7,6 +7,7 @@ import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config/Common'
 import FastImage from 'react-native-fast-image'
+import { themes } from '../config/globalFonts/globalFonts';
 const Posts = ({ UserPost, profile_Data }) => {
   const [starCount, setStarCount] = useState(1);
 
@@ -139,5 +140,9 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   container1: { paddingTop: 200, justifyContent: 'center', alignItems: 'center', flex: 1, },
-  txtheadersty: { fontSize: 25, fontWeight: 'bold',color:Colors.black }
+  txtheadersty: { 
+    fontSize: themes?.fontSize?.medium,
+    fontFamily:themes?.font?.italic,
+    color:'grey'
+  }
 });

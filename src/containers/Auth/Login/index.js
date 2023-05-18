@@ -12,6 +12,7 @@ import Toast from 'react-native-toast-message';
 import { login } from '../../../redux/APIs';
 import { styles } from './Login_Style';
 import AuthBackground from '../../../components/AuthBackground';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 class Login extends Component {
   ForgetPassword = () => {
@@ -89,9 +90,10 @@ class Login extends Component {
                 onPress={this.ForgetPassword}
                 style={styles.touchable} >
                 <Text style={{
-                  fontSize: 16,
-                  color: Colors.black,
 
+                  fontSize: themes?.fontSize?.extraSmall,
+                  fontFamily: themes?.font?.bold,
+                  color: Colors.black,
                   textDecorationLine: 'underline',
 
                 }} >Forgot Password?</Text>

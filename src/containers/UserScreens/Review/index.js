@@ -25,6 +25,7 @@ import FastImage from 'react-native-fast-image';
 import { color } from 'react-native-reanimated';
 import Images from '../../../assets/Images';
 import eventContext from '../../EventScreens/eventContext';
+import { themes } from '../../../config/globalFonts/globalFonts';
 const { width, height } = Dimensions.get('window');
 
 const MEDIA = [
@@ -153,9 +154,11 @@ const Review = (props) => {
             
           }} />
           <Text style={{
-            marginLeft: 8, fontSize: 16,
+            fontSize: themes?.fontSize?.medium,
+            fontFamily:themes?.font?.bold,
+            marginLeft: 8, 
             color: Colors.black,
-            fontWeight: '600',
+           
             marginBottom: 3
           }}>{user?.name}</Text>
           <View style={{ position: 'absolute', right: 0, flexDirection: 'row', alignItems: 'center' }}>
