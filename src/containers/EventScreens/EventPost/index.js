@@ -115,7 +115,10 @@ const EventPost = props => {
     // }
     const event_image = selectedImage;
     const user_id = users?.id;
-    const category_id = selectedData?.category_id;
+    // const category_id = selectedData?.category_id;
+    const category_id =
+     selectedData ==  selectedData?.category_id;
+
     const event_location = location;
     const event_date = moment(date).format('MM DD YYYY');
 
@@ -354,11 +357,16 @@ const EventPost = props => {
                 placeholderTextColor={Colors.black}
               />
             </View>
-            <PickerComptwo />
+            
+            <PickerComptwo />   
+            
+                     
             <Pickeventdate date={date} setDate={setDate} />
+
+                        
             <CustomButton
               buttonStyle={styles.btn}
-              title="Posts"
+              title="Post"
               onPress={handlesubmit}
             />
           </View>

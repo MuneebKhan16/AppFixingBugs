@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   marker: { width: 15, height: 18, position: 'absolute', right: 10, tintColor: '#434343' },
   description: { maxHeight: 150, marginLeft: 10, marginTop: 10, color: Colors.black },
   descp: {
-    height: 150,
+    height: 120,
     backgroundColor: '#ededed',
     width: 300,
     borderRadius: 10,
@@ -58,7 +58,7 @@ export const styles = StyleSheet.create({
   top: { marginTop: 20, alignSelf: 'center', height: 500 },
   user: { marginTop: 40, height: 150, },
   // mime: { alignItems: 'center', width: 300, height: 100, },
-  top: { marginTop: 50, alignSelf: 'center', height: 500 },
+  top: { marginTop: 30, alignSelf: 'center', height: 500 },
   user: { marginTop: 40 },
   mime: { alignItems: 'center', width: 300, height: 150 },
   upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black,marginLeft:10 },
@@ -102,7 +102,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: Platform.select({
       android: 850,
-      ios: 1200,
+      ios: 1000,
     }),
   },
   searchBox: {
@@ -127,7 +127,8 @@ export const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     color: Colors.black,
-    marginLeft: 10
+    marginLeft: 10,
+    marginTop:Platform.OS === 'ios' ? 10 :null
   },
   selectedPlace: {
     marginTop: 10,

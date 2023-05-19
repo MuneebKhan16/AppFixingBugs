@@ -266,12 +266,10 @@ export class Home extends Component {
                             wrapperStyles={{
                               width: '50%',
 
-
                             }}
                             inputStyles={{
                               borderWidth: 1,
                               borderColor: Colors.lightGrey,
-
 
 
                             }}
@@ -300,6 +298,7 @@ export class Home extends Component {
 
                             wrapperStyles={{
                               width: '49%',
+
                             }}
                             inputStyles={{
                               borderWidth: 1,

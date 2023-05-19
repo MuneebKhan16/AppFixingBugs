@@ -28,143 +28,143 @@ import { Colors } from '../../../config';
 import { loaderStart, loaderStop } from '../../../redux/APIs';
 import Icons from '../../../assets/Icons';
 
-const productIds = Platform.select({
-  ios: ['Featured_15'],
-  android: ['Featured_15'],
-});
-const subscriptionIds = Platform.select({
-  ios: ['Recurring_60', 'Monthly_80'],
-  android: ['Recurring_60', 'Monthly_80'],
-});
+// const productIds = Platform.select({
+//   ios: ['Featured_15'],
+//   android: ['Featured_15'],
+// });
+// const subscriptionIds = Platform.select({
+//   ios: ['Recurring_60', 'Monthly_80'],
+//   android: ['Recurring_60', 'Monthly_80'],
+// });
 const EventSubscription = () => {
-  let purchaseUpdateSubscription = null;
-  let purchaseErrorSubscription = null;
-  const [iapProducts, setIapProducts] = useState([]);
-  const buyFeature = async (receiptJson, sku, title) => {
-    // await buyFeatures(receiptJson, sku, 5, title?.split(' ')[0]);
-  };
-  const getProducts = async () => {
-    loaderStart();
-    try {
-      const products = await getProducts({skus: productIds});
-      if (products && products?.length) {
-        const currentProduct = [...iapProducts];
-        const mergedProducts = [...currentProduct, ...products];
-        setIapProducts(mergedProducts);
-      }
-    } catch (err) {
-      console.warn(err);
-    } finally {
-      loaderStop();
-      await getSubscriptions();
-    }
-  };
-  const getSubscriptions = async () => {
-    loaderStart();
-    try {
-      const products = await getSubscriptions({skus: subscriptionIds});
-      if (products && products?.length) {
-        const currentProduct = [...iapProducts];
-        const mergedProducts = [...currentProduct, ...products];
-        setIapProducts(mergedProducts);
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-    loaderStop();
-  };
+  // let purchaseUpdateSubscription = null;
+  // let purchaseErrorSubscription = null;
+  // const [iapProducts, setIapProducts] = useState([]);
+  // const buyFeature = async (receiptJson, sku, title) => {
+  //   // await buyFeatures(receiptJson, sku, 5, title?.split(' ')[0]);
+  // };
+  // const getProducts = async () => {
+  //   loaderStart();
+  //   try {
+  //     const products = await getProducts({skus: productIds});
+  //     if (products && products?.length) {
+  //       const currentProduct = [...iapProducts];
+  //       const mergedProducts = [...currentProduct, ...products];
+  //       setIapProducts(mergedProducts);
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   } finally {
+  //     loaderStop();
+  //     await getSubscriptions();
+  //   }
+  // };
+  // const getSubscriptions = async () => {
+  //   loaderStart();
+  //   try {
+  //     const products = await getSubscriptions({skus: subscriptionIds});
+  //     if (products && products?.length) {
+  //       const currentProduct = [...iapProducts];
+  //       const mergedProducts = [...currentProduct, ...products];
+  //       setIapProducts(mergedProducts);
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   }
+  //   loaderStop();
+  // };
 
-  const purchase = async () => {
-    Platform.OS == 'android' &&
-      flushFailedPurchasesCachedAsPendingAndroid()
-        .then(() => {
-          purchaseUpdateSubscription = purchaseUpdatedListener(
-            async purchase => {
-              const receipt = purchase.transactionReceipt;
-              if (receipt) {
-                console.log('purchase', purchase.productId);
-                // await this.buyFeature(receipt, purchase.productId);
-              }
-              const newPurchase = await getAvailablePurchases();
-              await finishTransaction(newPurchase[0]);
-            },
-          );
+  // const purchase = async () => {
+  //   Platform.OS == 'android' &&
+  //     flushFailedPurchasesCachedAsPendingAndroid()
+  //       .then(() => {
+  //         purchaseUpdateSubscription = purchaseUpdatedListener(
+  //           async purchase => {
+  //             const receipt = purchase.transactionReceipt;
+  //             if (receipt) {
+  //               console.log('purchase', purchase.productId);
+  //               // await this.buyFeature(receipt, purchase.productId);
+  //             }
+  //             const newPurchase = await getAvailablePurchases();
+  //             await finishTransaction(newPurchase[0]);
+  //           },
+  //         );
 
-          purchaseErrorSubscription = purchaseErrorListener(error => {
-            console.warn('purchaseErrorListener', error);
-          });
-        })
-        .catch(error => {
-          console.log(error);
-        });
-  };
+  //         purchaseErrorSubscription = purchaseErrorListener(error => {
+  //           console.warn('purchaseErrorListener', error);
+  //         });
+  //       })
+  //       .catch(error => {
+  //         console.log(error);
+  //       });
+  // };
 
-  const requestSubscription = async (sku, offerToken, title) => {
-    try {
-      loaderStart();
-      Alert.alert(
-        Platform.OS == 'android' ? 'Confirm Subscription' : 'Confirmation',
-        Platform.OS == 'android'
-          ? 'The Subscription will continue unless cancelled settings atleast 24 hours before the end of the subscription period.'
-          : 'Are you sure you want to continue the purchase',
-        [
-          {
-            text: 'Cancel',
-            onPress: () =>
-              Toast.show({
-                text1: 'Purchased cancelled',
-                type: 'error',
-                visibilityTime: 5000,
-              }),
-            style: 'cancel',
-          },
-          {
-            text: 'OK',
-            onPress: async () => {
-              const receipt = await requestPurchase(
-                Platform.select({
-                  ios: {
-                    sku,
-                    andDangerouslyFinishTransactionAutomaticallyIOS: false,
-                  },
-                  android: {
-                    skus: [sku],
-                    andDangerouslyFinishTransactionAutomaticallyIOS: false,
-                  },
-                }),
-              );
-              const receiptJson = JSON.stringify(receipt);
-              await buyFeature(receiptJson, sku, title);
-            },
-          },
-        ],
-      );
-      loaderStop();
-    } catch (error) {
-      loaderStop();
-      if (error instanceof PurchaseError) {
-        console.log({message: `[${error?.code}]: ${error?.message}`, error});
-      } else {
-        console.log({message: 'handleBuySubscription', error});
-      }
-    }
-  };
-  useEffect(async () => {
-    await initConnection();
-    await getProducts();
-    await purchase();
-    return () => {
-      if (purchaseUpdateSubscription) {
-        purchaseUpdateSubscription.remove();
-        purchaseUpdateSubscription = null;
-      }
+  // const requestSubscription = async (sku, offerToken, title) => {
+  //   try {
+  //     loaderStart();
+  //     Alert.alert(
+  //       Platform.OS == 'android' ? 'Confirm Subscription' : 'Confirmation',
+  //       Platform.OS == 'android'
+  //         ? 'The Subscription will continue unless cancelled settings atleast 24 hours before the end of the subscription period.'
+  //         : 'Are you sure you want to continue the purchase',
+  //       [
+  //         {
+  //           text: 'Cancel',
+  //           onPress: () =>
+  //             Toast.show({
+  //               text1: 'Purchased cancelled',
+  //               type: 'error',
+  //               visibilityTime: 5000,
+  //             }),
+  //           style: 'cancel',
+  //         },
+  //         {
+  //           text: 'OK',
+  //           onPress: async () => {
+  //             const receipt = await requestPurchase(
+  //               Platform.select({
+  //                 ios: {
+  //                   sku,
+  //                   andDangerouslyFinishTransactionAutomaticallyIOS: false,
+  //                 },
+  //                 android: {
+  //                   skus: [sku],
+  //                   andDangerouslyFinishTransactionAutomaticallyIOS: false,
+  //                 },
+  //               }),
+  //             );
+  //             const receiptJson = JSON.stringify(receipt);
+  //             await buyFeature(receiptJson, sku, title);
+  //           },
+  //         },
+  //       ],
+  //     );
+  //     loaderStop();
+  //   } catch (error) {
+  //     loaderStop();
+  //     if (error instanceof PurchaseError) {
+  //       console.log({message: `[${error?.code}]: ${error?.message}`, error});
+  //     } else {
+  //       console.log({message: 'handleBuySubscription', error});
+  //     }
+  //   }
+  // };
+  // useEffect(async () => {
+  //   await initConnection();
+  //   await getProducts();
+  //   await purchase();
+  //   return () => {
+  //     if (purchaseUpdateSubscription) {
+  //       purchaseUpdateSubscription.remove();
+  //       purchaseUpdateSubscription = null;
+  //     }
 
-      if (purchaseErrorSubscription) {
-        purchaseErrorSubscription.remove();
-        purchaseErrorSubscription = null;
-      }
-    };
-  }, []);
+  //     if (purchaseErrorSubscription) {
+  //       purchaseErrorSubscription.remove();
+  //       purchaseErrorSubscription = null;
+  //     }
+  //   };
+  // }, []);
   return (
     <AppBackground
       title={'Subscriptions'}

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
+  Platform
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import React, {useState, useEffect, useContext} from 'react';
@@ -87,7 +88,7 @@ const EventHome = props => {
                                 width: width * 0.1,
                                 height: height * 0.05,
                                 position: 'absolute',
-                                top: height * 0.07,
+                                top: Platform.OS === 'android' ? height * 0.07 : height * 0.09,
                                 left: width * 0.39,
                                 tintColor: Colors.white,
                               }}

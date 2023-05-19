@@ -41,9 +41,9 @@ const Featured = () => {
             </View>
             <TouchableOpacity
               activeOpacity={0.9}
-              // onPress={() =>
-              //   NavService.navigate('Review', {eventDetail: item})
-              // }
+              onPress={() =>
+                NavService.navigate('Review', {eventDetail: item})
+              }
             >
               <ImageBackground
                 source={{uri: `${BaseUrl}${item.event_image}`}}
