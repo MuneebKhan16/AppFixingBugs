@@ -88,8 +88,49 @@ class Post extends Component {
     //     visibilityTime: 3000,
     //   });
     // }
+    if (
+      isChecked === true &&
+      isChecked1 === true &&
+      isChecked2 === true &&
+      checkbox
+    ) {
+      const tag = Object.values(checkbox);
 
-    if (isChecked === true) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image;
+      if (selectedImage) {
+        rating_image = {
+          uri: selectedImage.path,
+          name: `Rating${Date.now()}.${selectedImage?.mime.slice(
+            selectedImage?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedImage?.mime,
+        };
+      }
+      if (selectedVideo) {
+        rating_image = {
+          uri: selectedVideo.path,
+          name: `Rating${Date.now()}.${selectedVideo?.mime.slice(
+            selectedVideo?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedVideo?.mime,
+        };
+      }
+      var tags = tag.join(',');
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
+    } else if (isChecked === true) {
       var user_id = id;
       var user_type = 'customer';
       var rating_image;
@@ -192,51 +233,6 @@ class Post extends Component {
         review,
         event_id,
       );
-    }
-
-    if (
-      isChecked === true &&
-      isChecked1 === true &&
-      isChecked2 === true &&
-      checkbox
-    ) {
-      const tag = Object.values(checkbox);
-
-      var user_id = id;
-      var user_type = 'customer';
-      var rating_image;
-      if (selectedImage) {
-        rating_image = {
-          uri: selectedImage.path,
-          name: `Rating${Date.now()}.${selectedImage?.mime.slice(
-            selectedImage?.mime.lastIndexOf('/') + 1,
-          )}`,
-          type: selectedImage?.mime,
-        };
-      }
-      if (selectedVideo) {
-        rating_image = {
-          uri: selectedVideo.path,
-          name: `Rating${Date.now()}.${selectedVideo?.mime.slice(
-            selectedVideo?.mime.lastIndexOf('/') + 1,
-          )}`,
-          type: selectedVideo?.mime,
-        };
-      }
-      var tags = tag.join(',');
-      var rating = starCount;
-      var review = null;
-      var event_id = this.props.route.params;
-      post_reviews(
-        user_id,
-        user_type,
-        rating_image,
-        tags,
-        rating,
-        review,
-        event_id,
-      );
-    } else {
     }
   };
   render() {
