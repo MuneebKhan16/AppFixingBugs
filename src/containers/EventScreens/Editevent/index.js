@@ -25,7 +25,11 @@ import Toast from 'react-native-toast-message';
 import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import {styles} from '../EventPost/eventpost_styles';
-import {post_events} from '../../../redux/APIs';
+import {
+  post_events,
+  edit_events,
+  deleteCurrentEventImage,
+} from '../../../redux/APIs';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
 import ImageURL from '../../../config/Common';
@@ -35,7 +39,7 @@ const Editevent = ({navigation, route}) => {
   const token = useSelector(state => state.reducer.user.api_token);
   const user = useSelector(state => state.reducer.user);
   const actionSheetStateRef = useRef();
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState(eventDetail?.event_location);
   const [currentlocation, setcurrentlocation] = useState(
     eventDetail?.event_location,
   );
@@ -67,13 +71,14 @@ const Editevent = ({navigation, route}) => {
       });
     }
 
-    if (!selectedData) {
-      return Toast.show({
-        text1: 'No Category Found',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
+    // if (!selectedData) {
+    //   console.log('selectedData', selectedData);
+    //   return Toast.show({
+    //     text1: 'No Category Found',
+    //     type: 'error',
+    //     visibilityTime: 3000,
+    //   });
+    // }
 
     if (!location) {
       return Toast.show({
@@ -94,17 +99,18 @@ const Editevent = ({navigation, route}) => {
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
-    const event_image = {
-      uri: selectedImage?.path,
-      name: `rating`,
-      type: selectedImage?.mime,
-    };
+    const event_image = selectedImage;
     const user_id = user?.id;
-    const category_id = selectedData?.category_id;
+    const event_id = eventDetail?.id;
+    const category_id =
+      selectedData == null
+        ? eventDetail?.category_id
+        : selectedData?.category_id;
     const event_location = location;
+    const event_date = date ? date : moment(date).format('MM DD YYYY');
     console.log('first', location);
 
-    post_events(
+    edit_events(
       event_title,
       event_type,
       event_description,
@@ -112,7 +118,28 @@ const Editevent = ({navigation, route}) => {
       user_id,
       category_id,
       event_location,
+      event_date,
+      event_id,
     );
+  };
+  const deleteCurrentGalleryAsset = async (assetId, customImagePath) => {
+    let result;
+    if (assetId) {
+      result = await deleteCurrentEventImage(assetId);
+      if (result) {
+        const currentGalleryImages = [...selectedImage];
+        const remainingAsset = currentGalleryImages?.filter(
+          images => images?.id !== assetId,
+        );
+        setSelectedImage(remainingAsset);
+      }
+    } else {
+      const currentGalleryImages = [...selectedImage];
+      const remainingAsset = currentGalleryImages?.filter(
+        images => images?.path !== customImagePath,
+      );
+      setSelectedImage(remainingAsset);
+    }
   };
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -122,9 +149,13 @@ const Editevent = ({navigation, route}) => {
     setIsModalVisible(false);
   };
   console.log('eventDetail', eventDetail, 'eventDetail');
-  console.log('date', date, 'date');
   return (
-    <AppBackground title={'Edit'} home back save>
+    <AppBackground
+      title={'Edit'}
+      home
+      back
+      save
+      onSavePress={() => handlesubmit()}>
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
@@ -147,64 +178,58 @@ const Editevent = ({navigation, route}) => {
                     key={image.path}
                     name={user?.name}
                     imageUri={
-                      !image?.event_images.includes('mp4')
+                      !image?.path &&
+                      image?.event_images &&
+                      !image?.event_images.includes('mp4') &&
+                      image?.event_images?.includes('images/')
                         ? `${ImageURL?.ImageURL}${image?.event_images}`
-                        : null
+                        : `${image?.path}`
                     }
                     showAssetDeleteIcon={true}
+                    deleteIconPress={() =>
+                      deleteCurrentGalleryAsset(image?.id, image?.path)
+                    }
                     videoUri={
-                      image?.event_images.startsWith('mp4')
+                      !image?.path &&
+                      image?.event_images &&
+                      image?.event_images.startsWith('mp4') &&
+                      image?.event_images?.includes('video/')
                         ? `${ImageURL?.ImageURL}${image?.event_images}`
-                        : null
+                        : `${image?.path}`
                     }
                   />
                 ))}
               </Swiper>
-            ) : (
-              <ProfileImage
-                name={user?.name}
-                imageUri={
-                  !image?.event_images.includes('mp4')
-                    ? image.event_images
-                    : null
-                }
-                videoUri={
-                  image?.event_images.startsWith('mp4')
-                    ? image.event_images
-                    : null
-                }
-              />
-            )}
-
-            <View style={{backgroundColor: 'red'}}>
-              <CustomImagePicker
-                isMultiple
-                uploadVideo
-                onImageChange={(path, mime) => {
-                  if (mime.startsWith('image/')) {
-                    if (Array.isArray(path.slice(0, 10))) {
-                      const currentGalleryAsset = [...selectedImage];
-                      const mergedUpdatedAsset = [
-                        ...currentGalleryAsset,
-                        ...path,
-                      ];
-                      setSelectedImage(mergedUpdatedAsset);
-                    } else {
-                      const currentGalleryAsset = [...selectedImage];
-                      currentGalleryAsset.push({path, mime});
-                      setSelectedImage(currentGalleryAsset);
-                    }
-                  } else if (mime.startsWith('video/')) {
+            ) : null}
+          </View>
+          <View style={{backgroundColor: 'red'}}>
+            <CustomImagePicker
+              isMultiple
+              uploadVideo
+              onImageChange={(path, mime) => {
+                if (mime.startsWith('image/')) {
+                  if (Array.isArray(path.slice(0, 10))) {
+                    const currentGalleryAsset = [...selectedImage];
+                    const mergedUpdatedAsset = [
+                      ...currentGalleryAsset,
+                      ...path,
+                    ];
+                    setSelectedImage(mergedUpdatedAsset);
+                  } else {
                     const currentGalleryAsset = [...selectedImage];
                     currentGalleryAsset.push({path, mime});
                     setSelectedImage(currentGalleryAsset);
                   }
-                }}>
-                <View style={[styles.mime, {height: 50}]}>
-                  <Text>Upload New Images</Text>
-                </View>
-              </CustomImagePicker>
-            </View>
+                } else if (mime.startsWith('video/')) {
+                  const currentGalleryAsset = [...selectedImage];
+                  currentGalleryAsset.push({path, mime});
+                  setSelectedImage(currentGalleryAsset);
+                }
+              }}>
+              <View style={[styles.mime, {height: 30}]}>
+                <Text>Upload New Images</Text>
+              </View>
+            </CustomImagePicker>
           </View>
           <View style={{marginTop: 30, alignSelf: 'center', height: 500}}>
             <TextInput

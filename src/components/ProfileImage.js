@@ -31,20 +31,20 @@ const ProfileImage = ({
             style,
           ]}
         />
-        {/* {showAssetDeleteIcon && (
-          <TouchableOpacity activeOpacity={0.8} onPress={deleteIconPress}>
+        {showAssetDeleteIcon && (
+          <TouchableOpacity
+            style={{position: 'absolute', top: 10, right: 35}}
+            activeOpacity={0.8}
+            onPress={deleteIconPress}>
             <Image
               source={Icons.subtract}
               style={{
                 height: 30,
                 width: 30,
-                backgroundColor: 'red',
-                position: 'absolute',
-                top: 10,
               }}
             />
           </TouchableOpacity>
-        )} */}
+        )}
       </View>
     );
   } else if (videoUri) {
@@ -74,11 +74,14 @@ const ProfileImage = ({
           resizeMode="cover"
           // controls={true}
         />
-        {/* {showAssetDeleteIcon && (
-          <TouchableOpacity activeOpacity={0.8} onPress={deleteIconPress}>
+        {showAssetDeleteIcon && (
+          <TouchableOpacity
+            style={{position: 'absolute', top: 10, right: 35}}
+            activeOpacity={0.8}
+            onPress={deleteIconPress}>
             <Image source={Icons.subtract} style={{height: 30, width: 30}} />
           </TouchableOpacity>
-        )} */}
+        )}
       </View>
     );
   } else {
