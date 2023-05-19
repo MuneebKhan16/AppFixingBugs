@@ -16,6 +16,7 @@ import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
 import Images from '../assets/Images';
+import { themes } from '../config/globalFonts/globalFonts';
 
 const Categories = props => {
   const { categories } = props;
@@ -49,8 +50,14 @@ const Categories = props => {
           </View>
         </TouchableOpacity>
         {isModalVisible && <View style={styles.popup}>
-          <Text style={{ color: '#000000', }}>{categories?.title}</Text>
-          <Text style={{ color: '#000000' }}>{categories?.category_info}</Text>
+          <Text style={{
+            color: '#000000', fontSize: themes?.fontSize?.extraVSmall,
+            fontFamily: themes?.font?.regular,
+          }}>{categories?.title}</Text>
+          <Text style={{
+            color: '#000000', fontSize: themes?.fontSize?.extraVSmall,
+            fontFamily: themes?.font?.regular,
+          }}>{categories?.category_info}</Text>
 
         </View>}
         {/* <Modal isVisible={isModalVisible}>
@@ -86,15 +93,15 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: Colors.purple,
-    
+
   },
   imgbg: {
     borderRadius: 10,
     shadowColor: '#000',
     flex: 1,
 
-    
- },
+
+  },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', },
   modal: {

@@ -19,9 +19,9 @@ import {connect} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import Mainprofile from '../../../components/Mainprofile';
 import StarRating from 'react-native-star-rating';
-import {styles} from './post_styles';
-import Toast from 'react-native-toast-message';
 import {post_reviews} from '../../../redux/APIs';
+import {styles} from './post_styles';
+
 const Checkbox = {
   first: '#ItsLit',
   second: '#ItsAVibe',
@@ -204,6 +204,7 @@ class Post extends Component {
 
       var user_id = id;
       var user_type = 'customer';
+      var rating_image;
       if (selectedImage) {
         rating_image = {
           uri: selectedImage.path,
@@ -226,7 +227,15 @@ class Post extends Component {
       var rating = starCount;
       var review = null;
       var event_id = this.props.route.params;
-      post_reviews(user_id, user_type, rating_image, tags, rating, review, event_id)
+      post_reviews(
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
     } else {
     }
   };
@@ -277,21 +286,33 @@ class Post extends Component {
           </ActionSheet>
           <View style={styles.profile}>
             <View style={styles.btm}>
-              {selectedImage?.length > 0 ? (
-                selectedImage.map(image => {
-                  return (
-                    <ProfileImage
-                      name={user?.name}
-                      imageUri={image ? image.path : userImage}
-                      videoUri={selectedVideo ? selectedVideo.path : null}
-                    />
-                  );
-                })
+              {selectedImage !== null ? (
+                <ProfileImage
+                  name={user?.name}
+                  imageUri={
+                    selectedImage?.mime.startsWith('image/')
+                      ? selectedImage.path
+                      : null
+                  }
+                  videoUri={
+                    selectedVideo?.mime.startsWith('image/')
+                      ? selectedVideo.path
+                      : null
+                  }
+                />
               ) : (
                 <ProfileImage
                   name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
+                  imageUri={
+                    selectedImage?.mime.startsWith('image/')
+                      ? selectedImage.path
+                      : null
+                  }
+                  videoUri={
+                    selectedVideo?.mime.startsWith('image/')
+                      ? selectedVideo.path
+                      : null
+                  }
                 />
               )}
               <View style={styles.picker}>
@@ -300,28 +321,19 @@ class Post extends Component {
                   onImageChange={(path, mime) => {
                     console.log('path', path);
                     if (mime.startsWith('image/')) {
-                      if (Array.isArray(path)) {
-                        this.setState({
-                          selectedImage: [path[0]], // Select only the first image in the array
-                          selectedVideo: null,
-                        });
-                      } else {
-                        this.setState({
-                          selectedImage: [{path, mime}],
-                          selectedVideo: null,
-                        });
-                      }
+                      this.setState({
+                        selectedImage: {
+                          path: path[0]?.path,
+                          mime: path[0]?.mime,
+                        },
+                        selectedVideo: null,
+                      });
                     } else if (mime.startsWith('video/')) {
                       this.setState({
                         selectedVideo: {path, mime},
                         selectedImage: null,
                       });
                     }
-                    // if (mime.startsWith('image/')) {
-                    //   this.setState({ selectedImage: { path, mime }, selectedVideo: null });
-                    // } else if (mime.startsWith('video/')) {
-                    //   this.setState({ selectedVideo: { path, mime }, selectedImage: null });
-                    // }
                   }}>
                   <View style={styles.item}>
                     <Image source={Icons.upload} style={styles.uploadimg} />

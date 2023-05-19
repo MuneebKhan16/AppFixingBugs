@@ -6,6 +6,7 @@ import Images from '../assets/Images';
 import RNBounceable from "@freakycoder/react-native-bounceable";
 import { yellow100 } from 'react-native-paper/lib/typescript/styles/colors';
 import ImageURL from '../config/Common'
+import { themes } from '../config/globalFonts/globalFonts';
 const MicroChat = props => {
   const { image, name, msg, onPress ,date } = props;
 
@@ -63,7 +64,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.darkGray,
     padding: 10,
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius:20,
     borderTopLeftRadius: 20,
     marginTop: 10,
   },
@@ -72,8 +74,8 @@ const styles = StyleSheet.create({
     paddingLeft: 6,
     maxWidth: 260,
     color: Colors.grey,
-    fontSize: 14,
-    fontWeight: '600',
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily: themes?.font?.light,
   },
   flexable: {
     flex: 2,

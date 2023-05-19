@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {useState, useRef, useEffect, useContext} from 'react';
+import moment from 'moment';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
 import {Colors, NavService, Common} from '../../../config';
@@ -43,7 +44,7 @@ const EventPost = props => {
   const [states, setStates] = useState(null);
 
   const [currentlocation, setcurrentlocation] = useState(null);
-  const [date, setDate] = useState(false);
+  const [date, setDate] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const [selectedId, setSelectedId] = useState('');
   const [title, setTitle] = useState('');
@@ -116,6 +117,7 @@ const EventPost = props => {
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;
+    const event_date = moment(date).format('MM DD YYYY');
 
     post_events(
       event_title,
@@ -125,6 +127,7 @@ const EventPost = props => {
       user_id,
       category_id,
       event_location,
+      event_date,
     );
   };
 
@@ -177,38 +180,6 @@ const EventPost = props => {
                 videoUri={selectedVideo ? selectedVideo.path : null}
               />
             )}
-            {/* {
-              selectedImage?.length > 0 ? selectedImage.map((image) => {
-                return (
-                  <ProfileImage
-                    name={user?.name}
-                    imageUri={image ? image.path : userImage}
-                    videoUri={selectedVideo ? selectedVideo.path : null}
-                  />
-                )
-              }) :
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
-                />
-            } */}
-            {/* {
-              selectedVideo?.length > 0 ? selectedVideo.map((video) => {
-                return (
-                  <ProfileImage
-                    name={user?.name}
-                    imageUri={selectedImage ? selectedImage.path : userImage}
-                    videoUri={video ? video.path : null}
-                  />
-                )
-              }) :
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
-                />
-            } */}
 
             <View style={styles.picker}>
               <CustomImagePicker
@@ -235,11 +206,15 @@ const EventPost = props => {
                     setSelectedImage(currentGalleryAsset);
                   }
                 }}>
+                <View style={styles.item}>
+                  <Image source={Icons.upload} style={styles.uploadimg} />
+                  <Text style={styles.upload}>Upload</Text>
+                </View>
                 {/* <View style={styles.mime}> */}
-                <View style={[styles.mime, {height: 50}]}>
-                  {!selectedImage ? (
+                {/* <View style={[styles.mime, {height: 50}]}> */}
+                {/* {!selectedImage ? (
                     <>
-                      <TouchableOpacity>
+                      <TouchableOpacity style={{marginTop:40,backgroundColor:'red'}}>
                         <Image source={Icons.upload} style={styles.upload} />
                         <Text style={styles.txtclr}>Upload</Text>
                       </TouchableOpacity>
@@ -259,10 +234,10 @@ const EventPost = props => {
                       </TouchableOpacity>
                       <Text style={styles.txtclr}>Upload</Text>
                     </>
-                  )}
-                  {/* <Image source={Icons.upload} style={styles.upload} />
+                  )} */}
+                {/* <Image source={Icons.upload} style={styles.upload} />
                   <Text style={styles.txtclr}>Upload</Text> */}
-                </View>
+                {/* </View> */}
               </CustomImagePicker>
             </View>
           </View>
@@ -282,7 +257,7 @@ const EventPost = props => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{color: '#000'}}>
+                <Text style={{color: '#000', width: 250}} numberOfLines={1}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -298,7 +273,7 @@ const EventPost = props => {
                     location.split(' ').slice(6, 7).pop()}
                 </Text>
               ) : currentlocation ? (
-                <Text style={{color: '#000'}}>
+                <Text style={{color: '#000', width: 250}} numberOfLines={1}>
                   {currentlocation.split(' ').slice(0, 1).pop() +
                     ' ' +
                     currentlocation.split(' ').slice(1, 2).pop() +
@@ -321,13 +296,13 @@ const EventPost = props => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{color: '#000', width: 95}} numberOfLines={1}>
                     {location.split(' ').slice(-5, -4).pop() +
                       ' ' +
                       location.split(' ').slice(-4, -3).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{color: '#000', width: 95}} numberOfLines={1}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-4, -3).pop()
                       : 'City'}
@@ -347,11 +322,11 @@ const EventPost = props => {
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{color: '#000', width: 95}} numberOfLines={1}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{color: '#000'}}>
+                  <Text style={{color: '#000', width: 95}} numberOfLines={1}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-2, -1).pop()
                       : 'State'}
@@ -380,7 +355,7 @@ const EventPost = props => {
               />
             </View>
             <PickerComptwo />
-            <Pickeventdate />
+            <Pickeventdate date={date} setDate={setDate} />
             <CustomButton
               buttonStyle={styles.btn}
               title="Posts"
@@ -403,8 +378,7 @@ const EventPost = props => {
             justifyContent: 'center',
             height:28,
             marginTop:15,
-            borderRadius:10,
-           
+            borderRadius:10,      
           }}>
           <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
         </TouchableOpacity> */}
@@ -413,23 +387,23 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               <Text style={styles.modaltxt}>
-                1-Name of Location (mandatory){'\n'}
+                1- Name of Location (mandatory){'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                2-Upload Clear Photo of Building (Mandatory){'\n'}
+                2- Upload Clear Photo of Building (Mandatory){'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                3-Operating Hours (Mandatory){'\n'}
+                3- Operating Hours (Mandatory){'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                4-Helpful Tips in Description field such as Parking tips, Crowd
+                4- Helpful Tips in Description field such as Parking tips, Crowd
                 (Age, Music Genre) on SpecificNights if Differs, Dress code,
                 {'\n'}
               </Text>
               <Text style={styles.modaltxt}>
-                5-Flyers, Pictures and videos of your most recent nights or
+                5- Flyers, Pictures and videos of your most recent nights or
                 events! (helpful) & Don’t forget you may purchase optimization
                 to have your events featured on main home page!{'\n'}
               </Text>
@@ -442,7 +416,7 @@ const EventPost = props => {
           <CustomButton
             buttonStyle={{
               alignSelf: 'center',
-              width: '90%',
+              width: '95%',
             }}
             title="Close"
             onPress={() => togglePopUp()}

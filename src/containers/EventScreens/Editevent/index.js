@@ -7,62 +7,50 @@ import {
   TouchableOpacity,
   Text,
   FlatList,
-  ScrollView
+  ScrollView,
 } from 'react-native';
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, {useState, useRef, useEffect, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import { Colors, NavService, Common } from '../../../config';
+import {Colors, NavService, Common} from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from '../EventPost/PickerCompone';
 import PickerComptwo from '../EventPost/PickerComptwo';
-import PickerLocation from '../EventPost/PickerLocation';
 import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
-import Modal from 'react-native-modal';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
-import axios from 'axios';
-import { store } from '../../../redux/index';
+import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
-import { styles } from '../EventPost/eventpost_styles';
-import { post_events } from '../../../redux/APIs'
-import GooglePlaceAutocomplete from '../../../components/Google_Location'
+import {styles} from '../EventPost/eventpost_styles';
+import {
+  post_events,
+  edit_events,
+  deleteCurrentEventImage,
+} from '../../../redux/APIs';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
-const Editevent = props => {
-  const { user } = props;
+import ImageURL from '../../../config/Common';
+
+const Editevent = ({navigation, route}) => {
+  const {eventDetail} = route?.params;
+  const token = useSelector(state => state.reducer.user.api_token);
+  const user = useSelector(state => state.reducer.user);
   const actionSheetStateRef = useRef();
-  const [isLoading, setIsLoading] = useState(false);
-  const [popUp, setPopUp] = useState(true);
-  const [text, settext] = useState();
-
-  const [location, setLocation] = useState(null);
-  const [city, setCity] = useState(null);
-  const [states, setStates] = useState(null);
-
-  const [currentlocation, setcurrentlocation] = useState(null);
-  const [date, setDate] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [selectedId, setSelectedId] = useState('');
-  const [title, setTitle] = useState('');
-  const [dec, setDec] = useState('');
-  const [state, setState] = useState(user?.state);
-  const [userImage, setUserImage] = useState(user?.image);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const handleSelect = item => {
-    setSelectedItem(item);
-  };
+  const [location, setLocation] = useState(eventDetail?.event_location);
+  const [currentlocation, setcurrentlocation] = useState(
+    eventDetail?.event_location,
+  );
+  const [title, setTitle] = useState(eventDetail?.event_title);
+  const [dec, setDec] = useState(eventDetail?.event_description);
+  const [selectedImage, setSelectedImage] = useState(eventDetail?.images);
   const [selectedData, setSelectedData] = useState(null);
-  const users = useSelector((state) => state?.reducer?.user)
-  const { Categorys } = useContext(eventContext);
-  const togglePopUp = () => {
-    setPopUp(previousState => previousState?.popUp);
-  };
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [date, setDate] = useState(eventDetail?.event_date);
+  const {Categorys} = useContext(eventContext);
+
   function dispatch(action) {
     store.dispatch(action);
   }
@@ -83,13 +71,14 @@ const Editevent = props => {
       });
     }
 
-    if (!selectedData) {
-      return Toast.show({
-        text1: 'No Category Found',
-        type: 'error',
-        visibilityTime: 3000,
-      });
-    }
+    // if (!selectedData) {
+    //   console.log('selectedData', selectedData);
+    //   return Toast.show({
+    //     text1: 'No Category Found',
+    //     type: 'error',
+    //     visibilityTime: 3000,
+    //   });
+    // }
 
     if (!location) {
       return Toast.show({
@@ -110,23 +99,48 @@ const Editevent = props => {
     const event_title = title;
     const event_type = 'local';
     const event_description = dec;
-    const event_image = {
-      uri: selectedImage?.path,
-      name: `rating`,
-      type: selectedImage?.mime,
-    };
-    const user_id = users?.id;
-    const category_id = selectedData?.category_id;
+    const event_image = selectedImage;
+    const user_id = user?.id;
+    const event_id = eventDetail?.id;
+    const category_id =
+      selectedData == null
+        ? eventDetail?.category_id
+        : selectedData?.category_id;
     const event_location = location;
-    console.log('first', location)
+    const event_date = date ? date : moment(date).format('MM DD YYYY');
+    console.log('first', location);
 
-    post_events(event_title, event_type, event_description, event_image, user_id, category_id, event_location)
-
-
+    edit_events(
+      event_title,
+      event_type,
+      event_description,
+      event_image,
+      user_id,
+      category_id,
+      event_location,
+      event_date,
+      event_id,
+    );
   };
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
+  const deleteCurrentGalleryAsset = async (assetId, customImagePath) => {
+    let result;
+    if (assetId) {
+      result = await deleteCurrentEventImage(assetId);
+      if (result) {
+        const currentGalleryImages = [...selectedImage];
+        const remainingAsset = currentGalleryImages?.filter(
+          images => images?.id !== assetId,
+        );
+        setSelectedImage(remainingAsset);
+      }
+    } else {
+      const currentGalleryImages = [...selectedImage];
+      const remainingAsset = currentGalleryImages?.filter(
+        images => images?.path !== customImagePath,
+      );
+      setSelectedImage(remainingAsset);
+    }
+  };
   const handleOpenModal = () => {
     setIsModalVisible(true);
   };
@@ -134,10 +148,15 @@ const Editevent = props => {
   const handleCloseModal = () => {
     setIsModalVisible(false);
   };
-
+  console.log('eventDetail', eventDetail, 'eventDetail');
   return (
-    <AppBackground title={'Edit'} home back save>
-      <ScrollView style={{ flex: 1, }} showsVerticalScrollIndicator={false}>
+    <AppBackground
+      title={'Edit'}
+      home
+      back
+      save
+      onSavePress={() => handlesubmit()}>
+      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -148,88 +167,71 @@ const Editevent = props => {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-          <View style={styles.user}>
-            {/* {selectedImage?.length > 0 ? (
-                <Swiper style={{backgroundColor:'red'}}>
-                  {selectedImage.map((image) => (
-                    <ProfileImage
-                      key={image.path} // Add a unique key prop for each image
-                      name={user?.name}
-                      imageUri={image.path}
-                      videoUri={selectedVideo ? selectedVideo.path : null}
-                    />
-                  ))}
-                </Swiper>
-              ) : (
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo.path : null}
-                />
-              )} */}
-            {
-              selectedImage?.length > 0 ? selectedImage.map((image) => {
-                return (
+          <View style={{marginTop: 40, height: 150}}>
+            {selectedImage?.length > 0 ? (
+              <Swiper
+                style={{height: 150}}
+                activeDotColor="transparent"
+                dotColor="transparent">
+                {selectedImage.map(image => (
                   <ProfileImage
+                    key={image.path}
                     name={user?.name}
-                    imageUri={image ? image.path : userImage}
-                    videoUri={selectedVideo ? selectedVideo?.path : null}
-                  />
-                )
-              }) :
-                <ProfileImage
-                  name={user?.name}
-                  imageUri={selectedImage ? selectedImage.path : userImage}
-                  videoUri={selectedVideo ? selectedVideo?.path : null}
-                />
-            }
-            {/* {
-                selectedVideo?.length > 0 ? selectedVideo.map((video) => {
-                  return (
-                    <ProfileImage
-                      name={user?.name}
-                      imageUri={selectedImage ? selectedImage.path : userImage}
-                      videoUri={video ? video.path : null}
-                    />
-                  )
-                }) :
-                  <ProfileImage
-                    name={user?.name}
-                    imageUri={selectedImage ? selectedImage.path : userImage}
-                    videoUri={selectedVideo ? selectedVideo.path : null}
-                  />
-              } */}
-
-            <View style={styles.picker}>
-              <CustomImagePicker
-                isMultiple
-                uploadVideo
-                onImageChange={(path, mime) => {
-                  // setSelectedImage({ path, mime });
-                  if (mime.startsWith('image/')) {
-                    if (Array.isArray(path)) {
-                      setSelectedImage(path);
-                      setSelectedVideo(null);
-                    } else {
-
-                      setSelectedImage([{ path, mime }]);
-                      setSelectedVideo(null);
-
+                    imageUri={
+                      !image?.path &&
+                      image?.event_images &&
+                      !image?.event_images.includes('mp4') &&
+                      image?.event_images?.includes('images/')
+                        ? `${ImageURL?.ImageURL}${image?.event_images}`
+                        : `${image?.path}`
                     }
-                  } else if (mime.startsWith('video/')) {
-                    setSelectedVideo({ path, mime });
-                    setSelectedImage(null);
-                  }
-                }}>
-                {/* <View style={styles.mime}> */}
-                <View style={[styles.mime, { height: 50 }]}>
-                  <Image source={Icons.upload} style={styles.upload} />
-                  <Text style={styles.txtclr}>Upload</Text>
-                </View>
-              </CustomImagePicker>
-            </View>
+                    showAssetDeleteIcon={true}
+                    deleteIconPress={() =>
+                      deleteCurrentGalleryAsset(image?.id, image?.path)
+                    }
+                    videoUri={
+                      !image?.path &&
+                      image?.event_images &&
+                      image?.event_images.startsWith('mp4') &&
+                      image?.event_images?.includes('video/')
+                        ? `${ImageURL?.ImageURL}${image?.event_images}`
+                        : `${image?.path}`
+                    }
+                  />
+                ))}
+              </Swiper>
+            ) : null}
           </View>
-          <View style={{ marginTop: 60, alignSelf: 'center', height: 500, }}>
+          <View style={{backgroundColor: 'red'}}>
+            <CustomImagePicker
+              isMultiple
+              uploadVideo
+              onImageChange={(path, mime) => {
+                if (mime.startsWith('image/')) {
+                  if (Array.isArray(path.slice(0, 10))) {
+                    const currentGalleryAsset = [...selectedImage];
+                    const mergedUpdatedAsset = [
+                      ...currentGalleryAsset,
+                      ...path,
+                    ];
+                    setSelectedImage(mergedUpdatedAsset);
+                  } else {
+                    const currentGalleryAsset = [...selectedImage];
+                    currentGalleryAsset.push({path, mime});
+                    setSelectedImage(currentGalleryAsset);
+                  }
+                } else if (mime.startsWith('video/')) {
+                  const currentGalleryAsset = [...selectedImage];
+                  currentGalleryAsset.push({path, mime});
+                  setSelectedImage(currentGalleryAsset);
+                }
+              }}>
+              <View style={[styles.mime, {height: 30}]}>
+                <Text>Upload New Images</Text>
+              </View>
+            </CustomImagePicker>
+          </View>
+          <View style={{marginTop: 30, alignSelf: 'center', height: 500}}>
             <TextInput
               style={styles.maincontainer}
               onChangeText={title => setTitle(title)}
@@ -240,22 +242,36 @@ const Editevent = props => {
 
             <PickerCompone
               categories={Categorys}
+              selectedData={eventDetail?.event_type}
               setSelectedData={setSelectedData}
             />
 
-
-
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
-              {location ?
-                <Text style={{ color: '#000' }}>
-                  {location.split(' ').slice(0, 1).pop() + " " + location.split(' ').slice(1, 2).pop() + " " + location.split(' ').slice(2, 3).pop() + " " + location.split(' ').slice(3, 4).pop() + " " + location.split(' ').slice(4, 5).pop() + " " + location.split(' ').slice(5, 6).pop() + " " + location.split(' ').slice(6, 7).pop()}
+              {location ? (
+                <Text style={{color: '#000'}}>
+                  {location.split(' ').slice(0, 1).pop() +
+                    ' ' +
+                    location.split(' ').slice(1, 2).pop() +
+                    ' ' +
+                    location.split(' ').slice(2, 3).pop() +
+                    ' ' +
+                    location.split(' ').slice(3, 4).pop() +
+                    ' ' +
+                    location.split(' ').slice(4, 5).pop() +
+                    ' ' +
+                    location.split(' ').slice(5, 6).pop() +
+                    ' ' +
+                    location.split(' ').slice(6, 7).pop()}
                 </Text>
-                : currentlocation ?
-                  <Text style={{ color: '#000' }}>
-                    {currentlocation.split(' ').slice(0, 1).pop() + " " + currentlocation.split(' ').slice(1, 2).pop() + " " + currentlocation.split(' ').slice(2, 3).pop()}
-                  </Text>
-                  : null
-              }
+              ) : currentlocation ? (
+                <Text style={{color: '#000'}}>
+                  {currentlocation.split(' ').slice(0, 1).pop() +
+                    ' ' +
+                    currentlocation.split(' ').slice(1, 2).pop() +
+                    ' ' +
+                    currentlocation.split(' ').slice(2, 3).pop()}
+                </Text>
+              ) : null}
 
               <Image source={Icons.marker} style={styles.marker} />
               <Mymdll
@@ -268,19 +284,21 @@ const Editevent = props => {
               />
             </TouchableOpacity>
 
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
-                {location ?
-                  <Text style={{ color: '#000' }}>
-                    {location.split(' ').slice(-5, -4).pop() + " " + location.split(' ').slice(-4, -3).pop()}
+                {location ? (
+                  <Text style={{color: '#000'}}>
+                    {location.split(' ').slice(-5, -4).pop() +
+                      ' ' +
+                      location.split(' ').slice(-4, -3).pop()}
                   </Text>
-                  : currentlocation ?
-                    <Text style={{ color: '#000' }}>
-                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-4, -3).pop() : 'City'}
-
-                    </Text>
-                    : null
-                }
+                ) : currentlocation ? (
+                  <Text style={{color: '#000'}}>
+                    {currentlocation.split(' ').length > 1
+                      ? currentlocation.split(' ').slice(-4, -3).pop()
+                      : 'City'}
+                  </Text>
+                ) : null}
 
                 <Image source={Icons.marker} style={styles.marker} />
                 <Mymdll
@@ -294,16 +312,17 @@ const Editevent = props => {
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
-                {location ?
-                  <Text style={{ color: '#000' }}>
+                {location ? (
+                  <Text style={{color: '#000'}}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
-                  : currentlocation ?
-                    <Text style={{ color: '#000' }}>
-                      {currentlocation.split(' ').length > 1 ? currentlocation.split(' ').slice(-2, -1).pop() : 'State'}
-                    </Text>
-                    : null
-                }
+                ) : currentlocation ? (
+                  <Text style={{color: '#000'}}>
+                    {currentlocation.split(' ').length > 1
+                      ? currentlocation.split(' ').slice(-2, -1).pop()
+                      : 'State'}
+                  </Text>
+                ) : null}
 
                 <Image source={Icons.marker} style={styles.marker} />
                 <Mymdll
@@ -315,7 +334,6 @@ const Editevent = props => {
                   setcurrentlocation={setcurrentlocation}
                 />
               </TouchableOpacity>
-
             </View>
             <View style={styles.descp}>
               <TextInput
@@ -327,8 +345,8 @@ const Editevent = props => {
                 placeholderTextColor={Colors.black}
               />
             </View>
-            <PickerComptwo />
-            <Pickeventdate />
+            {/* <PickerComptwo /> */}
+            <Pickeventdate date={date} setDate={setDate} />
             <CustomButton
               buttonStyle={styles.btn}
               title="Delete"
@@ -337,7 +355,6 @@ const Editevent = props => {
           </View>
         </View>
         {/* Modal */}
-
       </ScrollView>
     </AppBackground>
   );

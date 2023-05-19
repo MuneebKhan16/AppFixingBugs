@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { Colors, NavService } from '../../../config';
 import { Platform } from 'react-native';
+import { themes } from '../../../config/globalFonts/globalFonts';
 const { width, height } = Dimensions.get('window')
 export const styles = StyleSheet.create({
   cancel: {
@@ -54,16 +55,15 @@ export const styles = StyleSheet.create({
     width: 300
   },
   sheet: { backgroundColor: 'transparent' },
-  top: { marginTop: 20, alignSelf: 'center',height:500 },
-  user: { marginTop: 40,height:150, },
+  top: { marginTop: 20, alignSelf: 'center', height: 500 },
+  user: { marginTop: 40, height: 150, },
   // mime: { alignItems: 'center', width: 300, height: 100, },
   top: { marginTop: 30, alignSelf: 'center', height: 500 },
   user: { marginTop: 40 },
   mime: { alignItems: 'center', width: 300, height: 150 },
   upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black, },
-  modal: { margin: 0, padding: 0 },
-  posting:
-  {
+  modal: { margin: 0, padding: 15, },
+  posting:{
     backgroundColor: Colors.purple,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
@@ -71,7 +71,14 @@ export const styles = StyleSheet.create({
     width: '95%',
     alignSelf: 'center'
   },
-  requriment: { fontSize: 17, color: Colors.white, fontWeight: 'bold', marginLeft: 20 },
+  requriment: {
+
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.bold,
+    color: Colors.white,
+    marginLeft: 20,
+    marginTop:15
+  },
   category: {
     backgroundColor: Colors.purple,
     borderBottomLeftRadius: 10,
@@ -81,7 +88,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  modaltxt: { color: Colors.white, fontWeight: '700', fontSize: 16, paddingHorizontal: 10, textTransform: 'capitalize' },
+  modaltxt: {
+    color: Colors.white,
+    fontSize: themes?.fontSize?.extraVSmall,
+    fontFamily: themes?.font?.extraLight,
+    paddingHorizontal: 10,
+    textTransform: 'capitalize'
+  },
 
   txtclr: { color: Colors.black },
   container: {
@@ -160,7 +173,10 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     justifyContent: 'center'
 
-  }
+  },
+  item: { alignItems: 'center', justifyContent: 'center', width: 300, height: 150,marginBottom:50 },
+  uploadimg: { width: 20, height: 20, resizeMode: 'contain' },
+
 
 
 })

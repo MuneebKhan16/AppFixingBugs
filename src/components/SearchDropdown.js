@@ -38,11 +38,11 @@ const SearchableDropdown = ({ data = [], onSelect , query ,setQuery }) => {
         onChangeText={handleSearch}
         onFocus={() => setIsDropdownOpen(true)}
         onBlur={() => setIsDropdownOpen(false)}
-        style={{backgroundColor:'red'}}
+        // style={{backgroundColor:'red'}}
       />
       {isDropdownOpen && (
         <FlatList
-        style={{backgroundColor:'red'}}
+        // style={{backgroundColor:'red'}}
           data={filteredData}
           keyExtractor={item => item.id.toString()}
           renderItem={renderItem}

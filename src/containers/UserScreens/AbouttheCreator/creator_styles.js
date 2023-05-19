@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Colors, NavService } from '../../../config';
-
+import { themes } from '../../../config/globalFonts/globalFonts';
 export const styles = StyleSheet.create({
     main: { marginTop: 20 },
     heading: {
@@ -13,10 +13,11 @@ export const styles = StyleSheet.create({
     },
     subheading: {
         textDecorationLine: 'underline',
-        fontWeight: '500',
+      
         marginTop: 10,
-        fontSize: 18,
-        color: '#5A5A5A',
+        fontSize: themes?.fontSize?.medium,
+        fontFamily: themes?.font?.bold,
+       color:Colors.darkGray,
         marginLeft: 10,
         marginRight: 2
     },

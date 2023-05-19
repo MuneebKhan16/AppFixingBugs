@@ -1,13 +1,12 @@
 /* eslint-disable prettier/prettier */
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {Picker} from '@react-native-picker/picker';
-import {Colors} from '../../../config';
+import { StyleSheet, Text, View,  } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Picker } from '@react-native-picker/picker';
+import { Colors } from '../../../config';
 const PickerCompone = props => {
-  const {categories, setSelectedData} = props;
+  const {categories, selectedData, setSelectedData} = props;
 
   const [selectedLanguage, setSelectedLanguage] = useState();
-  const [selectedPicker, setSelectedPicker] = useState(categories);
 
   const handletransfer = () => {
     setSelectedData(selectedLanguage);
@@ -16,7 +15,7 @@ const PickerCompone = props => {
   useEffect(() => {
     handletransfer();
   }, [selectedLanguage]);
-
+  console.log('selectedData', selectedData);
   return (
     <Picker
       style={styles.container}
@@ -27,14 +26,13 @@ const PickerCompone = props => {
         color: 'white',
         fontSize: 20,
         backgroundColor: '#ededed',
-        height: 60,
       }}
-      mode="dropdown">
+      mode="dialog">
       <Picker.Item
-        label="Select an Option"
+        label={selectedData ? selectedData : 'Select an Option'}
         value="null"
         color={'black'}
-        style={{fontWeight: 'bold', backgroundColor: '#ededed'}}
+        style={{ fontWeight: 'bold', backgroundColor: '#ededed' }}
       />
       {categories?.map(data => {
         return (
@@ -43,7 +41,7 @@ const PickerCompone = props => {
             label={data.title}
             value={data || data.title}
             color={Colors.black}
-            style={{fontWeight: 'bold', backgroundColor: '#ededed'}}
+            style={{ fontWeight: 'bold', backgroundColor: '#ededed' }}
           />
         );
       })}

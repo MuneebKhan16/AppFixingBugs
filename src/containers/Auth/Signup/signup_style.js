@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { Colors, NavService } from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 export const styles = StyleSheet.create({
     maincontainer:{
@@ -22,17 +23,17 @@ export const styles = StyleSheet.create({
     },
     btmheader:{ marginTop: 50 },
     txt:{
-      fontSize: 14,
-      fontWeight: '400',
+      fontSize: themes?.fontSize?.extraSmall,
+      fontFamily: themes?.font?.bold,
       color: Colors.white,
       position: 'absolute',
       bottom: 10,
       alignSelf: 'center'
     },
     btmtxt:{
-      fontWeight: '600',
+      fontSize: themes?.fontSize?.extraSmall,
+      fontFamily: themes?.font?.extraBold,
       color: Colors.white,
-      fontSize: 16,
       textDecorationLine: 'underline',
     },
     btmheaderstyl:{

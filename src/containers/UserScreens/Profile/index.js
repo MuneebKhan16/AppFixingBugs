@@ -20,6 +20,7 @@ const { width, height } = Dimensions.get('window');
 import { styles } from './profile_style';
 import Images from '../../../assets/Images';
 import { Colors, NavService } from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 // import eventContext from '../../EventScreens/eventContext';
 
 const Profile = props => {
@@ -80,28 +81,21 @@ const Profile = props => {
             <View style={{ marginLeft: 10, marginBottom: 20 }}>
 
               <Text style={{
-                fontSize: 19,
-                fontWeight: '700',
+                fontSize: themes?.fontSize?.large,
+                fontFamily: themes?.font?.extraBold,
                 color: Colors.black,
                 // textAlign: row ? null : 'center',
                 textTransform: 'capitalize',
               }}>{userProfile?.name}</Text>
               <Text style={{
-                fontSize: 18,
+                fontSize: themes?.fontSize?.extraVSmall,
+                fontFamily: themes?.font?.regular,
                 color: Colors.darkGray,
-                fontWeight: '400',
 
               }}>{userProfile?.email}</Text>
             </View>
 
           </View>
-          {/* <Mainprofile
-            center
-            row
-            name={userProfile?.name}
-            subtitle={userProfile?.email}
-            edit
-          /> */}
           <Text
             style={styles.post}>
             Post History

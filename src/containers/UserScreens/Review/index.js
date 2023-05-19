@@ -7,69 +7,95 @@ import {
   ScrollView,
   Image,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { get_reviews_event } from '../../../redux/APIs/index'
-import React, { useEffect, useState, useMemo, useContext } from 'react';
+import {useSelector} from 'react-redux';
+import {get_reviews_event} from '../../../redux/APIs/index';
+import React, {useEffect, useState, useMemo, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
-import { Colors, NavService } from '../../../config';
+import {Colors, NavService} from '../../../config';
 import EventsPosts from '../../../components/EventsPosts';
 import CustomButton from '../../../components/CustomButton';
 import Swiper from 'react-native-swiper';
 import Mainprofile from '../../../components/Mainprofile';
-import { styles } from './review_style';
-import ImageURL from '../../../config/Common'
+import {styles} from './review_style';
+import ImageURL from '../../../config/Common';
 import Video from 'react-native-video';
 import FastImage from 'react-native-fast-image';
-import { color } from 'react-native-reanimated';
+import {color} from 'react-native-reanimated';
 import Images from '../../../assets/Images';
 import eventContext from '../../EventScreens/eventContext';
-const { width, height } = Dimensions.get('window');
+import {themes} from '../../../config/globalFonts/globalFonts';
+const {width, height} = Dimensions.get('window');
 
 const MEDIA = [
-  { id: 1, type: 'image', source: { uri: 'https://fastly.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s' } },
-  { id: 2, type: 'video', source: { uri: 'https://beststatusvideo.com/siteuploads/files/sfd76/37759/Technology%20Day%20Whatsapp%20Status%202023-(BestStatusVideo.com).mp4' } },
-  { id: 3, type: 'image', source: { uri: 'https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w' } },
-  { id: 4, type: 'video', source: { uri: 'https://beststatusvideo.com/siteuploads/files/sfd61/30240/National%20Technology%20Day%20Wishes%20Status%20Video%20For%20Whatsapp-(BestStatusVideo.com).mp4' } },
-
+  {
+    id: 1,
+    type: 'image',
+    source: {
+      uri: 'https://fastly.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s',
+    },
+  },
+  {
+    id: 2,
+    type: 'video',
+    source: {
+      uri: 'https://beststatusvideo.com/siteuploads/files/sfd76/37759/Technology%20Day%20Whatsapp%20Status%202023-(BestStatusVideo.com).mp4',
+    },
+  },
+  {
+    id: 3,
+    type: 'image',
+    source: {
+      uri: 'https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w',
+    },
+  },
+  {
+    id: 4,
+    type: 'video',
+    source: {
+      uri: 'https://beststatusvideo.com/siteuploads/files/sfd61/30240/National%20Technology%20Day%20Wishes%20Status%20Video%20For%20Whatsapp-(BestStatusVideo.com).mp4',
+    },
+  },
 ];
-const Review = (props) => {
-  const profile_Data = useSelector((state) => state.reducer.user)
-  const { user, event_title, event_location, event_image, id } = props.route.params;
+const Review = props => {
+  const profile_Data = useSelector(state => state.reducer.user);
+  const {user, event_title, event_location, event_image, id} =
+    props.route.params;
   const [UserPost, setUserPost] = useState([]);
-  const { userProfile } = useContext(eventContext);
-  const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`
+  const {userProfile} = useContext(eventContext);
+  const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
 
   const datahandle = () => {
     get_reviews_event(profile_Data?.api_token)
-      .then((res) => {
-        setUserPost(res?.Data)
+      .then(res => {
+        console.log('res?.Data', res?.Data, 'res?.Data');
+        setUserPost(res?.Data);
       })
-      .catch((error) => {
-      })
-  }
+      .catch(error => {});
+  };
   useEffect(() => {
-    datahandle()
-  }, [])
-  useMemo(() => UserPost, [UserPost])
-  const filteringData = UserPost?.filter(data => data.event_id === props.route.params.id)
+    datahandle();
+  }, []);
+  useMemo(() => UserPost, [UserPost]);
+  const filteringData = UserPost?.filter(
+    data => data.event_id === props.route.params.id,
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const onIndexChanged = (index) => {
+  const onIndexChanged = index => {
     setCurrentSlide(index);
   };
 
-  const renderItem = (item) => {
+  const renderItem = item => {
     if (item.type === 'image') {
       return (
         <FastImage
           source={item.source}
           style={{
-            height: 220,
+            height: 200,
             width: '100%',
-            borderRadius: 15
-
+            borderRadius: 20,
           }}
           resizeMode={FastImage.resizeMode.cover}
         />
@@ -82,15 +108,14 @@ const Review = (props) => {
             volume={0}
             source={item.source}
             style={{
-              height: 220,
+              height: 200,
               width: '100%',
-              borderRadius: 15,
+              borderRadius: 20,
+              height: 200,
             }}
             resizeMode="cover"
           />
-
         </>
-
       );
     }
   };
@@ -99,32 +124,40 @@ const Review = (props) => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
         <View
           style={{
-            ...Shadows.shadow3,
-            height: 220,
-            marginTop: 8,
-            borderRadius: 10,
+          
+            marginTop: 20,
+            borderRadius: 20,
             flexDirection: 'row',
-            borderRadius: 15
-
+            borderRadius: 20,
+            height: 200,
           }}>
           <Swiper
-            dotColor='transparent'
-            activeDotColor='transparent'
-            nextButton={<Text style={{ fontSize: 70, marginRight: 20, color: Colors.white }}>›</Text>}
-            prevButton={<Text style={{ fontSize: 70, marginLeft: 10, color: Colors.white }}>‹</Text>}
+            dotColor="transparent"
+            activeDotColor="transparent"
+            nextButton={
+              <Text
+                style={{fontSize: 70, marginRight: 20, color: Colors.white}}>
+                ›
+              </Text>
+            }
+            prevButton={
+              <Text style={{fontSize: 70, marginLeft: 10, color: Colors.white}}>
+                ‹
+              </Text>
+            }
             style={{
-              justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: 15
-
+              borderRadius: 20,
             }}
             showsButtons>
-            {MEDIA.map((item) => (
-              <View key={item.id} style={{
-                justifyContent: 'center',
-                borderRadius: 20
-
-              }}>
+            {MEDIA.map(item => (
+              <View
+                key={item.id}
+                style={{
+                  justifyContent: 'center',
+                  borderRadius:20,
+                  height: 200,
+                }}>
                 {renderItem(item)}
               </View>
             ))}
@@ -142,29 +175,45 @@ const Review = (props) => {
             />
           </View>
         </Swiper> */}
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, }}>
-          <Image source={{ uri: userProfile?.profile_picture ? `${BaseUrl}${userProfile?.profile_picture}` : "https://picsum.photos/200/300" }} style={{
-            width: 50,
-            height: 50,
-            borderRadius: 50,
-            borderWidth: 2,
-            borderColor: Colors.purple,
-            marginBottom: 10,
-            
-          }} />
-          <Text style={{
-            marginLeft: 8, fontSize: 16,
-            color: Colors.black,
-            fontWeight: '600',
-            marginBottom: 3
-          }}>{user?.name}</Text>
-          <View style={{ position: 'absolute', right: 0, flexDirection: 'row', alignItems: 'center' }}>
+        <View
+          style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+          <Image
+            source={{
+              uri: userProfile?.profile_picture
+                ? `${BaseUrl}${userProfile?.profile_picture}`
+                : 'https://picsum.photos/200/300',
+            }}
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: 50,
+              marginBottom: 10,
+            }}
+          />
+          <Text
+            style={{
+              fontSize: themes?.fontSize?.medium,
+              fontFamily: themes?.font?.bold,
+              marginLeft: 8,
+              color: Colors.black,
+
+              marginBottom: 3,
+            }}>
+            {user?.name}
+          </Text>
+          <View
+            style={{
+              position: 'absolute',
+              right: 0,
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
             <Image
               source={Icons.marker}
               resizeMode="contain"
               style={styles.marker}
             />
-            <Text style={styles.location} numberOfLines={1} >
+            <Text style={styles.location} numberOfLines={1}>
               {event_location}
             </Text>
           </View>
@@ -177,12 +226,8 @@ const Review = (props) => {
             location={event_location}
           /> */}
         </View>
-        <Text
-          style={styles.post}>
-          Ratings & Posts
-        </Text>
-        {<EventsPosts datas={filteringData} />}
-
+        <Text style={styles.post}>Ratings & Posts</Text>
+        <EventsPosts datas={filteringData} />
       </ScrollView>
       <CustomButton
         buttonStyle={styles.self}
@@ -194,4 +239,3 @@ const Review = (props) => {
 };
 
 export default React.memo(Review);
-

@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux';
 import Icons from '../assets/Icons';
 import {Colors, Common} from '../config';
 import Images from '../assets/Images';
+import { themes } from '../config/globalFonts/globalFonts';
 
 const ChatComponent = props => {
   const user = useSelector(state => state.reducer.user);
@@ -69,8 +70,8 @@ marginVertical:5,
   txt: {
     flex: 2.5,
     // paddingBottom: 6,
-    fontSize: 16,
-    fontWeight: '800',
+    fontSize: themes?.fontSize?.medium,
+    fontFamily:themes?.font?.bold,
     color: Colors.black,
     paddingLeft: 4,
     marginBottom: 2,
@@ -81,6 +82,8 @@ marginVertical:5,
     paddingLeft: 4,
     maxWidth: 280,
     color: Colors.darkGray,
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily:themes?.font?.regular,
   },
   flex: {
     flex: 8,

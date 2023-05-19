@@ -1,5 +1,5 @@
 // eslint-disable prettier/prettier /
-import React, { useRef, useEffect, useState } from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -8,22 +8,23 @@ import {
   ImageBackground,
   Animated,
   Button,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import {getStatusBarHeight} from 'react-native-status-bar-height';
 import Icons from '../assets/Icons';
 import Images from '../assets/Images';
-import { Colors, NavService } from '../config';
+import {Colors, NavService} from '../config';
 import RNBounceable from '@freakycoder/react-native-bounceable';
-import Modal from "react-native-modal";
+import Modal from 'react-native-modal';
 import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
-import { TextInput } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import {TextInput} from 'react-native-gesture-handler';
+import {useSelector} from 'react-redux';
 import ImageURL from '../config/Common';
 import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
-
+import Datepick from './Datepick';
+import {themes} from '../config/globalFonts/globalFonts';
 
 export function AppBackground({
   editeIcon,
@@ -34,7 +35,7 @@ export function AppBackground({
   nav = '',
   rightIcon = Images.avatar,
   marginHorizontal,
-  rightIconNav = () => { },
+  rightIconNav = () => {},
   profile = false,
   edit = false,
   notification = false,
@@ -43,30 +44,34 @@ export function AppBackground({
   chat = false,
   setting = false,
   editicn = false,
+  editParams = null,
   save = false,
+  onSavePress = () => {},
   home,
-  Eventuser
+  Eventuser,
 }) {
   const onPress = () => {
     nav.length
       ? NavService.navigate(nav)
       : back
-        ? NavService.goBack()
-        : NavService.navigate;
+      ? NavService.goBack()
+      : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
-  const user = useSelector((state) => state.reducer.user);
+  const user = useSelector(state => state.reducer.user);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const [location, setLocation] = useState();
+  const [City, setcity] = useState();
+  const [State, setstate] = useState();
+
   const [isFocused, setIsFocused] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalVisible, setIsModalVisible] = useState(false);
 
-  console.log('kl', `${Dummy.dummy}`)
+  console.log('kl', `${Dummy.dummy}`);
 
   const handleOpenModal = () => {
     setIsModalVisible(true);
@@ -76,9 +81,8 @@ export function AppBackground({
     setIsModalVisible(false);
   };
   return home ? (
-    <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
-      <View
-        style={styles.maincontainer}>
+    <View style={{flex: 1, backgroundColor: Colors.offWhite}}>
+      <View style={styles.maincontainer}>
         <>
           <TouchableOpacity
             activeOpacity={0.8}
@@ -91,7 +95,7 @@ export function AppBackground({
                 height: 24,
                 resizeMode: 'contain',
                 tintColor: Colors.purple,
-                marginTop: -8
+                marginTop: -8,
               }}
             />
           </TouchableOpacity>
@@ -100,16 +104,15 @@ export function AppBackground({
             <Text
               style={{
                 color: Colors.black,
-                fontWeight: 'bold',
-                fontSize: 20,
+                fontSize: themes?.fontSize?.large,
                 textTransform: 'capitalize',
+                fontFamily: themes?.font?.black,
               }}>
               {title}
             </Text>
           </View>
           {profile && (
             <TouchableOpacity
-
               onPress={() => {
                 NavService.navigate('EventProfile');
               }}
@@ -122,16 +125,18 @@ export function AppBackground({
                 borderRadius: 15,
               }}>
               <Image
-                source={{ uri: user?.profile_picture ? `${ImageURL?.ImageURL}${user?.profile_picture}` : "https://picsum.photos/200/300" }}
+                source={{
+                  uri: user?.profile_picture
+                    ? `${ImageURL?.ImageURL}${user?.profile_picture}`
+                    : 'https://picsum.photos/200/300',
+                }}
                 style={{
                   height: 40,
                   width: 40,
                   alignSelf: 'center',
                   borderRadius: 60,
                   borderWidth: 2,
-                  borderColor: Colors.purple
-
-
+                  borderColor: Colors.purple,
                 }}
               />
             </TouchableOpacity>
@@ -147,7 +152,6 @@ export function AppBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-
               }}>
               <Image
                 source={Icons.notification}
@@ -167,7 +171,7 @@ export function AppBackground({
               }}
               style={{
                 position: 'absolute',
-                right: 30,
+                right: 15,
                 width: 38,
                 height: 38,
                 alignItems: 'center',
@@ -193,7 +197,7 @@ export function AppBackground({
               }}
               style={{
                 position: 'absolute',
-                right: 30,
+                right: 25,
                 width: 38,
                 height: 38,
                 alignItems: 'center',
@@ -223,7 +227,6 @@ export function AppBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-                backgroundColor: Colors.white,
               }}>
               <Image
                 source={Icons.filter}
@@ -236,19 +239,31 @@ export function AppBackground({
               />
               <View>
                 <Modal isVisible={isModalVisible}>
-                  <View style={{ borderRadius: 15, backgroundColor: Colors.white, width: '90%', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', padding: 20 }}>
-                    <Text style={{
-                      fontSize: 16,
-                      fontWeight: 'bold',
-                      textTransform: 'capitalize',
-                      color: Colors.black
-                    }}>Filters</Text>
-                    <TouchableOpacity
-                      onPress={handleOpenModal}
+                  <View
+                    style={{
+                      borderRadius: 15,
+                      backgroundColor: Colors.white,
+                      width: '90%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      alignSelf: 'center',
+                      padding: 20,
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                        textTransform: 'capitalize',
+                        color: Colors.black,
+                      }}>
+                      Filters
+                    </Text>
+                    <View
+                      // onPress={handleOpenModal}
                       style={{
                         borderColor: Colors.black,
                         borderWidth: 1,
-                        width: '96%',
+                        width: '100%',
                         borderRadius: 10,
                         height: 45,
                         marginTop: 25,
@@ -261,28 +276,78 @@ export function AppBackground({
                         style={{
                           width: 22,
                           height: 22,
-                          marginLeft: 12,
+                          marginLeft: 10,
                           resizeMode: 'contain',
                           tintColor: Colors.purple,
                         }}
                       />
                       <TextInput
+                        numberOfLines={1}
                         editable={false}
-                        style={{ borderColor: 'gray', borderRadius: 10, width: '82%', color: Colors.black, marginLeft: 10, fontSize: 17, fontWeight: '700', }}
-                        placeholder={location ? location.name : 'Location'}
+                        style={{
+                          borderColor: 'gray',
+                          borderRadius: 10,
+                          width: '80%',
+                          color: Colors.black,
+                          fontSize: 17,
+                          marginLeft: 15,
+
+                        }}
+                        placeholder={'City'}
                         placeholderTextColor={Colors.black}
-                        secureTextEntry={!isFocused}
-                        onFocus={() => setIsFocused(true)}
+                        // secureTextEntry={!isFocused}
+                        // onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        onChangeText={location => setLocation(location)}
-                        value={location}
+                        onChangeText={City => setcity(City)}
+                        value={City}
                       />
-                    </TouchableOpacity>
-                    <Mymdll isVisible={ModalVisible} onClose={handleCloseModal} setLocation={setLocation} />
-                    <Pickdate />
+                    </View>
+                    <View
+                      style={{
+                        borderColor: Colors.black,
+                        borderWidth: 1,
+                        width: '100%',
+                        borderRadius: 10,
+                        height: 45,
+                        marginTop: 15,
+                        bottom: 5,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        source={Icons.location}
+                        style={{
+                          width: 22,
+                          height: 22,
+                          marginLeft: 10,
+                          resizeMode: 'contain',
+                          tintColor: Colors.purple,
+                        }}
+                      />
+                      <TextInput
+                        numberOfLines={1}
+                        editable={true}
+                        style={{
+                          borderColor: 'gray',
+                          borderRadius: 10,
+                          width: '80%',
+                          color: Colors.black,
+                          fontSize: 17,
+                          marginLeft: 15,
+
+                        }}
+                        placeholder={'State'}
+                        placeholderTextColor={Colors.black}
+                        onBlur={() => setIsFocused(false)}
+                        onChangeText={State => setstate(State)}
+                        value={State}
+                      />
+                    </View>
+
+                    <Datepick />
                     <CustomButton
                       buttonStyle={{
-                        width: 280
+                        width: 280,
                       }}
                       title="Continue"
                       onPress={toggleModal}
@@ -323,7 +388,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
-                NavService.navigate('Editevent',);
+                NavService.navigate('Editevent', {eventDetail: editParams});
               }}
               style={{
                 position: 'absolute',
@@ -350,6 +415,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
+                onSavePress();
                 // NavService.navigate('Editevent',);
               }}
               style={{
@@ -362,7 +428,15 @@ export function AppBackground({
                 borderRadius: 10,
                 // backgroundColor: Colors.white,
               }}>
-              <Text style={{ textDecorationLine: 'underline', color: Colors.purple, fontWeight: 'bold', fontSize: 16, }}>Save</Text>
+              <Text
+                style={{
+                  textDecorationLine: 'underline',
+                  color: Colors.purple,
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                }}>
+                Save
+              </Text>
               {/* <Image
                 source={Icons.edite}
                 style={{
@@ -387,9 +461,8 @@ export function AppBackground({
       </View>
     </View>
   ) : (
-    <ImageBackground source={Images.bg} style={{ flex: 1 }}>
-      <View
-        style={styles.maincontainer}>
+    <ImageBackground source={Images.bg} style={{flex: 1}}>
+      <View style={styles.maincontainer}>
         <>
           {back && (
             <TouchableOpacity
@@ -433,7 +506,6 @@ export function AppBackground({
                 borderRadius: 10,
                 backgroundColor: Colors.darkGray,
                 //
-
               }}>
               <Image
                 source={rightIcon}
@@ -487,7 +559,6 @@ export function AppBackground({
 
 export default React.memo(AppBackground);
 
-
 const styles = StyleSheet.create({
   maincontainer: {
     marginTop: getStatusBarHeight() + 20,
@@ -504,7 +575,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     top: 3,
     paddingRight: 50,
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   authtouchable: {
     position: 'absolute',
@@ -513,6 +584,6 @@ const styles = StyleSheet.create({
     left: 15,
     padding: 5,
     justifyContent: 'center',
-    paddingRight: 50
-  }
-})
+    paddingRight: 50,
+  },
+});

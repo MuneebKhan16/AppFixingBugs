@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import {Colors, NavService} from '../../../config';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 
 export const styles = StyleSheet.create({
@@ -32,14 +33,14 @@ touchable:{
     alignSelf: 'center',
   },
   btmtxt:{
-    fontSize: 15,
-    fontWeight: '400',
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily: themes?.font?.bold,
     color: Colors.white,
   },
   heading:{
-    fontWeight: '600',
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily: themes?.font?.extraBold,
     color: Colors.white,
-    fontSize: 15,
     textDecorationLine: 'underline',
   },
   btmheader: {

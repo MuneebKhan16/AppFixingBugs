@@ -6,6 +6,7 @@ import {Picker} from '@react-native-picker/picker';
 const PickerComptwo = () => {
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [selectedPicker, setSelectedPicker] = useState();
+  
   return (
     <Picker
       style={{
@@ -13,13 +14,12 @@ const PickerComptwo = () => {
         width: 300,
         backgroundColor: '#ededed',
         borderRadius: 10,
-        height: 60,
       }}
       color={Colors.grey}
       selectedValue={selectedPicker}
       onValueChange={(itemValue, itemIndex) => setSelectedPicker(itemValue)}
       itemStyle={{color: 'white', fontSize: 20, backgroundColor: '#ededed'}}
-      mode="dropdown">
+      mode="dialog">
       <Picker.Item
         label="Event Occurrence"
         value="Event Occurrence"
