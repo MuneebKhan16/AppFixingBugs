@@ -205,7 +205,7 @@ const Editevent = ({navigation, route}) => {
               </Swiper>
             ) : null}
           </View>
-          <View style={{backgroundColor: 'purple'}}>
+          <View>
             <CustomImagePicker
               isMultiple
               uploadVideo
@@ -237,7 +237,7 @@ const Editevent = ({navigation, route}) => {
               </View>
             </CustomImagePicker>
           </View>
-          <View style={{marginTop: 30, alignSelf: 'center', height: 500}}>
+          <View style={{marginTop: 20, alignSelf: 'center', height: 500}}>
             <TextInput
               style={styles.maincontainer}
               onChangeText={title => setTitle(title)}
