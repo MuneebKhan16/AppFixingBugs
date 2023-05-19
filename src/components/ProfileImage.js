@@ -41,6 +41,7 @@ const ProfileImage = ({
               style={{
                 height: 30,
                 width: 30,
+                tintColor:Colors.purple
               }}
             />
           </TouchableOpacity>

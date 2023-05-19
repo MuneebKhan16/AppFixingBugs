@@ -202,7 +202,7 @@ const Editevent = ({navigation, route}) => {
               </Swiper>
             ) : null}
           </View>
-          <View style={{backgroundColor: 'red'}}>
+          <View style={{backgroundColor: 'purple'}}>
             <CustomImagePicker
               isMultiple
               uploadVideo
@@ -226,8 +226,9 @@ const Editevent = ({navigation, route}) => {
                   setSelectedImage(currentGalleryAsset);
                 }
               }}>
-              <View style={[styles.mime, {height: 30}]}>
-                <Text>Upload New Images</Text>
+              <View style={[styles.mime, {height: 30,marginTop:-50}]}>
+              <Image source={Icons.upload} style={styles.uploadimg} />
+                <Text style={{color:Colors.black,fontWeight:'bold'}}>Upload</Text>
               </View>
             </CustomImagePicker>
           </View>
