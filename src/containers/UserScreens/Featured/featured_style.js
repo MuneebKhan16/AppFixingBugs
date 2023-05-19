@@ -54,5 +54,27 @@ export const styles = StyleSheet.create({
   },
   locationtxt: { color: Colors.white,fontSize: themes?.fontSize?.small,
     fontFamily: themes?.font?.bold, width: '88%', marginLeft: 5 },
-  border: { borderRadius: 20,borderColor:Colors.purple,borderWidth:3 ,}
+  border: { borderRadius: 20,borderColor:Colors.purple,borderWidth:3 ,},
+
+
+ 
+  loccontainer: { flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 5, },
+  locsub: {
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    marginLeft: 5
+  },
+  location: {
+    tintColor: Colors.white, width: 16,
+    height: 16,
+  },
+  loctxt: {
+    color: Colors.white, fontSize: themes?.fontSize?.small,
+    fontFamily: themes?.font?.bold, marginRight: 10, width: 250
+  },
+  top: { marginTop: 30 },
+ 
 });
