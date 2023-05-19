@@ -522,7 +522,7 @@ export async function show_eventCreater_event(user_id) {
 
   const data = await postApi('all-events', body);
   if (data.status == 1) {
-    NavService.navigate('EventHome');
+    // NavService.navigate('EventHome');
     return data?.Data;
   }
 }

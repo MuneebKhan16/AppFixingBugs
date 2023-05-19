@@ -142,6 +142,7 @@ const Editevent = ({navigation, route}) => {
     }
   };
   const handleDeleteEvent = async () => {
+    // console.log('bjdg')
     await deleteCurrentEvent(eventDetail?.id);
   };
   const handleOpenModal = () => {
