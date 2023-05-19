@@ -16,16 +16,21 @@ import ImageURL from '../../../config/Common';
 import Icons from '../../../assets/Icons';
 import eventContext from '../eventContext';
 import FastImage from 'react-native-fast-image';
+import {useFocusEffect} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 
 const EventHome = props => {
-  const {showEvents} = useContext(eventContext);
-
+  const [allEvents, setAllEvents] = useState([]);
   const EventReview = item => {
     NavService.navigate('EventReview', {eventDetail: item});
   };
-
+  useFocusEffect(
+    React.useCallback(() => {
+      const {showEvents} = useContext(eventContext);
+      setAllEvents(showEvents);
+    }, []),
+  );
   return (
     <AppBackground
       profile
@@ -33,10 +38,10 @@ const EventHome = props => {
       title={'Home'}
       home
       style={{paddingBottom: 20}}>
-      {showEvents?.length > 0 ? (
+      {allEvents?.length > 0 ? (
         <View style={styles.container}>
           <FlatList
-            data={showEvents}
+            data={allEvents}
             showsVerticalScrollIndicator={false}
             renderItem={({item, index}) => (
               <View style={styles.maincontainer}>

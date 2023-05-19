@@ -504,6 +504,17 @@ export async function deleteCurrentEventImage(event_id) {
     return data;
   }
 }
+export async function deleteCurrentEvent(event_id) {
+  const params = {
+    id: event_id,
+  };
+  // const params = new FormData();
+  // params.append('id', event_id);
+  const data = await postApi('delete-event', params);
+  if (data.status == 1) {
+    NavService.navigate('TabComp', data);
+  }
+}
 
 export async function show_eventCreater_event(user_id) {
   const body = new FormData();

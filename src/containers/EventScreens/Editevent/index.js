@@ -26,8 +26,8 @@ import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import {styles} from '../EventPost/eventpost_styles';
 import {
-  post_events,
   edit_events,
+  deleteCurrentEvent,
   deleteCurrentEventImage,
 } from '../../../redux/APIs';
 import Pickeventdate from '../../../components/Pickeventdate';
@@ -141,6 +141,9 @@ const Editevent = ({navigation, route}) => {
       setSelectedImage(remainingAsset);
     }
   };
+  const handleDeleteEvent = async () => {
+    await deleteCurrentEvent(eventDetail?.id);
+  };
   const handleOpenModal = () => {
     setIsModalVisible(true);
   };
@@ -226,9 +229,11 @@ const Editevent = ({navigation, route}) => {
                   setSelectedImage(currentGalleryAsset);
                 }
               }}>
-              <View style={[styles.mime, {height: 30,marginTop:-50}]}>
-              <Image source={Icons.upload} style={styles.uploadimg} />
-                <Text style={{color:Colors.black,fontWeight:'bold'}}>Upload</Text>
+              <View style={[styles.mime, {height: 30, marginTop: -50}]}>
+                <Image source={Icons.upload} style={styles.uploadimg} />
+                <Text style={{color: Colors.black, fontWeight: 'bold'}}>
+                  Upload
+                </Text>
               </View>
             </CustomImagePicker>
           </View>
@@ -351,7 +356,7 @@ const Editevent = ({navigation, route}) => {
             <CustomButton
               buttonStyle={styles.btn}
               title="Delete"
-              onPress={handlesubmit}
+              onPress={handleDeleteEvent}
             />
           </View>
         </View>
