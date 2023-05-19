@@ -22,11 +22,9 @@ import {styles} from './review_style';
 import ImageURL from '../../../config/Common';
 import Video from 'react-native-video';
 import FastImage from 'react-native-fast-image';
-import {color} from 'react-native-reanimated';
-import Images from '../../../assets/Images';
+import VideoPlayer from '../../../components/VideoPlayer';
 import eventContext from '../../EventScreens/eventContext';
 import {themes} from '../../../config/globalFonts/globalFonts';
-const {width, height} = Dimensions.get('window');
 
 const MEDIA = [
   {
@@ -58,10 +56,12 @@ const MEDIA = [
     },
   },
 ];
+const {width, height} = Dimensions.get('screen');
+
 const Review = props => {
   const profile_Data = useSelector(state => state.reducer.user);
-  const {user, event_title, event_location, event_image, id} =
-    props.route.params;
+  const {eventDetail} = props.route.params;
+  const {user, id} = eventDetail;
   const [UserPost, setUserPost] = useState([]);
   const {userProfile} = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
@@ -78,14 +78,7 @@ const Review = props => {
     datahandle();
   }, []);
   useMemo(() => UserPost, [UserPost]);
-  const filteringData = UserPost?.filter(
-    data => data.event_id === props.route.params.id,
-  );
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const onIndexChanged = index => {
-    setCurrentSlide(index);
-  };
+  const filteringData = UserPost?.filter(data => data.event_id === id);
 
   const renderItem = item => {
     if (item.type === 'image') {
@@ -124,12 +117,11 @@ const Review = props => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
         <View
           style={{
-          
             marginTop: 20,
             borderRadius: 20,
             flexDirection: 'row',
             borderRadius: 20,
-            height: 200,
+            height: 220,
           }}>
           <Swiper
             dotColor="transparent"
@@ -148,18 +140,45 @@ const Review = props => {
             style={{
               alignItems: 'center',
               borderRadius: 20,
+              height: 220,
             }}
             showsButtons>
-            {MEDIA.map(item => (
-              <View
-                key={item.id}
-                style={{
-                  justifyContent: 'center',
-                  borderRadius:20,
-                  height: 200,
-                }}>
-                {renderItem(item)}
-              </View>
+            {eventDetail?.event_images.map((data, index) => (
+              <React.Fragment>
+                {data?.event_images?.split('.')[1] == 'mp4' ? (
+                  <View style={{height: height * 0.24, width: width * 0.9}}>
+                    <VideoPlayer
+                      video={`${ImageURL?.ImageURL}${data?.event_images}`}
+                      style={{
+                        width: width * 0.9,
+                        height: height * 0.3,
+                        borderRadius: 20,
+                      }}
+                      mediaPlaybackRequiresUserAction={true}
+                      allowsInlineMediaPlayback={true}
+                      javaScriptEnabled={true}
+                      allowsFullscreenVideo={true}
+                      domStorageEnabled={true}
+                      injectedJavaScript={`
+                                 document.getElementsByTagName("video")[0].removeAttribute("autoplay");
+                                 document.getElementsByTagName("video")[0].style.objectFit = "cover";
+                                 document.getElementsByTagName("video")[0].style.width = "100%";
+                                 document.getElementsByTagName("video")[0].style.height = "100%";
+                             `}
+                      allowFileAccess={false}
+                    />
+                  </View>
+                ) : (
+                  <FastImage
+                    key={index}
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                    }}
+                    style={styles.img}
+                    imageStyle={styles.border}
+                  />
+                )}
+              </React.Fragment>
             ))}
           </Swiper>
         </View>
@@ -214,7 +233,7 @@ const Review = props => {
               style={styles.marker}
             />
             <Text style={styles.location} numberOfLines={1}>
-              {event_location}
+              {eventDetail?.event_location}
             </Text>
           </View>
           {/* <Mainprofile

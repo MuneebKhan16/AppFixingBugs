@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { Colors, NavService } from '../../../config';
-import { themes } from '../../../config/globalFonts/globalFonts';
-
+import {StyleSheet, Text, View} from 'react-native';
+import {Colors, NavService} from '../../../config';
+import {themes} from '../../../config/globalFonts/globalFonts';
 
 export const styles = StyleSheet.create({
   cardContainer: {
@@ -32,17 +31,25 @@ export const styles = StyleSheet.create({
 
     marginLeft: 13,
   },
-  top: { marginTop: 30 },
-  swiper: { height: 200, borderRadius: 15 },
-  topmerge: { marginTop: 5 },
-  img: { borderRadius: 20, width: '100%', height: '100%' },
-  self: { alignSelf: 'center' },
-  clr: { Color: '#fff' },
+  top: {marginTop: 30},
+  swiper: {height: 200, borderRadius: 15},
+  topmerge: {marginTop: 5},
+  img: {
+    width: '100%',
+    height: 200,
+    marginTop: 10,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: Colors.purple,
+  },
+  border: {borderRadius: 20},
+  self: {alignSelf: 'center'},
+  clr: {Color: '#fff'},
   wrapper: {},
   text: {
     color: '#fff',
     fontSize: 30,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   shadow0: {
     shadowColor: '#000',
@@ -77,11 +84,12 @@ export const styles = StyleSheet.create({
 
     elevation: 5,
   },
-  marker: { width: 25, height: 25, marginRight: 5 },
+  marker: {width: 25, height: 25, marginRight: 5},
   location: {
     fontSize: themes?.fontSize?.extraVSmall,
-    fontFamily: themes?.font?.bold, color: Colors.black, ellipsizeMode: 'middle', maxWidth: 150
+    fontFamily: themes?.font?.bold,
+    color: Colors.black,
+    ellipsizeMode: 'middle',
+    maxWidth: 150,
   },
-
-
 });

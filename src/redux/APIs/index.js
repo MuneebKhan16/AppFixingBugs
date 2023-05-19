@@ -315,14 +315,22 @@ export async function updateProfile(
   params.append('last_name', last_name);
   params.append('email', email);
   params.append('address', address);
-  params.append('profile_picture', profile_picture);
-  params.append('auth_token', auth_token);
-
+  if (profile_picture && profile_picture !== null) {
+    params.append('profile_picture', {
+      uri: profile_picture?.path,
+      name: `Profile${Date.now()}.${profile_picture?.mime.slice(
+        profile_picture?.mime.lastIndexOf('/') + 1,
+      )}`,
+      type: profile_picture?.mime,
+    });
+  }
+  // params.append('auth_token', auth_token);
+  console.log('params', params);
   const data = await postApi('update-profile', params);
-  console.log('object', data);
+  console.log('object', data?.Data);
   if (data.status == 1) {
-    NavService.goBack();
-    return data?.Data;
+    dispatch(saveUser(data?.Data));
+    //NavService.goBack();
   }
 }
 
