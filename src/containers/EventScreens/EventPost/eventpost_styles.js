@@ -58,10 +58,10 @@ export const styles = StyleSheet.create({
   top: { marginTop: 20, alignSelf: 'center', height: 500 },
   user: { marginTop: 40, height: 150, },
   // mime: { alignItems: 'center', width: 300, height: 100, },
-  top: { marginTop: 30, alignSelf: 'center', height: 500 },
+  top: { marginTop: 50, alignSelf: 'center', height: 500 },
   user: { marginTop: 40 },
   mime: { alignItems: 'center', width: 300, height: 150 },
-  upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black,marginLeft:5 },
+  upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black,marginLeft:10 },
   modal: { margin: 0, padding: 15, },
   posting:{
     backgroundColor: Colors.purple,
@@ -174,7 +174,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center'
 
   },
-  item: { alignItems: 'center', justifyContent: 'center', width: 300, height: 150,marginBottom:50 },
+  item: { alignItems: 'center', justifyContent: 'center', width: 300, height: 50,marginTop:-20 },
   uploadimg: { width: 20, height: 20, resizeMode: 'contain' },
 
 
