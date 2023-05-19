@@ -3,7 +3,7 @@ import { Colors, NavService } from '../../../config';
 import { themes } from '../../../config/globalFonts/globalFonts';
 
 export const styles = StyleSheet.create({
-  container: { marginTop: 30, marginHorizontal: 0 },
+  container: { marginTop: 30, marginHorizontal: 0 ,},
   header: { flexDirection: 'row', alignItems: 'center' },
   title: {
     fontSize: themes?.fontSize?.large,
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     height: 22,
     resizeMode: 'contain',
   },
-  img: { width: '100%', height: 200, marginTop: 10, },
+  img: { width: '100%', height: 180, marginTop: 10,},
   imgbg: {
     width: 38,
     height: 38,
@@ -54,5 +54,5 @@ export const styles = StyleSheet.create({
   },
   locationtxt: { color: Colors.white,fontSize: themes?.fontSize?.small,
     fontFamily: themes?.font?.bold, width: '88%', marginLeft: 5 },
-  border: { borderRadius: 10, borderWidth: 2, borderColor: Colors.purple }
+  border: { borderRadius: 20,borderColor:Colors.purple,borderWidth:3 ,}
 });

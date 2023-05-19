@@ -93,7 +93,7 @@ const Review = props => {
         <FastImage
           source={item.source}
           style={{
-            height: 180,
+            height: 200,
             width: '100%',
             borderRadius: 20,
           }}
@@ -108,10 +108,10 @@ const Review = props => {
             volume={0}
             source={item.source}
             style={{
-              height: 180,
+              height: 200,
               width: '100%',
               borderRadius: 20,
-              height: 180,
+              height: 200,
             }}
             resizeMode="cover"
           />
@@ -129,8 +129,7 @@ const Review = props => {
             borderRadius: 20,
             flexDirection: 'row',
             borderRadius: 20,
-            borderColor:Colors.purple,
-            borderWidth:2
+            height: 200,
           }}>
           <Swiper
             dotColor="transparent"
@@ -156,7 +155,8 @@ const Review = props => {
                 key={item.id}
                 style={{
                   justifyContent: 'center',
-                  borderRadius: 15,
+                  borderRadius:20,
+                  height: 200,
                 }}>
                 {renderItem(item)}
               </View>
@@ -187,8 +187,6 @@ const Review = props => {
               width: 50,
               height: 50,
               borderRadius: 50,
-              borderWidth: 2,
-              borderColor: Colors.purple,
               marginBottom: 10,
             }}
           />
