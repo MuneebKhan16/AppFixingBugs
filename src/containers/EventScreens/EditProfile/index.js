@@ -113,7 +113,11 @@ const EditProfile = () => {
                       : 
                       (
                         <Image
-                        source={{ uri: userProfile.profile_picture ? `${ImageURL.ImageURL}${userProfile.profile_picture}` : "https://picsum.photos/200/300" }}
+                        source={{
+                          uri: userProfile.profile_picture
+                            ? `${ImageURL.ImageURL}${userProfile.profile_picture}`
+                            : "https://picsum.photos/200/300",
+                        }}
                         style={{
                           width: 130,
                           height: 130,
@@ -122,7 +126,18 @@ const EditProfile = () => {
                           borderWidth: 3,
                           marginTop: 10,
                         }}
-                       />
+                      />
+                      //   <Image
+                      //   source={{ uri: userProfile.profile_picture ? `${ImageURL.ImageURL}${userProfile.profile_picture}` : "https://picsum.photos/200/300" }}
+                      //   style={{
+                      //     width: 130,
+                      //     height: 130,
+                      //     borderRadius: 80,
+                      //     borderColor: Colors.purple,
+                      //     borderWidth: 3,
+                      //     marginTop: 10,
+                      //   }}
+                      //  />
                       )
                     }
                     {/* <Text style={styles.upload}>Upload</Text> */}
