@@ -153,8 +153,8 @@ import {
     };
     useEffect(async () => {
       await initConnection();
-      await getProducts();
-      await purchase();
+      // await getProducts();
+      // await purchase();
       return () => {
         if (purchaseUpdateSubscription) {
           purchaseUpdateSubscription.remove();

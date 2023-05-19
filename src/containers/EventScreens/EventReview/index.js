@@ -88,9 +88,7 @@ const EventReview = ({navigation, route}) => {
         /> */}
         <View style={styles.titlehdr}>
           <Text style={styles.title}>{eventDetail?.event_title} .</Text>
-          <Text style={styles.date}>
-            {DateReadbleFunction(eventDetail?.created_at)}{' '}
-          </Text>
+          <Text style={styles.date}>{eventDetail?.event_date} </Text>
         </View>
         <Text style={styles.subtitle}>{eventDetail.event_description}</Text>
         <View style={styles.markericn}>

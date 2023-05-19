@@ -19,8 +19,8 @@ if (Platform.OS === 'android') {
   }
 }
 
-const ChatScreen = (props) => {
-  const {route } = props;
+const ChatScreen = props => {
+  const {route} = props;
   const {chatUser, conversation_id} = route?.params;
   const user = useSelector(state => state?.reducer?.user);
   const socket = useSelector(state => state?.reducer?.socket);
@@ -29,17 +29,18 @@ const ChatScreen = (props) => {
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
 
-  const conversation_id2 = user?.id+"_"+props?.route?.params?.id;
+  const conversation_id2 = user?.id + '_' + props?.route?.params?.id;
 
   const response = () => {
     const payload = {
       sender_id: sender_id,
-      conv_id: conversation_id? conversation_id : conversation_id2,
+      conv_id: conversation_id ? conversation_id : conversation_id2,
     };
-    console.log("payload " +  JSON.stringify(payload));
+    console.log('payload ' + JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
+        console.log('payload ', data?.data);
         const messages = data?.data || [];
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
@@ -54,21 +55,20 @@ const ChatScreen = (props) => {
   const sendNewMessage = () => {
     if (message.length > 0) {
       loaderStart();
-      var payload = ''
-      if(conversation_id != null ){ 
-      payload = {
+      var payload = '';
+      if (conversation_id != null) {
+        payload = {
           sender_id: sender_id,
           receiver_id: receiver_id,
-          conv_id: conversation_id ,
+          conv_id: conversation_id,
           msg: message,
           msg_type: 'text',
         };
-      }
-      else{  
-      payload = {
+      } else {
+        payload = {
           sender_id: user?.id,
           receiver_id: props?.route?.params?.id,
-          conv_id:  conversation_id2 ,
+          conv_id: conversation_id2,
           msg: message,
           msg_type: 'text',
         };

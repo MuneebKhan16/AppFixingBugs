@@ -71,6 +71,7 @@ const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
                 }}>
                 <Text style={styles.tags}>{'#' + ' ' + data.tags}</Text>
                 <TouchableOpacity
+                  hitSlop={10}
                   onPress={() => handleDelete(data)}
                   activeOpacity={0.8}>
                   <Image

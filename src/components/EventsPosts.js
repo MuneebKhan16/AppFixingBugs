@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
     marginLeft: 12,
     marginTop: 10,
     fontSize: 16,
-    textTransform: 'capitalize',
   },
   container1: {
     paddingTop: 100,
