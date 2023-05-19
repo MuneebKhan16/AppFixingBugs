@@ -10,7 +10,7 @@ import ImageURL from '../../../config/Common';
 import DummyURL from '../../../config/Common';
 import Icons from '../../../assets/Icons'
 import { themes } from '../../../config/globalFonts/globalFonts';
-
+import postApi from '../../../redux/RequestTypes/post';
 const EventProfile = () => {
   const { showEvents, UserPost } = useContext(eventContext);
 
@@ -24,6 +24,19 @@ const EventProfile = () => {
     const date = dateIn
     const dates = new Date(date);
     return dates?.toLocaleDateString();
+  }
+
+  const Delete_Event = async (item) => {
+    console.log("jjjj",item)
+    const id = item.id
+    const params = {
+      id : id
+    }
+    const data = await  postApi('delete-event',params);
+    if(data.status == 1){
+      NavService.navigate('EventHome')
+    }
+   
   }
 
   return (
@@ -224,7 +237,7 @@ const EventProfile = () => {
                           </FastImage>
 
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ position: 'absolute', right: 2, bottom: 10, }}>
+                        <TouchableOpacity onPress={() => Delete_Event(item)} style={{ position: 'absolute', right: 2, bottom: 10, }}>
                           <Image source={Icons.delete} style={{ width: 20, height: 20, tintColor: Colors.purple }} resizeMode='contain' />
 
                         </TouchableOpacity>

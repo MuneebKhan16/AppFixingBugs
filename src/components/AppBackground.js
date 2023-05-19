@@ -25,6 +25,9 @@ import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
 import Datepick from './Datepick';
 import {themes} from '../config/globalFonts/globalFonts';
+import moment from 'moment';
+import Pickeventdate from './Pickeventdate';
+import postApi from '../redux/RequestTypes/post';
 
 export function AppBackground({
   editeIcon,
@@ -60,12 +63,40 @@ export function AppBackground({
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector(state => state.reducer.user);
 
+  
+  const [City, setcity] = useState();
+  const [State, setstate] = useState();
+  const [date,setDate] = useState('');
+ 
+
+  const handleLocationFetch = async () => {
+    const state = State;
+    const city = City;
+    const event_date = moment(date).format('YYYY-MM-DD');
+
+    const params = new FormData();
+
+  params.append('state',state)
+  params.append('city',city)
+  params.append('event_date',event_date);
+
+  const data = await postApi('search-event',params);
+  if(data.status == 1){
+      setcity('')
+      setstate('')
+      setDate(null)
+      const filtered = data?.Data
+      NavService.navigate('Event',{filtered})
+  }
+  
+  }
+
+
+
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
-
-  const [City, setcity] = useState();
-  const [State, setstate] = useState();
 
   const [isFocused, setIsFocused] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -283,7 +314,7 @@ export function AppBackground({
                       />
                       <TextInput
                         numberOfLines={1}
-                        editable={false}
+                        editable={true}
                         style={{
                           borderColor: 'gray',
                           borderRadius: 10,
@@ -295,8 +326,6 @@ export function AppBackground({
                         }}
                         placeholder={'City'}
                         placeholderTextColor={Colors.black}
-                        // secureTextEntry={!isFocused}
-                        // onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
                         onChangeText={City => setcity(City)}
                         value={City}
@@ -344,13 +373,16 @@ export function AppBackground({
                       />
                     </View>
 
-                    <Datepick />
+                    <Pickeventdate  date={date} setDate={setDate} />
                     <CustomButton
                       buttonStyle={{
                         width: 280,
                       }}
                       title="Continue"
-                      onPress={toggleModal}
+                      onPress={() => {
+                        toggleModal()
+                        handleLocationFetch()
+                      }}
                     />
                   </View>
                 </Modal>

@@ -25,7 +25,7 @@ const Pickeventdate = ({date, setDate}) => {
   };
 
   const handleConfirm = date => {
-    setDate(moment(date).format('MM DD YYYY'));
+    setDate(moment(date).format('YYYY-MM-DD'));
     hideDatePicker();
   };
 

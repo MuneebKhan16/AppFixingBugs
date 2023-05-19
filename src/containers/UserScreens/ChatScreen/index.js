@@ -23,6 +23,8 @@ const ChatScreen = props => {
   const {route} = props;
   const {chatUser, conversation_id} = route?.params;
   const user = useSelector(state => state?.reducer?.user);
+  const picture = user.profile_picture
+  //console.log('picture',picture)
   const socket = useSelector(state => state?.reducer?.socket);
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState('');
@@ -36,11 +38,11 @@ const ChatScreen = props => {
       sender_id: sender_id,
       conv_id: conversation_id ? conversation_id : conversation_id2,
     };
-    console.log('payload ' + JSON.stringify(payload));
+   // console.log('payload ' + JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
-        console.log('payload ', data?.data);
+       console.log('senderpayload ', data?.user_sender);
         const messages = data?.data || [];
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
@@ -97,6 +99,9 @@ const ChatScreen = props => {
     }
   }, []);
 
+  console.log('chatListchatList',chatList)
+ 
+
   return (
     <AppBackground title={'Chats'} back profile={false} home>
       <SafeAreaView style={styles.flex}>
@@ -108,6 +113,7 @@ const ChatScreen = props => {
             style={styles.msg}
             renderItem={({item}) => (
               <>
+              {console.log("checklist",item)}
                 {item.sender_id == sender_id ? (
                   <CustomChatBox
                     msg={item.message ? item.message : item.msg}

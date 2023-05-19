@@ -62,33 +62,33 @@ export default async function postApi(
       e.message.includes('timeout of ') &&
       e.message.includes('ms exceeded')
     ) {
-      Toast.show({
-        text1: "Can't connect to server",
-        textStyle: {textAlign: 'center'},
-        type: 'error',
-        visibilityTime: 5000,
-      });
+      // Toast.show({
+      //   text1: "Can't connect to server",
+      //   textStyle: {textAlign: 'center'},
+      //   type: 'error',
+      //   visibilityTime: 5000,
+      // });
     } else if (e.response?.data?.message) {
-      Toast.show({
-        text1: e.response.data.message,
-        textStyle: {textAlign: 'center'},
-        type: 'error',
-        visibilityTime: 5000,
-      });
+      // Toast.show({
+      //   text1: e.response.data.message,
+      //   textStyle: {textAlign: 'center'},
+      //   type: 'error',
+      //   visibilityTime: 5000,
+      // });
     } else if (e.response?.data?.error?.message) {
-      Toast.show({
-        text1: e.response.data.error.message,
-        textStyle: {textAlign: 'center'},
-        type: 'error',
-        visibilityTime: 5000,
-      });
+      // Toast.show({
+      //   text1: e.response.data.error.message,
+      //   textStyle: {textAlign: 'center'},
+      //   type: 'error',
+      //   visibilityTime: 5000,
+      // });
     } else {
-      Toast.show({
-        text1: e.message,
-        textStyle: {textAlign: 'center'},
-        type: 'error',
-        visibilityTime: 5000,
-      });
+      // Toast.show({
+      //   text1: e.message,
+      //   textStyle: {textAlign: 'center'},
+      //   type: 'error',
+      //   visibilityTime: 5000,
+      // });
     }
     return null;
   }

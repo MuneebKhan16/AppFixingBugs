@@ -117,7 +117,7 @@ const EventPost = props => {
     const user_id = users?.id;
     const category_id = selectedData?.category_id;
     const event_location = location;
-    const event_date = moment(date).format('MM DD YYYY');
+    const event_date = moment(date).format('YYYY-MM-DD');
 
     post_events(
       event_title,

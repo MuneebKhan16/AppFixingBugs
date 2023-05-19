@@ -553,3 +553,19 @@ export async function showprofiledetail() {
   const data = await getApi('show-profile');
   return data;
 }
+
+export async function searchEvents(state,city,event_date){
+
+  const params = new FormData();
+
+  params.append('state',state)
+  params.append('city',city)
+  params.append('event_date',event_date);
+
+  const data = await postApi('search-event',params);
+  if(data.status == 1){
+     return  data?.Data ;
+  }
+
+
+}
