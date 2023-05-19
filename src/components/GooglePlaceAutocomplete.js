@@ -80,6 +80,7 @@ const GooglePlaceAutocomplete = ({
           types: 'premise',
           
         }}
+        editable={false}
       />
     </View>
   );
