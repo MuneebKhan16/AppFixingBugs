@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
   top: { marginTop: 30, alignSelf: 'center', height: 500 },
   user: { marginTop: 40 },
   mime: { alignItems: 'center', width: 300, height: 150 },
-  upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black, },
+  upload: { width: 50, height: 20, resizeMode: 'contain', color: Colors.black,marginLeft:5 },
   modal: { margin: 0, padding: 15, },
   posting:{
     backgroundColor: Colors.purple,
