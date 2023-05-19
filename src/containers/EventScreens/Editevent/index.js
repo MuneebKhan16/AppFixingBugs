@@ -26,8 +26,8 @@ import { store } from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 import { styles } from '../EventPost/eventpost_styles';
 import {
-  post_events,
   edit_events,
+  deleteCurrentEvent,
   deleteCurrentEventImage,
 } from '../../../redux/APIs';
 import Pickeventdate from '../../../components/Pickeventdate';
@@ -133,6 +133,10 @@ const Editevent = ({ navigation, route }) => {
       setSelectedImage(remainingAsset);
     }
   };
+  const handleDeleteEvent = async () => {
+    // console.log('bjdg')
+    await deleteCurrentEvent(eventDetail?.id);
+  };
   const handleOpenModal = () => {
     setIsModalVisible(true);
   };
@@ -194,7 +198,7 @@ const Editevent = ({ navigation, route }) => {
               </Swiper>
             ) : null}
           </View>
-          <View >
+          <View>
             <CustomImagePicker
               isMultiple
               uploadVideo
@@ -343,7 +347,7 @@ const Editevent = ({ navigation, route }) => {
             <CustomButton
               buttonStyle={styles.btn}
               title="Delete"
-              onPress={handlesubmit}
+              onPress={handleDeleteEvent}
             />
           </View>
         </View>

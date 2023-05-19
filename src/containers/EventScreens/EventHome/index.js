@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import React, {useState, useEffect, useContext} from 'react';
+import {useSelector} from 'react-redux';
 import AppBackground from '../../../components/AppBackground';
 import {NavService, Colors} from '../../../config';
 import {styles} from './eventhome_style';
@@ -16,16 +17,25 @@ import ImageURL from '../../../config/Common';
 import Icons from '../../../assets/Icons';
 import eventContext from '../eventContext';
 import FastImage from 'react-native-fast-image';
+import {useFocusEffect} from '@react-navigation/native';
+import {show_eventCreater_event} from '../../../redux/APIs';
 
 const {width, height} = Dimensions.get('screen');
 
 const EventHome = props => {
-  const {showEvents} = useContext(eventContext);
-
+  const user = useSelector(state => state.reducer.user);
+  const [allEvents, setAllEvents] = useState([]);
   const EventReview = item => {
     NavService.navigate('EventReview', {eventDetail: item});
   };
-
+  useFocusEffect(
+    React.useCallback(async () => {
+      const result = await show_eventCreater_event(user?.id);
+      // const {showEvents} = useContext(eventContext);
+      console.log('result', result);
+      setAllEvents(result?.events);
+    }, []),
+  );
   return (
     <AppBackground
       profile
@@ -33,10 +43,10 @@ const EventHome = props => {
       title={'Home'}
       home
       style={{paddingBottom: 20}}>
-      {showEvents?.length > 0 ? (
+      {allEvents?.length > 0 ? (
         <View style={styles.container}>
           <FlatList
-            data={showEvents}
+            data={allEvents}
             showsVerticalScrollIndicator={false}
             renderItem={({item, index}) => (
               <View style={styles.maincontainer}>

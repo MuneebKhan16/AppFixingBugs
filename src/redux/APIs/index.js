@@ -353,7 +353,21 @@ export async function get_reviews_event() {
   const data = await getApi('getreviews');
   return data;
 }
-
+export async function delete_rating(id) {
+  const params = {
+    id,
+  };
+  const data = await postApi('delete-rating', params);
+  if (data?.status == 1) {
+    Toast.show({
+      text1: data.message,
+      type: 'success',
+      visibilityTime: 2000,
+    });
+    return data;
+  }
+  // get_reviews_event();
+}
 export async function post_reviews(
   user_id,
   user_type,
@@ -504,6 +518,17 @@ export async function deleteCurrentEventImage(event_id) {
     return data;
   }
 }
+export async function deleteCurrentEvent(event_id) {
+  const params = {
+    id: event_id,
+  };
+  // const params = new FormData();
+  // params.append('id', event_id);
+  const data = await postApi('delete-event', params);
+  if (data.status == 1) {
+    NavService.navigate('TabComp', data);
+  }
+}
 
 export async function show_eventCreater_event(user_id) {
   const body = new FormData();
@@ -511,7 +536,7 @@ export async function show_eventCreater_event(user_id) {
 
   const data = await postApi('all-events', body);
   if (data.status == 1) {
-    NavService.navigate('EventHome');
+    // NavService.navigate('EventHome');
     return data?.Data;
   }
 }
