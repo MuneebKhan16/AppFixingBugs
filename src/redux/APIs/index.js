@@ -466,7 +466,7 @@ export async function edit_events(
   if (event_image?.length) {
     const result = event_image?.map((asset, index) => {
       if (asset?.path) {
-        params.append(`event_image[${index + 1}]`, {
+        params.append(`event_image[]`, {
           uri: asset?.path,
           name: `EventAsset${Date.now()}.${asset?.mime.slice(
             asset?.mime.lastIndexOf('/') + 1,

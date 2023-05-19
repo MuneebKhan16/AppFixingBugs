@@ -64,7 +64,9 @@ export function AppBackground({
     setModalVisible(!isModalVisible);
   };
 
-  const [location, setLocation] = useState();
+  const [City, setcity] = useState();
+  const [State, setstate] = useState();
+
   const [isFocused, setIsFocused] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalVisible, setIsModalVisible] = useState(false);
@@ -225,7 +227,6 @@ export function AppBackground({
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10,
-                backgroundColor: Colors.white,
               }}>
               <Image
                 source={Icons.filter}
@@ -257,8 +258,8 @@ export function AppBackground({
                       }}>
                       Filters
                     </Text>
-                    <TouchableOpacity
-                      onPress={handleOpenModal}
+                    <View
+                      // onPress={handleOpenModal}
                       style={{
                         borderColor: Colors.black,
                         borderWidth: 1,
@@ -275,7 +276,7 @@ export function AppBackground({
                         style={{
                           width: 22,
                           height: 22,
-                          marginLeft: 12,
+                          marginLeft: 10,
                           resizeMode: 'contain',
                           tintColor: Colors.purple,
                         }}
@@ -289,22 +290,60 @@ export function AppBackground({
                           width: '80%',
                           color: Colors.black,
                           fontSize: 17,
-                          fontWeight: '700',
+                          marginLeft: 15,
+
                         }}
-                        placeholder={location ? location.name : 'Location'}
+                        placeholder={'City'}
                         placeholderTextColor={Colors.black}
                         // secureTextEntry={!isFocused}
-                        onFocus={() => setIsFocused(true)}
+                        // onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        onChangeText={location => setLocation(location)}
-                        value={location}
+                        onChangeText={City => setcity(City)}
+                        value={City}
                       />
-                    </TouchableOpacity>
-                    <Mymdll
-                      isVisible={ModalVisible}
-                      onClose={handleCloseModal}
-                      setLocation={setLocation}
-                    />
+                    </View>
+                    <View
+                      style={{
+                        borderColor: Colors.black,
+                        borderWidth: 1,
+                        width: '100%',
+                        borderRadius: 10,
+                        height: 45,
+                        marginTop: 15,
+                        bottom: 5,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                      }}>
+                      <Image
+                        source={Icons.location}
+                        style={{
+                          width: 22,
+                          height: 22,
+                          marginLeft: 10,
+                          resizeMode: 'contain',
+                          tintColor: Colors.purple,
+                        }}
+                      />
+                      <TextInput
+                        numberOfLines={1}
+                        editable={true}
+                        style={{
+                          borderColor: 'gray',
+                          borderRadius: 10,
+                          width: '80%',
+                          color: Colors.black,
+                          fontSize: 17,
+                          marginLeft: 15,
+
+                        }}
+                        placeholder={'State'}
+                        placeholderTextColor={Colors.black}
+                        onBlur={() => setIsFocused(false)}
+                        onChangeText={State => setstate(State)}
+                        value={State}
+                      />
+                    </View>
+
                     <Datepick />
                     <CustomButton
                       buttonStyle={{

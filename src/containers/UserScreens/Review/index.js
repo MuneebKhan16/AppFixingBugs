@@ -93,9 +93,9 @@ const Review = props => {
         <FastImage
           source={item.source}
           style={{
-            height: 220,
+            height: 200,
             width: '100%',
-            borderRadius: 15,
+            borderRadius: 20,
           }}
           resizeMode={FastImage.resizeMode.cover}
         />
@@ -108,9 +108,10 @@ const Review = props => {
             volume={0}
             source={item.source}
             style={{
-              height: 220,
+              height: 200,
               width: '100%',
-              borderRadius: 15,
+              borderRadius: 20,
+              height: 200,
             }}
             resizeMode="cover"
           />
@@ -123,12 +124,12 @@ const Review = props => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
         <View
           style={{
-            ...Shadows.shadow3,
-            height: 220,
-            marginTop: 8,
-            borderRadius: 10,
+          
+            marginTop: 20,
+            borderRadius: 20,
             flexDirection: 'row',
-            borderRadius: 15,
+            borderRadius: 20,
+            height: 200,
           }}>
           <Swiper
             dotColor="transparent"
@@ -145,11 +146,8 @@ const Review = props => {
               </Text>
             }
             style={{
-              justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: 15,
-              height: 160,
-              backgroundColor: 'orange',
+              borderRadius: 20,
             }}
             showsButtons>
             {MEDIA.map(item => (
@@ -157,7 +155,8 @@ const Review = props => {
                 key={item.id}
                 style={{
                   justifyContent: 'center',
-                  borderRadius: 20,
+                  borderRadius:20,
+                  height: 200,
                 }}>
                 {renderItem(item)}
               </View>
@@ -188,8 +187,6 @@ const Review = props => {
               width: 50,
               height: 50,
               borderRadius: 50,
-              borderWidth: 2,
-              borderColor: Colors.purple,
               marginBottom: 10,
             }}
           />
