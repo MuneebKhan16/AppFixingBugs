@@ -25,7 +25,7 @@ const Pickeventdate = ({date, setDate}) => {
   };
 
   const handleConfirm = date => {
-    setDate(date);
+    setDate(moment(date).format('MM DD YYYY'));
     hideDatePicker();
   };
 
@@ -56,9 +56,10 @@ const Pickeventdate = ({date, setDate}) => {
               editable={false}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              onChangeText={pickedDate =>
-                setDate(moment(pickedDate).format('MM DD YYYY'))
-              }
+              onChangeText={pickedDate => {
+                console.log('date', pickedDate);
+                setDate(moment(pickedDate).format('MM DD YYYY'));
+              }}
               value={date}
             />
             {/* <Text
