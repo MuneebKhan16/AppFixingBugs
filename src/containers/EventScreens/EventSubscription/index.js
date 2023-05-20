@@ -353,12 +353,13 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+    height:150
   },
   maincontainer: {
     backgroundColor: Colors.purple,
     padding: 3,
     borderRadius: 10,
-    marginBottom: 15
+    marginBottom: 15,
   },
   check: { width: 10, height: 10, tintColor: Colors.white },
   descrption: { marginLeft: 5, fontSize: 18, color: Colors.black, width: '80%' }
