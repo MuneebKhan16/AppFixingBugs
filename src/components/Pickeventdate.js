@@ -38,7 +38,7 @@ const Pickeventdate = ({date, setDate}) => {
 
   return (
     <>
-      <View style={styles.container}>
+      {/* <View style={styles.container}>
         <View style={styles.content}>
           <TouchableOpacity onPress={showDatePicker} style={styles.touchable}>
             <View style={styles.datepicker}>
@@ -62,11 +62,7 @@ const Pickeventdate = ({date, setDate}) => {
               }}
               value={date}
             />
-            {/* <Text
-                style={styles.textInput}
-              >
-                {getDate()}
-              </Text> */}
+           
           </TouchableOpacity>
         </View>
         <DateTimePickerModal
@@ -75,7 +71,44 @@ const Pickeventdate = ({date, setDate}) => {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
+      </View> */}
+      <View style={styles.container}>
+      <View style={styles.content}>
+        <TouchableOpacity onPress={showDatePicker} style={styles.touchable}>
+          <View style={styles.datepicker}>
+            <Image source={Icons.date} style={styles.img} />
+          </View>
+          {Platform.OS === 'ios' ? (
+            <Text style={styles.dateText}>{date || 'Date'}</Text>
+          ) : (
+            <TextInput
+              style={{
+                height: 40,
+                color: Colors.black,
+                fontSize: 17,
+                width: '92%',
+              }}
+              placeholder="Date"
+              placeholderTextColor={Colors.greey}
+              editable={false}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              onChangeText={(pickedDate) => {
+                console.log('date', pickedDate);
+                setDate(moment(pickedDate).format('MM DD YYYY'));
+              }}
+              value={date}
+            />
+          )}
+        </TouchableOpacity>
       </View>
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
+      />
+    </View>
     </>
   );
 };

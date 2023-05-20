@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   container: { marginTop: 30, marginHorizontal: 0 ,},
   header: { flexDirection: 'row', alignItems: 'center' },
   title: {
-    fontSize: themes?.fontSize?.large,
+    fontSize: themes?.fontSize?.medium,
     fontFamily: themes?.font?.extraBold,
     color: Colors.black,
     marginLeft: 8,

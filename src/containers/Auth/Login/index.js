@@ -31,8 +31,8 @@ class Login extends Component {
   };
 
   state = {
-    email: '',
-    password: '',
+    email: 'Trump@gmail.com',
+    password: 'Abcd123@',
     visible: false,
   };
   onSubmit = () => {

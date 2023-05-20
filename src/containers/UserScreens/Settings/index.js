@@ -59,7 +59,7 @@ export class TermsConditions extends Component {
             <Heading name="Terms & Condition" icon={Icons.information} onpress="TermsConditions" />
             <Heading name="Policies" icon={Icons.policies} onpress="PrivacyPolicy"/>
             <Heading name="Help" icon={Icons.help} onpress="Help" />
-            <Heading name="Subscription" icon={Icons.subscription} onpress="Subscription"/>
+            {/* <Heading name="Subscription" icon={Icons.subscription} onpress="Subscription"/> */}
             <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator" />
 
 

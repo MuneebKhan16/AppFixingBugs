@@ -118,7 +118,9 @@ const EventPost = props => {
     // }
     const event_image = selectedImage;
     const user_id = users?.id;
-    const category_id = selectedData?.category_id;
+    // const category_id = selectedData?.category_id;
+    const category_id = selectedData == selectedData?.category_id;
+
     const event_location = location;
     const event_date = moment(date).format('YYYY-MM-DD');
 
@@ -349,21 +351,36 @@ const EventPost = props => {
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.descp}>
+            <View
+              style={{
+                height: 150,
+                backgroundColor: '#ededed',
+                width: 300,
+                borderRadius: 10,
+                marginTop: 10,
+                paddingVertical: 10,
+              }}>
               <TextInput
                 placeholder="Description"
                 multiline={true}
-                style={styles.description}
+                style={{
+                  flex: 1,
+                  marginLeft: 10,
+                  color: 'black',
+                  textAlignVertical: 'top', // Add this property to align the placeholder text at the top
+                }}
                 onChangeText={dec => setDec(dec)}
                 value={dec}
-                placeholderTextColor={Colors.black}
+                placeholderTextColor="black"
               />
             </View>
             <PickerComptwo />
+
             <Pickeventdate date={date} setDate={setDate} />
+
             <CustomButton
               buttonStyle={styles.btn}
-              title="Posts"
+              title="Post"
               onPress={handlesubmit}
             />
           </View>
@@ -392,7 +409,7 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               <Text style={styles.modaltxt}>
                 1- Name of Location (mandatory){'\n'}
               </Text>
