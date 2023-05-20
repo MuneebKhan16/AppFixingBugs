@@ -89,7 +89,7 @@ const Pickeventdate = ({date, setDate}) => {
                 width: '92%',
               }}
               placeholder="Date"
-              placeholderTextColor={Colors.greey}
+              placeholderTextColor={Colors.black}
               editable={false}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
@@ -126,10 +126,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingLeft: 5,
     borderRadius: 10,
-    backgroundColor: '#ededed',
+    borderWidth:1
   },
   touchable: {
-    width: 260,
+    width: 270,
     flexDirection: 'row',
     alignItems: 'center',
     height: 45,
