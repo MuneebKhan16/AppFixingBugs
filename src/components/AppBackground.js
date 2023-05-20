@@ -81,6 +81,8 @@ export function AppBackground({
   params.append('event_date',event_date);
 
   const data = await postApi('search-event',params);
+  console.log('kjhg',data)
+
   if(data.status == 1){
       setcity('')
       setstate('')

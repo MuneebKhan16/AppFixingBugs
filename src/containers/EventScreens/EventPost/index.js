@@ -66,6 +66,9 @@ const EventPost = props => {
   function dispatch(action) {
     store.dispatch(action);
   }
+
+ 
+
   const handlesubmit = () => {
     if (!title) {
       return Toast.show({
@@ -142,6 +145,7 @@ const EventPost = props => {
   };
 
   return (
+     
     <AppBackground title={'Events'} home back>
       <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
@@ -155,6 +159,7 @@ const EventPost = props => {
             </View>
           </ActionSheet>
           <View style={{marginTop: 40, height: 150}}>
+            {console.log('selectedImageselectedImage',selectedImage)}
             {selectedImage?.length > 0 ? (
               <Swiper
                 style={{height: 150}}

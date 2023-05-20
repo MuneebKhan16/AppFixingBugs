@@ -21,7 +21,7 @@ const CustomImagePicker = ({
   const imageChange = method => {
     if (method === 'camera') {
       ImageCropPicker.openCamera({
-        mediaType: 'any',
+        mediaType: 'photo',
       }).then(async image => {
         actionSheetRef.current.hide();
         // Perform additional operations on the image if needed
@@ -30,7 +30,7 @@ const CustomImagePicker = ({
           maxWidth: 400,
           quality: 1,
         });
-        onImageChange(result, image.mime, 'any');
+        onImageChange(result, image.mime, 'photo');
       });
     } else if (method === 'gallery') {
       ImageCropPicker.openPicker({

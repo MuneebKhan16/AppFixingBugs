@@ -69,6 +69,8 @@ class Post extends Component {
     return;
   };
 
+ 
+
   handleSubmit = () => {
     const {id} = this.props.user;
     const {
@@ -88,6 +90,8 @@ class Post extends Component {
     //     visibilityTime: 3000,
     //   });
     // }
+
+    
     if (
       isChecked === true &&
       isChecked1 === true &&
@@ -251,7 +255,7 @@ class Post extends Component {
   render() {
     const {userImage, selectedImage, selectedVideo} = this.state;
     const {user} = this.props;
-
+    console.log('selectedImage', this.state.selectedImage)
     return (
       <AppBackground title={'Post'} back home>
         <ScrollView
@@ -295,13 +299,13 @@ class Post extends Component {
           </ActionSheet>
           <View style={styles.profile}>
             <View style={styles.btm}>
-              {selectedImage !== null ? (
+              { selectedImage !== null ? (
                 <ProfileImage
                   name={user?.name}
-                  imageUri={
-                    selectedImage?.mime?.startsWith('image/')
-                      ? selectedImage.path
-                      : null
+                  imageUri={  
+                        selectedImage?.mime?.startsWith('image/')
+                          ? selectedImage.path
+                          : null 
                   }
                   videoUri={
                      selectedVideo?.mime?.startsWith('image/')
@@ -310,6 +314,7 @@ class Post extends Component {
                   }
                 />
               ) : (
+                
                 <ProfileImage
                   name={user?.name}
                   imageUri={
@@ -323,12 +328,14 @@ class Post extends Component {
                       : null
                   }
                 />
+                
               )}
               <View style={styles.picker}>
                 <CustomImagePicker
                   uploadVideo
                   onImageChange={(path, mime) => {
                     console.log('pathssss', path);
+
                     if (mime.startsWith('image/')) {
                       this.setState({
                         selectedImage: {
