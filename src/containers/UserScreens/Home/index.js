@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   Platform,
   PermissionsAndroid,
-  TextInput
+  TextInput,
+  
 } from 'react-native';
 import Modal from 'react-native-modal';
 import AppBackground from '../../../components/AppBackground';
@@ -351,7 +352,15 @@ export class Home extends Component {
 
                         />
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10 }}>
-                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, }}>
+                          <View style={{ flexDirection: 'row', 
+                          borderWidth: 1, borderColor: Colors?.purple, 
+                          borderRadius: 10, 
+                          alignItems: 'center', 
+                          width: '48.5%',
+                           paddingHorizontal: 10,
+                           height:Platform.OS === 'ios' ? 60 : null,
+                           
+                           }}>
                             <Image source={Icons?.location} style={{ height: 20, width: 20, tintColor: Colors?.purple }} resizeMode='contain' />
                             <TextInput
                               placeholderTextColor={Colors?.black}
@@ -361,7 +370,7 @@ export class Home extends Component {
                               value={this.state.Locations ? this.state.Locations.split(' ').slice(-5, -4).pop() + " " + this.state.Locations.split(' ').slice(-4, -3).pop() : 'City'}
                             />
                           </View>
-                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, }}>
+                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10,       height:Platform.OS === 'ios' ? 60 : null,}}>
                             <Image source={Icons?.location} style={{ height: 20, width: 20, tintColor: Colors?.purple }} resizeMode='contain' />
                             <TextInput
                               placeholderTextColor={Colors?.black}

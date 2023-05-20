@@ -42,13 +42,14 @@ export const styles = StyleSheet.create({
   },
   loc: { width: '90%', color: Colors.black },
   marker: { width: 15, height: 18, position: 'absolute', right: 10, tintColor: '#434343' },
-  description: { maxHeight: 150, marginLeft: 10, marginTop: 10, color: Colors.black },
+  description: { maxHeight: 150, marginLeft: 10, marginTop: 10, color: Colors.black ,backgroundColor:'red'},
   descp: {
     height: 120,
     backgroundColor: '#ededed',
     width: 300,
     borderRadius: 10,
-    marginTop: 10
+    marginTop: 10,
+    
   },
   btn: {
     alignSelf: 'center',
@@ -124,12 +125,12 @@ export const styles = StyleSheet.create({
     height: 1,
     color: Colors.black
   },
-  description: {
-    fontSize: 16,
-    color: Colors.black,
-    marginLeft: 10,
-    marginTop:Platform.OS === 'ios' ? 10 :null
-  },
+  // description: {
+  //   fontSize: 16,
+  //   color: Colors.black,
+  //   marginLeft: 10,
+  //   marginTop:Platform.OS === 'ios' ? 10 :null,
+  // },
   selectedPlace: {
     marginTop: 10,
     alignItems: 'center',
