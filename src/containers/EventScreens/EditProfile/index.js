@@ -9,6 +9,7 @@ import {
   StyleSheet,
   ImageBackground,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import {Colors, NavService} from '../../../config';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import {ProfileTextInput} from '../../../components/CustomTextInput';
@@ -21,7 +22,8 @@ import {updateProfile} from '../../../redux/APIs';
 import ImageURL from '../../../config/Common';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
 const EditProfile = () => {
-  const {userProfile} = useContext(eventContext);
+  // const {userProfile} = useContext(eventContext);
+  const userProfile = useSelector(state => state.reducer.user);
   const [fullName, setFullName] = useState('');
   const [lastName, setLastName] = useState('');
   const [addresss, setAddress] = useState('');
@@ -162,7 +164,11 @@ const EditProfile = () => {
           <View>
             <CustomImagePicker
               onImageChange={(path, mime) => {
-                setselectedImage({path: path[0]?.path, mime: path[0]?.mime});
+                if (Array.isArray(path)) {
+                  setselectedImage({path: path[0]?.path, mime: path[0]?.mime});
+                } else {
+                  setselectedImage({path, mime});
+                }
               }}>
               <View style={styles.item}>
                 {selectedImage != null ? (

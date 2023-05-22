@@ -42,7 +42,7 @@ const ChatScreen = props => {
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
-       console.log('senderpayload ', data?.user_sender);
+       console.log('senderpayload ', data);
         const messages = data?.data || [];
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
