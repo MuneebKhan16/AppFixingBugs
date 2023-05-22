@@ -9,12 +9,47 @@ import {
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
-import Toast from 'react-native-toast-message';
+import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
 import Nav from './src';
 import {store} from './src/redux';
-import {Loader} from './src/config';
+import {Loader, Colors} from './src/config';
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
+
+const toastConfig = {
+  success: props => (
+    <BaseToast
+      {...props}
+      text1NumberOfLines={5}
+      style={{
+        borderLeftColor: Colors.primary,
+        maxHeight: 120,
+        height: '100%',
+        paddingVertical: 20,
+      }}
+      text1Style={{
+        fontSize: 14,
+        color: Colors.black,
+      }}
+    />
+  ),
+  error: props => (
+    <ErrorToast
+      {...props}
+      text1NumberOfLines={5}
+      style={{
+        borderLeftColor: Colors.google,
+        maxHeight: 120,
+        height: '100%',
+        paddingVertical: 20,
+      }}
+      text1Style={{
+        fontSize: 14,
+        color: Colors.black,
+      }}
+    />
+  ),
+};
 class App extends Component {
   render() {
     return (
@@ -28,7 +63,7 @@ class App extends Component {
           <Provider store={store}>
             <Loader />
             <Nav />
-            <Toast />
+            <Toast config={toastConfig} />
           </Provider>
         </GestureHandlerRootView>
       </Wrapper>

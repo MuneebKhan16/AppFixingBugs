@@ -1,6 +1,7 @@
 export default Icons = {
   user: require('./user.png'),
   profile: require('./profile.png'),
+  playIcon: require('./playIcon.png'),
   menu: require('./information.png'),
   notification: require('./notification.png'),
   search: require('./search.png'),
@@ -40,7 +41,7 @@ export default Icons = {
   delete:require('../Icons/delete.png'),
   date:require('../Icons/date.png'),
   lock:require('../Icons/lock.png'),
-  subscription:require('../Icons/Subtraction.png'),
+  subtract:require('../Icons/Subtraction.png'),
   icn:require('../Icons/icn.png'),
   wallet:require('../Icons/wallet.png'),
   phone:require('../Icons/phone.png'),
@@ -78,5 +79,7 @@ eventlist:require('./eventlist.png'),
 homelist:require('./homelist.png'),
 chatlist:require('./chalist.png'),
 subscription:require('./subcription.png'),
-null:require('../Icons/null.png')
+null:require('../Icons/null.png'),
+left:require('../Icons/left.png'),
+right:require('../Icons/right.png')
 };

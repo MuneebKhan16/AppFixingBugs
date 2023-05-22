@@ -1,0 +1,65 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/NexaBlack.ttf",
+      "sha1": "93959d970cd752da47563655b0134ca193fcac32"
+    },
+    {
+      "path": "src/assets/fonts/NexaBlackItalic.ttf",
+      "sha1": "044e9540d92d460d54353f009abb2b3c503fc2d6"
+    },
+    {
+      "path": "src/assets/fonts/NexaBold.ttf",
+      "sha1": "a8b77b6b40ea059ab814be95779f61679d2992d3"
+    },
+    {
+      "path": "src/assets/fonts/NexaBoldItalic.ttf",
+      "sha1": "ea3e5bcfcdc4bc3adc93108048dcf531911b577d"
+    },
+    {
+      "path": "src/assets/fonts/NexaBook.ttf",
+      "sha1": "57029dba89a4b9e1fcb673e886c84c125a746486"
+    },
+    {
+      "path": "src/assets/fonts/NexaBookItalic.ttf",
+      "sha1": "7257aad1da35416b1a5305193193622c91ebb5b3"
+    },
+    {
+      "path": "src/assets/fonts/NexaHeavyItalic.ttf",
+      "sha1": "11d1a81d553dd55692d219a15e353f20fa20c57a"
+    },
+    {
+      "path": "src/assets/fonts/NexaLight.ttf",
+      "sha1": "f053574a65af956e779ed7ed7d5fd2edd7a4cbb8"
+    },
+    {
+      "path": "src/assets/fonts/NexaLightItalic.ttf",
+      "sha1": "07aeedd42efe4061f134f1efb52fdb447414a96e"
+    },
+    {
+      "path": "src/assets/fonts/NexaRegular.ttf",
+      "sha1": "74a05bfe105fb09ff7eb25c957739595b173aa7b"
+    },
+    {
+      "path": "src/assets/fonts/NexaRegularItalic.ttf",
+      "sha1": "ec7422390857ad1fc31e5a163a51ecb7f7a3ec15"
+    },
+    {
+      "path": "src/assets/fonts/NexaThin.ttf",
+      "sha1": "3626e580c7c6dce14a14ed36fcb0edb408a92a3c"
+    },
+    {
+      "path": "src/assets/fonts/NexaXBold.ttf",
+      "sha1": "808cb1ff0574acae4f7aec312e93a322defebef0"
+    },
+    {
+      "path": "src/assets/fonts/NexaXBoldItalic.ttf",
+      "sha1": "7e4fd6feabd0a22c18e293f5750f6ba59ad7d173"
+    },
+    {
+      "path": "src/assets/fonts/SEGOEUI.TTF",
+      "sha1": "280935e382b62fe953a4efe09b2bbf8d34b0f14a"
+    }
+  ]
+}

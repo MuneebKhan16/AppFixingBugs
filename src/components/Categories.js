@@ -16,6 +16,7 @@ import Icons from '../assets/Icons';
 import Modal from 'react-native-modal';
 import CustomButton from './CustomButton';
 import Images from '../assets/Images';
+import { themes } from '../config/globalFonts/globalFonts';
 
 const Categories = props => {
   const { categories } = props;
@@ -32,13 +33,14 @@ const Categories = props => {
       onPress={onPress}
       activeOpacity={0.3}
       style={styles.touchable}>
-      
+
       <ImageBackground
-        resizeMode='contain'
+        resizeMode='cover'
         // source={Images.grid}
         source={{ uri: `${ImageURL?.ImageURL}${categories?.category_image}` }}
         style={styles.imgbg}
         imageStyle={styles.bg}>
+        {isModalVisible && <View style={styles.overlay} />}
         <TouchableOpacity
           onPress={toggleModal}
           activeOpacity={0.5}
@@ -47,7 +49,18 @@ const Categories = props => {
             <Image source={Icons.privacyPolicy} style={styles.policy} onPress={onPress} />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={isModalVisible}>
+        {isModalVisible && <View style={styles.popup}>
+          <Text style={{
+            color: '#000000', fontSize: themes?.fontSize?.extraVSmall,
+            fontFamily: themes?.font?.regular,
+          }}>{categories?.title}</Text>
+          <Text style={{
+            color: '#000000', fontSize: themes?.fontSize?.extraVSmall,
+            fontFamily: themes?.font?.regular,
+          }}>{categories?.category_info}</Text>
+
+        </View>}
+        {/* <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
             <Text style={styles.title}>{categories?.title}</Text>
           </View>
@@ -61,7 +74,7 @@ const Categories = props => {
             title="Close"
             onPress={toggleModal}
           />
-        </Modal>
+        </Modal> */}
 
         {/* <Text style={styles.ctg}>{categories?.title}</Text> */}
       </ImageBackground>
@@ -74,20 +87,20 @@ export default React.memo(Categories);
 
 const styles = StyleSheet.create({
   touchable: {
-    marginHorizontal: 20
-  },
-  imgbg: {
+    marginHorizontal: 20,
+    height: 400,
+    marginVertical: 10,
     borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { height: 3, width: 3 },
-    shadowOpacity: 0.8,
-    shadowRadius: 0.5,
-    marginTop: 8,
-    marginBottom: 8,
     borderWidth: 2,
     borderColor: Colors.purple,
-    height: 400,
-    paddingRight: 10
+
+  },
+  imgbg: {
+    borderRadius: 10,
+    shadowColor: '#000',
+    flex: 1,
+
+
   },
   bg: { borderRadius: 10 },
   title: { fontSize: 18, color: Colors.white, fontWeight: 'bold', textTransform: 'capitalize', },
@@ -135,4 +148,25 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textTransform: 'capitalize',
   },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, ' + 0.4 + ')', flex: 1,
+    borderRadius: 12,
+    // marginTop: 8,
+    // marginBottom: 8,
+    height: 400,
+    paddingRight: 10,
+    width: width * 0.89
+  },
+  popup: {
+    backgroundColor: '#ffff',
+    position: 'absolute',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    maxWidth: 220,
+    top: 35,
+    right: 35
+  }
 });

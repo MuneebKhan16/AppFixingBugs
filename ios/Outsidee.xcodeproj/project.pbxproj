@@ -12,9 +12,25 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2014F627248841118CDF982A /* NexaThin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 616331E156864DA58E603E5F /* NexaThin.ttf */; };
+		4B01BA4F2C0E47568CBCABD6 /* NexaRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD82A38C70654F1082845574 /* NexaRegular.ttf */; };
 		5C11CFD02A0487A400E02DB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C11CFCF2A0487A400E02DB9 /* GoogleService-Info.plist */; };
+		6248D0132C0241FBB3834DC6 /* NexaLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 788D6C0A35094527838EDAFE /* NexaLight.ttf */; };
+		6C93675187074EA889454E4C /* NexaXBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8060CCEFA85F4EB2BD4AB227 /* NexaXBold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-Outsidee-OutsideeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-Outsidee-OutsideeTests.a */; };
+		7E426DB87A9748B5BB345035 /* NexaBlack.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8587031B940D44C2A66BC164 /* NexaBlack.ttf */; };
+		7F8D7A643F94473687B41D62 /* NexaBlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91A32529C72C46BCAE7F3175 /* NexaBlackItalic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		84D28C1146E4472AA4A59285 /* NexaXBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89FC8B5146604B3E8ECB9AD2 /* NexaXBoldItalic.ttf */; };
+		8F095803832E48B6B21EE59B /* NexaBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 68584A0CB44F4A538526D70D /* NexaBoldItalic.ttf */; };
+		9409E4470E074B72A37CA7C9 /* NexaRegularItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE166239CA574F41B8864F33 /* NexaRegularItalic.ttf */; };
+		98BD3663869E4ADCB5AB5691 /* NexaHeavyItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CCBB2EBFC30A472A8BD466F8 /* NexaHeavyItalic.ttf */; };
+		A237FD9BCEDF49489538BD86 /* NexaBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80C9D756735542BBB7486DE8 /* NexaBold.ttf */; };
+		ABF707032A155AFE00276849 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF707022A155AFE00276849 /* StoreKit.framework */; };
+		BAD40C8DB3FE4FB0AD5CFAA7 /* NexaBookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D831097E0EAA4C72A35EFA15 /* NexaBookItalic.ttf */; };
+		C4083B99B2284581AFD478B2 /* NexaBook.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91D68E03DAF9459C94BB466E /* NexaBook.ttf */; };
+		E6951486ED084E73B32985FC /* SEGOEUI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 9FBC90BF8AA24E0C94720485 /* SEGOEUI.TTF */; };
+		FB3C93E7C47645F495B57902 /* NexaLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7357130C52C84A19B8456C0C /* NexaLightItalic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,9 +60,25 @@
 		5C11CFCE2A04878F00E02DB9 /* Outsidee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Outsidee.entitlements; path = Outsidee/Outsidee.entitlements; sourceTree = "<group>"; };
 		5C11CFCF2A0487A400E02DB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-Outsidee.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Outsidee.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		616331E156864DA58E603E5F /* NexaThin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaThin.ttf; path = ../src/assets/fonts/NexaThin.ttf; sourceTree = "<group>"; };
+		68584A0CB44F4A538526D70D /* NexaBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaBoldItalic.ttf; path = ../src/assets/fonts/NexaBoldItalic.ttf; sourceTree = "<group>"; };
+		7357130C52C84A19B8456C0C /* NexaLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaLightItalic.ttf; path = ../src/assets/fonts/NexaLightItalic.ttf; sourceTree = "<group>"; };
+		788D6C0A35094527838EDAFE /* NexaLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaLight.ttf; path = ../src/assets/fonts/NexaLight.ttf; sourceTree = "<group>"; };
+		8060CCEFA85F4EB2BD4AB227 /* NexaXBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaXBold.ttf; path = ../src/assets/fonts/NexaXBold.ttf; sourceTree = "<group>"; };
+		80C9D756735542BBB7486DE8 /* NexaBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaBold.ttf; path = ../src/assets/fonts/NexaBold.ttf; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Outsidee/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8587031B940D44C2A66BC164 /* NexaBlack.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaBlack.ttf; path = ../src/assets/fonts/NexaBlack.ttf; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Outsidee-OutsideeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Outsidee-OutsideeTests.release.xcconfig"; path = "Target Support Files/Pods-Outsidee-OutsideeTests/Pods-Outsidee-OutsideeTests.release.xcconfig"; sourceTree = "<group>"; };
+		89FC8B5146604B3E8ECB9AD2 /* NexaXBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaXBoldItalic.ttf; path = ../src/assets/fonts/NexaXBoldItalic.ttf; sourceTree = "<group>"; };
+		91A32529C72C46BCAE7F3175 /* NexaBlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaBlackItalic.ttf; path = ../src/assets/fonts/NexaBlackItalic.ttf; sourceTree = "<group>"; };
+		91D68E03DAF9459C94BB466E /* NexaBook.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaBook.ttf; path = ../src/assets/fonts/NexaBook.ttf; sourceTree = "<group>"; };
+		9FBC90BF8AA24E0C94720485 /* SEGOEUI.TTF */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SEGOEUI.TTF; path = ../src/assets/fonts/SEGOEUI.TTF; sourceTree = "<group>"; };
+		ABF707022A155AFE00276849 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		AE166239CA574F41B8864F33 /* NexaRegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaRegularItalic.ttf; path = ../src/assets/fonts/NexaRegularItalic.ttf; sourceTree = "<group>"; };
+		CCBB2EBFC30A472A8BD466F8 /* NexaHeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaHeavyItalic.ttf; path = ../src/assets/fonts/NexaHeavyItalic.ttf; sourceTree = "<group>"; };
+		D831097E0EAA4C72A35EFA15 /* NexaBookItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaBookItalic.ttf; path = ../src/assets/fonts/NexaBookItalic.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FD82A38C70654F1082845574 /* NexaRegular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = NexaRegular.ttf; path = ../src/assets/fonts/NexaRegular.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +95,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C80B921A6F3F58F76C31292 /* libPods-Outsidee.a in Frameworks */,
+				ABF707032A155AFE00276849 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +137,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABF707022A155AFE00276849 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				5DCACB8F33CDC322A6C60F78 /* libPods-Outsidee.a */,
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-Outsidee-OutsideeTests.a */,
@@ -127,6 +161,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				E1D20C8E92FF4B12A1442B95 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -151,6 +186,28 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-Outsidee-OutsideeTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		E1D20C8E92FF4B12A1442B95 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9FBC90BF8AA24E0C94720485 /* SEGOEUI.TTF */,
+				8587031B940D44C2A66BC164 /* NexaBlack.ttf */,
+				91A32529C72C46BCAE7F3175 /* NexaBlackItalic.ttf */,
+				80C9D756735542BBB7486DE8 /* NexaBold.ttf */,
+				68584A0CB44F4A538526D70D /* NexaBoldItalic.ttf */,
+				91D68E03DAF9459C94BB466E /* NexaBook.ttf */,
+				D831097E0EAA4C72A35EFA15 /* NexaBookItalic.ttf */,
+				CCBB2EBFC30A472A8BD466F8 /* NexaHeavyItalic.ttf */,
+				788D6C0A35094527838EDAFE /* NexaLight.ttf */,
+				7357130C52C84A19B8456C0C /* NexaLightItalic.ttf */,
+				FD82A38C70654F1082845574 /* NexaRegular.ttf */,
+				AE166239CA574F41B8864F33 /* NexaRegularItalic.ttf */,
+				616331E156864DA58E603E5F /* NexaThin.ttf */,
+				8060CCEFA85F4EB2BD4AB227 /* NexaXBold.ttf */,
+				89FC8B5146604B3E8ECB9AD2 /* NexaXBoldItalic.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +308,21 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				5C11CFD02A0487A400E02DB9 /* GoogleService-Info.plist in Resources */,
+				E6951486ED084E73B32985FC /* SEGOEUI.TTF in Resources */,
+				7E426DB87A9748B5BB345035 /* NexaBlack.ttf in Resources */,
+				7F8D7A643F94473687B41D62 /* NexaBlackItalic.ttf in Resources */,
+				A237FD9BCEDF49489538BD86 /* NexaBold.ttf in Resources */,
+				8F095803832E48B6B21EE59B /* NexaBoldItalic.ttf in Resources */,
+				C4083B99B2284581AFD478B2 /* NexaBook.ttf in Resources */,
+				BAD40C8DB3FE4FB0AD5CFAA7 /* NexaBookItalic.ttf in Resources */,
+				98BD3663869E4ADCB5AB5691 /* NexaHeavyItalic.ttf in Resources */,
+				6248D0132C0241FBB3834DC6 /* NexaLight.ttf in Resources */,
+				FB3C93E7C47645F495B57902 /* NexaLightItalic.ttf in Resources */,
+				4B01BA4F2C0E47568CBCABD6 /* NexaRegular.ttf in Resources */,
+				9409E4470E074B72A37CA7C9 /* NexaRegularItalic.ttf in Resources */,
+				2014F627248841118CDF982A /* NexaThin.ttf in Resources */,
+				6C93675187074EA889454E4C /* NexaXBold.ttf in Resources */,
+				84D28C1146E4472AA4A59285 /* NexaXBoldItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,8 +576,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsidee/Outsidee.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 696PA32759;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = N35Z4A9JLM;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Outsidee/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outsidee;
@@ -519,7 +591,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsidee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsideee;
 				PRODUCT_NAME = Outsidee;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -534,8 +606,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Outsidee/Outsidee.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 696PA32759;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = N35Z4A9JLM;
 				INFOPLIST_FILE = Outsidee/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Outsidee;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -548,7 +620,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsidee;
+				PRODUCT_BUNDLE_IDENTIFIER = com.celectstudios.outsideee;
 				PRODUCT_NAME = Outsidee;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

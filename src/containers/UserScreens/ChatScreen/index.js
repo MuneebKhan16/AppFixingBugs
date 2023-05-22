@@ -19,27 +19,30 @@ if (Platform.OS === 'android') {
   }
 }
 
-const ChatScreen = (props) => {
-  const {route } = props;
+const ChatScreen = props => {
+  const {route} = props;
   const {chatUser, conversation_id} = route?.params;
   const user = useSelector(state => state?.reducer?.user);
+  const picture = user.profile_picture
+  //console.log('picture',picture)
   const socket = useSelector(state => state?.reducer?.socket);
   const [chatList, setChatList] = useState([]);
   const [message, setMessage] = useState('');
   const sender_id = user?.id;
   const receiver_id = chatUser?.id;
 
-  const conversation_id2 = user?.id+"_"+props?.route?.params?.id;
+  const conversation_id2 = user?.id + '_' + props?.route?.params?.id;
 
   const response = () => {
     const payload = {
       sender_id: sender_id,
-      conv_id: conversation_id? conversation_id : conversation_id2,
+      conv_id: conversation_id ? conversation_id : conversation_id2,
     };
-    console.log("payload " +  JSON.stringify(payload));
+   // console.log('payload ' + JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
+       console.log('senderpayload ', data);
         const messages = data?.data || [];
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
@@ -54,21 +57,20 @@ const ChatScreen = (props) => {
   const sendNewMessage = () => {
     if (message.length > 0) {
       loaderStart();
-      var payload = ''
-      if(conversation_id != null ){ // chat through search user: already existing chats 
-      payload = {
+      var payload = '';
+      if (conversation_id != null) {
+        payload = {
           sender_id: sender_id,
           receiver_id: receiver_id,
-          conv_id: conversation_id ,
+          conv_id: conversation_id,
           msg: message,
           msg_type: 'text',
         };
-      }
-      else{  // direct chat through event page :totally new chat initiation
-      payload = {
+      } else {
+        payload = {
           sender_id: user?.id,
           receiver_id: props?.route?.params?.id,
-          conv_id:  conversation_id2 ,
+          conv_id: conversation_id2,
           msg: message,
           msg_type: 'text',
         };
@@ -97,6 +99,9 @@ const ChatScreen = (props) => {
     }
   }, []);
 
+  console.log('chatListchatList',chatList)
+ 
+
   return (
     <AppBackground title={'Chats'} back profile={false} home>
       <SafeAreaView style={styles.flex}>
@@ -108,6 +113,7 @@ const ChatScreen = (props) => {
             style={styles.msg}
             renderItem={({item}) => (
               <>
+              {console.log("checklist",item)}
                 {item.sender_id == sender_id ? (
                   <CustomChatBox
                     msg={item.message ? item.message : item.msg}

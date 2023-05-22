@@ -12,6 +12,7 @@ const GooglePlaceAutocomplete = ({
   inputStyles,
   placeholder,
   iconColor,
+  renderRightButton
 }) => {
   return (
     <View style={[styles.geoLocationView, wrapperStyles]}>
