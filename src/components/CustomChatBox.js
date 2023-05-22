@@ -9,7 +9,7 @@ import ImageURL from '../config/Common'
 import { themes } from '../config/globalFonts/globalFonts';
 const MicroChat = props => {
   const { image, name, msg, onPress ,date } = props;
-
+  console.log("$$$",image)
   const db = `${ImageURL.ImageURL}${image}`
   const bd = image
   

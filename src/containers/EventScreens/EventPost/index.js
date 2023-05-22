@@ -119,10 +119,11 @@ const EventPost = props => {
     const event_image = selectedImage;
     const user_id = users?.id;
     // const category_id = selectedData?.category_id;
-    const category_id = selectedData == selectedData?.category_id;
+    const category_id =  selectedData ? selectedData?.category_id : null;
 
     const event_location = location;
     const event_date = moment(date).format('YYYY-MM-DD');
+    
 
     post_events(
       event_title,
