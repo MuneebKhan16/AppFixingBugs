@@ -329,8 +329,8 @@ export async function updateProfile(
   const data = await postApi('update-profile', params);
   console.log('object', data?.Data);
   if (data.status == 1) {
-    dispatch(saveUser(data?.Data));
-    //NavService.goBack();
+    saveUser(data?.Data);
+    NavService.goBack();
   }
 }
 
@@ -552,4 +552,17 @@ export async function show_eventCreater_event(user_id) {
 export async function showprofiledetail() {
   const data = await getApi('show-profile');
   return data;
+}
+
+export async function searchEvents(state, city, event_date) {
+  const params = new FormData();
+
+  params.append('state', state);
+  params.append('city', city);
+  params.append('event_date', event_date);
+
+  const data = await postApi('search-event', params);
+  if (data.status == 1) {
+    return data?.Data;
+  }
 }

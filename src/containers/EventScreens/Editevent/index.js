@@ -245,7 +245,7 @@ const Editevent = ({ navigation, route }) => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{ color: '#000' }}>
+                <Text style={{ color: '#000',width:250 }} numberOfLines={1}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -284,13 +284,13 @@ const Editevent = ({ navigation, route }) => {
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000',width:100}} numberOfLines={1}>
                     {location.split(' ').slice(-5, -4).pop() +
                       ' ' +
                       location.split(' ').slice(-4, -3).pop()}
                   </Text>
                 ) : currentlocation ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000', }}>
                     {currentlocation.split(' ').length > 1
                       ? currentlocation.split(' ').slice(-4, -3).pop()
                       : 'City'}
@@ -310,7 +310,7 @@ const Editevent = ({ navigation, route }) => {
 
               <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
                 {location ? (
-                  <Text style={{ color: '#000' }}>
+                  <Text style={{ color: '#000' ,width:100}}numberOfLines={1}>
                     {location.split(' ').slice(-3, -2).pop()}
                   </Text>
                 ) : currentlocation ? (

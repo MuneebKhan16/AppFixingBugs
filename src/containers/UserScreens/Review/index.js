@@ -207,6 +207,8 @@ const Review = props => {
               height: 50,
               borderRadius: 50,
               marginBottom: 10,
+              borderWidth:2,
+              borderColor:Colors.purple
             }}
           />
           <Text

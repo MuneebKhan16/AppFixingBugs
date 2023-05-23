@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   container: { marginTop: 30, marginHorizontal: 0 ,},
   header: { flexDirection: 'row', alignItems: 'center' },
   title: {
-    fontSize: themes?.fontSize?.large,
+    fontSize: themes?.fontSize?.medium,
     fontFamily: themes?.font?.extraBold,
     color: Colors.black,
     marginLeft: 8,
@@ -54,5 +54,27 @@ export const styles = StyleSheet.create({
   },
   locationtxt: { color: Colors.white,fontSize: themes?.fontSize?.small,
     fontFamily: themes?.font?.bold, width: '88%', marginLeft: 5 },
-  border: { borderRadius: 20,borderColor:Colors.purple,borderWidth:3 ,}
+  border: { borderRadius: 20,borderColor:Colors.purple,borderWidth:3 ,},
+
+
+ 
+  loccontainer: { flexDirection: 'row', alignItems: 'center', position: 'absolute', bottom: 5, },
+  locsub: {
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    marginLeft: 5
+  },
+  location: {
+    tintColor: Colors.white, width: 16,
+    height: 16,
+  },
+  loctxt: {
+    color: Colors.white, fontSize: themes?.fontSize?.small,
+    fontFamily: themes?.font?.bold, marginRight: 10, width: 250
+  },
+  top: { marginTop: 30 },
+ 
 });

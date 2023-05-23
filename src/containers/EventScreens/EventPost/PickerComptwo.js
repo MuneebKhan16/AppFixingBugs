@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View,Platform} from 'react-native';
 import React, {useState} from 'react';
 import {Colors} from '../../../config';
 import {Picker} from '@react-native-picker/picker';
@@ -18,7 +18,12 @@ const PickerComptwo = () => {
       color={Colors.grey}
       selectedValue={selectedPicker}
       onValueChange={(itemValue, itemIndex) => setSelectedPicker(itemValue)}
-      itemStyle={{color: 'white', fontSize: 20, backgroundColor: '#ededed'}}
+      itemStyle={{
+        color: 'white', 
+      fontSize: 20, 
+      backgroundColor: '#ededed',
+      height: Platform.OS === 'ios' ? 140 : null,
+      borderRadius:Platform.OS === 'ios' ? 20 : null,}}
       mode="dialog">
       <Picker.Item
         label="Event Occurrence"

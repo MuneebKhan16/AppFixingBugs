@@ -88,6 +88,7 @@ class Post extends Component {
     //     visibilityTime: 3000,
     //   });
     // }
+
     if (
       isChecked === true &&
       isChecked1 === true &&
@@ -102,7 +103,7 @@ class Post extends Component {
       if (selectedImage) {
         rating_image = {
           uri: selectedImage.path,
-          name: `Rating${Date.now()}.${selectedImage?.mime.slice(
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
             selectedImage?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedImage?.mime,
@@ -111,7 +112,7 @@ class Post extends Component {
       if (selectedVideo) {
         rating_image = {
           uri: selectedVideo.path,
-          name: `Rating${Date.now()}.${selectedVideo?.mime.slice(
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
             selectedVideo?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedVideo?.mime,
@@ -137,7 +138,7 @@ class Post extends Component {
       if (selectedImage) {
         rating_image = {
           uri: selectedImage.path,
-          name: `Rating${Date.now()}.${selectedImage?.mime.slice(
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
             selectedImage?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedImage?.mime,
@@ -146,7 +147,7 @@ class Post extends Component {
       if (selectedVideo) {
         rating_image = {
           uri: selectedVideo.path,
-          name: `Rating${Date.now()}.${selectedVideo?.mime.slice(
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
             selectedVideo?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedVideo?.mime,
@@ -171,7 +172,7 @@ class Post extends Component {
       if (selectedImage) {
         rating_image = {
           uri: selectedImage.path,
-          name: `Rating${Date.now()}.${selectedImage?.mime.slice(
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
             selectedImage?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedImage?.mime,
@@ -180,7 +181,7 @@ class Post extends Component {
       if (selectedVideo) {
         rating_image = {
           uri: selectedVideo.path,
-          name: `Rating${Date.now()}.${selectedVideo?.mime.slice(
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
             selectedVideo?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedVideo?.mime,
@@ -205,7 +206,7 @@ class Post extends Component {
       if (selectedImage) {
         rating_image = {
           uri: selectedImage.path,
-          name: `Rating${Date.now()}.${selectedImage?.mime.slice(
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
             selectedImage?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedImage?.mime,
@@ -214,7 +215,7 @@ class Post extends Component {
       if (selectedVideo) {
         rating_image = {
           uri: selectedVideo.path,
-          name: `Rating${Date.now()}.${selectedVideo?.mime.slice(
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
             selectedVideo?.mime.lastIndexOf('/') + 1,
           )}`,
           type: selectedVideo?.mime,
@@ -224,6 +225,18 @@ class Post extends Component {
       var rating = starCount;
       var review = null;
       var event_id = this.props.route.params;
+
+      console.log(
+        'object',
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
+
       post_reviews(
         user_id,
         user_type,
@@ -235,10 +248,11 @@ class Post extends Component {
       );
     }
   };
+
   render() {
     const {userImage, selectedImage, selectedVideo} = this.state;
     const {user} = this.props;
-
+    console.log('selectedImage', this.state.selectedImage);
     return (
       <AppBackground title={'Post'} back home>
         <ScrollView
@@ -286,12 +300,12 @@ class Post extends Component {
                 <ProfileImage
                   name={user?.name}
                   imageUri={
-                    selectedImage?.mime.startsWith('image/')
+                    selectedImage?.mime?.startsWith('image/')
                       ? selectedImage.path
                       : null
                   }
                   videoUri={
-                    selectedVideo?.mime.startsWith('image/')
+                    selectedVideo?.mime?.startsWith('image/')
                       ? selectedVideo.path
                       : null
                   }
@@ -315,15 +329,26 @@ class Post extends Component {
                 <CustomImagePicker
                   uploadVideo
                   onImageChange={(path, mime) => {
-                    console.log('path', path);
+                    console.log('pathssss', path);
+
                     if (mime.startsWith('image/')) {
-                      this.setState({
-                        selectedImage: {
-                          path: path[0]?.path,
-                          mime: path[0]?.mime,
-                        },
-                        selectedVideo: null,
-                      });
+                      if (Array.isArray(path)) {
+                        this.setState({
+                          selectedImage: {
+                            path: path[0]?.path,
+                            mime: path[0]?.mime,
+                          },
+                          selectedVideo: null,
+                        });
+                      } else {
+                        this.setState({
+                          selectedImage: {
+                            path,
+                            mime,
+                          },
+                          selectedVideo: null,
+                        });
+                      }
                     } else if (mime.startsWith('video/')) {
                       this.setState({
                         selectedVideo: {path, mime},

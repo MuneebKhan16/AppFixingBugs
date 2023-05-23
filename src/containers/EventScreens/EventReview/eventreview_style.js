@@ -55,7 +55,6 @@ export const styles = StyleSheet.create({
   imgback: {
     width: '100%',
     height: 170,
-    marginTop: 10,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: Colors.purple,

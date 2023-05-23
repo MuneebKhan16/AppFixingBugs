@@ -41,24 +41,27 @@ const EventReview = ({navigation, route}) => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         {eventDetail?.images?.length > 0 ? (
           <Swiper
-            style={{height: 185}}
+            style={{height:170,borderRadius:10}}
             activeDotColor="transparent"
             dotColor="transparent">
             {eventDetail?.images.map((data, index) => (
               <React.Fragment>
                 {data?.event_images?.split('.')[1] == 'mp4' ? (
-                  <View style={{height: height * 0.21, width: width * 0.9}}>
+                  <View style={{height: height * 0.25, width: width * 0.9,borderRadius:10}}>
                     <VideoPlayer
                       video={`${ImageURL?.ImageURL}${data?.event_images}`}
                       style={{
                         width: width * 0.9,
                         height: height * 0.3,
+                        borderRadius:10,
+                        
                       }}
                       mediaPlaybackRequiresUserAction={true}
                       allowsInlineMediaPlayback={true}
                       javaScriptEnabled={true}
                       allowsFullscreenVideo={true}
                       domStorageEnabled={true}
+                      hideControlsOnStart={true}
                       injectedJavaScript={`
                                  document.getElementsByTagName("video")[0].removeAttribute("autoplay");
                                  document.getElementsByTagName("video")[0].style.objectFit = "cover";
@@ -88,9 +91,7 @@ const EventReview = ({navigation, route}) => {
         /> */}
         <View style={styles.titlehdr}>
           <Text style={styles.title}>{eventDetail?.event_title} .</Text>
-          <Text style={styles.date}>
-            {DateReadbleFunction(eventDetail?.created_at)}{' '}
-          </Text>
+          <Text style={styles.date}>{eventDetail?.event_date} </Text>
         </View>
         <Text style={styles.subtitle}>{eventDetail.event_description}</Text>
         <View style={styles.markericn}>
