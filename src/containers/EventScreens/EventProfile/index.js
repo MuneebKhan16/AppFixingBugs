@@ -186,19 +186,11 @@ const EventProfile = () => {
             </View>
           </View>
 
-          <View
-            style={{
-              marginTop: 20,
-              borderBottomWidth: 1.5,
-              borderBottomColor: Colors.grey,
-            }}>
-            <Text
-              style={{
-                color: Colors.black,
-                fontWeight: '700',
-                fontSize: 18,
-                marginBottom: 10,
-              }}>
+          <View style={{
+            marginTop: 20,
+            borderBottomWidth: 1.5, borderBottomColor: Colors.grey,
+          }}>
+            <Text style={{ color: Colors.black, fontWeight: '700', fontSize: 18, marginBottom: 10 }}>
               Event History
             </Text>
           </View>

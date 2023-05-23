@@ -64,7 +64,7 @@ export async function socialSignin(access_token, provider, name, email) {
   }
 }
 
-export async function login(email, password, setLogin) {
+export async function login(email, password, device_token,device_type) {
   try {
     if (!email && !password)
       return Toast.show({
@@ -88,6 +88,8 @@ export async function login(email, password, setLogin) {
     const params = {
       email,
       password,
+      device_token,
+      device_type
     };
 
     const data = await postApi('signin', params, false);
@@ -135,20 +137,24 @@ export async function signup(
     password,
     confirm_password,
   };
-  const data = await postApi('signup', params);
-  if (data?.status == 1) {
-    NavService.reset(0, [{name: 'Login'}]);
-    // Toast.show({
-    //   text1: data.message,
-    //   type: 'success',
-    //   visibilityTime: 5000,
-    // });
-  } else if (data?.status === 0) {
-    Toast.show({
-      text1: `${data.message.email}`,
-      type: 'error',
-      visibilityTime: 5000,
-    });
+  try{
+    const data = await postApi('signup', params);
+    if (data?.status == 1) {
+      NavService.reset(0, [{name: 'Login'}]);
+      // Toast.show({
+      //   text1: data.message,
+      //   type: 'success',
+      //   visibilityTime: 5000,
+      // });
+    } else if (data?.status === 0) {
+      Toast.show({
+        text1: `${data.message.email}`,
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    }
+  }catch(err){
+    logout()
   }
 }
 

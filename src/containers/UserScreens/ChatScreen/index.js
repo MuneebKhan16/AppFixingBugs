@@ -42,11 +42,13 @@ const ChatScreen = props => {
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
+      //  console.log('senderpayload ', data?.user_sender);
        console.log('senderpayload ', data);
         const messages = data?.data || [];
+        // console.log('messages123@',data)
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
-        setChatList(chatList1 => [...[data?.data], ...chatList1]);
+        setChatList(chatList1 => [...[data?.data , picture] ,  ...chatList1]);
       }
     });
 
@@ -99,7 +101,7 @@ const ChatScreen = props => {
     }
   }, []);
 
-  console.log('chatListchatList',chatList)
+  //console.log('chatListchatList',chatList)
  
 
   return (
@@ -113,16 +115,16 @@ const ChatScreen = props => {
             style={styles.msg}
             renderItem={({item}) => (
               <>
-              {console.log("checklist",item)}
+              {console.log("checklist&&",item)}
                 {item.sender_id == sender_id ? (
                   <CustomChatBox
                     msg={item.message ? item.message : item.msg}
-                    image={item.profile_picture || `${dummy.dummy}`}
+                    image={picture || `${dummy.dummy}`}
                   />
                 ) : item.sender_id == receiver_id ? (
                   <MicroChat
                     msg={item.message ? item.message : item.msg}
-                    image={item.profile_picture || `${dummy.dummy}`}
+                    image={picture || `${dummy.dummy}`}
                   />
                 ) : null}
               </>
