@@ -64,7 +64,7 @@ export async function socialSignin(access_token, provider, name, email) {
   }
 }
 
-export async function login(email, password, setLogin) {
+export async function login(email, password, device_token,device_type) {
   try {
     if (!email && !password)
       return Toast.show({
@@ -88,6 +88,8 @@ export async function login(email, password, setLogin) {
     const params = {
       email,
       password,
+      device_token,
+      device_type
     };
 
     const data = await postApi('signin', params, false);
