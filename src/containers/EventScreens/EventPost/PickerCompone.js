@@ -9,16 +9,18 @@ const PickerCompone = (props) => {
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [selectedPicker, setSelectedPicker] = useState(categories);
 
+
+
+
+
   const handletransfer = () => {
-    setSelectedData(selectedLanguage)
-  }
+    setSelectedData(selectedLanguage);
+  };
 
   useEffect(() => {
-    handletransfer()
-  }, [selectedLanguage])
-
-
-
+    handletransfer();
+  }, [selectedLanguage]);
+  console.log('selectedData', selectedData);
   return (
     <Picker
       style={styles.container}

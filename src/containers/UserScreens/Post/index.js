@@ -69,8 +69,6 @@ class Post extends Component {
     return;
   };
 
- 
-
   handleSubmit = () => {
     const {id} = this.props.user;
     const {
@@ -91,7 +89,6 @@ class Post extends Component {
     //   });
     // }
 
-    
     if (
       isChecked === true &&
       isChecked1 === true &&
@@ -229,14 +226,16 @@ class Post extends Component {
       var review = null;
       var event_id = this.props.route.params;
 
-      console.log('object', user_id,
-      user_type,
-      rating_image,
-      tags,
-      rating,
-      review,
-      event_id,)
-
+      console.log(
+        'object',
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
 
       post_reviews(
         user_id,
@@ -250,12 +249,10 @@ class Post extends Component {
     }
   };
 
-
-  
   render() {
     const {userImage, selectedImage, selectedVideo} = this.state;
     const {user} = this.props;
-    console.log('selectedImage', this.state.selectedImage)
+    console.log('selectedImage', this.state.selectedImage);
     return (
       <AppBackground title={'Post'} back home>
         <ScrollView
@@ -299,26 +296,25 @@ class Post extends Component {
           </ActionSheet>
           <View style={styles.profile}>
             <View style={styles.btm}>
-              { selectedImage !== null ? (
+              {selectedImage !== null ? (
                 <ProfileImage
                   name={user?.name}
-                  imageUri={  
-                        selectedImage?.mime?.startsWith('image/')
-                          ? selectedImage.path
-                          : null 
+                  imageUri={
+                    selectedImage?.mime?.startsWith('image/')
+                      ? selectedImage.path
+                      : null
                   }
                   videoUri={
-                     selectedVideo?.mime?.startsWith('image/')
+                    selectedVideo?.mime?.startsWith('image/')
                       ? selectedVideo.path
                       : null
                   }
                 />
               ) : (
-                
                 <ProfileImage
                   name={user?.name}
                   imageUri={
-                     selectedImage?.mime.startsWith('image/')
+                    selectedImage?.mime.startsWith('image/')
                       ? selectedImage.path
                       : null
                   }
@@ -328,7 +324,6 @@ class Post extends Component {
                       : null
                   }
                 />
-                
               )}
               <View style={styles.picker}>
                 <CustomImagePicker
@@ -337,13 +332,23 @@ class Post extends Component {
                     console.log('pathssss', path);
 
                     if (mime.startsWith('image/')) {
-                      this.setState({
-                        selectedImage: {
-                          path: path[0]?.path,
-                          mime: path[0]?.mime,
-                        },
-                        selectedVideo: null,
-                      });
+                      if (Array.isArray(path)) {
+                        this.setState({
+                          selectedImage: {
+                            path: path[0]?.path,
+                            mime: path[0]?.mime,
+                          },
+                          selectedVideo: null,
+                        });
+                      } else {
+                        this.setState({
+                          selectedImage: {
+                            path,
+                            mime,
+                          },
+                          selectedVideo: null,
+                        });
+                      }
                     } else if (mime.startsWith('video/')) {
                       this.setState({
                         selectedVideo: {path, mime},

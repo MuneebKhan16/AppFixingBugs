@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import {Common} from '../../config';
+import {logoutUser} from '../actions';
 import {store} from '../index';
 
 let state = store.getState()?.reducer;

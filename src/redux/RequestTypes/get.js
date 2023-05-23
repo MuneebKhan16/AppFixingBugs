@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import { Common } from '../../config';
+import {logoutUser} from '../actions';
 import {store} from '../index';
 
 let state = store.getState()?.reducer;
@@ -60,7 +61,9 @@ export default async function getApi(
         type: 'error',
         visibilityTime: 5000,
       });
-    } else if (e.response?.data?.message && showError) {
+    } else if (e?.response?.status == 401) {
+      logoutUser();
+    }else if (e.response?.data?.message && showError) {
       Toast.show({
         text1: e.response.data.message,
         textStyle: {textAlign: 'center'},

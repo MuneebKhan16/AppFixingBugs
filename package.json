@@ -48,7 +48,7 @@
     "react-native-eject": "^0.2.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-fbsdk-next": "^7.2.0",
-    "react-native-gesture-handler": "^2.4.2",
+    "react-native-gesture-handler": "2.9.0",
     "react-native-google-places-autocomplete": "^2.5.1",
     "react-native-iap": "^12.10.5",
     "react-native-image-crop-picker": "^0.37.3",
