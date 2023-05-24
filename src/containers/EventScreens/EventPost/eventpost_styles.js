@@ -109,6 +109,15 @@ export const styles = StyleSheet.create({
   searchBox: {
     width: '90%',
   },
+  containers: {
+    width: 141,
+    borderRadius: 20,
+    color:Colors.black,
+    marginVertical:10,
+    backgroundColor:'#ededed',
+    marginHorizontal:5
+
+  },
   listView: {
     backgroundColor: '#FFF',
     borderTopWidth: 1,

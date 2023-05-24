@@ -64,7 +64,7 @@ class Login extends Component {
         visibilityTime: 3000,
       });
     } else {
-      login(email, password, device_token,device_type);
+      login(email, password,device_type,device_token);
     }
   };
   render() {

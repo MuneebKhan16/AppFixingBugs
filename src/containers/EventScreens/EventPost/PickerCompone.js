@@ -20,6 +20,7 @@ const PickerCompone = (props) => {
   useEffect(() => {
     handletransfer();
   }, [selectedLanguage]);
+ 
   return (
     <Picker
       style={styles.container}
@@ -71,3 +72,5 @@ const styles = StyleSheet.create({
 
   }
 })
+
+  

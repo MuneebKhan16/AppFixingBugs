@@ -39,7 +39,7 @@ export default async function postApi(
     const headers = {
       Authorization: 'Bearer ' + user_authentication,
       'Content-Type': 'multipart/form-data',
-      accept: 'application/json',
+      'Accept' : 'application/json',
       // 'Content-Type': 'multipart/form-data,octet-stream',
     };
     const response = await axios.post(endpoint, params, {headers});
