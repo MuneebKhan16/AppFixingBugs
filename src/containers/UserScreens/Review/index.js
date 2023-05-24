@@ -251,10 +251,10 @@ const Review = props => {
             numberOfLines={1}
             style={{
               fontSize: themes?.fontSize?.medium,
-              fontFamily: themes?.font?.bold,
+              fontFamily: themes?.font?.black,
               marginLeft: 8,
               color: Colors.black,
-              width: 130,
+              width: 120,
               marginBottom: 3,
             }}>
             {user?.name}

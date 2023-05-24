@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   post: {
     color: Colors.black,
     fontSize: themes?.fontSize?.large,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
     marginTop: 30,
 
     marginLeft: 13,
@@ -86,9 +86,9 @@ export const styles = StyleSheet.create({
   },
   marker: {width: 25, height: 25, marginRight: 5},
   location: {
-    fontSize: themes?.fontSize?.extraVSmall,
+    fontSize: themes?.fontSize?.small,
     fontFamily: themes?.font?.bold,
-    color: Colors.black,
+    color: Colors.darkGray,
     ellipsizeMode: 'middle',
     maxWidth: 150,
   },

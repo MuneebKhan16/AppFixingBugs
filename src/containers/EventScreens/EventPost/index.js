@@ -367,7 +367,7 @@ const EventPost = props => {
                 selectedValue={states}
                 onValueChange={(itemValue, itemIndex) => setStates(itemValue)}
                 itemStyle={{ color: 'white', fontSize: 20, }}
-                mode="dropdown"
+                mode="dialog"
               >
                 <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold' }} />
                 {
@@ -386,7 +386,7 @@ const EventPost = props => {
                 selectedValue={citys}
                 onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
                 itemStyle={{ color: 'white', fontSize: 20, }}
-                mode="dropdown"
+                mode="dialog"
               >
                 
                 {
