@@ -74,7 +74,7 @@ export async function socialSignin(access_token, provider, name, email) {
   }
 }
 
-export async function login(email, password, device_token, device_type) {
+export async function login(email, password) {
   try {
     if (!email && !password)
       return Toast.show({
@@ -439,6 +439,8 @@ export async function post_events(
   user_id,
   category_id,
   event_location,
+  state,
+  city,
   event_date,
 ) {
   const params = new FormData();
@@ -468,8 +470,8 @@ export async function post_events(
   params.append('user_id', user_id);
   params.append('category_id', category_id);
   params.append('event_location', event_location);
-  params.append('state', 'New Jersey');
-  params.append('city', 'San Fransisco');
+  params.append('state', state);
+  params.append('city', city);
   params.append('event_date', event_date);
 
   console.log('object09876', params);
