@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {NavService} from '../../config';
 import Toast from 'react-native-toast-message';
+import messaging from '@react-native-firebase/messaging';
 import {store} from '../index';
 import postApi, {fetchApi} from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
@@ -22,6 +23,15 @@ export function loaderStart() {
 export function loaderStop() {
   dispatch({type: 'LOADER_STOP'});
 }
+export const getDeviceToken = async () => {
+  try {
+    const token = await messaging().getToken();
+    if (token) return token;
+    else return '';
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Common APIs
 
@@ -31,10 +41,11 @@ export async function Get_All_Categories(api_token) {
 }
 
 export async function socialSignin(access_token, provider, name, email) {
+  const fcmToken = await getDeviceToken();
   const params = {
     social_token: access_token,
     login_type: provider,
-    device_token: 'fcmToken',
+    device_token: fcmToken,
     device_type: Platform.OS,
     name,
     email,
@@ -64,7 +75,7 @@ export async function socialSignin(access_token, provider, name, email) {
   }
 }
 
-export async function login(email, password,device_type,device_token) {
+export async function login(email, password) {
   try {
     if (!email && !password)
       return Toast.show({
@@ -84,9 +95,12 @@ export async function login(email, password,device_type,device_token) {
         type: 'error',
         visibilityTime: 3000,
       });
-
+    const fcmToken = await getDeviceToken();
     const params = {
-      email, password,device_type,device_token
+      email,
+      password,
+      device_type: Platform.OS,
+      device_token: fcmToken,
     };
 
     const data = await postApi('signin', params, false);
@@ -127,14 +141,16 @@ export async function signup(
       type: 'error',
       visibilityTime: 3000,
     });
-
+    const fcmToken = await getDeviceToken();
   const params = {
     name,
     email,
     password,
     confirm_password,
+    device_type: Platform.OS,
+    device_token: fcmToken,
   };
-  try{
+  try {
     const data = await postApi('signup', params);
     if (data?.status == 1) {
       NavService.reset(0, [{name: 'Login'}]);
@@ -150,8 +166,8 @@ export async function signup(
         visibilityTime: 5000,
       });
     }
-  }catch(err){
-    logout()
+  } catch (err) {
+    logout();
   }
 }
 

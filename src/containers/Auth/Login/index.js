@@ -31,14 +31,14 @@ class Login extends Component {
   };
 
   state = {
-    email: 'george@gmail.com',
+    email: 'Trump@gmail.com',
     password: 'Abcd123@',
     device_token: 'abc123321',
-    device_type:'android',
+    device_type: 'android',
     visible: false,
   };
   onSubmit = () => {
-    const {email, password,device_token,device_type} = this.state;
+    const {email, password, device_token, device_type} = this.state;
     if (!email && !password) {
       Toast.show({
         text1: 'Please enter all fields',
@@ -64,7 +64,7 @@ class Login extends Component {
         visibilityTime: 3000,
       });
     } else {
-      login(email, password,device_type,device_token);
+      login(email, password);
     }
   };
   render() {

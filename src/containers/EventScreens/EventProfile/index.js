@@ -27,15 +27,15 @@ const EventProfile = () => {
 
   const {userProfile} = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleImagePress = () => {
-    setIsFullScreen(true);
-  };
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
 
-  const handleCloseModal = () => {
-    setIsFullScreen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
 
   const userData = useSelector(state => state?.reducer?.user);
   const [showEvents, SetshowEvents] = useState([]);
@@ -251,7 +251,7 @@ const EventProfile = () => {
                         </Text>
                       </View>
                     </View>
-                    <TouchableWithoutFeedback onPress={handleImagePress}>
+                    {/* <TouchableWithoutFeedback onPress={handleImagePress}> */}
                    
                        {/* onPress={() => */}
                       {/* //   NavService.navigate('Event', item?.category_id)
@@ -303,8 +303,8 @@ const EventProfile = () => {
                           </Text>
                         </View>
                       </FastImage>
-                    </TouchableWithoutFeedback>
-                    <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                    {/* </TouchableWithoutFeedback> */}
+                    {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
                 <ScrollView>
                   <FastImage
                     source={{
@@ -329,7 +329,7 @@ const EventProfile = () => {
                 </TouchableWithoutFeedback>
                 </View>
                 </ScrollView>
-              </Modal>
+              </Modal> */}
                     <TouchableOpacity
                       onPress={() => Delete_Event(item)}
                       style={{position: 'absolute', right: 2, bottom: 10}}>

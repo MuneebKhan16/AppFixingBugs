@@ -25,20 +25,20 @@ const EventReview = ({ navigation, route }) => {
   useEffect(() => {
     get_reviews_event(token).then(res => setUserPost(res.Data));
   }, []);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleImagePress = () => {
-    setIsFullScreen(true);
-  };
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
 
-  const handleCloseModal = () => {
-    setIsFullScreen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
 
-  const DateReadbleFunction = date => {
-    var date = new Date();
-    return date.toLocaleDateString();
-  };
+  // const DateReadbleFunction = date => {
+  //   var date = new Date();
+  //   return date.toLocaleDateString();
+  // };
 
   const filteringData = [];
   // UserPost.filter(
@@ -81,7 +81,7 @@ const EventReview = ({ navigation, route }) => {
                     />
                   </View>
                 ) : (
-                  <TouchableWithoutFeedback onPress={handleImagePress}>
+                  // <TouchableWithoutFeedback onPress={handleImagePress}>
                     <FastImage
                       key={index}
                       source={{
@@ -90,9 +90,9 @@ const EventReview = ({ navigation, route }) => {
                       style={styles.imgback}
                       imageStyle={styles.img}
                     />
-                  </TouchableWithoutFeedback>
+                  // </TouchableWithoutFeedback>
                 )}
-                <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
                   <ScrollView>
                     <FastImage
                       source={{
@@ -115,7 +115,7 @@ const EventReview = ({ navigation, route }) => {
                       </TouchableWithoutFeedback>
                     </View>
                   </ScrollView>
-                </Modal>
+                </Modal> */}
               </React.Fragment>
             ))}
           </Swiper>
