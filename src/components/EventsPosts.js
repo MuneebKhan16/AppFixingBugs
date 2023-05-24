@@ -6,24 +6,34 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
+  TouchableWithoutFeedback,ScrollView
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-native-modal';
-import {Post} from '../config/Dummydata/Dummydata';
-import {Colors} from '../config';
+import { Post } from '../config/Dummydata/Dummydata';
+import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config//Common';
 import FastImage from 'react-native-fast-image';
-import {themes} from '../config/globalFonts/globalFonts';
+import { themes } from '../config/globalFonts/globalFonts';
 import VideoPlayer from '../components/VideoPlayer';
 // check
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 const Posts = props => {
-  const {datas} = props;
+  const { datas } = props;
   const [showVideoPopup, setShowVideoPopup] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
   const [starCount, setStarCount] = useState(1);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const handleImagePress = () => {
+    setIsFullScreen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsFullScreen(false);
+  };
 
   const ConvertTimeStamp = date => {
     const start = new Date(date);
@@ -39,7 +49,7 @@ const Posts = props => {
   return (
     <View>
       {datas?.length > 0 ? (
-        datas.map(data => {
+        datas.map((data,index) => {
           return (
             <View style={styles.mainprofile}>
               <View style={styles.container}>
@@ -52,7 +62,7 @@ const Posts = props => {
                 />
                 <View>
                   <Text style={styles.name}>{data?.user?.name}</Text>
-                  <View style={{marginLeft: 10}}>
+                  <View style={{ marginLeft: 10 }}>
                     <StarRating
                       fullStar={Icons.starFilled}
                       // halfStar={Icons.star_half}
@@ -103,21 +113,48 @@ const Posts = props => {
                   </FastImage>
                 </TouchableOpacity>
               ) : (
-                <FastImage
-                  source={{
-                    uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
-                    priority: FastImage.priority.normal,
-                  }}
-                  style={styles.rating}
-                  resizeMode="cover"
-                />
+                <TouchableWithoutFeedback onPress={handleImagePress}  >
+                  <FastImage
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
+                      priority: FastImage.priority.normal,
+                    }}
+                    
+                    style={styles.rating}
+                    resizeMode="cover"
+                  />
+                </TouchableWithoutFeedback>
               )}
               {/* <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
                     resizeMode="stretch"
                     style={styles.rating}
                   /> */}
-
+              <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                <ScrollView>
+                  <FastImage
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
+                      priority: FastImage.priority.normal,
+                    }}
+                    resizeMode="stretch"
+                    style={{
+                      marginTop: 10,
+                      height: 450,
+                      borderRadius: 10,
+                      width: '98%',
+                      marginLeft: 5,
+                      borderWidth: 2,
+                      borderColor: Colors.purple,
+                    }}
+                  />
+                  <View style={{ alignItems: 'center', marginTop: 10 }}>
+                    <TouchableWithoutFeedback onPress={handleCloseModal}>
+                      <Text style={{ fontSize: 16, color: Colors.purple, fontWeight: 'bold' }}>Close</Text>
+                    </TouchableWithoutFeedback>
+                  </View>
+                </ScrollView>
+              </Modal>
               <Text style={styles.tags}>{data?.tags}</Text>
             </View>
           );
@@ -157,7 +194,7 @@ const Posts = props => {
                                  document.getElementsByTagName("video")[0].style.width = "100%";
                                  document.getElementsByTagName("video")[0].style.height = "100%";
                              `}
-            // allowFileAccess={false}
+          // allowFileAccess={false}
           />
         </View>
       </Modal>

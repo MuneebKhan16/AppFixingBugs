@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Toast from 'react-native-toast-message';
 import {Common} from '../../config';
+import {logoutUser} from '../actions';
 import {store} from '../index';
 
 let state = store.getState()?.reducer;
@@ -38,7 +39,7 @@ export default async function postApi(
     const headers = {
       Authorization: 'Bearer ' + user_authentication,
       'Content-Type': 'multipart/form-data',
-      accept: 'application/json',
+      'Accept' : 'application/json',
       // 'Content-Type': 'multipart/form-data,octet-stream',
     };
     const response = await axios.post(endpoint, params, {headers});
@@ -77,7 +78,7 @@ export default async function postApi(
       //   visibilityTime: 5000,
       // });
     } else if (e.response?.data?.error?.message == "Request failed with status code 401") {
-      console.log('e.response?.data?.message',e.response?.data?.message)
+      console.log('e.response?.data?.message' , e.response?.data?.error?.message)
       // Toast.show({
       //   text1: e.response.data.error.message,
       //   textStyle: {textAlign: 'center'},

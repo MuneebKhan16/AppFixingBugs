@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image,ScrollView } from 'react-native'
 import React, { useContext } from 'react'
 import AppBackground from '../../../components/AppBackground'
 import Mainprofile from '../../../components/Mainprofile'
@@ -23,6 +23,7 @@ const EventSetting = () => {
   const user_id = useSelector((state) => state.reducer.user);
   return (
     <AppBackground back title={"Settings"} home>
+        <ScrollView style={styles.top} showsVerticalScrollIndicator={false}>
       <View style={styles.top}>
         <View style={{ alignItems: 'center', marginTop: 20 }}>
           <View>
@@ -69,6 +70,8 @@ const EventSetting = () => {
         <Heading name="Policies" icon={Icons.policies} onpress="EventPrivacyPolicy" />
         <Heading name="Help" icon={Icons.help} onpress="EventHelp" />
         <Heading name="Subscription" icon={Icons.subscription} onpress="EventSubscription" />
+        <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator" />
+
         {/* <Heading name="About the creator" icon={Icons.information} onpress="Aboutthecreator" /> */}
       </View>
       <CustomButton
@@ -77,6 +80,7 @@ const EventSetting = () => {
         onPress={logout}
 
       />
+      </ScrollView>
     </AppBackground>
   )
 }

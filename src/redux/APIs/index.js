@@ -64,7 +64,11 @@ export async function socialSignin(access_token, provider, name, email) {
   }
 }
 
+<<<<<<< HEAD
 export async function login(email, password,device_type,device_token) {
+=======
+export async function login(email, password, device_token,device_type) {
+>>>>>>> 74db98252c21fa55db22fa9dc7f52b966015e142
   try {
     if (!email && !password)
       return Toast.show({
@@ -86,7 +90,14 @@ export async function login(email, password,device_type,device_token) {
       });
 
     const params = {
+<<<<<<< HEAD
       email, password,device_type,device_token
+=======
+      email,
+      password,
+      device_token,
+      device_type
+>>>>>>> 74db98252c21fa55db22fa9dc7f52b966015e142
     };
 
     const data = await postApi('signin', params, false);
@@ -332,8 +343,8 @@ export async function updateProfile(
   const data = await postApi('update-profile', params);
   console.log('object', data?.Data);
   if (data.status == 1) {
-    dispatch(saveUser(data?.Data));
-    //NavService.goBack();
+    saveUser(data?.Data);
+    NavService.goBack();
   }
 }
 
@@ -559,18 +570,15 @@ export async function showprofiledetail() {
   return data;
 }
 
-export async function searchEvents(state,city,event_date){
-
+export async function searchEvents(state, city, event_date) {
   const params = new FormData();
 
-  params.append('state',state)
-  params.append('city',city)
-  params.append('event_date',event_date);
+  params.append('state', state);
+  params.append('city', city);
+  params.append('event_date', event_date);
 
-  const data = await postApi('search-event',params);
-  if(data.status == 1){
-     return  data?.Data ;
+  const data = await postApi('search-event', params);
+  if (data.status == 1) {
+    return data?.Data;
   }
-
-
 }

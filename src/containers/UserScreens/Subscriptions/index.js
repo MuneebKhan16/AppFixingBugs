@@ -206,6 +206,21 @@ import {
                   Feature your event across the top and on the featured events page
                 </Text>
               </View>
+              <View
+                style={styles.container}>
+                <View
+                  style={styles.maincontainer}>
+                  <Image
+                    source={Icons.check}
+                    resizeMode="contain"
+                    style={styles.check}
+                  />
+                </View>
+                <Text
+                  style={styles.descrption}>
+                  Feature your event across the top and on the featured events page
+                </Text>
+              </View>
               <TouchableOpacity
                 style={styles.btncontent}>
                 <Text
@@ -269,8 +284,9 @@ import {
                 </View>
                 <Text
                   style={styles.descrption}>
-                  Subscribe a monthly recurring package to avail all the features
+                  Subscribe a monthly recurring package to avail all the features 
                 </Text>
+                
               </View>
               <TouchableOpacity
                 style={styles.btncontent}>

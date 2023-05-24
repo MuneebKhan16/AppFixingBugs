@@ -72,7 +72,7 @@ const Aboutthecreator = () => {
         </View>
         <Text style={styles.heading}>Description From The Author</Text>
         <Text style={styles.subheading}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+         Bringing you a Nightlife and Brunch-Ing Guide categorized by the VIBE.Picture and Videos so that you can get the inside before going outside.Saving you the Research & Time soo you can hurry and get Outside.
         </Text>
       </ScrollView>
     </AppBackground>
