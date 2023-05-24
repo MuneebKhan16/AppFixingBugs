@@ -53,6 +53,7 @@
     "react-native-google-places-autocomplete": "^2.5.1",
     "react-native-iap": "^12.10.5",
     "react-native-image-crop-picker": "^0.37.3",
+    "react-native-image-gallery": "^2.1.5",
     "react-native-image-picker": "^5.3.1",
     "react-native-keep-awake": "^4.0.0",
     "react-native-linear-gradient": "^2.6.2",

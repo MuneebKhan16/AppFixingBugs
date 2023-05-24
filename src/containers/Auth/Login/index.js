@@ -31,7 +31,7 @@ class Login extends Component {
   };
 
   state = {
-    email: 'george@gmail.com',
+    email: 'Trump@gmail.com',
     password: 'Abcd123@',
     device_token: 'abc123321',
     device_type: 'android',
