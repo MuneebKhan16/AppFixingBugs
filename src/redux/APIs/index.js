@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {NavService} from '../../config';
 import Toast from 'react-native-toast-message';
+import messaging from '@react-native-firebase/messaging';
 import {store} from '../index';
 import postApi, {fetchApi} from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
@@ -22,6 +23,15 @@ export function loaderStart() {
 export function loaderStop() {
   dispatch({type: 'LOADER_STOP'});
 }
+export const getDeviceToken = async () => {
+  try {
+    const token = await messaging().getToken();
+    if (token) return token;
+    else return '';
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Common APIs
 
@@ -64,7 +74,7 @@ export async function socialSignin(access_token, provider, name, email) {
   }
 }
 
-export async function login(email, password, setLogin) {
+export async function login(email, password) {
   try {
     if (!email && !password)
       return Toast.show({
@@ -84,10 +94,12 @@ export async function login(email, password, setLogin) {
         type: 'error',
         visibilityTime: 3000,
       });
-
+    const fcmToken = await getDeviceToken();
     const params = {
       email,
       password,
+      device_type: Platform.OS,
+      device_token: fcmToken,
     };
 
     const data = await postApi('signin', params, false);
@@ -128,27 +140,33 @@ export async function signup(
       type: 'error',
       visibilityTime: 3000,
     });
-
+    const fcmToken = await getDeviceToken();
   const params = {
     name,
     email,
     password,
     confirm_password,
+    device_type: Platform.OS,
+    device_token: fcmToken,
   };
-  const data = await postApi('signup', params);
-  if (data?.status == 1) {
-    NavService.reset(0, [{name: 'Login'}]);
-    // Toast.show({
-    //   text1: data.message,
-    //   type: 'success',
-    //   visibilityTime: 5000,
-    // });
-  } else if (data?.status === 0) {
-    Toast.show({
-      text1: `${data.message.email}`,
-      type: 'error',
-      visibilityTime: 5000,
-    });
+  try {
+    const data = await postApi('signup', params);
+    if (data?.status == 1) {
+      NavService.reset(0, [{name: 'Login'}]);
+      // Toast.show({
+      //   text1: data.message,
+      //   type: 'success',
+      //   visibilityTime: 5000,
+      // });
+    } else if (data?.status === 0) {
+      Toast.show({
+        text1: `${data.message.email}`,
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    }
+  } catch (err) {
+    logout();
   }
 }
 
@@ -423,6 +441,8 @@ export async function post_events(
   user_id,
   category_id,
   event_location,
+  state,
+  city,
   event_date,
 ) {
   const params = new FormData();
@@ -452,8 +472,8 @@ export async function post_events(
   params.append('user_id', user_id);
   params.append('category_id', category_id);
   params.append('event_location', event_location);
-  params.append('state', 'New Jersey');
-  params.append('city', 'San Fransisco');
+  params.append('state', state);
+  params.append('city', city);
   params.append('event_date', event_date);
 
   console.log('object09876', params);

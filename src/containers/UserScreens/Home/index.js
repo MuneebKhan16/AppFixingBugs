@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   Text,
   View,
@@ -10,18 +10,19 @@ import {
   Platform,
   PermissionsAndroid,
   TextInput,
-  
 } from 'react-native';
+import State from './Location'
 import Modal from 'react-native-modal';
 import AppBackground from '../../../components/AppBackground';
-import { Colors, NavService } from '../../../config';
-import { connect } from 'react-redux';
+import {Colors, NavService} from '../../../config';
+import {connect} from 'react-redux';
 import CustomButton from '../../../components/CustomButton';
 import Btn from '../../../components/Btn';
 import Pickdate from '../../../components/Pickdate';
+import { Picker } from '@react-native-picker/picker';
 import SplashScreen from 'react-native-splash-screen';
 import Categories from '../../../components/Categories';
-import { Get_All_Categories, localevents } from '../../../redux/APIs/index';
+import {Get_All_Categories, localevents} from '../../../redux/APIs/index';
 import Icons from '../../../assets/Icons';
 import ImageURL from '../../../config/Common';
 import FastImage from 'react-native-fast-image';
@@ -30,9 +31,8 @@ import GooglePlaceAutocomplete from '../../../components/GooglePlaceAutocomplete
 import Geolocation from '@react-native-community/geolocation';
 navigator.geolocation = require('@react-native-community/geolocation');
 
-import { styles } from './Home_Styles';
-import { themes } from '../../../config/globalFonts/globalFonts';
-
+import {styles} from './Home_Styles';
+import {themes} from '../../../config/globalFonts/globalFonts';
 
 export class Home extends Component {
   Featured = () => {
@@ -56,91 +56,76 @@ export class Home extends Component {
     geolocation: false,
     latitude: null,
     longitude: null,
+    selectedLanguage: null,
+    selectedcity: null,
+    local: State
+
 
   };
   setModalVisible = visible => {
-    this.setState({ modalVisible: visible });
+    this.setState({modalVisible: visible});
   };
 
   setLocation = location => {
-    this.setState({ location });
+    this.setState({location});
   };
 
   requestCameraPermission() {
     if (Platform.OS === 'android') {
-      PermissionsAndroid
-        .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
-        .then(granted => {
-          if (granted) {
-            Geolocation.getCurrentPosition(position => {
-
-              const { latitude, longitude } = position.coords
-              this.setState({ latitude })
-              this.setState({ longitude })
-
-
-            })
-          }
-        });
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ).then(granted => {
+        if (granted) {
+          Geolocation.getCurrentPosition(position => {
+            const {latitude, longitude} = position.coords;
+            this.setState({latitude});
+            this.setState({longitude});
+          });
+        }
+      });
     } else {
-
       Geolocation.getCurrentPosition(position => {
-
-        const { latitude, longitude } = position.coords
-        this.setState({ latitude })
-        this.setState({ longitude })
-
-
-      })
+        const {latitude, longitude} = position.coords;
+        this.setState({latitude});
+        this.setState({longitude});
+      });
     }
   }
-
-
-
 
   currentLocations = async () => {
     const apiKey = 'AIzaSyB3QpMvb2IXZtJ6VI_pfH5687HyHCGVnUs';
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${apiKey}`;
-    console.log("345", url)
+    console.log('345', url);
     const data = await fetch(url);
     const resp = await data.json();
-    this.setState({ text: JSON.stringify(resp?.results[0]?.formatted_address).replace(/['"]/g, '') })
-
-
-  }
-  setGeoLocation = async (geolocation) => {
-
-    this.setState({ geolocation });
-    this.requestCameraPermission()
+    this.setState({
+      text: JSON.stringify(resp?.results[0]?.formatted_address).replace(
+        /['"]/g,
+        '',
+      ),
+    });
+  };
+  setGeoLocation = async geolocation => {
+    this.setState({geolocation});
+    this.requestCameraPermission();
     setTimeout(() => {
-      this.currentLocations()
-
-    }, 3000)
-
-  }
-
+      this.currentLocations();
+    }, 3000);
+  };
 
   componentDidMount() {
-
     SplashScreen.hide();
     const userData = this.props?.user?.api_token;
-    Get_All_Categories().then(res => this.setState({ category: res?.Data }));
+    Get_All_Categories().then(res => this.setState({category: res?.Data}));
     Get_All_Categories().then(res =>
-      this.setState({ categoryid: res.Data.filter(data => data?.category_id) }),
+      this.setState({categoryid: res.Data.filter(data => data?.category_id)}),
     );
     localevents(userData).then(res =>
-      this.setState({ feature: res?.Data?.featured }),
+      this.setState({feature: res?.Data?.featured}),
     );
-
-
   }
 
-
-
-
   render() {
-
-
     const {
       popUp,
       location,
@@ -152,13 +137,12 @@ export class Home extends Component {
       u,
       isFocused,
       modalVisible,
-
     } = this.state;
     const userImage = this?.props?.user?.image;
 
     const togglePopUp = () => {
       if (location.name != '') {
-        this.setState(previousState => ({ popUp: !previousState?.popUp }));
+        this.setState(previousState => ({popUp: !previousState?.popUp}));
       }
     };
 
@@ -173,10 +157,10 @@ export class Home extends Component {
               showsHorizontalScrollIndicator={false}
               data={feature}
               horizontal
-              renderItem={({ item, index }) => (
+              renderItem={({item, index}) => (
                 <TouchableOpacity onPress={this.Featured} style={styles.tch}>
                   <FastImage
-                    source={{ uri: `${ImageURL?.ImageURL}${item.event_image}` }}
+                    source={{uri: `${ImageURL?.ImageURL}${item.event_image}`}}
                     style={styles.imgbackground}
                     imageStyle={styles.imgbg}>
                     <View style={styles.icnstrempty}>
@@ -221,7 +205,7 @@ export class Home extends Component {
                   this.state.geolocation ?
                     (
                       <>
-                        <GooglePlaceAutocomplete
+                        {/* <GooglePlaceAutocomplete
                           callback={(address, geometry) =>
                             console.log('address, geometry', address, geometry)
                           }
@@ -231,13 +215,44 @@ export class Home extends Component {
                             // console.log(lat, lng );
                           }}
 
+                          // const { lat, lng } = details.geometry.location;
+                          // console.log(lat, lng );
+                        }}
+                        wrapperStyles={{
+                          width: '50%',
+                        }}
+                        inputStyles={{
+                          borderWidth: 1,
+                          borderColor: Colors.lightGrey,
+                        }}
+                        // textInputStyle={styles.textInput}
 
-                          wrapperStyles={{
-                            width: '100%',
-                          }}
-                          inputStyles={{
-                            borderWidth: 1,
-                            borderColor: Colors.lightGrey,
+                        iconColor
+                        placeholder={
+                          text.split(' ').length > 1
+                            ? text.split(' ').slice(-4, -3).pop()
+                            : 'City'
+                        }
+                      />
+                      <GooglePlaceAutocomplete
+                        callback={(address, geometry) =>
+                          console.log('address, geometry', address, geometry)
+                        }
+                        onPress={(data, details = null) => {
+                          console.log(data, details);
+                          // const { lat, lng } = details.geometry.location;
+                          // console.log(lat, lng );
+                        }}
+                        wrapperStyles={{
+                          width: '49%',
+                        }}
+                        inputStyles={{
+                          borderWidth: 1,
+                          borderColor: Colors.lightGrey,
+                        }}
+                        iconColor
+                        placeholder={
+                          // s = text.split(' ').map(data => data)
 
                           }}
                           iconColor
@@ -248,7 +263,9 @@ export class Home extends Component {
                           }
 
 
-                        />
+                        /> */}
+
+
                         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                           <GooglePlaceAutocomplete
 
@@ -308,7 +325,7 @@ export class Home extends Component {
                             iconColor
 
                             placeholder={
-                              // s = text.split(' ').map(data => data)
+
 
                               text.split(' ').length > 1 ? text.split(' ').slice(-2, -1).pop() : 'State'
                             }
@@ -322,7 +339,7 @@ export class Home extends Component {
                     :
                     (
                       <>
-                        <GooglePlaceAutocomplete
+                        {/* <GooglePlaceAutocomplete
                           callback={(address, geometry) => {
                             console.log('address, geometry', address, geometry)
                             this.setState({ Locations: address })
@@ -350,36 +367,67 @@ export class Home extends Component {
                           }
 
 
-                        />
+                        /> */}
+
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10 }}>
-                          <View style={{ flexDirection: 'row', 
-                          borderWidth: 1, borderColor: Colors?.purple, 
-                          borderRadius: 10, 
-                          alignItems: 'center', 
-                          width: '48.5%',
-                           paddingHorizontal: 10,
-                           height:Platform.OS === 'ios' ? 60 : null,
-                           
-                           }}>
-                            <Image source={Icons?.location} style={{ height: 20, width: 20, tintColor: Colors?.purple }} resizeMode='contain' />
-                            <TextInput
+                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null, }}>
+                            {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
+                            {/* <TextInput
                               placeholderTextColor={Colors?.black}
-                              style={{ color: Colors?.black, width:'85%',  fontFamily:themes?.font?.regular}}
+                              style={{ color: Colors?.black, width: '85%', fontFamily: themes?.font?.regular }}
                               editable={false}
                               placeholder='City'
-                              value={this.state.Locations ? this.state.Locations.split(' ').slice(-5, -4).pop() + " " + this.state.Locations.split(' ').slice(-4, -3).pop() : 'City'}
-                            />
+                              // value={this.state.Locations.split(' ').length > 1 ? this.state.Locations.split(' ').slice(-3, -2).pop() : 'State'}
+                              value={"State"}
+                            /> */}
+                            {console.log('this.state.selectedLanguage', this.state.selectedLanguage)}
+                            <Picker
+                              style={styles.container}
+                              // color={Colors.grey}
+                              selectedValue={this.state.selectedLanguage}
+                              onValueChange={(itemValue, itemIndex) => this.setState({ selectedLanguage: itemValue })}
+                              itemStyle={{ color: 'white', fontSize: 20,  }}
+                              mode="dropdown"
+                            >
+                              <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold', backgroundColor: '#ededed', }} />
+                              {
+                                Object.keys(this.state.local).map((item) => {
+                                  console.log("kji", item)
+                                  return (
+                                    <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold',  }} />
+                                  )
+                                })
+                              }
+                            </Picker>
                           </View>
-                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10,       height:Platform.OS === 'ios' ? 60 : null,}}>
-                            <Image source={Icons?.location} style={{ height: 20, width: 20, tintColor: Colors?.purple }} resizeMode='contain' />
-                            <TextInput
-                              placeholderTextColor={Colors?.black}
-                              style={{ color: Colors?.black, width:'85%', fontFamily:themes?.font?.regular }}
-                              editable={false}
-                              placeholder='City'
-                              value={this.state.Locations.split(' ').length > 1 ? this.state.Locations.split(' ').slice(-3, -2).pop() : 'State'}
-                            />
+                          <View style={{
+                            flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null,
+
+                          }}>
+                            {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
+                            <Picker
+                              style={styles.container}
+                              color={Colors.grey}
+                              selectedValue={this.state.selectedcity}
+                              onValueChange={(itemValue, itemIndex) => this.setState({ selectedcity: itemValue })}
+                              itemStyle={{ color: 'white', fontSize: 20,  }}
+                              mode="dropdown"
+                            >
+
+                              {
+                                this.state.selectedLanguage && this.state.local[this.state.selectedLanguage].map((city, index) => (
+                                  <Picker.Item
+                                    key={index}
+                                    label={city}
+                                    value={city}
+                                    color="black"
+                                    style={{ fontWeight: 'bold',  }}
+                                  />
+                                ))
+                              }
+                            </Picker>
                           </View>
+
                           {/* <GooglePlaceAutocomplete
                             callback={(address, geometry) => {
                               console.log('address, geometry', address, geometry)
@@ -408,12 +456,12 @@ export class Home extends Component {
                          
                           /> */}
 
-                          {/* <TextInput
+                      {/* <TextInput
                           placeholder='City'
                           value={details.geometry.location}
                 
                           /> */}
-                          {/* <GooglePlaceAutocomplete
+                      {/* <GooglePlaceAutocomplete
                             callback={(address, geometry) => {
                               console.log('address, geometry', address, geometry)
                               this.setState({ Locations: address })
@@ -444,11 +492,9 @@ export class Home extends Component {
 
 
                           /> */}
-                        </View>
-                      </>
-                    )
-                }
-
+                    </View>
+                  </>
+                )}
 
                 {/* {console.log('bvcxz', text ,"jjjj", text.split(' ').slice( 0 ,3) , "kkk" , text.split(' ').slice( 0 ,3).pop())}  */}
                 {console.log('bvcxz', this.state.Locations)}
@@ -478,8 +524,8 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProp = ({ reducer: { user } }) => {
-  return { user };
+const mapStateToProp = ({reducer: {user}}) => {
+  return {user};
 };
 
 export default connect(mapStateToProp)(React.memo(Home));

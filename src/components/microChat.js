@@ -1,82 +1,95 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import React from 'react';
 import Icons from '../assets/Icons';
 import { Colors } from '../config';
 import Images from '../assets/Images';
 import RNBounceable from "@freakycoder/react-native-bounceable";
+import { yellow100 } from 'react-native-paper/lib/typescript/styles/colors';
 import ImageURL from '../config/Common'
 import { themes } from '../config/globalFonts/globalFonts';
-
 const MicroChat = props => {
-  const { image, name, msg, onPress } = props;
-
-
-
+  const { image, name, msg, onPress ,date } = props;
+  console.log("******",image)
+  const img = image
+  const db = `${ImageURL.ImageURL}${img}`
+  const bd = image
+  
 
   return (
-    <RNBounceable
-      onPress={onPress}
-      style={styles.container}>
-      <View
-        style={styles.content}>
-        <Image
-          resizeMode="center"
-          style={styles.img}
-          source={{ uri: `${ImageURL.ImageURL}${image}` ?? image }}
-        />
-      </View>
-      <View
-        style={styles.msg}>
-        <Text
-          style={styles.txt}>
-          {msg}
-        </Text>
+    <View style={styles.self} >
+      <RNBounceable
+        onPress={onPress}
+        style={styles.maincontainer}>
+        <View
+          style={styles.flex}>
+          <View
+            style={styles.container}>
+            <Text
+              style={styles.msg}>
+              {msg}
+            </Text>
+           
+          </View>
 
-
-      </View>
-    </RNBounceable>
+        </View>
+        <View
+          style={styles.flexable}>
+          <Image
+            resizeMode="cover"
+            style={styles.img}
+            source={{ uri : db ? db : bd}}
+          />
+        </View>
+      </RNBounceable>
+    </View>
   );
 };
 
 export default MicroChat;
 
 const styles = StyleSheet.create({
-  container: {
-    width: 300,
+  maincontainer: {
+    width: 360,
     maxHeight: 200,
+    padding: 3,
     flexDirection: 'row',
-    marginBottom: 10,
-    marginRight: 10
+    marginBottom: '4%',
+    paddingLeft: 20
   },
-  content: {
+  flex: {
+    flex: 8,
+    padding: 1,
+  },
+  container: {
+    width: '100%',
+    backgroundColor: Colors.darkGray,
+    padding: 10,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 0,
+    borderTopRightRadius:20,
+    borderTopLeftRadius: 20,
+    marginTop: 10,
+  },
+  msg: {
+    // flex: 8,
+    paddingLeft: 6,
+    maxWidth: 260,
+    color: Colors.grey,
+    fontSize: themes?.fontSize?.extraSmall,
+    fontFamily: themes?.font?.light,
+  },
+  flexable: {
     flex: 2,
-    paddingTop: 5,
   },
   img: {
     height: 50,
     width: 50,
     alignSelf: 'center',
-    backgroundColor: 'blue',
-    borderRadius: 25,
+    borderRadius: 30,
+    marginTop: 10,
+   backgroundColor:'grey'
   },
-  msg: {
-    padding: 1,
-    backgroundColor: Colors.purple,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomRightRadius:20,
-    width: '80%',
-    fontSize: themes?.fontSize?.medium,
-    fontFamily:themes?.font?.regular,
-  },
-  txt: {
-    // flex: 8,
-    paddingLeft: 4,
-    paddingTop: 2,
-    maxWidth: 260,
-    color: Colors.white,
-    fontSize: themes?.fontSize?.extraSmall,
-    fontFamily: themes?.font?.light,
-    margin: 10
+  self: {
+    alignSelf: "flex-end"
   }
 });

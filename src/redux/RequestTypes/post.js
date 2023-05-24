@@ -39,7 +39,7 @@ export default async function postApi(
     const headers = {
       Authorization: 'Bearer ' + user_authentication,
       'Content-Type': 'multipart/form-data',
-      accept: 'application/json',
+      'Accept' : 'application/json',
       // 'Content-Type': 'multipart/form-data,octet-stream',
     };
     const response = await axios.post(endpoint, params, {headers});
@@ -69,16 +69,16 @@ export default async function postApi(
       //   type: 'error',
       //   visibilityTime: 5000,
       // });
-    } else if (e?.response?.status == 401) {
-      logoutUser();
-    } else if (e.response?.data?.message) {
+    } else if (e.response?.data?.message == "Request failed with status code 401") {
+      console.log('e.response?.data?.message',e.response?.data?.message)
       // Toast.show({
       //   text1: e.response.data.message,
       //   textStyle: {textAlign: 'center'},
       //   type: 'error',
       //   visibilityTime: 5000,
       // });
-    } else if (e.response?.data?.error?.message) {
+    } else if (e.response?.data?.error?.message == "Request failed with status code 401") {
+      console.log('e.response?.data?.message' , e.response?.data?.error?.message)
       // Toast.show({
       //   text1: e.response.data.error.message,
       //   textStyle: {textAlign: 'center'},
