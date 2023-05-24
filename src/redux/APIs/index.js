@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import {NavService} from '../../config';
 import Toast from 'react-native-toast-message';
+import messaging from '@react-native-firebase/messaging';
 import {store} from '../index';
 import postApi, {fetchApi} from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
@@ -22,6 +23,15 @@ export function loaderStart() {
 export function loaderStop() {
   dispatch({type: 'LOADER_STOP'});
 }
+export const getDeviceToken = async () => {
+  try {
+    const token = await messaging().getToken();
+    if (token) return token;
+    else return '';
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Common APIs
 
@@ -84,10 +94,12 @@ export async function login(email, password, setLogin) {
         type: 'error',
         visibilityTime: 3000,
       });
-
+      const fcmToken = await getDeviceToken();
     const params = {
       email,
       password,
+      device_type: Platform.OS,
+      device_token: fcmToken,
     };
 
     const data = await postApi('signin', params, false);
