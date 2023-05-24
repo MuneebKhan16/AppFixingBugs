@@ -1,35 +1,44 @@
 /* eslint-disable prettier/prettier */
-import React, {useState, useEffect} from 'react';
-import {Dimensions, Text, View, Image, ScrollView} from 'react-native';
-import {useSelector} from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Dimensions, Text, View, Image, ScrollView, TouchableWithoutFeedback, Modal } from 'react-native';
+import { useSelector } from 'react-redux';
 import Swiper from 'react-native-swiper';
 import FastImage from 'react-native-fast-image';
 import AppBackground from '../../../components/AppBackground';
 import Images from '../../../assets/Images';
 import Posts from '../../../components/Posts';
-import {Colors} from '../../../config';
+import { Colors } from '../../../config';
 import Icons from '../../../assets/Icons';
-import {styles} from './eventreview_style';
+import { styles } from './eventreview_style';
 import ImageURL from '../../../config/Common';
 import EventsPosts from '../../../components/EventsPosts';
 import VideoPlayer from '../../../components/VideoPlayer';
-import {get_reviews_event} from '../../../redux/APIs/index';
+import { get_reviews_event } from '../../../redux/APIs/index';
 
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
-const EventReview = ({navigation, route}) => {
+const EventReview = ({ navigation, route }) => {
   const token = useSelector(state => state.reducer.user.api_token);
-  const {eventDetail} = route?.params;
+  const { eventDetail } = route?.params;
   const [UserPost, setUserPost] = useState([]);
   console.log('eventDetail', eventDetail, 'eventDetail');
   useEffect(() => {
     get_reviews_event(token).then(res => setUserPost(res.Data));
   }, []);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const DateReadbleFunction = date => {
-    var date = new Date();
-    return date.toLocaleDateString();
-  };
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
+
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
+
+  // const DateReadbleFunction = date => {
+  //   var date = new Date();
+  //   return date.toLocaleDateString();
+  // };
 
   const filteringData = [];
   // UserPost.filter(
@@ -41,20 +50,20 @@ const EventReview = ({navigation, route}) => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
         {eventDetail?.images?.length > 0 ? (
           <Swiper
-            style={{height:170,borderRadius:10}}
+            style={{ height: 170, borderRadius: 10 }}
             activeDotColor="transparent"
             dotColor="transparent">
             {eventDetail?.images.map((data, index) => (
               <React.Fragment>
                 {data?.event_images?.split('.')[1] == 'mp4' ? (
-                  <View style={{height: height * 0.25, width: width * 0.9,borderRadius:10}}>
+                  <View style={{ height: height * 0.25, width: width * 0.9, borderRadius: 10 }}>
                     <VideoPlayer
                       video={`${ImageURL?.ImageURL}${data?.event_images}`}
                       style={{
                         width: width * 0.9,
                         height: height * 0.3,
-                        borderRadius:10,
-                        
+                        borderRadius: 10,
+
                       }}
                       mediaPlaybackRequiresUserAction={true}
                       allowsInlineMediaPlayback={true}
@@ -72,15 +81,41 @@ const EventReview = ({navigation, route}) => {
                     />
                   </View>
                 ) : (
-                  <FastImage
-                    key={index}
-                    source={{
-                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
-                    }}
-                    style={styles.imgback}
-                    imageStyle={styles.img}
-                  />
+                  // <TouchableWithoutFeedback onPress={handleImagePress}>
+                    <FastImage
+                      key={index}
+                      source={{
+                        uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                      }}
+                      style={styles.imgback}
+                      imageStyle={styles.img}
+                    />
+                  // </TouchableWithoutFeedback>
                 )}
+                {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                  <ScrollView>
+                    <FastImage
+                      source={{
+                        uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                      }}
+                      resizeMode="stretch"
+                      style={{
+                        marginTop: 10,
+                        height: 500,
+                        borderRadius: 10,
+                        width: '98%',
+                        marginLeft: 5,
+                        borderWidth: 2,
+                        borderColor: Colors.purple,
+                      }}
+                    />
+                    <View style={{ alignItems: 'center', marginTop: 10 }}>
+                      <TouchableWithoutFeedback onPress={handleCloseModal}>
+                        <Text style={{ fontSize: 16, color: Colors.purple, fontWeight: 'bold' }}>Close</Text>
+                      </TouchableWithoutFeedback>
+                    </View>
+                  </ScrollView>
+                </Modal> */}
               </React.Fragment>
             ))}
           </Swiper>

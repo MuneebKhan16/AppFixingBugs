@@ -10,7 +10,7 @@ import { themes } from '../config/globalFonts/globalFonts';
 const MicroChat = props => {
   const { image, name, msg, onPress } = props;
 
-
+ // console.log('kkkkk',image)
 
 
   return (

@@ -39,7 +39,9 @@ class Navigation extends Component {
       SplashScreen.hide();
     }, 2500);
   }
+
   render() {
+   // console.log('objectssssss',this.props.user.api_token)
     return (
       <NavigationContainer
         ref={ref => NavService.setTopLevelNavigator(ref)}
@@ -49,7 +51,7 @@ class Navigation extends Component {
             contentStyle: {backgroundColor: 'transparent'},
             animation: 'simple_push',
           }}>
-          {this?.props?.api_token ? (
+          {this?.props?.api_token  ? (
             <>
               <Stack.Screen
                 name="ScreenStack"

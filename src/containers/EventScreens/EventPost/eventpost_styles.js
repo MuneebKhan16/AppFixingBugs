@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
   },
   loc: { width: '90%', color: Colors.black },
   marker: { width: 15, height: 18, position: 'absolute', right: 10, tintColor: '#434343' },
-  description: { maxHeight: 150, marginLeft: 10, marginTop: 10, color: Colors.black ,backgroundColor:'red'},
+  description: { maxHeight: 150, marginLeft: 10, marginTop: 10, color: Colors.black ,},
   descp: {
     height: 120,
     backgroundColor: '#ededed',
@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
   },
   requriment: {
 
-    fontSize: themes?.fontSize?.medium,
+    fontSize: themes?.fontSize?.large,
     fontFamily: themes?.bold,
     color: Colors.white,
     marginLeft: 20,
@@ -91,8 +91,8 @@ export const styles = StyleSheet.create({
   },
   modaltxt: {
     color: Colors.white,
-    fontSize: themes?.fontSize?.extraVSmall,
-    fontFamily: themes?.font?.extraLight,
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.bold,
     paddingHorizontal: 10,
     textTransform: 'capitalize'
   },

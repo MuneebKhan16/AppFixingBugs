@@ -1,16 +1,25 @@
 /* eslint-disable prettier/prettier */
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {Post} from '../config/Dummydata/Dummydata';
-import {Colors} from '../config';
+import { StyleSheet, Text, View, TouchableOpacity, Image, TouchableWithoutFeedback, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Post } from '../config/Dummydata/Dummydata';
+import { Colors } from '../config';
 import StarRating from 'react-native-star-rating';
 import Icons from '../assets/Icons';
 import ImageURL from '../config/Common';
 import FastImage from 'react-native-fast-image';
-import {themes} from '../config/globalFonts/globalFonts';
-const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
+import { themes } from '../config/globalFonts/globalFonts';
+import { ScrollView } from 'react-native-gesture-handler';
+const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
   const [starCount, setStarCount] = useState(1);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
+
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
   const ConvertTimeStamp = date => {
     const data = new Date(date);
     const hours = data.getHours();
@@ -28,6 +37,7 @@ const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
         return (
           <View style={styles.maincontent}>
             <View style={styles.maincontainer}>
+
               <Image
                 source={{
                   uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}`,
@@ -35,7 +45,7 @@ const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
                 style={styles.container}
                 resizeMode="cover"
               />
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text style={styles.name}>{data.user.name}</Text>
                 <StarRating
                   fullStar={Icons.starFilled}
@@ -51,17 +61,14 @@ const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
                 {ConvertTimeStamp(data.created_at)}
               </Text>
             </View>
-            <View style={{marginTop: 10}}>
-              <FastImage
-                source={{uri: `${ImageURL?.ImageURL}${data?.rating_image}`}}
-                resizeMode="stretch"
-                style={styles.img}
-              />
-              {/* <Image
-                    source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
-                    resizeMode="stretch"
-                    style={styles.img}
-                  /> */}
+            <View style={{ marginTop: 10 }}>
+                <FastImage
+                  source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
+                  resizeMode="stretch"
+                  style={styles.img}
+                />
+               
+             
               <View
                 style={{
                   flexDirection: 'row',
@@ -77,7 +84,7 @@ const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
                   <Image
                     source={Icons.delete}
                     resizeMode="contain"
-                    style={{width: 20, height: 20, tintColor: Colors.purple}}
+                    style={{ width: 20, height: 20, tintColor: Colors.purple }}
                   />
                 </TouchableOpacity>
               </View>

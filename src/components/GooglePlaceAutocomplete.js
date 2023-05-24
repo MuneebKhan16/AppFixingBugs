@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, View, Dimensions, Image} from 'react-native';
-import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
-import {Common, Colors} from '../config';
+import { StyleSheet, View, Dimensions, Image } from 'react-native';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Common, Colors } from '../config';
 import Icons from '../assets/Icons';
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 const GooglePlaceAutocomplete = ({
   callback,
@@ -21,15 +21,15 @@ const GooglePlaceAutocomplete = ({
         disableScroll
         enablePoweredByContainer={false}
         keepResultsAfterBlur={true}
-     
+
         listViewDisplayed={false}
         placeholder={placeholder ? placeholder : 'Address'}
-        
+
         placeholderTextColor={iconColor ? Colors.primary : Colors.black}
-        
+
         onPress={(data, details = null) => {
-          const {formatted_address, geometry,location} = details;
-          callback(formatted_address, geometry,location);
+          const { formatted_address, geometry, location } = details;
+          callback(formatted_address, geometry, location);
         }}
         renderLeftButton={() => (
           <Image
@@ -43,7 +43,7 @@ const GooglePlaceAutocomplete = ({
               marginBottom: 5,
               marginLeft: 15,
               marginRight: 5,
-              
+
             }}
           />
         )}
@@ -54,10 +54,10 @@ const GooglePlaceAutocomplete = ({
             color: iconColor ? Colors?.black : Colors?.black,
             // backgroundColor: iconColor ? Colors.white : Colors.black,
             width: '100%',
-            
-            
+
+
           },
-          description: {color: iconColor ? Colors.purple : Colors.black},
+          description: { color: iconColor ? Colors.purple : Colors.black },
         }}
         textInputProps={{
           placeholderTextColor: iconColor ? Colors.black : Colors.black,
@@ -78,7 +78,7 @@ const GooglePlaceAutocomplete = ({
           key: Common?.GEOCODE_API_KEY,
           language: 'en',
           types: 'premise',
-          
+
         }}
         editable={false}
       />

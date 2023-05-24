@@ -119,10 +119,11 @@ const EventPost = props => {
     const event_image = selectedImage;
     const user_id = users?.id;
     // const category_id = selectedData?.category_id;
-    const category_id = selectedData == selectedData?.category_id;
+    const category_id =  selectedData ? selectedData?.category_id : null;
 
     const event_location = location;
     const event_date = moment(date).format('YYYY-MM-DD');
+    
 
     post_events(
       event_title,
@@ -421,7 +422,7 @@ const EventPost = props => {
               </Text>
               <Text style={styles.modaltxt}>
                 4- Helpful Tips in Description field such as Parking tips, Crowd
-                (Age, Music Genre) on SpecificNights if Differs, Dress code,
+                (Age, Music Genre) on Specific Nights if Differs, Dress code,
                 {'\n'}
               </Text>
               <Text style={styles.modaltxt}>
