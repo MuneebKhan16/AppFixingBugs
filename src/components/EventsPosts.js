@@ -6,7 +6,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback,ScrollView
+  TouchableWithoutFeedback, ScrollView
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-native-modal';
@@ -18,6 +18,7 @@ import ImageURL from '../config//Common';
 import FastImage from 'react-native-fast-image';
 import { themes } from '../config/globalFonts/globalFonts';
 import VideoPlayer from '../components/VideoPlayer';
+
 // check
 const { width, height } = Dimensions.get('screen');
 const Posts = props => {
@@ -49,7 +50,7 @@ const Posts = props => {
   return (
     <View>
       {datas?.length > 0 ? (
-        datas.map((data,index) => {
+        datas.map((data, index) => {
           return (
             <View style={styles.mainprofile}>
               <View style={styles.container}>
@@ -61,7 +62,10 @@ const Posts = props => {
                   resizeMode="cover"
                 />
                 <View>
-                  <Text style={styles.name}>{data?.user?.name}</Text>
+                  <Text style={styles.name} numberOfLines={1}>
+                    {data?.user?.name}
+
+                  </Text>
                   <View style={{ marginLeft: 10 }}>
                     <StarRating
                       fullStar={Icons.starFilled}
@@ -113,16 +117,16 @@ const Posts = props => {
                   </FastImage>
                 </TouchableOpacity>
               ) : (
-                // <TouchableWithoutFeedback onPress={handleImagePress}  >
-                  <FastImage
-                    source={{
-                      uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
-                      priority: FastImage.priority.normal,
-                    }}
-                    
-                    style={styles.rating}
-                    resizeMode="cover"
-                  />
+                // <TouchableWithoutFeedback onPress={handleImagePress}>
+                <FastImage
+                  source={{
+                    uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
+                    priority: FastImage.priority.normal,
+                  }}
+
+                  style={styles.rating}
+                  resizeMode="cover"
+                />
                 // </TouchableWithoutFeedback>
               )}
               {/* <Image
@@ -239,8 +243,9 @@ const styles = StyleSheet.create({
     fontSize: themes?.fontSize?.medium,
     fontFamily: themes?.font?.extraBold,
     marginLeft: 10,
-
+    width: 130,
     textTransform: 'capitalize',
+
   },
   rating: {
     width: '100%',

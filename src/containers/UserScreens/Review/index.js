@@ -10,22 +10,22 @@ import {
   ActivityIndicator,
   TouchableWithoutFeedback, Modal
 } from 'react-native';
-import {useSelector} from 'react-redux';
-import {get_reviews_event} from '../../../redux/APIs/index';
-import React, {useEffect, useState, useMemo, useContext} from 'react';
+import { useSelector } from 'react-redux';
+import { get_reviews_event } from '../../../redux/APIs/index';
+import React, { useEffect, useState, useMemo, useContext } from 'react';
 import AppBackground from '../../../components/AppBackground';
-import {Colors, NavService} from '../../../config';
+import { Colors, NavService } from '../../../config';
 import EventsPosts from '../../../components/EventsPosts';
 import CustomButton from '../../../components/CustomButton';
 import Swiper from 'react-native-swiper';
 import Mainprofile from '../../../components/Mainprofile';
-import {styles} from './review_style';
+import { styles } from './review_style';
 import ImageURL from '../../../config/Common';
 import Video from 'react-native-video';
 import FastImage from 'react-native-fast-image';
 import VideoPlayer from '../../../components/VideoPlayer';
 import eventContext from '../../EventScreens/eventContext';
-import {themes} from '../../../config/globalFonts/globalFonts';
+import { themes } from '../../../config/globalFonts/globalFonts';
 
 const MEDIA = [
   {
@@ -57,14 +57,14 @@ const MEDIA = [
     },
   },
 ];
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 const Review = props => {
   const profile_Data = useSelector(state => state.reducer.user);
-  const {eventDetail} = props.route.params;
-  const {user, id} = eventDetail;
+  const { eventDetail } = props.route.params;
+  const { user, id } = eventDetail;
   const [UserPost, setUserPost] = useState([]);
-  const {userProfile} = useContext(eventContext);
+  const { userProfile } = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
   // const [isFullScreen, setIsFullScreen] = useState(false);
 
@@ -82,9 +82,9 @@ const Review = props => {
         console.log('res?.Data', res?.Data, 'res?.Data');
         setUserPost(res?.Data);
       })
-      .catch(error => {});
+      .catch(error => { });
   };
-  
+
   useEffect(() => {
     datahandle();
   }, []);
@@ -139,12 +139,12 @@ const Review = props => {
             activeDotColor="transparent"
             nextButton={
               <Text
-                style={{fontSize: 70, marginRight: 20, color: Colors.white}}>
+                style={{ fontSize: 70, marginRight: 20, color: Colors.white }}>
                 ›
               </Text>
             }
             prevButton={
-              <Text style={{fontSize: 70, marginLeft: 10, color: Colors.white}}>
+              <Text style={{ fontSize: 70, marginLeft: 10, color: Colors.white }}>
                 ‹
               </Text>
             }
@@ -157,7 +157,7 @@ const Review = props => {
             {eventDetail?.event_images.map((data, index) => (
               <React.Fragment>
                 {data?.event_images?.split('.')[1] == 'mp4' ? (
-                  <View style={{height: height * 0.24, width: width * 0.9}}>
+                  <View style={{ height: height * 0.24, width: width * 0.9 }}>
                     <VideoPlayer
                       video={`${ImageURL?.ImageURL}${data?.event_images}`}
                       style={{
@@ -188,16 +188,16 @@ const Review = props => {
                     }}
                     style={styles.img}
                     imageStyle={styles.border}
-                    />
-                    // </TouchableWithoutFeedback>
-                    )}
-                     {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}> */}
+                  />
+                  // </TouchableWithoutFeedback>
+                )}
+                {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}> */}
                 <ScrollView>
                   <FastImage
-                   key={index}
-                 source={{
-                  uri: `${ImageURL?.ImageURL}${data?.event_images}`,
-                }}
+                    key={index}
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                    }}
                     resizeMode="contain"
                     style={{
                       marginTop: 10,
@@ -209,11 +209,11 @@ const Review = props => {
                       borderColor: Colors.purple,
                     }}
                   />
-                  <View style={{alignItems:'center',marginTop:10}}>
-                  <Text style={{fontSize:16,color:Colors.purple,fontWeight:'bold'}}>Close</Text>
-                </View>
+                  <View style={{ alignItems: 'center', marginTop: 10 }}>
+                    <Text style={{ fontSize: 16, color: Colors.purple, fontWeight: 'bold' }}>Close</Text>
+                  </View>
                 </ScrollView>
-              {/* </Modal> */}
+                {/* </Modal> */}
               </React.Fragment>
             ))}
           </Swiper>
@@ -231,7 +231,7 @@ const Review = props => {
           </View>
         </Swiper> */}
         <View
-          style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+          style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
           <Image
             source={{
               uri: userProfile?.profile_picture
@@ -243,17 +243,18 @@ const Review = props => {
               height: 50,
               borderRadius: 50,
               marginBottom: 10,
-              borderWidth:2,
-              borderColor:Colors.purple
+              borderWidth: 2,
+              borderColor: Colors.purple
             }}
           />
           <Text
+            numberOfLines={1}
             style={{
               fontSize: themes?.fontSize?.medium,
               fontFamily: themes?.font?.bold,
               marginLeft: 8,
               color: Colors.black,
-
+              width: 130,
               marginBottom: 3,
             }}>
             {user?.name}

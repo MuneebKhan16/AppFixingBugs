@@ -380,7 +380,7 @@ export class Home extends Component {
                               itemStyle={{ color: 'white', fontSize: 20,  }}
                               mode="dropdown"
                             >
-                              <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold', backgroundColor: '#ededed', }} />
+                              <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold',  }} />
                               {
                                 Object.keys(this.state.local).map((item) => {
                                   console.log("kji", item)
