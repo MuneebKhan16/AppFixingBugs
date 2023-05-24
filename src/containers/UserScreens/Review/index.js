@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
   ActivityIndicator,
+  TouchableWithoutFeedback, Modal
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {get_reviews_event} from '../../../redux/APIs/index';
@@ -65,6 +66,15 @@ const Review = props => {
   const [UserPost, setUserPost] = useState([]);
   const {userProfile} = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const handleImagePress = () => {
+    setIsFullScreen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsFullScreen(false);
+  };
 
   const datahandle = () => {
     get_reviews_event(profile_Data?.api_token)
@@ -74,11 +84,13 @@ const Review = props => {
       })
       .catch(error => {});
   };
+  
   useEffect(() => {
     datahandle();
   }, []);
   useMemo(() => UserPost, [UserPost]);
   const filteringData = UserPost?.filter(data => data.event_id === id);
+  // console.log('data',data?.event_images)  
 
   const renderItem = item => {
     if (item.type === 'image') {
@@ -169,6 +181,7 @@ const Review = props => {
                     />
                   </View>
                 ) : (
+                  <TouchableWithoutFeedback onPress={handleImagePress}>
                   <FastImage
                     key={index}
                     source={{
@@ -176,8 +189,34 @@ const Review = props => {
                     }}
                     style={styles.img}
                     imageStyle={styles.border}
+                    />
+                    </TouchableWithoutFeedback>
+                    )}
+                     <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                <ScrollView>
+                  <FastImage
+                   key={index}
+                 source={{
+                  uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                }}
+                    resizeMode="stretch"
+                    style={{
+                      marginTop: 10,
+                      height: 500,
+                      borderRadius: 10,
+                      width: '98%',
+                      marginLeft: 5,
+                      borderWidth: 2,
+                      borderColor: Colors.purple,
+                    }}
                   />
-                )}
+                  <View style={{alignItems:'center',marginTop:10}}>
+                <TouchableWithoutFeedback onPress={handleCloseModal}>
+                  <Text style={{fontSize:16,color:Colors.purple,fontWeight:'bold'}}>Close</Text>
+                </TouchableWithoutFeedback>
+                </View>
+                </ScrollView>
+              </Modal>
               </React.Fragment>
             ))}
           </Swiper>

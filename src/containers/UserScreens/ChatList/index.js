@@ -31,6 +31,11 @@ const ChatList = ({navigation, route}) => {
         .catch(error => console.log('error', error));
     }, []),
   );
+ let y =  conversationList.filter((data , i) => {
+    return conversationList.indexOf(data) === i;
+  })
+
+  console.log("*************",y)
 
   // const sender_id = user?.id;
   // // const receiver_id = chatUser?.id;
