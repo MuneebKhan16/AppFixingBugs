@@ -66,15 +66,15 @@ const Review = props => {
   const [UserPost, setUserPost] = useState([]);
   const {userProfile} = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleImagePress = () => {
-    setIsFullScreen(true);
-  };
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
 
-  const handleCloseModal = () => {
-    setIsFullScreen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
 
   const datahandle = () => {
     get_reviews_event(profile_Data?.api_token)
@@ -90,7 +90,6 @@ const Review = props => {
   }, []);
   useMemo(() => UserPost, [UserPost]);
   const filteringData = UserPost?.filter(data => data.event_id === id);
-  // console.log('data',data?.event_images)  
 
   const renderItem = item => {
     if (item.type === 'image') {
@@ -181,7 +180,7 @@ const Review = props => {
                     />
                   </View>
                 ) : (
-                  <TouchableWithoutFeedback onPress={handleImagePress}>
+                  // <TouchableWithoutFeedback onPress={handleImagePress}>
                   <FastImage
                     key={index}
                     source={{
@@ -190,16 +189,16 @@ const Review = props => {
                     style={styles.img}
                     imageStyle={styles.border}
                     />
-                    </TouchableWithoutFeedback>
+                    // </TouchableWithoutFeedback>
                     )}
-                     <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                     {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}> */}
                 <ScrollView>
                   <FastImage
                    key={index}
                  source={{
                   uri: `${ImageURL?.ImageURL}${data?.event_images}`,
                 }}
-                    resizeMode="stretch"
+                    resizeMode="contain"
                     style={{
                       marginTop: 10,
                       height: 500,
@@ -211,12 +210,10 @@ const Review = props => {
                     }}
                   />
                   <View style={{alignItems:'center',marginTop:10}}>
-                <TouchableWithoutFeedback onPress={handleCloseModal}>
                   <Text style={{fontSize:16,color:Colors.purple,fontWeight:'bold'}}>Close</Text>
-                </TouchableWithoutFeedback>
                 </View>
                 </ScrollView>
-              </Modal>
+              {/* </Modal> */}
               </React.Fragment>
             ))}
           </Swiper>

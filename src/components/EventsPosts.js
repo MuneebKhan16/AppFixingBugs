@@ -25,15 +25,15 @@ const Posts = props => {
   const [showVideoPopup, setShowVideoPopup] = useState(false);
   const [videoUrl, setVideoUrl] = useState('');
   const [starCount, setStarCount] = useState(1);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleImagePress = () => {
-    setIsFullScreen(true);
-  };
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
 
-  const handleCloseModal = () => {
-    setIsFullScreen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
 
   const ConvertTimeStamp = date => {
     const start = new Date(date);
@@ -113,7 +113,7 @@ const Posts = props => {
                   </FastImage>
                 </TouchableOpacity>
               ) : (
-                <TouchableWithoutFeedback onPress={handleImagePress}  >
+                // <TouchableWithoutFeedback onPress={handleImagePress}  >
                   <FastImage
                     source={{
                       uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
@@ -123,21 +123,21 @@ const Posts = props => {
                     style={styles.rating}
                     resizeMode="cover"
                   />
-                </TouchableWithoutFeedback>
+                // </TouchableWithoutFeedback>
               )}
               {/* <Image
                     source={{ uri: `${ImageURL?.ImageURL}${data.rating_image}` }}
                     resizeMode="stretch"
                     style={styles.rating}
                   /> */}
-              <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+              {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
                 <ScrollView>
                   <FastImage
                     source={{
                       uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
                       priority: FastImage.priority.normal,
                     }}
-                    resizeMode="stretch"
+                    resizeMode="cover"
                     style={{
                       marginTop: 10,
                       height: 450,
@@ -154,7 +154,7 @@ const Posts = props => {
                     </TouchableWithoutFeedback>
                   </View>
                 </ScrollView>
-              </Modal>
+              </Modal> */}
               <Text style={styles.tags}>{data?.tags}</Text>
             </View>
           );

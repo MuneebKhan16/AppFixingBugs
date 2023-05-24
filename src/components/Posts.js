@@ -11,15 +11,15 @@ import { themes } from '../config/globalFonts/globalFonts';
 import { ScrollView } from 'react-native-gesture-handler';
 const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
   const [starCount, setStarCount] = useState(1);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  // const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleImagePress = () => {
-    setIsFullScreen(true);
-  };
+  // const handleImagePress = () => {
+  //   setIsFullScreen(true);
+  // };
 
-  const handleCloseModal = () => {
-    setIsFullScreen(false);
-  };
+  // const handleCloseModal = () => {
+  //   setIsFullScreen(false);
+  // };
   const ConvertTimeStamp = date => {
     const data = new Date(date);
     const hours = data.getHours();
@@ -62,40 +62,13 @@ const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
               </Text>
             </View>
             <View style={{ marginTop: 10 }}>
-              <TouchableWithoutFeedback onPress={handleImagePress}>
                 <FastImage
                   source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
                   resizeMode="stretch"
                   style={styles.img}
                 />
-              </TouchableWithoutFeedback>
-              <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
-                <ScrollView>
-                  <FastImage
-                    source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
-                    resizeMode="stretch"
-                    style={{
-                      marginTop: 10,
-                      height: 500,
-                      borderRadius: 10,
-                      width: '98%',
-                      marginLeft: 5,
-                      borderWidth: 2,
-                      borderColor: Colors.purple,
-                    }}
-                  />
-                  <View style={{alignItems:'center',marginTop:10}}>
-                <TouchableWithoutFeedback onPress={handleCloseModal}>
-                  <Text style={{fontSize:16,color:Colors.purple,fontWeight:'bold'}}>Close</Text>
-                </TouchableWithoutFeedback>
-                </View>
-                </ScrollView>
-              </Modal>
-              {/* <Image
-                    source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
-                    resizeMode="stretch"
-                    style={styles.img}
-                  /> */}
+               
+             
               <View
                 style={{
                   flexDirection: 'row',
