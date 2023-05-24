@@ -10,8 +10,9 @@ import {
   Platform,
   PermissionsAndroid,
   TextInput,
-  
+
 } from 'react-native';
+import State from './Location'
 import Modal from 'react-native-modal';
 import AppBackground from '../../../components/AppBackground';
 import { Colors, NavService } from '../../../config';
@@ -19,6 +20,7 @@ import { connect } from 'react-redux';
 import CustomButton from '../../../components/CustomButton';
 import Btn from '../../../components/Btn';
 import Pickdate from '../../../components/Pickdate';
+import { Picker } from '@react-native-picker/picker';
 import SplashScreen from 'react-native-splash-screen';
 import Categories from '../../../components/Categories';
 import { Get_All_Categories, localevents } from '../../../redux/APIs/index';
@@ -56,6 +58,10 @@ export class Home extends Component {
     geolocation: false,
     latitude: null,
     longitude: null,
+    selectedLanguage: null,
+    selectedcity: null,
+    local: State
+
 
   };
   setModalVisible = visible => {
@@ -221,7 +227,7 @@ export class Home extends Component {
                   this.state.geolocation ?
                     (
                       <>
-                        <GooglePlaceAutocomplete
+                        {/* <GooglePlaceAutocomplete
                           callback={(address, geometry) =>
                             console.log('address, geometry', address, geometry)
                           }
@@ -248,7 +254,9 @@ export class Home extends Component {
                           }
 
 
-                        />
+                        /> */}
+
+
                         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                           <GooglePlaceAutocomplete
 
@@ -308,7 +316,7 @@ export class Home extends Component {
                             iconColor
 
                             placeholder={
-                              // s = text.split(' ').map(data => data)
+
 
                               text.split(' ').length > 1 ? text.split(' ').slice(-2, -1).pop() : 'State'
                             }
@@ -322,7 +330,7 @@ export class Home extends Component {
                     :
                     (
                       <>
-                        <GooglePlaceAutocomplete
+                        {/* <GooglePlaceAutocomplete
                           callback={(address, geometry) => {
                             console.log('address, geometry', address, geometry)
                             this.setState({ Locations: address })
@@ -350,36 +358,67 @@ export class Home extends Component {
                           }
 
 
-                        />
+                        /> */}
+
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10 }}>
-                          <View style={{ flexDirection: 'row', 
-                          borderWidth: 1, borderColor: Colors?.purple, 
-                          borderRadius: 10, 
-                          alignItems: 'center', 
-                          width: '48.5%',
-                           paddingHorizontal: 10,
-                           height:Platform.OS === 'ios' ? 60 : null,
-                           
-                           }}>
-                            <Image source={Icons?.location} style={{ height: 20, width: 20, tintColor: Colors?.purple }} resizeMode='contain' />
-                            <TextInput
+                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null, }}>
+                            {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
+                            {/* <TextInput
                               placeholderTextColor={Colors?.black}
-                              style={{ color: Colors?.black, width:'85%',  fontFamily:themes?.font?.regular}}
+                              style={{ color: Colors?.black, width: '85%', fontFamily: themes?.font?.regular }}
                               editable={false}
                               placeholder='City'
-                              value={this.state.Locations ? this.state.Locations.split(' ').slice(-5, -4).pop() + " " + this.state.Locations.split(' ').slice(-4, -3).pop() : 'City'}
-                            />
+                              // value={this.state.Locations.split(' ').length > 1 ? this.state.Locations.split(' ').slice(-3, -2).pop() : 'State'}
+                              value={"State"}
+                            /> */}
+                            {console.log('this.state.selectedLanguage', this.state.selectedLanguage)}
+                            <Picker
+                              style={styles.container}
+                              // color={Colors.grey}
+                              selectedValue={this.state.selectedLanguage}
+                              onValueChange={(itemValue, itemIndex) => this.setState({ selectedLanguage: itemValue })}
+                              itemStyle={{ color: 'white', fontSize: 20,  }}
+                              mode="dropdown"
+                            >
+                              <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold', backgroundColor: '#ededed', }} />
+                              {
+                                Object.keys(this.state.local).map((item) => {
+                                  console.log("kji", item)
+                                  return (
+                                    <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold',  }} />
+                                  )
+                                })
+                              }
+                            </Picker>
                           </View>
-                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10,       height:Platform.OS === 'ios' ? 60 : null,}}>
-                            <Image source={Icons?.location} style={{ height: 20, width: 20, tintColor: Colors?.purple }} resizeMode='contain' />
-                            <TextInput
-                              placeholderTextColor={Colors?.black}
-                              style={{ color: Colors?.black, width:'85%', fontFamily:themes?.font?.regular }}
-                              editable={false}
-                              placeholder='City'
-                              value={this.state.Locations.split(' ').length > 1 ? this.state.Locations.split(' ').slice(-3, -2).pop() : 'State'}
-                            />
+                          <View style={{
+                            flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null,
+
+                          }}>
+                            {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
+                            <Picker
+                              style={styles.container}
+                              color={Colors.grey}
+                              selectedValue={this.state.selectedcity}
+                              onValueChange={(itemValue, itemIndex) => this.setState({ selectedcity: itemValue })}
+                              itemStyle={{ color: 'white', fontSize: 20,  }}
+                              mode="dropdown"
+                            >
+
+                              {
+                                this.state.selectedLanguage && this.state.local[this.state.selectedLanguage].map((city, index) => (
+                                  <Picker.Item
+                                    key={index}
+                                    label={city}
+                                    value={city}
+                                    color="black"
+                                    style={{ fontWeight: 'bold',  }}
+                                  />
+                                ))
+                              }
+                            </Picker>
                           </View>
+
                           {/* <GooglePlaceAutocomplete
                             callback={(address, geometry) => {
                               console.log('address, geometry', address, geometry)

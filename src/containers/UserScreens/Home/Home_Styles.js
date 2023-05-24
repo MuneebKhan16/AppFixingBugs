@@ -93,6 +93,13 @@ export const styles = StyleSheet.create({
     fontFamily: themes?.font?.italic,
     color: 'grey'
   },
+  container: {
+   
+    width: 135,
+    borderRadius: 20,
+    color:Colors.black,
+
+  },
   textInput: {
     // // Custom text input styles
     // // Example styles:
