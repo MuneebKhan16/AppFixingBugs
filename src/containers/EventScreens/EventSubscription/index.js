@@ -8,6 +8,7 @@ import {
   Image,
   Platform,
   Alert,
+  ScrollView,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import {
@@ -28,6 +29,40 @@ import { Colors } from '../../../config';
 import { loaderStart, loaderStop } from '../../../redux/APIs';
 import Icons from '../../../assets/Icons';
 
+const Featured = [
+  {
+    id: 1,
+    name: 'One-Time Events (not on a package) is for $15 per post',
+  },
+  {
+    id: 2,
+    name: 'If on a subscription package $15 optimization to feature your business or events for the month on the featured events page',
+  },
+  {
+    id: 3,
+    name: 'Part Bus Owners $15/monthly',
+  },
+]
+const Month = [
+  {
+    id: 1,
+    name: 'For those who have set up auto pay can post unlimited each month, added perks is being randomly selected to be featured for no charge or can be featured all month for $15 extra',
+  },
+  {
+    id: 2,
+    name: 'Can still cancel at anytime per request',
+  },
+]
+const Recurring = [
+  {
+    id: 1,
+    name: 'For those who want to just try it, Business Profile will be deleted if payment is not received 5th day after',
+  },
+
+]
+
+
+
 // const productIds = Platform.select({
 //   ios: ['Featured_15'],
 //   android: ['Featured_15'],
@@ -37,6 +72,7 @@ import Icons from '../../../assets/Icons';
 //   android: ['Recurring_60', 'Monthly_80'],
 // });
 const EventSubscription = () => {
+
   // let purchaseUpdateSubscription = null;
   // let purchaseErrorSubscription = null;
   // const [iapProducts, setIapProducts] = useState([]);
@@ -165,6 +201,19 @@ const EventSubscription = () => {
   //     }
   //   };
   // }, []);
+  let swiperRef = null;
+
+  const goNext = () => {
+    if (swiperRef) {
+      swiperRef.scrollBy(1);
+    }
+  };
+
+  const goPrevious = () => {
+    if (swiperRef) {
+      swiperRef.scrollBy(-1);
+    }
+  };
   return (
     <AppBackground
       title={'Subscriptions'}
@@ -172,114 +221,150 @@ const EventSubscription = () => {
       notification={false}
       back
       home>
-      <View style={{ height: 400, borderRadius: 10, marginTop: 30 }}>
-        <Swiper style={styles.wrapper} showsButtons={false} 
-        activeDotColor={Colors.purple}
-        // "transparent"
-          dotColor={Colors.grey}
-          // "transparent"
-          >
-            {/* //////////////////////////////// */}
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Featured Post</Text>
-            <View
-              style={styles.maincontent}>
-              <Text
-                style={styles.txt}>
-                $15
-              </Text>
-            </View>
-            <View
-              style={styles.container}>
-              <View
-                style={styles.maincontainer}>
-                <Image
-                  source={Icons.check}
-                  resizeMode="contain"
-                  style={styles.check}
+      <ScrollView>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 30 }}>
+          <TouchableOpacity onPress={goPrevious}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: Colors.purple }}>{'<'}</Text>
+          </TouchableOpacity>
+          <View style={{ height: 460, borderRadius: 10, marginTop: 30, marginHorizontal: 10 }}>
+            <Swiper style={styles.wrapper} showsButtons={false}
+              activeDotColor={Colors.purple}
+              // "transparent"
+              dotColor={Colors.grey}
+              ref={(ref) => (swiperRef = ref)}
+            // "transparent"
+            >
+              {/* //////////////////////////////// */}
+              <View style={styles.slide1}>
+                <Text style={styles.text}>Featured Post</Text>
+                <View
+                  style={styles.maincontent}>
+                  <Text
+                    style={styles.txt}>
+                    $15
+                  </Text>
+                </View>
+                <FlatList
+                  data={Featured}
+                  renderItem={({ item }) => (
+                    <View
+                      style={styles.container}>
+                      <View
+                        style={styles.maincontainer}>
+                        <Image
+                          source={Icons.check}
+                          resizeMode="contain"
+                          style={styles.check}
+                        />
+                      </View>
+                      <Text
+                        style={styles.descrption}>
+                        {item.name}
+                      </Text>
+
+                    </View>
+                  )}
+
                 />
+
+
+
+                <TouchableOpacity
+                  style={styles.btncontent}>
+                  <Text
+                    style={styles.btn}>
+                    Buy
+                  </Text>
+                </TouchableOpacity>
               </View>
-              <Text
-                style={styles.descrption}>
-                Feature your event across the top and on the featured events page
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.btncontent}>
-              <Text
-                style={styles.btn}>
-                Buy
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/* //////////////////////////////////////////////////// */}
-          <View style={styles.slide2}>
-          <Text style={styles.text}>Month-to-Month</Text>
-            <View
-              style={styles.maincontent}>
-              <Text
-                style={styles.txt}>
-               $80
-              </Text>
-            </View>
-            <View
-              style={styles.container}>
-              <View
-                style={styles.maincontainer}>
-                <Image
-                  source={Icons.check}
-                  resizeMode="contain"
-                  style={styles.check}
+              {/* //////////////////////////////////////////////////// */}
+              <View style={styles.slide2}>
+                <Text style={styles.text}>Month Recurring</Text>
+                <View
+                  style={styles.maincontent}>
+                  <Text
+                    style={styles.txt}>
+                    $60
+                  </Text>
+                </View>
+                <FlatList
+                  data={Month}
+                  renderItem={({ item }) => (
+                    <View
+                      style={styles.container}>
+                      <View
+                        style={styles.maincontainer}>
+                        <Image
+                          source={Icons.check}
+                          resizeMode="contain"
+                          style={styles.check}
+                        />
+                      </View>
+                      <Text
+                        style={styles.descrption}>
+                        {item.name}
+                      </Text>
+
+                    </View>
+                  )}
+
                 />
+
+                <TouchableOpacity
+                  style={styles.btncontent}>
+                  <Text
+                    style={styles.btn}>
+                    Subscribe
+                  </Text>
+                </TouchableOpacity>
               </View>
-              <Text
-                style={styles.descrption}>
-                Subscribe a month-to-month package to avail all the features
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.btncontent}>
-              <Text
-                style={styles.btn}>
-                Subscribe
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {/* //////////////////////////////////////// */}
-          <View style={styles.slide3}>
-          <Text style={styles.text}>Monthly recurring</Text>
-            <View
-              style={styles.maincontent}>
-              <Text
-                style={styles.txt}>
-              $60
-              </Text>
-            </View>
-            <View
-              style={styles.container}>
-              <View
-                style={styles.maincontainer}>
-                <Image
-                  source={Icons.check}
-                  resizeMode="contain"
-                  style={styles.check}
+              {/* //////////////////////////////////////// */}
+              <View style={styles.slide3}>
+                <Text style={styles.text}>Monthly Pay As You Go</Text>
+                <View
+                  style={styles.maincontent}>
+                  <Text
+                    style={styles.txt}>
+                    $80
+                  </Text>
+                </View>
+                <FlatList
+                  data={Recurring}
+                  renderItem={({ item }) => (
+                    <View
+                      style={styles.container}>
+                      <View
+                        style={styles.maincontainer}>
+                        <Image
+                          source={Icons.check}
+                          resizeMode="contain"
+                          style={styles.check}
+                        />
+                      </View>
+                      <Text
+                        style={styles.descrption}>
+                        {item.name}
+                      </Text>
+
+                    </View>
+                  )}
+
                 />
+                <TouchableOpacity
+                  style={styles.btncontent}>
+                  <Text
+                    style={styles.btn}>
+                    Subscribe
+                  </Text>
+                </TouchableOpacity>
               </View>
-              <Text
-                style={styles.descrption}>
-                Subscribe a monthly recurring package to avail all the features
-              </Text>
-            </View>
-            <TouchableOpacity
-              style={styles.btncontent}>
-              <Text
-                style={styles.btn}>
-                Subscribe
-              </Text>
-            </TouchableOpacity>
+            </Swiper>
           </View>
-        </Swiper>
-      </View>
+          <TouchableOpacity onPress={goNext} style={{ marginRight: 10 }}>
+            <Text style={{ fontSize: 30, fontWeight: 'bold', color: Colors.purple, }}>{'>'}</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </AppBackground>
   );
 };
@@ -293,17 +378,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    height: 400,
+    height: 460,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: Colors.purple,
-    height: 500,
   },
   slide2: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    height: 400,
+    height: 480,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: Colors.purple,
@@ -313,7 +397,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#ffffff',
-    height: 400,
+    height: 480,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: Colors.purple,
@@ -331,7 +415,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.purple,
     width: '100%',
     paddingVertical: 15,
-    justifyContent: 'center',
     alignItems: 'center',
   },
   txt: {
@@ -352,17 +435,20 @@ const styles = StyleSheet.create({
   btn: { color: Colors.white, fontSize: 16, fontWeight: 'bold' },
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
-    height:150
+    flex: 1,
+    marginTop: 5
   },
   maincontainer: {
     backgroundColor: Colors.purple,
-    padding: 3,
+    padding: 5,
     borderRadius: 10,
     marginBottom: 15,
+    height: 20,
+    marginTop: 5
+
   },
   check: { width: 10, height: 10, tintColor: Colors.white },
-  descrption: { marginLeft: 5, fontSize: 18, color: Colors.black, width: '80%' }
+  descrption: { marginLeft: 5, fontSize: 16, color: Colors.black, width: '85%', fontWeight: 'bold' }
 
 
 

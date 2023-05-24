@@ -20,7 +20,6 @@ const PickerCompone = (props) => {
   useEffect(() => {
     handletransfer();
   }, [selectedLanguage]);
-  console.log('selectedData', selectedData);
   return (
     <Picker
       style={styles.container}

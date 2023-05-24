@@ -422,7 +422,7 @@ const EventPost = props => {
               </Text>
               <Text style={styles.modaltxt}>
                 4- Helpful Tips in Description field such as Parking tips, Crowd
-                (Age, Music Genre) on SpecificNights if Differs, Dress code,
+                (Age, Music Genre) on Specific Nights if Differs, Dress code,
                 {'\n'}
               </Text>
               <Text style={styles.modaltxt}>

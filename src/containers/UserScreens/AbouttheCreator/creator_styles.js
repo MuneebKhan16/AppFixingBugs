@@ -12,15 +12,15 @@ export const styles = StyleSheet.create({
         fontStyle: 'italic'
     },
     subheading: {
-        textDecorationLine: 'underline',
-      
+        // textDecorationLine: 'underline',
+      fontWeight:'bold',
         marginTop: 10,
         fontSize: themes?.fontSize?.medium,
-        fontFamily: themes?.font?.bold,
-       color:Colors.darkGray,
+        // fontFamily: themes?.font?.extraBold,
+       color:Colors.black,
         marginLeft: 10,
         marginRight: 2,
-        letterSpacing:1
+        letterSpacing:1,
     },
     top:{ marginTop: 30 }
 

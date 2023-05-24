@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  TouchableWithoutFeedback, Modal
 } from 'react-native';
 import React, {useState, useEffect, useCallback, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
@@ -26,6 +27,15 @@ const EventProfile = () => {
 
   const {userProfile} = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const handleImagePress = () => {
+    setIsFullScreen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsFullScreen(false);
+  };
 
   const userData = useSelector(state => state?.reducer?.user);
   const [showEvents, SetshowEvents] = useState([]);
@@ -241,11 +251,12 @@ const EventProfile = () => {
                         </Text>
                       </View>
                     </View>
-                    <TouchableOpacity
-                      activeOpacity={0.8}
-                      onPress={() =>
-                        NavService.navigate('Event', item?.category_id)
-                      }>
+                    <TouchableWithoutFeedback onPress={handleImagePress}>
+                   
+                       {/* onPress={() => */}
+                      {/* //   NavService.navigate('Event', item?.category_id)
+                      // } */}
+                      
                       <FastImage
                         source={{
                           uri: item?.event_image
@@ -292,7 +303,33 @@ const EventProfile = () => {
                           </Text>
                         </View>
                       </FastImage>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
+                    <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
+                <ScrollView>
+                  <FastImage
+                    source={{
+                      uri: item?.event_image
+                        ? `${ImageURL?.ImageURL}${item?.event_image}`
+                        : `${DummyURL.dummy}`,
+                    }}
+                    resizeMode="stretch"
+                    style={{
+                      marginTop: 10,
+                      height: 500,
+                      borderRadius: 10,
+                      width: '98%',
+                      marginLeft: 5,
+                      borderWidth: 2,
+                      borderColor: Colors.purple,
+                    }}
+                  />
+                  <View style={{alignItems:'center',marginTop:10}}>
+                <TouchableWithoutFeedback onPress={handleCloseModal}>
+                  <Text style={{fontSize:16,color:Colors.purple,fontWeight:'bold'}}>Close</Text>
+                </TouchableWithoutFeedback>
+                </View>
+                </ScrollView>
+              </Modal>
                     <TouchableOpacity
                       onPress={() => Delete_Event(item)}
                       style={{position: 'absolute', right: 2, bottom: 10}}>
