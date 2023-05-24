@@ -69,12 +69,8 @@ const styles = StyleSheet.create({
     width: 300,
     paddingLeft: 15,
     borderRadius: 20,
-<<<<<<< HEAD
 
   }
 })
-=======
->>>>>>> 74db98252c21fa55db22fa9dc7f52b966015e142
 
-  }
-})
+  

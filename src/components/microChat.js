@@ -8,19 +8,12 @@ import { yellow100 } from 'react-native-paper/lib/typescript/styles/colors';
 import ImageURL from '../config/Common'
 import { themes } from '../config/globalFonts/globalFonts';
 const MicroChat = props => {
-<<<<<<< HEAD
   const { image, name, msg, onPress ,date } = props;
   console.log("******",image)
   const img = image
   const db = `${ImageURL.ImageURL}${img}`
   const bd = image
   
-=======
-  const { image, name, msg, onPress } = props;
-
- // console.log('kkkkk',image)
-
->>>>>>> 74db98252c21fa55db22fa9dc7f52b966015e142
 
   return (
     <View style={styles.self} >
