@@ -11,15 +11,17 @@ import { themes } from '../config/globalFonts/globalFonts';
 import { ScrollView } from 'react-native-gesture-handler';
 const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
   const [starCount, setStarCount] = useState(1);
-  // const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  // const handleImagePress = () => {
-  //   setIsFullScreen(true);
-  // };
+  const handleImagePress = (image) => {
+    setSelectedImage(image);
+    setIsFullScreen(true);
+  };
 
-  // const handleCloseModal = () => {
-  //   setIsFullScreen(false);
-  // };
+  const handleCloseModal = () => {
+    setIsFullScreen(false);
+  };
   const ConvertTimeStamp = date => {
     const data = new Date(date);
     const hours = data.getHours();
@@ -50,7 +52,7 @@ const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
                 <StarRating
                   fullStar={Icons.starFilled}
                   emptyStar={Icons.starEmpty}
-                  starSize={14}
+                  starSize={12}
                   disabled={true}
                   maxStars={5}
                   rating={data.rating}
@@ -120,16 +122,16 @@ const styles = StyleSheet.create({
   },
   name: {
     color: Colors.black,
-    fontWeight: 'bold',
-
-    fontSize: 18,
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.black,
     textTransform: 'capitalize',
   },
   date: {
     position: 'absolute',
     right: 0,
     color: Colors.black,
-    fontWeight: 'bold',
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.regular,
     marginRight: 10,
   },
   img: {
@@ -142,7 +144,8 @@ const styles = StyleSheet.create({
     borderColor: Colors.purple,
   },
   tags: {
-    fontWeight: '700',
+    fontSize: themes?.fontSize?.regular,
+    fontFamily: themes?.font?.black,
     color: '#000',
     marginLeft: 12,
     marginTop: 10,

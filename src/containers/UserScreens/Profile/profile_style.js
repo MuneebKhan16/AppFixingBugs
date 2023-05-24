@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
 
     fontSize: themes?.fontSize?.large,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
     color: Colors.black,
     marginLeft: 10,
 

@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   name: {
     marginLeft: 10,
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.bold,
+    fontFamily: themes?.font?.black,
     color: Colors.black,
     textTransform: 'capitalize',
   }

@@ -92,7 +92,7 @@ const Profile = props => {
               <Text
                 style={{
                   fontSize: themes?.fontSize?.large,
-                  fontFamily: themes?.font?.extraBold,
+                  fontFamily: themes?.font?.black,
                   color: Colors.black,
                   // textAlign: row ? null : 'center',
                   textTransform: 'capitalize',
@@ -101,7 +101,7 @@ const Profile = props => {
               </Text>
               <Text
                 style={{
-                  fontSize: themes?.fontSize?.extraVSmall,
+                  fontSize: themes?.fontSize?.large,
                   fontFamily: themes?.font?.regular,
                   color: Colors.darkGray,
                 }}>
