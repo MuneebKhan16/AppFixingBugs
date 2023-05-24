@@ -140,12 +140,14 @@ export async function signup(
       type: 'error',
       visibilityTime: 3000,
     });
-
+    const fcmToken = await getDeviceToken();
   const params = {
     name,
     email,
     password,
     confirm_password,
+    device_type: Platform.OS,
+    device_token: fcmToken,
   };
   try {
     const data = await postApi('signup', params);
