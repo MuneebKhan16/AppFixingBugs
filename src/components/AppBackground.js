@@ -1,5 +1,5 @@
 // eslint-disable prettier/prettier /
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   Text,
   View,
@@ -10,25 +10,26 @@ import {
   Button,
   StyleSheet,
 } from 'react-native';
-import {getStatusBarHeight} from 'react-native-status-bar-height';
+import { Picker } from '@react-native-picker/picker';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import Icons from '../assets/Icons';
 import Images from '../assets/Images';
-import {Colors, NavService} from '../config';
+import { Colors, NavService } from '../config';
 import RNBounceable from '@freakycoder/react-native-bounceable';
 import Modal from 'react-native-modal';
 import Pickdate from './Pickdate';
 import CustomButton from './CustomButton';
-import {TextInput} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import { TextInput } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 import ImageURL from '../config/Common';
 import Dummy from '../config/Common';
 import Mymdll from './Mymdll';
 import Datepick from './Datepick';
-import {themes} from '../config/globalFonts/globalFonts';
+import { themes } from '../config/globalFonts/globalFonts';
 import moment from 'moment';
 import Pickeventdate from './Pickeventdate';
 import postApi from '../redux/RequestTypes/post';
-
+import States from '../containers/UserScreens/Home/Location'
 export function AppBackground({
   editeIcon,
   route,
@@ -38,7 +39,7 @@ export function AppBackground({
   nav = '',
   rightIcon = Images.avatar,
   marginHorizontal,
-  rightIconNav = () => {},
+  rightIconNav = () => { },
   profile = false,
   edit = false,
   notification = false,
@@ -49,7 +50,7 @@ export function AppBackground({
   editicn = false,
   editParams = null,
   save = false,
-  onSavePress = () => {},
+  onSavePress = () => { },
   home,
   Eventuser,
 }) {
@@ -57,17 +58,18 @@ export function AppBackground({
     nav.length
       ? NavService.navigate(nav)
       : back
-      ? NavService.goBack()
-      : NavService.navigate;
+        ? NavService.goBack()
+        : NavService.navigate;
   };
   const [isModalVisible, setModalVisible] = useState(false);
   const user = useSelector(state => state.reducer.user);
 
-  
+
   const [City, setcity] = useState();
   const [State, setstate] = useState();
-  const [date,setDate] = useState('');
- 
+  const [date, setDate] = useState('');
+  const [locals, Setlocals] = useState(States);
+
 
   const handleLocationFetch = async () => {
     const state = State;
@@ -76,21 +78,21 @@ export function AppBackground({
 
     const params = new FormData();
 
-  params.append('state',state)
-  params.append('city',city)
-  params.append('event_date',event_date);
+    params.append('state', state)
+    params.append('city', city)
+    params.append('event_date', event_date);
 
-  const data = await postApi('search-event',params);
-  console.log('kjhg',data)
+    const data = await postApi('search-event', params);
+    console.log('kjhg', data)
 
-  if(data.status == 1){
+    if (data.status == 1) {
       setcity('')
       setstate('')
       setDate(null)
       const filtered = data?.Data
-      NavService.navigate('Event',{filtered})
-  }
-  
+      NavService.navigate('Event', { filtered })
+    }
+
   }
 
 
@@ -114,7 +116,7 @@ export function AppBackground({
     setIsModalVisible(false);
   };
   return home ? (
-    <View style={{flex: 1, backgroundColor: Colors.offWhite}}>
+    <View style={{ flex: 1, backgroundColor: Colors.offWhite }}>
       <View style={styles.maincontainer}>
         <>
           <TouchableOpacity
@@ -314,7 +316,7 @@ export function AppBackground({
                           tintColor: Colors.purple,
                         }}
                       />
-                      <TextInput
+                      {/* <TextInput
                         numberOfLines={1}
                         editable={true}
                         style={{
@@ -331,7 +333,27 @@ export function AppBackground({
                         onBlur={() => setIsFocused(false)}
                         onChangeText={City => setcity(City)}
                         value={City}
-                      />
+                      /> */}
+                      <Picker
+                        style={styles.containers}
+                        // color={Colors.grey}
+                        selectedValue={State}
+                        onValueChange={(itemValue, itemIndex) => setstate(itemValue)}
+                        itemStyle={{ color: 'white', fontSize: 20, }}
+                        mode="dropdown"
+                      >
+                        <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold' }} />
+                        {
+                          Object.keys(locals).map((item) => {
+                            console.log("kji", item)
+                            return (
+                              <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold', }} />
+                            )
+                          })
+                        }
+                      </Picker>
+
+
                     </View>
                     <View
                       style={{
@@ -355,7 +377,7 @@ export function AppBackground({
                           tintColor: Colors.purple,
                         }}
                       />
-                      <TextInput
+                      {/* <TextInput
                         numberOfLines={1}
                         editable={true}
                         style={{
@@ -372,10 +394,31 @@ export function AppBackground({
                         onBlur={() => setIsFocused(false)}
                         onChangeText={State => setstate(State)}
                         value={State}
-                      />
+                      /> */}
+                      <Picker
+                        style={styles.containers}
+                        color={Colors.grey}
+                        selectedValue={City}
+                        onValueChange={(itemValue, itemIndex) => setcity(itemValue)}
+                        itemStyle={{ color: 'white', fontSize: 20, }}
+                        mode="dropdown"
+                      >
+
+                        {
+                          State && locals[State].map((city, index) => (
+                            <Picker.Item
+                              key={index}
+                              label={city}
+                              value={city}
+                              color="black"
+                              style={{ fontWeight: 'bold', }}
+                            />
+                          ))
+                        }
+                      </Picker>
                     </View>
 
-                    <Pickeventdate  date={date} setDate={setDate} />
+                    <Pickeventdate date={date} setDate={setDate} />
                     <CustomButton
                       buttonStyle={{
                         width: 280,
@@ -422,7 +465,7 @@ export function AppBackground({
             <RNBounceable
               activeOpacity={0.8}
               onPress={() => {
-                NavService.navigate('Editevent', {eventDetail: editParams});
+                NavService.navigate('Editevent', { eventDetail: editParams });
               }}
               style={{
                 position: 'absolute',
@@ -495,7 +538,7 @@ export function AppBackground({
       </View>
     </View>
   ) : (
-    <ImageBackground source={Images.bg} style={{flex: 1}}>
+    <ImageBackground source={Images.bg} style={{ flex: 1 }}>
       <View style={styles.maincontainer}>
         <>
           {back && (
@@ -619,5 +662,14 @@ const styles = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
     paddingRight: 50,
+  },
+  containers: {
+    borderColor: 'yellow',
+    borderRadius: 10,
+    width: '80%',
+    color: Colors.black,
+    fontSize: 17,
+    marginLeft: 15,
+
   },
 });
