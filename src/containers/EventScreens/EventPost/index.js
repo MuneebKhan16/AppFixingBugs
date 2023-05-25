@@ -1,3 +1,4 @@
+//  eslint-disable prettier/prettier 
 import {
   StyleSheet,
   View,
@@ -44,7 +45,7 @@ const EventPost = props => {
 
   const [location, setLocation] = useState(null);
   const [locations, setLocations] = useState('');
-  
+
   const [citys, setCity] = useState(null);
   const [states, setStates] = useState(null);
 
@@ -67,6 +68,7 @@ const EventPost = props => {
   const [selectedData, setSelectedData] = useState(null);
   const users = useSelector(state => state?.reducer?.user);
   const { Categorys } = useContext(eventContext);
+  const placeholder = 'Enter your Location'
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
@@ -130,8 +132,8 @@ const EventPost = props => {
 
     const event_location = location;
     const event_date = moment(date).format('YYYY-MM-DD');
-    const state = states
-    const city = citys
+    const state = states ? states : location.split(' ').slice(-3, -2).pop();
+    const city = citys ? citys : location.split(' ').slice(-5, -4).pop() +' ' +location.split(' ').slice(-4, -3).pop();
     // console.log("check",event_location,state,city)
     post_events(
       event_title,
@@ -288,16 +290,16 @@ const EventPost = props => {
                     location.split(' ').slice(4, 5).pop() +
                     ' ' +
                     location.split(' ').slice(5, 6).pop() +
-                    ' ' +
-                    location.split(' ').slice(6, 7).pop()}
+                    ' '}
                 </Text>
               ) : currentlocation ? (
                 <Text style={{ color: '#000', width: 250 }} numberOfLines={1}>
-                  {currentlocation.split(' ').slice(0, 1).pop() +
+                  {/* {currentlocation.split(' ').slice(0, 1).pop() +
                     ' ' +
                     currentlocation.split(' ').slice(1, 2).pop() +
                     ' ' +
-                    currentlocation.split(' ').slice(2, 3).pop()}
+                    currentlocation.split(' ').slice(2, 3).pop()} */}
+                  {placeholder}
                 </Text>
               ) : null}
 
@@ -311,102 +313,11 @@ const EventPost = props => {
                 setcurrentlocation={setcurrentlocation}
               />
             </TouchableOpacity>
-            {console.log('locations***********',locations) }
+            {console.log('locations***********', location)}
             {
-              location != null ?
+              location == null ?
                 (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                    <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
-                      {/* {location ? (
-                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {location.split(' ').slice(-5, -4).pop() +
-                            ' ' +
-                            location.split(' ').slice(-4, -3).pop()}
-                        </Text>
-                      ) : currentlocation ? (
-                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {currentlocation.split(' ').length > 1
-                            ? currentlocation.split(' ').slice(-4, -3).pop()
-                            : 'City'}
-                        </Text>
-                      ) : null} */}
-
-                      <Image source={Icons.marker} style={styles.marker} />
-                      {/* <Mymdll
-                        isVisible={isModalVisible}
-                        onClose={handleCloseModal}
-                        setLocation={setLocation}
-                        location={location}
-                        currentlocation={currentlocation}
-                        setcurrentlocation={setcurrentlocation}
-                      /> */}
-
-                      <TextInput
-                        editable={true}
-                        style={{
-                          flex: 1,
-                          marginLeft: 10,
-                          color: 'black',
-                          alignContent:'center'
-                        }}
-                        onChangeText={state => {
-                          if(state == ' '){
-                            setStates(state);
-                          }
-                          setLocation(null);
-                        }}
-                        value={location ? location.split(' ').slice(-5, -4).pop() +
-                        ' ' +
-                        location.split(' ').slice(-4, -3).pop() : states}
-                        placeholderTextColor="black"
-                      />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
-                      {/* {location ? (
-                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {location.split(' ').slice(-3, -2).pop()}
-                        </Text>
-                      ) : currentlocation ? (
-                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {currentlocation.split(' ').length > 1
-                            ? currentlocation.split(' ').slice(-2, -1).pop()
-                            : 'State'}
-                        </Text>
-                      ) : null} */}
-
-                      <Image source={Icons.marker} style={styles.marker} />
-
-                      <TextInput
-                        editable={true}
-                        style={{
-                          flex: 1,
-                          marginLeft: 10,
-                          color: 'black',
-                          alignContent:'center'
-                        }}
-                        onChangeText={city => setCity(city)}
-                        value={  location ? location.split(' ').slice(-3, -2).pop() : citys}
-                        placeholderTextColor="black"
-                      />
-
-                      {/* <Mymdll
-                        isVisible={isModalVisible}
-                        onClose={handleCloseModal}
-                        setLocation={setLocation}
-                        location={location}
-                        currentlocation={currentlocation}
-                        setcurrentlocation={setcurrentlocation}
-                      /> */}
-
-                    </TouchableOpacity>
-
-
-                  </View>
-                )
-                :
-                (
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Picker
                       style={styles.containers}
@@ -448,6 +359,94 @@ const EventPost = props => {
                         ))
                       }
                     </Picker>
+                  </View>
+                )
+                :
+                (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                    <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
+                    {location ? (
+                      <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
+                        {location.split(' ').slice(-5, -4).pop() +
+                          ' ' +
+                          location.split(' ').slice(-4, -3).pop()}
+                      </Text>
+                    ) : currentlocation ? (
+                      <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
+                        {currentlocation.split(' ').length > 1
+                          ? currentlocation.split(' ').slice(-4, -3).pop()
+                          : 'City'}
+                      </Text>
+                    ) : null} 
+                     
+
+                      <Image source={Icons.marker} style={styles.marker} />
+
+                      {/* <TextInput
+                      editable={true}
+                      style={{
+                        flex: 1,
+                        marginLeft: 10,
+                        color: 'black',
+                        alignContent:'center'
+                      }}
+                      onChangeText={city => setCity(city)}
+                      value={  location ? location.split(' ').slice(-3, -2).pop() : citys}
+                      placeholderTextColor="black"
+                    /> */}
+
+                      <Mymdll
+                        isVisible={isModalVisible}
+                        onClose={handleCloseModal}
+                        setLocation={setLocation}
+                        location={location}
+                        currentlocation={currentlocation}
+                        setcurrentlocation={setcurrentlocation}
+                      />
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
+                      
+                    {location ? (
+                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
+                          {location.split(' ').slice(-3, -2).pop()}
+                        </Text>
+                      ) : currentlocation ? (
+                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
+                          {currentlocation.split(' ').length > 1
+                            ? currentlocation.split(' ').slice(-2, -1).pop()
+                            : 'State'}
+                        </Text>
+                      ) : null}
+                      <Image source={Icons.marker} style={styles.marker} />
+
+                      {/* <TextInput
+                      editable={true}
+                      style={{
+                        flex: 1,
+                        marginLeft: 10,
+                        color: 'black',
+                        alignContent:'center'
+                      }}
+                      onChangeText={city => setCity(city)}
+                      value={  location ? location.split(' ').slice(-3, -2).pop() : citys}
+                      placeholderTextColor="black"
+                    /> */}
+
+                      <Mymdll
+                        isVisible={isModalVisible}
+                        onClose={handleCloseModal}
+                        setLocation={setLocation}
+                        location={location}
+                        currentlocation={currentlocation}
+                        setcurrentlocation={setcurrentlocation}
+                      />
+
+                    </TouchableOpacity>
+
+
                   </View>
 
                 )

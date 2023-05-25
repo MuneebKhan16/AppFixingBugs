@@ -7,7 +7,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback,
+  TouchableWithoutFeedback, ScrollView
 } from 'react-native';
 import Modal from 'react-native-modal';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -18,6 +18,7 @@ import ImageURL from '../config//Common';
 import FastImage from 'react-native-fast-image';
 import {themes} from '../config/globalFonts/globalFonts';
 import VideoPlayer from '../components/VideoPlayer';
+
 // check
 const {width, height} = Dimensions.get('screen');
 const Posts = props => {
@@ -59,8 +60,11 @@ const Posts = props => {
                   resizeMode="cover"
                 />
                 <View>
-                  <Text style={styles.name}>{data?.user?.name}</Text>
-                  <View style={{marginLeft: 10}}>
+                  <Text style={styles.name} numberOfLines={1}>
+                    {data?.user?.name}
+
+                  </Text>
+                  <View style={{ marginLeft: 10 }}>
                     <StarRating
                       fullStar={Icons.starFilled}
                       // halfStar={Icons.star_half}
@@ -111,17 +115,17 @@ const Posts = props => {
                   </FastImage>
                 </TouchableOpacity>
               ) : (
-                <TouchableWithoutFeedback
-                  onPress={() => handleImagePress(data?.rating_image)}>
-                  <FastImage
-                    source={{
-                      uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
-                      priority: FastImage.priority.normal,
-                    }}
-                    style={styles.rating}
-                    resizeMode="cover"
-                  />
-                </TouchableWithoutFeedback>
+                // <TouchableWithoutFeedback onPress={handleImagePress}>
+                <FastImage
+                  source={{
+                    uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
+                    priority: FastImage.priority.normal,
+                  }}
+
+                  style={styles.rating}
+                  resizeMode="cover"
+                />
+                // </TouchableWithoutFeedback>
               )}
               <Text style={styles.tags}>{data?.tags}</Text>
             </View>
@@ -237,8 +241,9 @@ const styles = StyleSheet.create({
     fontSize: themes?.fontSize?.medium,
     fontFamily: themes?.font?.extraBold,
     marginLeft: 10,
-
+    width: 130,
     textTransform: 'capitalize',
+
   },
   rating: {
     width: '100%',

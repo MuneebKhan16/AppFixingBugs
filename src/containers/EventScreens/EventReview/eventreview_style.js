@@ -16,7 +16,10 @@ export const styles = StyleSheet.create({
     fontSize: 17, color: Colors.darkGray, marginLeft: 5, fontSize: themes?.fontSize?.small,
     fontFamily: themes?.font?.light,
   },
-  subtitle: { marginTop: 10, fontSize: 17, color: Colors.black, marginLeft: 5 },
+  subtitle: {
+    marginTop: 10, fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.regular, marginLeft: 5,color:Colors.black
+  },
   markericn: { flexDirection: 'row', alignItems: 'center', marginTop: 5, },
   markericnhdr: {
     justifyContent: 'center',
@@ -33,14 +36,14 @@ export const styles = StyleSheet.create({
   },
   subcontent: {
     color: Colors.black,
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.regular,
     width: 300,
   },
   heading: {
     marginVertical: 5,
-    fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontSize: themes?.fontSize?.large,
+    fontFamily: themes?.font?.italic,
     color: Colors.black,
 
     marginTop: 10,

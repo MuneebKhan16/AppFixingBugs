@@ -44,14 +44,14 @@ const EventSetting = () => {
           </View>
 
           <Text style={{
+            fontSize: themes?.fontSize?.large,
             fontFamily: themes?.font?.black,
-            fontSize: themes?.fontSize?.medium,
             color: Colors.black,
             textTransform: 'capitalize',
             marginTop: 10
           }}>{user_id?.name}</Text>
           <Text style={{
-            fontSize: themes?.fontSize?.extraVSmall,
+            fontSize: themes?.fontSize?.large,
             fontFamily: themes?.font?.regular,
             color: Colors.darkGray,
 
