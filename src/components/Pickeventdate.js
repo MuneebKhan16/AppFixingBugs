@@ -126,7 +126,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingLeft: 5,
     borderRadius: 10,
-    borderWidth:1
+    borderWidth:2,
+    borderColor:Colors.purple
   },
   touchable: {
     width: 270,
@@ -145,6 +146,6 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     resizeMode: 'contain',
-    tintColor: Colors.darkGray,
+    tintColor: Colors.purple,
   },
 });

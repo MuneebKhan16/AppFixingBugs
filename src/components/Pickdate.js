@@ -54,7 +54,7 @@ const Pickdate = () => {
             <TextInput
         style={{height: 60,color:Colors.black ,fontSize:16,fontWeight:'600',width:'92%',}}
         placeholder="Date"
-        placeholderTextColor={Colors.greey}
+        placeholderTextColor={Colors.black}
         editable={false}
         onFocus={() => setIsFocused(true)} 
         onBlur={() => setIsFocused(false)} 

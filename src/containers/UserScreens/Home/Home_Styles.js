@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   header:
   {
     fontSize: themes?.fontSize?.large,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
     color: Colors.black,
     marginLeft: 20,
     textTransform: 'capitalize',
@@ -85,7 +85,7 @@ export const styles = StyleSheet.create({
   imgbg: { borderRadius: 10, },
   mdltxtheader: { marginTop: 20, flexDirection: 'row', alignItems: 'center', borderWidth: 1, borderRadius: 10, paddingLeft: 10, },
   mdlimg: { width: 20, height: 20, },
-  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: themes?.fontSize?.large, fontFamily: themes?.font?.extraBold, marginVertical: 20, },
+  mdltxt: { color: Colors.black, alignSelf: 'center', fontSize: themes?.fontSize?.large, fontFamily: themes?.font?.black, marginVertical: 20, },
   txtinputadrs: { borderColor: 'grey', borderRadius: 10, width: '88%', color: Colors.darkGray, marginLeft: 10, fontSize: 16, fontWeight: '600', height: 45 },
   container1: { justifyContent: 'center', alignItems: 'center', flex: 1, },
   txtheadersty: {
