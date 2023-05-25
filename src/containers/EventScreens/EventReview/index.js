@@ -17,7 +17,8 @@ import { get_reviews_event } from '../../../redux/APIs/index';
 
 const { width, height } = Dimensions.get('screen');
 
-const EventReview = ({ navigation, route }) => {
+const EventReview = (props) => {
+  const { navigation, route } = props
   const token = useSelector(state => state.reducer.user.api_token);
   const { eventDetail } = route?.params;
   const [UserPost, setUserPost] = useState([]);
@@ -41,10 +42,21 @@ const EventReview = ({ navigation, route }) => {
   // };
 
   const filteringData = [];
+
+ // console.log('lllllllllllllllll', props?.route?.params?.eventDetail.id)
+
   // UserPost.filter(
-  //   data => data.event_id === props.route.params.id,
+  //   data => console.log("checking", data?.event_id === props?.route?.params?.eventDetail.id)  ,
   // );
-  console.log('eventDetail', eventDetail, 'eventDetail');
+
+  const filter = UserPost.filter((data) => {
+    if (data?.event_id === props?.route?.params?.eventDetail?.id ){
+      return data
+    }
+  })
+
+
+  console.log('UserPostsssss', filter, 'UserPost');
   return (
     <AppBackground back home editicn editParams={eventDetail}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
@@ -138,7 +150,7 @@ const EventReview = ({ navigation, route }) => {
           </Text>
         </View>
         <Text style={styles.heading}>Ratings & Post</Text>
-        {<EventsPosts datas={filteringData} />}
+        {<EventsPosts datas={filter} />}
       </ScrollView>
     </AppBackground>
   );
