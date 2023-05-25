@@ -239,9 +239,8 @@ const styles = StyleSheet.create({
   name: {
     color: Colors.black,
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
     marginLeft: 10,
-    width: 130,
     textTransform: 'capitalize',
 
   },
@@ -255,7 +254,7 @@ const styles = StyleSheet.create({
   },
   tags: {
     fontSize: themes?.fontSize?.small,
-    fontFamily: themes?.font?.bold,
+    fontFamily: themes?.font?.black,
     color: '#000',
     marginLeft: 12,
     marginTop: 10,

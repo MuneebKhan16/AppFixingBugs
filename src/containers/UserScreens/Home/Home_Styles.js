@@ -94,9 +94,8 @@ export const styles = StyleSheet.create({
     color: 'grey'
   },
   container: {
-   
-    width: 135,
-    borderRadius: 20,
+    backgroundColor:'#ededed',
+    width: 148,
     color:Colors.black,
 
   },

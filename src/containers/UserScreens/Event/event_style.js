@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     color: Colors.black,
     marginLeft: 5,
     fontSize: themes?.fontSize?.large,
-    fontFamily: themes?.font?.extraBold
+    fontFamily: themes?.font?.black
   },
   filled: {
     flexDirection: 'row',
@@ -21,8 +21,8 @@ export const styles = StyleSheet.create({
   review: {
     marginLeft: 10,
     color: Colors.black,
-    fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontSize: themes?.fontSize?.regular,
+    fontFamily: themes?.font?.black,
 
   },
   img: { width: '100%', height: 200, marginTop: 10, borderRadius: 10, borderWidth: 2, borderColor: Colors.purple },

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginVertical: 10,
     paddingLeft: 5,
-    borderRadius: 10,
+    backgroundColor:'#ededed',
   },
   touchable: { width: 260, flexDirection: 'row', alignItems: 'center', height: 45,},
   datepicker: {

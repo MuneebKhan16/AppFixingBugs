@@ -28,7 +28,7 @@ const PickerCompone = (props) => {
       selectedValue={selectedLanguage}
       onValueChange={(itemValue, itemIndex) => setSelectedLanguage(itemValue)}
       itemStyle={{ color: 'white', fontSize: 20, backgroundColor: '#ededed', }}
-      mode="dropdown"
+      mode="dialog"
     >
       <Picker.Item label='Select an Option' value='null' color={'black'} style={{ fontWeight: 'bold', backgroundColor: '#ededed', }} />
       {

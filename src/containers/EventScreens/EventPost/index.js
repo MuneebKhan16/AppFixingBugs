@@ -69,6 +69,8 @@ const EventPost = props => {
   const users = useSelector(state => state?.reducer?.user);
   const { Categorys } = useContext(eventContext);
   const placeholder = 'Enter your Location'
+  const statecurrent = 'State'
+  const citycurrent = 'City'
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
@@ -315,24 +317,26 @@ const EventPost = props => {
             </TouchableOpacity>
             {console.log('locations***********', location)}
             {
-              location == null ?
+              citys !== null ?
                 (
 
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Picker
                       style={styles.containers}
-                      // color={Colors.grey}
+                      color={Colors.grey}
                       selectedValue={states}
                       onValueChange={(itemValue, itemIndex) => setStates(itemValue)}
-                      itemStyle={{ color: 'white', fontSize: 20, }}
-                      mode="dropdown"
+                      itemStyle={{ color: 'white', fontSize: 20,}}
+                      mode="dialog"
+                      
+
                     >
-                      <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold' }} />
+                      <Picker.Item label='States' value='null'  style={{ fontWeight: 'bold', }} />
                       {
                         Object.keys(locals).map((item) => {
                           console.log("kji", item)
                           return (
-                            <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold', }} />
+                            <Picker.Item label={item} value={item}  style={{ fontWeight: 'bold', backgroundColor:'#ededed',color:Colors.black }} />
                           )
                         })
                       }
@@ -340,11 +344,10 @@ const EventPost = props => {
 
                     <Picker
                       style={styles.containers}
-                      color={Colors.grey}
                       selectedValue={citys}
                       onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
                       itemStyle={{ color: 'white', fontSize: 20, }}
-                      mode="dropdown"
+                      mode="dialog"
                     >
 
                       {
@@ -353,8 +356,7 @@ const EventPost = props => {
                             key={index}
                             label={city}
                             value={city}
-                            color="black"
-                            style={{ fontWeight: 'bold', }}
+                            style={{ fontWeight: 'bold',backgroundColor:'#ededed',color:Colors.black }}
                           />
                         ))
                       }
@@ -366,7 +368,7 @@ const EventPost = props => {
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
                     <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
-                    {location ? (
+                    {/* {location ? (
                       <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
                         {location.split(' ').slice(-5, -4).pop() +
                           ' ' +
@@ -378,32 +380,34 @@ const EventPost = props => {
                           ? currentlocation.split(' ').slice(-4, -3).pop()
                           : 'City'}
                       </Text>
-                    ) : null} 
+                    ) : null}  */}
                      
 
                       <Image source={Icons.marker} style={styles.marker} />
 
-                      {/* <TextInput
+                      <TextInput
                       editable={true}
                       style={{
                         flex: 1,
-                        marginLeft: 10,
                         color: 'black',
                         alignContent:'center'
                       }}
-                      onChangeText={city => setCity(city)}
-                      value={  location ? location.split(' ').slice(-3, -2).pop() : citys}
+                      onChangeText={city => {
+                         setCity(city) 
+                         
+                        }}
+                      value={!citys ? location?.split(' ')?.slice(-5, -4)?.pop() +' ' +location?.split(' ')?.slice(-4, -3)?.pop() : citys}
                       placeholderTextColor="black"
-                    /> */}
+                    />
 
-                      <Mymdll
+                      {/* <Mymdll
                         isVisible={isModalVisible}
                         onClose={handleCloseModal}
                         setLocation={setLocation}
                         location={location}
                         currentlocation={currentlocation}
                         setcurrentlocation={setcurrentlocation}
-                      />
+                      /> */}
 
                     </TouchableOpacity>
 

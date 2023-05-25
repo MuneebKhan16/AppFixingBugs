@@ -52,7 +52,7 @@ const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
                 <StarRating
                   fullStar={Icons.starFilled}
                   emptyStar={Icons.starEmpty}
-                  starSize={12}
+                  starSize={14}
                   disabled={true}
                   maxStars={5}
                   rating={data.rating}

@@ -288,7 +288,7 @@ export class Home extends Component {
                             inputStyles={{
                               borderWidth: 1,
                               borderColor: Colors.lightGrey,
-
+                                
 
                             }}
 
@@ -316,11 +316,14 @@ export class Home extends Component {
 
                             wrapperStyles={{
                               width: '49%',
+                              backgroundColor:'#ededed',
+
 
                             }}
                             inputStyles={{
                               borderWidth: 1,
-                              borderColor: Colors.lightGrey
+                              borderColor: Colors.lightGrey,
+
                             }}
                             iconColor
 
@@ -370,7 +373,7 @@ export class Home extends Component {
                         /> */}
 
                         <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10 }}>
-                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null, }}>
+                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple,  alignItems: 'center', width: '48.5%',  height: Platform.OS === 'ios' ? 60 : null, }}>
                             {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
                             {/* <TextInput
                               placeholderTextColor={Colors?.black}
@@ -387,21 +390,21 @@ export class Home extends Component {
                               selectedValue={this.state.selectedLanguage}
                               onValueChange={(itemValue, itemIndex) => this.setState({ selectedLanguage: itemValue })}
                               itemStyle={{ color: 'white', fontSize: 20,  }}
-                              mode="dropdown"
+                              mode=""
                             >
                               <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold',  }} />
                               {
                                 Object.keys(this.state.local).map((item) => {
                                   console.log("kji", item)
                                   return (
-                                    <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold',  }} />
+                                    <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold',color:Colors.black ,backgroundColor:'#ededed', }} />
                                   )
                                 })
                               }
                             </Picker>
                           </View>
                           <View style={{
-                            flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null,
+                            flexDirection: 'row', borderWidth: 1,  alignItems: 'center', width: '48.5%',height: Platform.OS === 'ios' ? 60 : null,
 
                           }}>
                             {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
@@ -410,8 +413,8 @@ export class Home extends Component {
                               color={Colors.grey}
                               selectedValue={this.state.selectedcity}
                               onValueChange={(itemValue, itemIndex) => this.setState({ selectedcity: itemValue })}
-                              itemStyle={{ color: 'white', fontSize: 20,  }}
-                              mode="dropdown"
+                              itemStyle={{ color: 'white', fontSize: 20, }}
+                              mode="dialog"
                             >
 
                               {
@@ -421,7 +424,7 @@ export class Home extends Component {
                                     label={city}
                                     value={city}
                                     color="black"
-                                    style={{ fontWeight: 'bold',  }}
+                                    style={{ fontWeight: 'bold', color:Colors.black,backgroundColor:'#ededed', }}
                                   />
                                 ))
                               }

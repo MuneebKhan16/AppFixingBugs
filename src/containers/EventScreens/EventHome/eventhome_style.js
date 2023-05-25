@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   txt: {
     marginLeft: 10,
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
     color: Colors.black,
     marginRight: 5,
   },

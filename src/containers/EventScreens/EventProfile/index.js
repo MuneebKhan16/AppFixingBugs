@@ -235,7 +235,7 @@ const EventProfile = () => {
                           style={{
                             marginLeft: 10,
                             fontSize: themes?.fontSize?.medium,
-                            fontFamily: themes?.font?.extraBold,
+                            fontFamily: themes?.font?.black,
                             color: Colors.black,
                           }}>
                           {item?.rating_avg.map(data => data.rating_count) || 0}{' '}

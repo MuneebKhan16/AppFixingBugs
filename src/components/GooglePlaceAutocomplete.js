@@ -43,6 +43,8 @@ const GooglePlaceAutocomplete = ({
               marginBottom: 5,
               marginLeft: 15,
               marginRight: 5,
+              backgroundColor:'#ededed',
+
 
             }}
           />
@@ -53,6 +55,8 @@ const GooglePlaceAutocomplete = ({
             height: 45,
             color: iconColor ? Colors?.black : Colors?.black,
             // backgroundColor: iconColor ? Colors.white : Colors.black,
+            backgroundColor:'#ededed',
+
             width: '100%',
 
 
@@ -93,9 +97,9 @@ const styles = StyleSheet.create({
     width: width,
     marginTop: 20,
     // backgroundColor: Colors.white,
-    borderRadius: 10,
     borderColor: Colors.black,
     borderWidth: 1,
+    backgroundColor:'#ededed',
 
   },
   textInput: {
