@@ -367,7 +367,7 @@ const EventPost = props => {
                 (
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                    <TouchableOpacity style={styles.city} onPress={handleOpenModal}>
+                    <TouchableOpacity style={styles.city}>
                     {/* {location ? (
                       <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
                         {location.split(' ').slice(-5, -4).pop() +
@@ -376,7 +376,7 @@ const EventPost = props => {
                       </Text>
                     ) : currentlocation ? (
                       <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                        {currentlocation.split(' ').length > 1
+                         { currentlocation.split(' ').length > 1
                           ? currentlocation.split(' ').slice(-4, -3).pop()
                           : 'City'}
                       </Text>
@@ -396,7 +396,7 @@ const EventPost = props => {
                          setCity(city) 
                          
                         }}
-                      value={!citys ? location?.split(' ')?.slice(-5, -4)?.pop() +' ' +location?.split(' ')?.slice(-4, -3)?.pop() : citys}
+                      value={(!citys) ? (location ? (location.split(' ').slice(-5, -4)?.pop() + ' ' + location.split(' ').slice(-4, -3)?.pop()) : 'Enter State') : citys}
                       placeholderTextColor="black"
                     />
 
@@ -419,9 +419,7 @@ const EventPost = props => {
                         </Text>
                       ) : currentlocation ? (
                         <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {currentlocation.split(' ').length > 1
-                            ? currentlocation.split(' ').slice(-2, -1).pop()
-                            : 'State'}
+                          {'Enter City'}
                         </Text>
                       ) : null}
                       <Image source={Icons.marker} style={styles.marker} />
