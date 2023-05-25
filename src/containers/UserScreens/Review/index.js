@@ -71,6 +71,7 @@ const Review = props => {
             flexDirection: 'row',
             borderRadius: 20,
             height: 220,
+           
           }}>
           <Swiper
             dotColor="transparent"
@@ -118,7 +119,7 @@ const Review = props => {
                     />
                   </View>
                 ) : (
-                  // <TouchableWithoutFeedback onPress={handleImagePress}>
+               
                   <FastImage
                     key={index}
                     source={{
@@ -127,31 +128,9 @@ const Review = props => {
                     style={styles.img}
                     imageStyle={styles.border}
                   />
-                  // </TouchableWithoutFeedback>
+             
                 )}
-                {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}> */}
-                <ScrollView>
-                  <FastImage
-                    key={index}
-                    source={{
-                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
-                    }}
-                    resizeMode="contain"
-                    style={{
-                      marginTop: 10,
-                      height: 500,
-                      borderRadius: 10,
-                      width: '98%',
-                      marginLeft: 5,
-                      borderWidth: 2,
-                      borderColor: Colors.purple,
-                    }}
-                  />
-                  <View style={{ alignItems: 'center', marginTop: 10 }}>
-                    <Text style={{ fontSize: 16, color: Colors.purple, fontWeight: 'bold' }}>Close</Text>
-                  </View>
-                </ScrollView>
-                {/* </Modal> */}
+             
               </React.Fragment>
             ))}
           </Swiper>
@@ -203,7 +182,7 @@ const Review = props => {
           </View>
         </Swiper> */}
         <View
-          style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+          style={{ flexDirection: 'row', alignItems: 'center',  }}>
           <Image
             source={{
               uri: userProfile?.profile_picture
