@@ -10,7 +10,6 @@ import {
   Platform,
   PermissionsAndroid,
   TextInput,
-
 } from 'react-native';
 import State from './Location'
 import Modal from 'react-native-modal';
@@ -34,7 +33,6 @@ navigator.geolocation = require('@react-native-community/geolocation');
 
 import { styles } from './Home_Styles';
 import { themes } from '../../../config/globalFonts/globalFonts';
-
 
 export class Home extends Component {
   Featured = () => {
@@ -74,60 +72,48 @@ export class Home extends Component {
 
   requestCameraPermission() {
     if (Platform.OS === 'android') {
-      PermissionsAndroid
-        .request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
-        .then(granted => {
-          if (granted) {
-            Geolocation.getCurrentPosition(position => {
-
-              const { latitude, longitude } = position.coords
-              this.setState({ latitude })
-              this.setState({ longitude })
-
-
-            })
-          }
-        });
+      PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      ).then(granted => {
+        if (granted) {
+          Geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            this.setState({ latitude });
+            this.setState({ longitude });
+          });
+        }
+      });
     } else {
-
       Geolocation.getCurrentPosition(position => {
-
-        const { latitude, longitude } = position.coords
-        this.setState({ latitude })
-        this.setState({ longitude })
-
-
-      })
+        const { latitude, longitude } = position.coords;
+        this.setState({ latitude });
+        this.setState({ longitude });
+      });
     }
   }
-
-
-
 
   currentLocations = async () => {
     const apiKey = 'AIzaSyB3QpMvb2IXZtJ6VI_pfH5687HyHCGVnUs';
     const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${this.state.latitude},${this.state.longitude}&key=${apiKey}`;
-    console.log("345", url)
+    console.log('345', url);
     const data = await fetch(url);
     const resp = await data.json();
-    this.setState({ text: JSON.stringify(resp?.results[0]?.formatted_address).replace(/['"]/g, '') })
-
-
-  }
-  setGeoLocation = async (geolocation) => {
-
+    this.setState({
+      text: JSON.stringify(resp?.results[0]?.formatted_address).replace(
+        /['"]/g,
+        '',
+      ),
+    });
+  };
+  setGeoLocation = async geolocation => {
     this.setState({ geolocation });
-    this.requestCameraPermission()
+    this.requestCameraPermission();
     setTimeout(() => {
-      this.currentLocations()
-
-    }, 3000)
-
-  }
-
+      this.currentLocations();
+    }, 3000);
+  };
 
   componentDidMount() {
-
     SplashScreen.hide();
     const userData = this.props?.user?.api_token;
     Get_All_Categories().then(res => this.setState({ category: res?.Data }));
@@ -137,16 +123,9 @@ export class Home extends Component {
     localevents(userData).then(res =>
       this.setState({ feature: res?.Data?.featured }),
     );
-
-
   }
 
-
-
-
   render() {
-
-
     const {
       popUp,
       location,
@@ -158,7 +137,6 @@ export class Home extends Component {
       u,
       isFocused,
       modalVisible,
-
     } = this.state;
     const userImage = this?.props?.user?.image;
 
@@ -237,13 +215,44 @@ export class Home extends Component {
                             // console.log(lat, lng );
                           }}
 
+                          // const { lat, lng } = details.geometry.location;
+                          // console.log(lat, lng );
+                        }}
+                        wrapperStyles={{
+                          width: '50%',
+                        }}
+                        inputStyles={{
+                          borderWidth: 1,
+                          borderColor: Colors.lightGrey,
+                        }}
+                        // textInputStyle={styles.textInput}
 
-                          wrapperStyles={{
-                            width: '100%',
-                          }}
-                          inputStyles={{
-                            borderWidth: 1,
-                            borderColor: Colors.lightGrey,
+                        iconColor
+                        placeholder={
+                          text.split(' ').length > 1
+                            ? text.split(' ').slice(-4, -3).pop()
+                            : 'City'
+                        }
+                      />
+                      <GooglePlaceAutocomplete
+                        callback={(address, geometry) =>
+                          console.log('address, geometry', address, geometry)
+                        }
+                        onPress={(data, details = null) => {
+                          console.log(data, details);
+                          // const { lat, lng } = details.geometry.location;
+                          // console.log(lat, lng );
+                        }}
+                        wrapperStyles={{
+                          width: '49%',
+                        }}
+                        inputStyles={{
+                          borderWidth: 1,
+                          borderColor: Colors.lightGrey,
+                        }}
+                        iconColor
+                        placeholder={
+                          // s = text.split(' ').map(data => data)
 
                           }}
                           iconColor
@@ -257,7 +266,7 @@ export class Home extends Component {
                         /> */}
 
 
-                        <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+                        <View style={{ flexDirection: "row",  }}>
                           <GooglePlaceAutocomplete
 
                             callback={(address, geometry) =>
@@ -274,11 +283,12 @@ export class Home extends Component {
 
                             wrapperStyles={{
                               width: '50%',
+                              borderColor:Colors.purple,
+                              borderWidth:2,
 
                             }}
                             inputStyles={{
                               borderWidth: 1,
-                              borderColor: Colors.lightGrey,
 
 
                             }}
@@ -306,12 +316,19 @@ export class Home extends Component {
 
 
                             wrapperStyles={{
-                              width: '49%',
+                              width: '48%',
+                              backgroundColor: '#ededed',
+                              borderColor:Colors.purple,
+                              borderWidth:2,
+                              marginLeft:5
+
+
 
                             }}
                             inputStyles={{
                               borderWidth: 1,
-                              borderColor: Colors.lightGrey
+                              borderColor: Colors.purple,
+
                             }}
                             iconColor
 
@@ -360,8 +377,10 @@ export class Home extends Component {
 
                         /> */}
 
-                        <View style={{ flexDirection: "row", justifyContent: 'space-between', marginTop: 10 }}>
-                          <View style={{ flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null, }}>
+                        <View style={{ flexDirection: "row",  marginTop: 10 }}>
+                          <View style={{ flexDirection: 'row', 
+                          borderWidth: 2, 
+                          borderColor: Colors?.purple, alignItems: 'center', width: '50%', height: Platform.OS === 'ios' ? 60 : null, }}>
                             {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
                             {/* <TextInput
                               placeholderTextColor={Colors?.black}
@@ -377,22 +396,23 @@ export class Home extends Component {
                               // color={Colors.grey}
                               selectedValue={this.state.selectedLanguage}
                               onValueChange={(itemValue, itemIndex) => this.setState({ selectedLanguage: itemValue })}
-                              itemStyle={{ color: 'white', fontSize: 20,  }}
-                              mode="dropdown"
+                              itemStyle={{ color: 'white', fontSize: 20, }}
+                              mode="dialog"
                             >
-                              <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold',  }} />
+                              <Picker.Item label='States' value='null' color={'black'} style={{ fontWeight: 'bold', }} />
                               {
                                 Object.keys(this.state.local).map((item) => {
                                   console.log("kji", item)
                                   return (
-                                    <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold',  }} />
+                                    <Picker.Item label={item} value={item} color={'black'} style={{ fontWeight: 'bold', color: Colors.black, backgroundColor: '#ededed', }} />
                                   )
                                 })
                               }
                             </Picker>
                           </View>
                           <View style={{
-                            flexDirection: 'row', borderWidth: 1, borderColor: Colors?.purple, borderRadius: 10, alignItems: 'center', width: '48.5%', paddingHorizontal: 10, height: Platform.OS === 'ios' ? 60 : null,
+                            flexDirection: 'row',   borderWidth: 2, 
+                            borderColor: Colors?.purple, alignItems: 'center', width:'48%', height: Platform.OS === 'ios' ? 60 : null,marginHorizontal:5
 
                           }}>
                             {/* <Image source={Icons?.location} style={{ height: 15, width: 15, tintColor: Colors?.purple }} resizeMode='contain' /> */}
@@ -401,8 +421,8 @@ export class Home extends Component {
                               color={Colors.grey}
                               selectedValue={this.state.selectedcity}
                               onValueChange={(itemValue, itemIndex) => this.setState({ selectedcity: itemValue })}
-                              itemStyle={{ color: 'white', fontSize: 20,  }}
-                              mode="dropdown"
+                              itemStyle={{ color: 'white', fontSize: 20, }}
+                              mode="dialog"
                             >
 
                               {
@@ -412,7 +432,7 @@ export class Home extends Component {
                                     label={city}
                                     value={city}
                                     color="black"
-                                    style={{ fontWeight: 'bold',  }}
+                                    style={{ fontWeight: 'bold', color: Colors.black, backgroundColor: '#ededed', }}
                                   />
                                 ))
                               }
@@ -485,9 +505,7 @@ export class Home extends Component {
                           /> */}
                         </View>
                       </>
-                    )
-                }
-
+                    )}
 
                 {/* {console.log('bvcxz', text ,"jjjj", text.split(' ').slice( 0 ,3) , "kkk" , text.split(' ').slice( 0 ,3).pop())}  */}
                 {console.log('bvcxz', this.state.Locations)}

@@ -9,12 +9,32 @@ import {
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
 import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
 import Nav from './src';
 import {store} from './src/redux';
 import {Loader, Colors} from './src/config';
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
+
+const requestNotificationPermission = async () => {
+  const authStatus = await messaging().requestPermission({
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: true,
+    provisional: false,
+    sound: true,
+  });
+  if (
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL
+  ) {
+    // await handleBackgroundMessages();
+  } else {
+    // alert(' noti disabled’)
+  }
+};
 
 const toastConfig = {
   success: props => (
@@ -51,6 +71,9 @@ const toastConfig = {
   ),
 };
 class App extends Component {
+  componentDidMount() {
+    requestNotificationPermission();
+  }
   render() {
     return (
       <Wrapper>

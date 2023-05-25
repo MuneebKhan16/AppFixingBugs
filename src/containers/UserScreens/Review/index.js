@@ -1,63 +1,31 @@
 /* eslint-disable prettier/prettier */
+import React, {useEffect, useState, useMemo, useContext} from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
   Image,
   Dimensions,
-  ActivityIndicator,
-  TouchableWithoutFeedback, Modal
+  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from 'react-native';
-import { useSelector } from 'react-redux';
-import { get_reviews_event } from '../../../redux/APIs/index';
-import React, { useEffect, useState, useMemo, useContext } from 'react';
+import {useSelector} from 'react-redux';
+import Swiper from 'react-native-swiper';
+import Modal from 'react-native-modal';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FastImage from 'react-native-fast-image';
+import {get_reviews_event} from '../../../redux/APIs/index';
 import AppBackground from '../../../components/AppBackground';
 import { Colors, NavService } from '../../../config';
 import EventsPosts from '../../../components/EventsPosts';
 import CustomButton from '../../../components/CustomButton';
-import Swiper from 'react-native-swiper';
-import Mainprofile from '../../../components/Mainprofile';
-import { styles } from './review_style';
 import ImageURL from '../../../config/Common';
-import Video from 'react-native-video';
-import FastImage from 'react-native-fast-image';
 import VideoPlayer from '../../../components/VideoPlayer';
 import eventContext from '../../EventScreens/eventContext';
-import { themes } from '../../../config/globalFonts/globalFonts';
+import {themes} from '../../../config/globalFonts/globalFonts';
+import {styles} from './review_style';
 
-const MEDIA = [
-  {
-    id: 1,
-    type: 'image',
-    source: {
-      uri: 'https://fastly.picsum.photos/id/13/2500/1667.jpg?hmac=SoX9UoHhN8HyklRA4A3vcCWJMVtiBXUg0W4ljWTor7s',
-    },
-  },
-  {
-    id: 2,
-    type: 'video',
-    source: {
-      uri: 'https://beststatusvideo.com/siteuploads/files/sfd76/37759/Technology%20Day%20Whatsapp%20Status%202023-(BestStatusVideo.com).mp4',
-    },
-  },
-  {
-    id: 3,
-    type: 'image',
-    source: {
-      uri: 'https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w',
-    },
-  },
-  {
-    id: 4,
-    type: 'video',
-    source: {
-      uri: 'https://beststatusvideo.com/siteuploads/files/sfd61/30240/National%20Technology%20Day%20Wishes%20Status%20Video%20For%20Whatsapp-(BestStatusVideo.com).mp4',
-    },
-  },
-];
-const { width, height } = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 const Review = props => {
   const profile_Data = useSelector(state => state.reducer.user);
@@ -66,11 +34,13 @@ const Review = props => {
   const [UserPost, setUserPost] = useState([]);
   const { userProfile } = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
-  // const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [imageFullScreen, setImageFullScreen] = useState('');
 
-  // const handleImagePress = () => {
-  //   setIsFullScreen(true);
-  // };
+  const handleImagePress = image => {
+    setImageFullScreen(image);
+    setIsFullScreen(true);
+  };
 
   // const handleCloseModal = () => {
   //   setIsFullScreen(false);
@@ -90,39 +60,7 @@ const Review = props => {
   }, []);
   useMemo(() => UserPost, [UserPost]);
   const filteringData = UserPost?.filter(data => data.event_id === id);
-
-  const renderItem = item => {
-    if (item.type === 'image') {
-      return (
-        <FastImage
-          source={item.source}
-          style={{
-            height: 200,
-            width: '100%',
-            borderRadius: 20,
-          }}
-          resizeMode={FastImage.resizeMode.cover}
-        />
-      );
-    } else if (item.type === 'video') {
-      return (
-        <>
-          <Video
-            repeat={true}
-            volume={0}
-            source={item.source}
-            style={{
-              height: 200,
-              width: '100%',
-              borderRadius: 20,
-              height: 200,
-            }}
-            resizeMode="cover"
-          />
-        </>
-      );
-    }
-  };
+  console.log('isFullScreen', isFullScreen, 'isFullScreen');
   return (
     <AppBackground title={'Events'} home back chat Eventuser={user}>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.top}>
@@ -217,6 +155,40 @@ const Review = props => {
               </React.Fragment>
             ))}
           </Swiper>
+          <Modal
+            isVisible={isFullScreen}
+            onBackdropPress={() => setIsFullScreen(false)}
+            onBackButtonPress={() => setIsFullScreen(false)}>
+            <View style={{position: 'relative'}}>
+              <FastImage
+                source={{
+                  uri: `${ImageURL?.ImageURL}${imageFullScreen}`,
+                }}
+                resizeMode="contain"
+                style={{
+                  marginTop: 10,
+                  height: 250,
+                  backgroundColor: Colors.white,
+                  borderRadius: 10,
+                  width: '100%',
+                }}
+              />
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => setIsFullScreen(false)}
+                style={{
+                  position: 'absolute',
+                  top: height * 0.01,
+                  right: -5,
+                }}>
+                <AntDesign
+                  name={'closecircle'}
+                  size={30}
+                  color={Colors.purple}
+                />
+              </TouchableOpacity>
+            </View>
+          </Modal>
         </View>
 
         {/* <Swiper

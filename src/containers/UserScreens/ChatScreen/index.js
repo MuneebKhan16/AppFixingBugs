@@ -23,7 +23,7 @@ const ChatScreen = props => {
   const {route} = props;
   const {chatUser, conversation_id} = route?.params;
   const user = useSelector(state => state?.reducer?.user);
-  const picture = user.profile_picture
+  const picture = user.profile_picture;
   //console.log('picture',picture)
   const socket = useSelector(state => state?.reducer?.socket);
   const [chatList, setChatList] = useState([]);
@@ -38,17 +38,17 @@ const ChatScreen = props => {
       sender_id: sender_id,
       conv_id: conversation_id ? conversation_id : conversation_id2,
     };
-   // console.log('payload ' + JSON.stringify(payload));
+    // console.log('payload ' + JSON.stringify(payload));
     socket?.emit('SendChatToClient', payload);
     socket?.on('ChatList', data => {
       if (data?.object_type == 'get_messages') {
-      //  console.log('senderpayload ', data?.user_sender);
-       console.log('senderpayload ', data);
+        //  console.log('senderpayload ', data?.user_sender);
+        console.log('senderpayload ', data);
         const messages = data?.data || [];
         // console.log('messages123@',data)
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
-        setChatList(chatList1 => [...[data?.data , picture] ,  ...chatList1]);
+        setChatList(chatList1 => [...[data?.data, picture], ...chatList1]);
       }
     });
 
@@ -102,7 +102,6 @@ const ChatScreen = props => {
   }, []);
 
   //console.log('chatListchatList',chatList)
- 
 
   return (
     <AppBackground title={'Chats'} back profile={false} home>
@@ -115,16 +114,21 @@ const ChatScreen = props => {
             style={styles.msg}
             renderItem={({item}) => (
               <>
-              {console.log("checklist&&",item)}
-                {item.sender_id == sender_id ? (
+                {console.log('checklist&&', item?.user_sender)}
+                {item?.user_sender?.id == sender_id ? (
                   <CustomChatBox
                     msg={item.message ? item.message : item.msg}
-                    image={picture || `${dummy.dummy}`}
+                    image={
+                      item?.user_sender?.profile_picture || `${dummy.dummy}`
+                    }
                   />
-                ) : item.sender_id == receiver_id ? (
+                ) : item?.user_receiver?.id == receiver_id ? (
                   <MicroChat
                     msg={item.message ? item.message : item.msg}
-                    image={picture || `${dummy.dummy}`}
+                    image={
+                      item?.user_receiver?.profile_picture ||
+                      `${dummy.dummy}`
+                    }
                   />
                 ) : null}
               </>

@@ -89,10 +89,11 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 2,
     marginVertical: 10,
     paddingLeft: 5,
-    borderRadius: 10,
+    backgroundColor:'#ededed',
+    borderColor:Colors.purple,
   },
   touchable: { width: 260, flexDirection: 'row', alignItems: 'center', height: 45,},
   datepicker: {
