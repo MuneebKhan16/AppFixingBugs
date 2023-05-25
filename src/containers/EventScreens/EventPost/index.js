@@ -124,7 +124,7 @@ const EventPost = props => {
     const user_id = users?.id;
     // const category_id = selectedData?.category_id;
     const category_id = selectedData ? selectedData?.category_id : null;
-    
+
     const event_location = location;
     const event_date = moment(date).format('YYYY-MM-DD');
     const state = states
@@ -388,7 +388,7 @@ const EventPost = props => {
                 itemStyle={{ color: 'white', fontSize: 20, }}
                 mode="dialog"
               >
-                
+
                 {
                   states && locals[states].map((city, index) => (
                     <Picker.Item
