@@ -50,20 +50,18 @@ const Aboutthecreator = () => {
               width: '90%',
               marginLeft: 20,
               marginTop: 20,
-              
-
             }}
             onPress={handleInstagramPress}>
             <Image source={Icons.instagram} style={{
               width: 22,
               height: 22,
               resizeMode: 'contain',
-              marginLeft:5
+              marginLeft: 5
             }} />
             <Text style={{
               marginLeft: 20,
               fontSize: themes?.fontSize?.medium,
-              fontFamily: themes?.font?.bold,
+              fontFamily: themes?.font?.black,
               color: Colors.black,
               textTransform: 'capitalize',
             }}>Instagram</Text>
@@ -72,7 +70,7 @@ const Aboutthecreator = () => {
         </View>
         <Text style={styles.heading}>Description From The Author</Text>
         <Text style={styles.subheading}>
-         Bringing you a Nightlife and Brunch-Ing Guide categorized by the VIBE.Picture and Videos so that you can get the inside before going outside.Saving you the Research & Time soo you can hurry and get Outside.
+          Bringing you a Nightlife and Brunch-Ing Guide categorized by the VIBE.Picture and Videos so that you can get the inside before going outside.Saving you the Research & Time soo you can hurry and get Outside.
         </Text>
       </ScrollView>
     </AppBackground>
