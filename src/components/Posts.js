@@ -78,7 +78,7 @@ const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
                   marginTop: 10,
                   alignItems: 'center',
                 }}>
-                <Text style={styles.tags}>{'#' + ' ' + data.tags}</Text>
+                <Text style={styles.tags}>{data.tags}</Text>
                 <TouchableOpacity
                   hitSlop={10}
                   onPress={() => handleDelete(data)}
