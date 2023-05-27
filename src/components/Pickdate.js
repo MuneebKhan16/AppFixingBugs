@@ -54,7 +54,7 @@ const Pickdate = () => {
             <TextInput
         style={{height: 60,color:Colors.black ,fontSize:16,fontWeight:'600',width:'92%',}}
         placeholder="Date"
-        placeholderTextColor={Colors.greey}
+        placeholderTextColor={Colors.black}
         editable={false}
         onFocus={() => setIsFocused(true)} 
         onBlur={() => setIsFocused(false)} 
@@ -89,10 +89,11 @@ const styles = StyleSheet.create({
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 2,
     marginVertical: 10,
     paddingLeft: 5,
-    borderRadius: 10,
+    backgroundColor:'#ededed',
+    borderColor:Colors.purple,
   },
   touchable: { width: 260, flexDirection: 'row', alignItems: 'center', height: 45,},
   datepicker: {

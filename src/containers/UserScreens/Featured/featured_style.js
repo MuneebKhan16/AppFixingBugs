@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center' },
   title: {
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
     color: Colors.black,
     marginLeft: 8,
   },
@@ -22,14 +22,14 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     color: Colors.black,
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.black,
   },
   empty: {
     width: 22,
     height: 22,
     resizeMode: 'contain',
   },
-  img: { width: '100%', height: 180, marginTop: 10,},
+  img: { width: '100%', height: 190, marginTop: 10,borderWidth:2,borderColor:Colors.purple,borderRadius:10},
   imgbg: {
     width: 38,
     height: 38,

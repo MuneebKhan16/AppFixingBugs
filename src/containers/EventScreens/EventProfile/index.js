@@ -27,15 +27,6 @@ const EventProfile = () => {
 
   const {userProfile} = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
-  // const [isFullScreen, setIsFullScreen] = useState(false);
-
-  // const handleImagePress = () => {
-  //   setIsFullScreen(true);
-  // };
-
-  // const handleCloseModal = () => {
-  //   setIsFullScreen(false);
-  // };
 
   const userData = useSelector(state => state?.reducer?.user);
   const [showEvents, SetshowEvents] = useState([]);
@@ -111,7 +102,7 @@ const EventProfile = () => {
             <Text
               style={{
                 fontSize: themes?.fontSize?.large,
-                fontFamily: themes?.font?.extraBold,
+                fontFamily: themes?.font?.black,
                 color: Colors.black,
                 // textAlign: row ? null : 'center',
                 textTransform: 'capitalize',
@@ -120,7 +111,7 @@ const EventProfile = () => {
             </Text>
             <Text
               style={{
-                fontSize: themes?.fontSize?.extraVSmall,
+                fontSize: themes?.fontSize?.large,
                 fontFamily: themes?.font?.regular,
                 color: Colors.darkGray,
               }}>
@@ -175,7 +166,7 @@ const EventProfile = () => {
                 borderRadius: 10,
                 borderWidth: 2,
                 borderColor: Colors.purple,
-                width: '40%',
+                width: '35%',
               }}>
               <Text style={[styles.txt, {color: Colors.purple}]}>
                 {showEvents?.length}
@@ -188,7 +179,7 @@ const EventProfile = () => {
                 borderRadius: 10,
                 borderWidth: 2,
                 borderColor: Colors.purple,
-                width: '50%',
+                width: '40%',
               }}>
               <Text style={[styles.txt, {color: Colors.purple}]}>
                 {UserPost?.length}
@@ -200,7 +191,8 @@ const EventProfile = () => {
             marginTop: 20,
             borderBottomWidth: 1.5, borderBottomColor: Colors.grey,
           }}>
-            <Text style={{ color: Colors.black, fontWeight: '700', fontSize: 18, marginBottom: 10 }}>
+            <Text style={{ color: Colors.black,  fontSize: themes?.fontSize?.large,
+    fontFamily: themes?.font?.italic, marginBottom: 10 }}>
               Event History
             </Text>
           </View>
@@ -243,7 +235,7 @@ const EventProfile = () => {
                           style={{
                             marginLeft: 10,
                             fontSize: themes?.fontSize?.medium,
-                            fontFamily: themes?.font?.extraBold,
+                            fontFamily: themes?.font?.black,
                             color: Colors.black,
                           }}>
                           {item?.rating_avg.map(data => data.rating_count) || 0}{' '}
@@ -251,11 +243,7 @@ const EventProfile = () => {
                         </Text>
                       </View>
                     </View>
-                    {/* <TouchableWithoutFeedback onPress={handleImagePress}> */}
-                   
-                       {/* onPress={() => */}
-                      {/* //   NavService.navigate('Event', item?.category_id)
-                      // } */}
+                  
                       
                       <FastImage
                         source={{
@@ -303,33 +291,6 @@ const EventProfile = () => {
                           </Text>
                         </View>
                       </FastImage>
-                    {/* </TouchableWithoutFeedback> */}
-                    {/* <Modal visible={isFullScreen} onRequestClose={handleCloseModal}>
-                <ScrollView>
-                  <FastImage
-                    source={{
-                      uri: item?.event_image
-                        ? `${ImageURL?.ImageURL}${item?.event_image}`
-                        : `${DummyURL.dummy}`,
-                    }}
-                    resizeMode="stretch"
-                    style={{
-                      marginTop: 10,
-                      height: 500,
-                      borderRadius: 10,
-                      width: '98%',
-                      marginLeft: 5,
-                      borderWidth: 2,
-                      borderColor: Colors.purple,
-                    }}
-                  />
-                  <View style={{alignItems:'center',marginTop:10}}>
-                <TouchableWithoutFeedback onPress={handleCloseModal}>
-                  <Text style={{fontSize:16,color:Colors.purple,fontWeight:'bold'}}>Close</Text>
-                </TouchableWithoutFeedback>
-                </View>
-                </ScrollView>
-              </Modal> */}
                     <TouchableOpacity
                       onPress={() => Delete_Event(item)}
                       style={{position: 'absolute', right: 2, bottom: 10}}>

@@ -11,29 +11,29 @@ export const styles = StyleSheet.create({
   hd1: {
     color: Colors.black,
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold,
+    fontFamily: themes?.font?.italic,
 
 
     marginBottom: 5
   },
   hd2: {
     color: Colors.black,
-    fontSize: themes?.fontSize?.small,
-    fontFamily: themes?.font?.extraBold,
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.italic,
     marginBottom: 5
 
   },
   hd3: {
     color: Colors.black,
-    fontSize: themes?.fontSize?.small,
-    fontFamily: themes?.font?.extraBold,
+    fontSize: themes?.fontSize?.medium,
+    fontFamily: themes?.font?.italic,
     marginRight: 5,
     marginBottom: 5,
 
   },
   txt: {
     fontSize: themes?.fontSize?.medium,
-    fontFamily: themes?.font?.extraBold, marginBottom: 5, textTransform: 'capitalize', color: Colors.darkGray
+    fontFamily: themes?.font?.regular, marginBottom: 5, textTransform: 'capitalize', color: Colors.darkGray
   },
   content: { marginTop: 20, },
   hdcontent: { alignSelf: 'center', alignItems: 'center' },

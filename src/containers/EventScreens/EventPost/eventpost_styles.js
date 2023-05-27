@@ -102,8 +102,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     height: Platform.select({
-      android: 850,
-      ios: 1000,
+      android: 870,
+      ios: 1100,
     }),
   },
   searchBox: {

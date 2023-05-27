@@ -16,7 +16,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FastImage from 'react-native-fast-image';
 import {get_reviews_event} from '../../../redux/APIs/index';
 import AppBackground from '../../../components/AppBackground';
-import {Colors, NavService} from '../../../config';
+import { Colors, NavService } from '../../../config';
 import EventsPosts from '../../../components/EventsPosts';
 import CustomButton from '../../../components/CustomButton';
 import ImageURL from '../../../config/Common';
@@ -29,10 +29,10 @@ const {width, height} = Dimensions.get('screen');
 
 const Review = props => {
   const profile_Data = useSelector(state => state.reducer.user);
-  const {eventDetail} = props.route.params;
-  const {user, id} = eventDetail;
+  const { eventDetail } = props.route.params;
+  const { user, id } = eventDetail;
   const [UserPost, setUserPost] = useState([]);
-  const {userProfile} = useContext(eventContext);
+  const { userProfile } = useContext(eventContext);
   const BaseUrl = `https://api.myprojectstaging.com/outsideee/public/`;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [imageFullScreen, setImageFullScreen] = useState('');
@@ -52,7 +52,7 @@ const Review = props => {
         console.log('res?.Data', res?.Data, 'res?.Data');
         setUserPost(res?.Data);
       })
-      .catch(error => {});
+      .catch(error => { });
   };
 
   useEffect(() => {
@@ -71,18 +71,19 @@ const Review = props => {
             flexDirection: 'row',
             borderRadius: 20,
             height: 220,
+           
           }}>
           <Swiper
             dotColor="transparent"
             activeDotColor="transparent"
             nextButton={
               <Text
-                style={{fontSize: 70, marginRight: 20, color: Colors.white}}>
+                style={{ fontSize: 70, marginRight: 20, color: Colors.white }}>
                 ›
               </Text>
             }
             prevButton={
-              <Text style={{fontSize: 70, marginLeft: 10, color: Colors.white}}>
+              <Text style={{ fontSize: 70, marginLeft: 10, color: Colors.white }}>
                 ‹
               </Text>
             }
@@ -95,7 +96,7 @@ const Review = props => {
             {eventDetail?.event_images.map((data, index) => (
               <React.Fragment>
                 {data?.event_images?.split('.')[1] == 'mp4' ? (
-                  <View style={{height: height * 0.24, width: width * 0.9}}>
+                  <View style={{ height: height * 0.24, width: width * 0.9 }}>
                     <VideoPlayer
                       video={`${ImageURL?.ImageURL}${data?.event_images}`}
                       style={{
@@ -118,18 +119,18 @@ const Review = props => {
                     />
                   </View>
                 ) : (
-                  <TouchableWithoutFeedback
-                    onPress={() => handleImagePress(data?.event_images)}>
-                    <FastImage
-                      key={index}
-                      source={{
-                        uri: `${ImageURL?.ImageURL}${data?.event_images}`,
-                      }}
-                      style={styles.img}
-                      imageStyle={styles.border}
-                    />
-                  </TouchableWithoutFeedback>
+               
+                  <FastImage
+                    key={index}
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.event_images}`,
+                    }}
+                    style={styles.img}
+                    imageStyle={styles.border}
+                  />
+             
                 )}
+             
               </React.Fragment>
             ))}
           </Swiper>
@@ -181,7 +182,7 @@ const Review = props => {
           </View>
         </Swiper> */}
         <View
-          style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+          style={{ flexDirection: 'row', alignItems: 'center',  }}>
           <Image
             source={{
               uri: userProfile?.profile_picture
@@ -194,16 +195,17 @@ const Review = props => {
               borderRadius: 50,
               marginBottom: 10,
               borderWidth: 2,
-              borderColor: Colors.purple,
+              borderColor: Colors.purple
             }}
           />
           <Text
+            numberOfLines={1}
             style={{
               fontSize: themes?.fontSize?.medium,
-              fontFamily: themes?.font?.bold,
+              fontFamily: themes?.font?.black,
               marginLeft: 8,
               color: Colors.black,
-
+              width: 120,
               marginBottom: 3,
             }}>
             {user?.name}

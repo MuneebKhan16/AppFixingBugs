@@ -46,7 +46,7 @@ const Featured = () => {
             </View>
             {item?.event_images?.length > 0 ? (
                 <Swiper
-                  style={{height: 220}}
+                  style={{height: 220,}}
                   activeDotColor={Colors.white}
                   dotColor={Colors.purple}>
                   {item?.event_images.map((data, index) => (
@@ -63,7 +63,7 @@ const Featured = () => {
                           }}
                           style={[
                             styles.img,
-                            {backgroundColor: 'grey', position: 'relative'},
+                            {backgroundColor: 'grey', position: 'relative',},
                           ]}
                           imageStyle={styles.border}>
                           <Image
