@@ -6,7 +6,8 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  TouchableWithoutFeedback, Modal
+  TouchableWithoutFeedback,
+  Modal,
 } from 'react-native';
 import React, {useState, useEffect, useCallback, useContext} from 'react';
 import AppBackground from '../../../components/AppBackground';
@@ -62,8 +63,8 @@ const EventProfile = () => {
             <View>
               <Image
                 source={{
-                  uri: userProfile?.profile_picture
-                    ? `${BaseUrl}${userProfile?.profile_picture}`
+                  uri: userData?.profile_picture
+                    ? `${BaseUrl}${userData?.profile_picture}`
                     : 'https://picsum.photos/200/300',
                 }}
                 style={{
@@ -187,12 +188,19 @@ const EventProfile = () => {
             </View>
           </View>
 
-          <View style={{
-            marginTop: 20,
-            borderBottomWidth: 1.5, borderBottomColor: Colors.grey,
-          }}>
-            <Text style={{ color: Colors.black,  fontSize: themes?.fontSize?.large,
-    fontFamily: themes?.font?.italic, marginBottom: 10 }}>
+          <View
+            style={{
+              marginTop: 20,
+              borderBottomWidth: 1.5,
+              borderBottomColor: Colors.grey,
+            }}>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: themes?.fontSize?.large,
+                fontFamily: themes?.font?.italic,
+                marginBottom: 10,
+              }}>
               Event History
             </Text>
           </View>
@@ -243,54 +251,53 @@ const EventProfile = () => {
                         </Text>
                       </View>
                     </View>
-                  
-                      
-                      <FastImage
-                        source={{
-                          uri: item?.event_image
-                            ? `${ImageURL?.ImageURL}${item?.event_image}`
-                            : `${DummyURL.dummy}`,
-                        }}
+
+                    <FastImage
+                      source={{
+                        uri: item?.event_image
+                          ? `${ImageURL?.ImageURL}${item?.event_image}`
+                          : `${DummyURL.dummy}`,
+                      }}
+                      style={{
+                        width: '100%',
+                        height: 170,
+                        marginTop: 10,
+                        borderRadius: 10,
+                        borderWidth: 2,
+                        borderColor: Colors.purple,
+                      }}
+                      imageStyle={styles.img}>
+                      <View
                         style={{
-                          width: '100%',
-                          height: 170,
-                          marginTop: 10,
-                          borderRadius: 10,
-                          borderWidth: 2,
-                          borderColor: Colors.purple,
-                        }}
-                        imageStyle={styles.img}>
-                        <View
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          position: 'absolute',
+                          bottom: 12,
+                          left: 5,
+                        }}>
+                        <Image
+                          source={Icons.location}
+                          resizeMode="contain"
                           style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            position: 'absolute',
-                            bottom: 12,
-                            left: 5,
-                          }}>
-                          <Image
-                            source={Icons.location}
-                            resizeMode="contain"
-                            style={{
-                              tintColor: Colors.white,
-                              width: 20,
-                              height: 20,
-                            }}
-                          />
-                          <Text
-                            style={{
-                              color: Colors.white,
-                              textTransform: 'capitalize',
-                              fontFamily: themes?.font?.bold,
-                              fontSize: themes?.fontSize?.medium,
-                              width: 250,
-                            }}
-                            numberOfLines={1}>
-                            {' '}
-                            {item?.event_location}
-                          </Text>
-                        </View>
-                      </FastImage>
+                            tintColor: Colors.white,
+                            width: 20,
+                            height: 20,
+                          }}
+                        />
+                        <Text
+                          style={{
+                            color: Colors.white,
+                            textTransform: 'capitalize',
+                            fontFamily: themes?.font?.bold,
+                            fontSize: themes?.fontSize?.medium,
+                            width: 250,
+                          }}
+                          numberOfLines={1}>
+                          {' '}
+                          {item?.event_location}
+                        </Text>
+                      </View>
+                    </FastImage>
                     <TouchableOpacity
                       onPress={() => Delete_Event(item)}
                       style={{position: 'absolute', right: 2, bottom: 10}}>

@@ -131,6 +131,111 @@ class Post extends Component {
         review,
         event_id,
       );
+    } else if (isChecked === true && isChecked1 === true && checkbox) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image;
+      if (selectedImage) {
+        rating_image = {
+          uri: selectedImage.path,
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
+            selectedImage?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedImage?.mime,
+        };
+      }
+      if (selectedVideo) {
+        rating_image = {
+          uri: selectedVideo.path,
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
+            selectedVideo?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedVideo?.mime,
+        };
+      }
+      var tags = `${checkbox?.first},${checkbox?.second}`;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
+    } else if (isChecked1 === true && isChecked2 === true && checkbox) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image;
+      if (selectedImage) {
+        rating_image = {
+          uri: selectedImage.path,
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
+            selectedImage?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedImage?.mime,
+        };
+      }
+      if (selectedVideo) {
+        rating_image = {
+          uri: selectedVideo.path,
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
+            selectedVideo?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedVideo?.mime,
+        };
+      }
+      var tags = `${checkbox?.second},${checkbox?.third}`;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
+    } else if (isChecked === true && isChecked2 === true && checkbox) {
+      var user_id = id;
+      var user_type = 'customer';
+      var rating_image;
+      if (selectedImage) {
+        rating_image = {
+          uri: selectedImage.path,
+          name: `Rating${Date.now()}.${selectedImage?.mime?.slice(
+            selectedImage?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedImage?.mime,
+        };
+      }
+      if (selectedVideo) {
+        rating_image = {
+          uri: selectedVideo.path,
+          name: `Rating${Date.now()}.${selectedVideo?.mime?.slice(
+            selectedVideo?.mime.lastIndexOf('/') + 1,
+          )}`,
+          type: selectedVideo?.mime,
+        };
+      }
+      var tags = `${checkbox?.first},${checkbox?.third}`;
+      var rating = starCount;
+      var review = null;
+      var event_id = this.props.route.params;
+      post_reviews(
+        user_id,
+        user_type,
+        rating_image,
+        tags,
+        rating,
+        review,
+        event_id,
+      );
     } else if (isChecked === true) {
       var user_id = id;
       var user_type = 'customer';

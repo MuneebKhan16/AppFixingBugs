@@ -96,6 +96,7 @@ export async function login(email, password) {
         visibilityTime: 3000,
       });
     const fcmToken = await getDeviceToken();
+    console.log('fcmToken', fcmToken, 'fcmToken');
     const params = {
       email,
       password,
@@ -141,7 +142,7 @@ export async function signup(
       type: 'error',
       visibilityTime: 3000,
     });
-    const fcmToken = await getDeviceToken();
+  const fcmToken = await getDeviceToken();
   const params = {
     name,
     email,
@@ -497,6 +498,8 @@ export async function edit_events(
   user_id,
   category_id,
   event_location,
+  state,
+  city,
   event_date,
   event_id,
 ) {
@@ -523,8 +526,8 @@ export async function edit_events(
   params.append('user_id', user_id);
   params.append('category_id', category_id);
   params.append('event_location', event_location);
-  params.append('state', 'New Jersey');
-  params.append('city', 'San Fransisco');
+  params.append('state', state);
+  params.append('city', city);
   params.append('event_date', event_date);
 
   console.log('object09876', params);

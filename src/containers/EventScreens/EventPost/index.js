@@ -1,21 +1,19 @@
-//  eslint-disable prettier/prettier 
+//  eslint-disable prettier/prettier
+import React, {useState, useRef, useContext} from 'react';
 import {
-  StyleSheet,
   View,
   Image,
   TextInput,
   TouchableOpacity,
   Text,
-  FlatList,
   ScrollView,
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import State from '../../UserScreens/Home/Location'
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import {Picker} from '@react-native-picker/picker';
+import State from '../../UserScreens/Home/Location';
 import moment from 'moment';
 import AppBackground from '../../../components/AppBackground';
 import Icons from '../../../assets/Icons';
-import { Colors, NavService, Common } from '../../../config';
+import {Colors, NavService, Common} from '../../../config';
 import CustomButton from '../../../components/CustomButton';
 import PickerCompone from './PickerCompone';
 import PickerComptwo from './PickerComptwo';
@@ -24,20 +22,19 @@ import ActionSheet from 'react-native-actions-sheet';
 import ProfileImage from '../../../components/ProfileImage';
 import CustomImagePicker from '../../../components/CustomImagePicker';
 import Modal from 'react-native-modal';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import eventContext from '../eventContext';
 import Toast from 'react-native-toast-message';
-import axios from 'axios';
-import { store } from '../../../redux/index';
+import {store} from '../../../redux/index';
 import Mymdll from '../../../components/Mymdll';
 
-import { styles } from './eventpost_styles';
-import { post_events } from '../../../redux/APIs';
+import {styles} from './eventpost_styles';
+import {post_events} from '../../../redux/APIs';
 import GooglePlaceAutocomplete from '../../../components/Google_Location';
 import Pickeventdate from '../../../components/Pickeventdate';
 import Swiper from 'react-native-swiper';
 const EventPost = props => {
-  const { user } = props;
+  const {user} = props;
   const actionSheetStateRef = useRef();
   const [isLoading, setIsLoading] = useState(false);
   const [popUp, setPopUp] = useState(true);
@@ -67,18 +64,16 @@ const EventPost = props => {
   };
   const [selectedData, setSelectedData] = useState(null);
   const users = useSelector(state => state?.reducer?.user);
-  const { Categorys } = useContext(eventContext);
-  const placeholder = 'Enter your Location'
-  const statecurrent = 'State'
-  const citycurrent = 'City'
+  const {Categorys} = useContext(eventContext);
+  const placeholder = 'Enter your Location';
+  const statecurrent = 'State';
+  const citycurrent = 'City';
   const togglePopUp = () => {
     setPopUp(previousState => previousState?.popUp);
   };
   function dispatch(action) {
     store.dispatch(action);
   }
-
-
 
   const handlesubmit = () => {
     if (!title) {
@@ -135,7 +130,11 @@ const EventPost = props => {
     const event_location = location;
     const event_date = moment(date).format('YYYY-MM-DD');
     const state = states ? states : location.split(' ').slice(-3, -2).pop();
-    const city = citys ? citys : location.split(' ').slice(-5, -4).pop() +' ' +location.split(' ').slice(-4, -3).pop();
+    const city = citys
+      ? citys
+      : location.split(' ').slice(-5, -4).pop() +
+        ' ' +
+        location.split(' ').slice(-4, -3).pop();
     // console.log("check",event_location,state,city)
     post_events(
       event_title,
@@ -148,7 +147,6 @@ const EventPost = props => {
       state,
       city,
       event_date,
-
     );
   };
 
@@ -163,9 +161,8 @@ const EventPost = props => {
   };
 
   return (
-
     <AppBackground title={'Events'} home back>
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <ActionSheet ref={actionSheetStateRef} containerStyle={styles.sheet}>
             <View style={styles.action}>
@@ -176,11 +173,11 @@ const EventPost = props => {
               </TouchableOpacity>
             </View>
           </ActionSheet>
-          <View style={{ marginTop: 40, height: 150 }}>
+          <View style={{marginTop: 40, height: 150}}>
             {console.log('selectedImageselectedImage', selectedImage)}
             {selectedImage?.length > 0 ? (
               <Swiper
-                style={{ height: 150 }}
+                style={{height: 150}}
                 activeDotColor="transparent"
                 dotColor="transparent">
                 {selectedImage.map(image => (
@@ -220,12 +217,12 @@ const EventPost = props => {
                       setSelectedImage(mergedUpdatedAsset);
                     } else {
                       const currentGalleryAsset = [...selectedImage];
-                      currentGalleryAsset.push({ path, mime });
+                      currentGalleryAsset.push({path, mime});
                       setSelectedImage(currentGalleryAsset);
                     }
                   } else if (mime.startsWith('video/')) {
                     const currentGalleryAsset = [...selectedImage];
-                    currentGalleryAsset.push({ path, mime });
+                    currentGalleryAsset.push({path, mime});
                     setSelectedImage(currentGalleryAsset);
                   }
                 }}>
@@ -280,7 +277,7 @@ const EventPost = props => {
 
             <TouchableOpacity style={styles.location} onPress={handleOpenModal}>
               {location ? (
-                <Text style={{ color: '#000', width: 250 }} numberOfLines={1}>
+                <Text style={{color: '#000', width: 250}} numberOfLines={1}>
                   {location.split(' ').slice(0, 1).pop() +
                     ' ' +
                     location.split(' ').slice(1, 2).pop() +
@@ -295,7 +292,7 @@ const EventPost = props => {
                     ' '}
                 </Text>
               ) : currentlocation ? (
-                <Text style={{ color: '#000', width: 250 }} numberOfLines={1}>
+                <Text style={{color: '#000', width: 250}} numberOfLines={1}>
                   {/* {currentlocation.split(' ').slice(0, 1).pop() +
                     ' ' +
                     currentlocation.split(' ').slice(1, 2).pop() +
@@ -315,144 +312,61 @@ const EventPost = props => {
                 setcurrentlocation={setcurrentlocation}
               />
             </TouchableOpacity>
-            {console.log('locations***********', location)}
-            {
-              citys !== null ?
-                (
-
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Picker
-                      style={styles.containers}
-                      color={Colors.grey}
-                      selectedValue={states}
-                      onValueChange={(itemValue, itemIndex) => setStates(itemValue)}
-                      itemStyle={{ color: 'white', fontSize: 20,}}
-                      mode="dialog"
-                      
-
-                    >
-                      <Picker.Item label='States' value='null'  style={{ fontWeight: 'bold', }} />
-                      {
-                        Object.keys(locals).map((item) => {
-                          console.log("kji", item)
-                          return (
-                            <Picker.Item label={item} value={item}  style={{ fontWeight: 'bold', backgroundColor:'#ededed',color:Colors.black }} />
-                          )
-                        })
-                      }
-                    </Picker>
-
-                    <Picker
-                      style={styles.containers}
-                      selectedValue={citys}
-                      onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
-                      itemStyle={{ color: 'white', fontSize: 20, }}
-                      mode="dialog"
-                    >
-
-                      {
-                        states && locals[states].map((city, index) => (
-                          <Picker.Item
-                            key={index}
-                            label={city}
-                            value={city}
-                            style={{ fontWeight: 'bold',backgroundColor:'#ededed',color:Colors.black }}
-                          />
-                        ))
-                      }
-                    </Picker>
-                  </View>
-                )
-                :
-                (
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                    <TouchableOpacity style={styles.city}>
-                    {/* {location ? (
-                      <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                        {location.split(' ').slice(-5, -4).pop() +
-                          ' ' +
-                          location.split(' ').slice(-4, -3).pop()}
-                      </Text>
-                    ) : currentlocation ? (
-                      <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                         { currentlocation.split(' ').length > 1
-                          ? currentlocation.split(' ').slice(-4, -3).pop()
-                          : 'City'}
-                      </Text>
-                    ) : null}  */}
-                     
-
-                      <Image source={Icons.marker} style={styles.marker} />
-
-                      <TextInput
-                      editable={true}
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Picker
+                style={styles.containers}
+                color={Colors.grey}
+                selectedValue={states}
+                onValueChange={(itemValue, itemIndex) => setStates(itemValue)}
+                itemStyle={{color: 'white', fontSize: 20}}
+                mode="dialog">
+                <Picker.Item
+                  label="States"
+                  value="null"
+                  style={{fontWeight: 'bold'}}
+                />
+                {Object.keys(locals).map(item => {
+                  console.log('kji', item);
+                  return (
+                    <Picker.Item
+                      label={item}
+                      value={item}
                       style={{
-                        flex: 1,
-                        color: 'black',
-                        alignContent:'center'
+                        fontWeight: 'bold',
+                        backgroundColor: '#ededed',
+                        color: Colors.black,
                       }}
-                      onChangeText={city => {
-                         setCity(city) 
-                         
-                        }}
-                      value={(!citys) ? (location ? (location.split(' ').slice(-5, -4)?.pop() + ' ' + location.split(' ').slice(-4, -3)?.pop()) : 'Enter State') : citys}
-                      placeholderTextColor="black"
                     />
+                  );
+                })}
+              </Picker>
 
-                      {/* <Mymdll
-                        isVisible={isModalVisible}
-                        onClose={handleCloseModal}
-                        setLocation={setLocation}
-                        location={location}
-                        currentlocation={currentlocation}
-                        setcurrentlocation={setcurrentlocation}
-                      /> */}
-
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.state} onPress={handleOpenModal}>
-                      
-                    {location ? (
-                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {location.split(' ').slice(-3, -2).pop()}
-                        </Text>
-                      ) : currentlocation ? (
-                        <Text style={{ color: '#000', width: 95 }} numberOfLines={1}>
-                          {'Enter City'}
-                        </Text>
-                      ) : null}
-                      <Image source={Icons.marker} style={styles.marker} />
-
-                      {/* <TextInput
-                      editable={true}
+              <Picker
+                style={styles.containers}
+                selectedValue={citys}
+                onValueChange={(itemValue, itemIndex) => setCity(itemValue)}
+                itemStyle={{color: 'white', fontSize: 20}}
+                mode="dialog">
+                <Picker.Item
+                  label="Cities"
+                  value="null"
+                  style={{fontWeight: 'bold'}}
+                />
+                {states &&
+                  locals[states].map((city, index) => (
+                    <Picker.Item
+                      key={index}
+                      label={city}
+                      value={city}
                       style={{
-                        flex: 1,
-                        marginLeft: 10,
-                        color: 'black',
-                        alignContent:'center'
+                        fontWeight: 'bold',
+                        backgroundColor: '#ededed',
+                        color: Colors.black,
                       }}
-                      onChangeText={city => setCity(city)}
-                      value={  location ? location.split(' ').slice(-3, -2).pop() : citys}
-                      placeholderTextColor="black"
-                    /> */}
-
-                      <Mymdll
-                        isVisible={isModalVisible}
-                        onClose={handleCloseModal}
-                        setLocation={setLocation}
-                        location={location}
-                        currentlocation={currentlocation}
-                        setcurrentlocation={setcurrentlocation}
-                      />
-
-                    </TouchableOpacity>
-
-
-                  </View>
-
-                )
-            }
+                    />
+                  ))}
+              </Picker>
+            </View>
 
             <View
               style={{
@@ -513,7 +427,7 @@ const EventPost = props => {
             </Text>
           </View>
           <View style={styles.category}>
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               <Text style={styles.modaltxt}>
                 1- Name of Location (mandatory){'\n'}
               </Text>

@@ -6,7 +6,9 @@ import {
   LogBox,
   KeyboardAvoidingView,
   Platform,
+  PermissionsAndroid,
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Provider} from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
@@ -17,6 +19,21 @@ import {Loader, Colors} from './src/config';
 LogBox.ignoreAllLogs(true);
 LogBox.ignoreLogs(['Remote debugger']);
 
+const requestPermissionForAndroid = async () => {
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATION, // or POST_NOTIFICATIONS
+      {
+        title: 'Outsideee',
+        message: 'This App need notification access',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      requestNotificationPermission();
+    } else {
+    }
+  } catch (err) {}
+};
 const requestNotificationPermission = async () => {
   const authStatus = await messaging().requestPermission({
     alert: true,
@@ -30,9 +47,18 @@ const requestNotificationPermission = async () => {
     authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
     authStatus === messaging.AuthorizationStatus.PROVISIONAL
   ) {
-    // await handleBackgroundMessages();
+    await registerForNotifications();
   } else {
     // alert(' noti disabled’)
+  }
+};
+const registerForNotifications = async () => {
+  const isRegisted = messaging().isDeviceRegisteredForRemoteMessages;
+  if (!isRegisted) {
+    await messaging().registerDeviceForRemoteMessages(); // calls await messaging().registerDeviceForRemoteMessages()
+  } else {
+    // const fcmToken = await getFCMnotificationsToken();
+    // fcmToken && (await updateBackendToken(fcmToken));
   }
 };
 
@@ -72,7 +98,11 @@ const toastConfig = {
 };
 class App extends Component {
   componentDidMount() {
-    requestNotificationPermission();
+    // if (Platform.OS == 'android' && DeviceInfo.getApiLevelSync() >= 33) {
+    //   requestPermissionForAndroid();
+    // } else {
+      requestNotificationPermission();
+    // }
   }
   render() {
     return (

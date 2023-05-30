@@ -7,9 +7,11 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  TouchableWithoutFeedback, ScrollView
+  TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Colors} from '../config';
 import StarRating from 'react-native-star-rating';
@@ -45,6 +47,12 @@ const Posts = props => {
   const toggleVideoPopup = () => {
     setShowVideoPopup(!showVideoPopup);
   };
+  const images = [
+    {
+      // Simplest usage.
+      url: `${ImageURL?.ImageURL}${imageFullScreen}`,
+    },
+  ];
   return (
     <View>
       {datas?.length > 0 ? (
@@ -62,9 +70,8 @@ const Posts = props => {
                 <View>
                   <Text style={styles.name} numberOfLines={1}>
                     {data?.user?.name}
-
                   </Text>
-                  <View style={{ marginLeft: 10 }}>
+                  <View style={{marginLeft: 10}}>
                     <StarRating
                       fullStar={Icons.starFilled}
                       // halfStar={Icons.star_half}
@@ -115,17 +122,17 @@ const Posts = props => {
                   </FastImage>
                 </TouchableOpacity>
               ) : (
-                // <TouchableWithoutFeedback onPress={handleImagePress}>
-                <FastImage
-                  source={{
-                    uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
-                    priority: FastImage.priority.normal,
-                  }}
-
-                  style={styles.rating}
-                  resizeMode="cover"
-                />
-                // </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback
+                  onPress={() => handleImagePress(data?.rating_image)}>
+                  <FastImage
+                    source={{
+                      uri: `${ImageURL?.ImageURL}${data?.rating_image}`,
+                      priority: FastImage.priority.normal,
+                    }}
+                    style={styles.rating}
+                    resizeMode="cover"
+                  />
+                </TouchableWithoutFeedback>
               )}
               <Text style={styles.tags}>{data?.tags}</Text>
             </View>
@@ -174,26 +181,17 @@ const Posts = props => {
         isVisible={isFullScreen}
         onBackdropPress={handleImagePress}
         onBackButtonPress={handleImagePress}>
-        <View style={{position: 'relative'}}>
-          <FastImage
-            source={{
-              uri: `${ImageURL?.ImageURL}${imageFullScreen}`,
-            }}
-            resizeMode="cover"
-            style={{
-              marginTop: 10,
-              height: 250,
-              backgroundColor: Colors.white,
-              borderRadius: 10,
-              width: '100%',
-            }}
+        <View style={{flex: 0.5, position: 'relative'}}>
+          <ImageViewer
+            imageUrls={images}
+            renderIndicator={(currentIndex, allSize) => null}
           />
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() => setIsFullScreen(false)}
             style={{
               position: 'absolute',
-              top: height * 0.00,
+              top: height * -0.01,
               right: -5,
             }}>
             <AntDesign name={'closecircle'} size={30} color={Colors.purple} />
@@ -242,7 +240,6 @@ const styles = StyleSheet.create({
     fontFamily: themes?.font?.black,
     marginLeft: 10,
     textTransform: 'capitalize',
-
   },
   rating: {
     width: '100%',

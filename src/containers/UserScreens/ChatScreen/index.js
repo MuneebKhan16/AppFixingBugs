@@ -48,7 +48,7 @@ const ChatScreen = props => {
         // console.log('messages123@',data)
         setChatList(messages);
       } else if (data?.object_type == 'get_message') {
-        setChatList(chatList1 => [...[data?.data, picture], ...chatList1]);
+        setChatList(chatList1 => [...[data?.data], ...chatList1]);
       }
     });
 
@@ -59,7 +59,7 @@ const ChatScreen = props => {
   const sendNewMessage = () => {
     if (message.length > 0) {
       loaderStart();
-      var payload = '';
+      let payload;
       if (conversation_id != null) {
         payload = {
           sender_id: sender_id,
@@ -114,20 +114,19 @@ const ChatScreen = props => {
             style={styles.msg}
             renderItem={({item}) => (
               <>
-                {console.log('checklist&&', item?.user_sender)}
+                {console.log('checklist&&', item)}
                 {item?.user_sender?.id == sender_id ? (
                   <CustomChatBox
-                    msg={item.message ? item.message : item.msg}
+                    msg={item?.message ? item?.message : item?.msg}
                     image={
-                      item?.user_sender?.profile_picture || `${dummy.dummy}`
+                      item?.user_sender?.profile_picture || `${dummy?.dummy}`
                     }
                   />
                 ) : item?.user_receiver?.id == receiver_id ? (
                   <MicroChat
-                    msg={item.message ? item.message : item.msg}
+                    msg={item?.message ? item?.message : item?.msg}
                     image={
-                      item?.user_receiver?.profile_picture ||
-                      `${dummy.dummy}`
+                      item?.user_receiver?.profile_picture || `${dummy?.dummy}`
                     }
                   />
                 ) : null}

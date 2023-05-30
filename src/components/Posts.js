@@ -1,27 +1,31 @@
 /* eslint-disable prettier/prettier */
-import { StyleSheet, Text, View, TouchableOpacity, Image, TouchableWithoutFeedback, Modal } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { Post } from '../config/Dummydata/Dummydata';
-import { Colors } from '../config';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  TouchableWithoutFeedback,
+  Dimensions
+} from 'react-native';
+import Modal from 'react-native-modal';
+import ImageViewer from 'react-native-image-zoom-viewer';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import StarRating from 'react-native-star-rating';
+import FastImage from 'react-native-fast-image';
+import {Colors} from '../config';
 import Icons from '../assets/Icons';
 import ImageURL from '../config/Common';
-import FastImage from 'react-native-fast-image';
-import { themes } from '../config/globalFonts/globalFonts';
-import { ScrollView } from 'react-native-gesture-handler';
-const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
-  const [starCount, setStarCount] = useState(1);
-  const [isFullScreen, setIsFullScreen] = useState(false);
+import {themes} from '../config/globalFonts/globalFonts';
+
+const {width, height} = Dimensions.get('screen');
+
+const Posts = ({UserPost, profile_Data, deleteCurrentEvent}) => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [imageFullScreen, setImageFullScreen] = useState('');
 
-  const handleImagePress = (image) => {
-    setSelectedImage(image);
-    setIsFullScreen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsFullScreen(false);
-  };
   const ConvertTimeStamp = date => {
     const data = new Date(date);
     const hours = data.getHours();
@@ -33,68 +37,100 @@ const Posts = ({ UserPost, profile_Data, deleteCurrentEvent }) => {
     console.log('data', data);
     deleteCurrentEvent(rating_id);
   };
+  const handleImagePress = image => {
+    setImageFullScreen(image);
+    setIsFullScreen(!isFullScreen);
+  };
+  const images = [
+    {
+      // Simplest usage.
+      url: `${ImageURL?.ImageURL}${imageFullScreen}`,
+    },
+  ];
   return UserPost && UserPost.length > 0 ? (
-    UserPost.map(data => {
-      if (data?.user?.id === profile_Data?.id) {
-        return (
-          <View style={styles.maincontent}>
-            <View style={styles.maincontainer}>
-
-              <Image
-                source={{
-                  uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}`,
-                }}
-                style={styles.container}
-                resizeMode="cover"
-              />
-              <View style={{ marginLeft: 10 }}>
-                <Text style={styles.name}>{data.user.name}</Text>
-                <StarRating
-                  fullStar={Icons.starFilled}
-                  emptyStar={Icons.starEmpty}
-                  starSize={14}
-                  disabled={true}
-                  maxStars={5}
-                  rating={data.rating}
-                  selectedStar={rating => setStarCount(rating)}
+    <>
+      {UserPost.map(data => {
+        if (data?.user?.id === profile_Data?.id) {
+          return (
+            <View style={styles.maincontent}>
+              <View style={styles.maincontainer}>
+                <Image
+                  source={{
+                    uri: `${ImageURL?.ImageURL}${data?.user?.profile_picture}`,
+                  }}
+                  style={styles.container}
+                  resizeMode="cover"
                 />
-              </View>
-              <Text style={styles.date}>
-                {ConvertTimeStamp(data.created_at)}
-              </Text>
-            </View>
-            <View style={{ marginTop: 10 }}>
-                <FastImage
-                  source={{ uri: `${ImageURL?.ImageURL}${data?.rating_image}` }}
-                  resizeMode="stretch"
-                  style={styles.img}
-                />
-               
-             
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: 10,
-                  alignItems: 'center',
-                }}>
-                <Text style={styles.tags}>{data.tags}</Text>
-                <TouchableOpacity
-                  hitSlop={10}
-                  onPress={() => handleDelete(data)}
-                  activeOpacity={0.8}>
-                  <Image
-                    source={Icons.delete}
-                    resizeMode="contain"
-                    style={{ width: 20, height: 20, tintColor: Colors.purple }}
+                <View style={{marginLeft: 10}}>
+                  <Text style={styles.name}>{data.user.name}</Text>
+                  <StarRating
+                    fullStar={Icons.starFilled}
+                    emptyStar={Icons.starEmpty}
+                    starSize={14}
+                    disabled={true}
+                    maxStars={5}
+                    rating={data.rating}
                   />
-                </TouchableOpacity>
+                </View>
+                <Text style={styles.date}>
+                  {ConvertTimeStamp(data.created_at)}
+                </Text>
+              </View>
+              <View style={{marginTop: 10}}>
+                <TouchableWithoutFeedback
+                  onPress={() => handleImagePress(data?.rating_image)}>
+                  <FastImage
+                    source={{uri: `${ImageURL?.ImageURL}${data?.rating_image}`}}
+                    resizeMode="stretch"
+                    style={styles.img}
+                  />
+                </TouchableWithoutFeedback>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 10,
+                    alignItems: 'center',
+                  }}>
+                  <Text style={styles.tags}>{data.tags}</Text>
+                  <TouchableOpacity
+                    hitSlop={10}
+                    onPress={() => handleDelete(data)}
+                    activeOpacity={0.8}>
+                    <Image
+                      source={Icons.delete}
+                      resizeMode="contain"
+                      style={{width: 20, height: 20, tintColor: Colors.purple}}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        );
-      }
-    })
+          );
+        }
+      })}
+      <Modal
+        isVisible={isFullScreen}
+        onBackdropPress={handleImagePress}
+        onBackButtonPress={handleImagePress}>
+        <View style={{flex: 0.5, position: 'relative'}}>
+          <ImageViewer
+            imageUrls={images}
+            renderIndicator={(currentIndex, allSize) => null}
+          />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => setIsFullScreen(false)}
+            style={{
+              position: 'absolute',
+              top: height * -0.01,
+              right: -5,
+            }}>
+            <AntDesign name={'closecircle'} size={30} color={Colors.purple} />
+          </TouchableOpacity>
+        </View>
+      </Modal>
+    </>
   ) : (
     <View style={styles.container1}>
       <Text style={styles.txtheadersty}>No User Data Available</Text>
