@@ -457,6 +457,7 @@ const EventPost = props => {
           buttonStyle={{
             alignSelf: 'center',
             width: '95%',
+            marginTop: -10,
           }}
           title="Close"
           onPress={() => togglePopUp()}

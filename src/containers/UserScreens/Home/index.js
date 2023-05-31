@@ -140,8 +140,8 @@ export class Home extends Component {
 
     const togglePopUp = () => {
       if (
-        selectedLanguage == null &&
-        selectedcity == null &&
+        selectedLanguage == null ||
+        selectedcity == null ||
         selectedDate == ''
       ) {
         return Toast.show({
