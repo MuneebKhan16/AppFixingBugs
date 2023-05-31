@@ -44,9 +44,11 @@ const ChatScreen = props => {
       if (data?.object_type == 'get_messages') {
         //  console.log('senderpayload ', data?.user_sender);
         console.log('senderpayload ', data);
-        const messages = data?.data || [];
-        // console.log('messages123@',data)
-        setChatList(messages);
+        const messages = data?.data;
+        if (messages?.length > 0) {
+          // console.log('messages123@',data)
+          setChatList(messages);
+        }
       } else if (data?.object_type == 'get_message') {
         setChatList(chatList1 => [...[data?.data], ...chatList1]);
       }

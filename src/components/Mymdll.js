@@ -116,7 +116,7 @@ const MyMdl = ({
           {console.log('currentlocation', currentlocation)}
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeButtonText}>
-              {textInputEditable == false ? 'Done' : 'Close'}
+              {textInputEditable == false ? 'Done' : 'Update'}
             </Text>
           </TouchableOpacity>
         </View>

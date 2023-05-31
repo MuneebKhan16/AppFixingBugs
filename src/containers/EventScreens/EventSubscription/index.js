@@ -23,9 +23,10 @@ import {
   finishTransaction,
   getAvailablePurchases,
 } from 'react-native-iap';
+import Toast from 'react-native-toast-message';
 import AppBackground from '../../../components/AppBackground';
 import Swiper from 'react-native-swiper';
-import {Colors} from '../../../config';
+import {Colors, NavService} from '../../../config';
 import {loaderStart, loaderStop} from '../../../redux/APIs';
 import Icons from '../../../assets/Icons';
 
@@ -212,6 +213,15 @@ const EventSubscription = () => {
       swiperRef.scrollBy(-1);
     }
   };
+  const onSubscriptionPurchase = () => {
+    Toast.show({
+      text1: 'Purchase successful',
+      textStyle: {textAlign: 'center'},
+      type: 'success',
+      visibilityTime: 5000,
+    });
+    NavService.navigate('EventPost', {isSubscribed: true});
+  };
   return (
     <AppBackground
       title={'Subscriptions'}
@@ -266,7 +276,9 @@ const EventSubscription = () => {
                   )}
                 />
 
-                <TouchableOpacity style={styles.btncontent}>
+                <TouchableOpacity
+                  style={styles.btncontent}
+                  onPress={() => onSubscriptionPurchase()}>
                   <Text style={styles.btn}>Buy</Text>
                 </TouchableOpacity>
               </View>
@@ -292,7 +304,9 @@ const EventSubscription = () => {
                   )}
                 />
 
-                <TouchableOpacity style={styles.btncontent}>
+                <TouchableOpacity
+                  style={styles.btncontent}
+                  onPress={() => onSubscriptionPurchase()}>
                   <Text style={styles.btn}>Subscribe</Text>
                 </TouchableOpacity>
               </View>
@@ -317,7 +331,9 @@ const EventSubscription = () => {
                     </View>
                   )}
                 />
-                <TouchableOpacity style={styles.btncontent}>
+                <TouchableOpacity
+                  style={styles.btncontent}
+                  onPress={() => onSubscriptionPurchase()}>
                   <Text style={styles.btn}>Subscribe</Text>
                 </TouchableOpacity>
               </View>

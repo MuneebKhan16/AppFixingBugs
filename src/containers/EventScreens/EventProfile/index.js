@@ -251,12 +251,13 @@ const EventProfile = () => {
                         </Text>
                       </View>
                     </View>
-
+                    {console.log('item', item)}
                     <FastImage
                       source={{
-                        uri: item?.event_image
-                          ? `${ImageURL?.ImageURL}${item?.event_image}`
-                          : `${DummyURL.dummy}`,
+                        uri:
+                          item?.images?.length > 0
+                            ? `${ImageURL?.ImageURL}${item?.images[0]?.event_images}`
+                            : `${DummyURL.dummy}`,
                       }}
                       style={{
                         width: '100%',

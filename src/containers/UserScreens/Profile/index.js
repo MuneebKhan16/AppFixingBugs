@@ -45,7 +45,7 @@ const Profile = props => {
   }, []);
   console.log('profile_Data', profile_Data);
   return (
-    <AppBackground title={'User Profile'} home setting>
+    <AppBackground title={'Usser Profile'} home setting>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.btm}>
         <View style={styles.top}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>

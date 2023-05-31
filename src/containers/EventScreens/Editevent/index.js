@@ -101,7 +101,7 @@ const Editevent = ({navigation, route}) => {
     const event_id = eventDetail?.id;
     const category_id =
       selectedData == null
-        ? eventDetail?.category_id
+        ? eventDetail?.category?.category_id
         : selectedData?.category_id;
     const event_location = location;
     const state = states ? states : eventDetail?.state;
@@ -251,6 +251,7 @@ const Editevent = ({navigation, route}) => {
             <PickerCompone
               categories={Categorys}
               selectedData={eventDetail?.event_type}
+              placeholderCategory={eventDetail?.category?.title}
               setSelectedData={setSelectedData}
             />
 

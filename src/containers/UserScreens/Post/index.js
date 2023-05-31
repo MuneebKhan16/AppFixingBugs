@@ -9,6 +9,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import CustomButton from '../../../components/CustomButton';
 import Icons from '../../../assets/Icons';
 import ActionSheet from 'react-native-actions-sheet';
@@ -81,13 +82,21 @@ class Post extends Component {
       selectedVideo,
     } = this.state;
 
-    // if (!selectedImage || !selectedVideo) {
-    //   return Toast.show({
-    //     text1: 'No Image Found',
-    //     type: 'error',
-    //     visibilityTime: 3000,
-    //   });
-    // }
+    if (selectedImage == null && selectedVideo == null) {
+      return Toast.show({
+        text1: 'Please select a media for rate',
+        textStyle: {textAlign: 'center'},
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    } else if (!isChecked && !isChecked1 && !isChecked2) {
+      return Toast.show({
+        text1: 'Please select a hashtag for rate',
+        textStyle: {textAlign: 'center'},
+        type: 'error',
+        visibilityTime: 5000,
+      });
+    }
 
     if (
       isChecked === true &&

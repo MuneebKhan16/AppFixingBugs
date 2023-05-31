@@ -136,18 +136,22 @@ const EventPost = props => {
         ' ' +
         location.split(' ').slice(-4, -3).pop();
     // console.log("check",event_location,state,city)
-    post_events(
-      event_title,
-      event_type,
-      event_description,
-      event_image,
-      user_id,
-      category_id,
-      event_location,
-      state,
-      city,
-      event_date,
-    );
+    if (props?.route?.params?.isSubscribed) {
+      post_events(
+        event_title,
+        event_type,
+        event_description,
+        event_image,
+        user_id,
+        category_id,
+        event_location,
+        state,
+        city,
+        event_date,
+      );
+    } else {
+      NavService.navigate('EventSubscription');
+    }
   };
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -321,7 +325,7 @@ const EventPost = props => {
                 itemStyle={{color: 'white', fontSize: 20}}
                 mode="dialog">
                 <Picker.Item
-                  label="States"
+                  label="State"
                   value="null"
                   style={{fontWeight: 'bold'}}
                 />
@@ -348,7 +352,7 @@ const EventPost = props => {
                 itemStyle={{color: 'white', fontSize: 20}}
                 mode="dialog">
                 <Picker.Item
-                  label="Cities"
+                  label="City"
                   value="null"
                   style={{fontWeight: 'bold'}}
                 />
@@ -403,30 +407,16 @@ const EventPost = props => {
             />
           </View>
         </View>
-        {/* Modal */}
-        <Modal isVisible={popUp} style={styles.modal} backdropOpacity={0.7}>
-          <View style={styles.posting}>
-            {/* <TouchableOpacity 
-          onPress={() => togglePopUp()}
-          style={{
-            marginVertical: 10,
-            position: 'absolute',
-            right: 15,
-            backgroundColor: 'white',
-            padding: 8,
-            alignItems: 'center',
-            justifyContent: 'center',
-            height:28,
-            marginTop:15,
-            borderRadius:10,      
-          }}>
-          <Text style={{ color: Colors.purple, fontWeight: 'bold', }}>X</Text>
-        </TouchableOpacity> */}
-            <Text style={styles.requriment}>
-              Requirements and Tips for Posting{'   '}
-            </Text>
-          </View>
-          <View style={styles.category}>
+      </ScrollView>
+      {/* Modal */}
+      <Modal isVisible={popUp} style={styles.modal} backdropOpacity={0.7}>
+        <View style={styles.posting}>
+          <Text style={styles.requriment}>
+            Requirements and Tips for Posting{'   '}
+          </Text>
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={[styles.category, {paddingBottom: 15}]}>
             <View style={{marginTop: 10}}>
               <Text style={styles.modaltxt}>
                 1- Name of Location (mandatory){'\n'}
@@ -447,22 +437,31 @@ const EventPost = props => {
                 events! (helpful) & Don’t forget you may purchase optimization
                 to have your events featured on main home page!{'\n'}
               </Text>
+              <Text style={styles.modaltxt}>
+                6- Outsideee is an informative guide for locations and events.
+                Outsideee encourages users to drink responsibly.{'\n'}
+              </Text>
+              <Text style={styles.modaltxt}>
+                7- Outsideee assumes no responsibility for any unfortunate
+                events that occur at any of the locations or events posted on
+                the app.
+              </Text>
               {/* <Text style={styles.modaltxt}>6-If crowd (age, genre) differs from night to night, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>7-If specified dress code is required on a specific night or on all nights, please include this helpful tip for outsiders{'\n'}</Text>
             <Text style={styles.modaltxt}>8-Flyers, Pictures and videos of your most recent nights or events! (helpful){'\n'}</Text>
           <Text style={styles.modaltxt}>9-Don't forget you may purchase optimisation to have your events featured on main home page!{'\n'}</Text> */}
             </View>
           </View>
-          <CustomButton
-            buttonStyle={{
-              alignSelf: 'center',
-              width: '95%',
-            }}
-            title="Close"
-            onPress={() => togglePopUp()}
-          />
-        </Modal>
-      </ScrollView>
+        </ScrollView>
+        <CustomButton
+          buttonStyle={{
+            alignSelf: 'center',
+            width: '95%',
+          }}
+          title="Close"
+          onPress={() => togglePopUp()}
+        />
+      </Modal>
     </AppBackground>
   );
 };

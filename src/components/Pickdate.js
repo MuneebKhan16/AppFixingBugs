@@ -7,14 +7,14 @@ import {
   Button,
   TextInput,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icons from '../assets/Icons';
-import { Colors } from '../config';
-const Pickdate = () => {
+import {Colors} from '../config';
+const Pickdate = ({selectDate}) => {
   const [date, setDate] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
- 
+
   const [isFocused, setIsFocused] = useState(false);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -26,6 +26,7 @@ const Pickdate = () => {
 
   const handleConfirm = date => {
     setDate(date);
+    selectDate(date);
     hideDatePicker();
   };
 
@@ -39,28 +40,27 @@ const Pickdate = () => {
   return (
     <>
       <View style={styles.container}>
-        <View
-          style={styles.content}>
-          <TouchableOpacity
-            onPress={showDatePicker}
-            style={styles.touchable}>
+        <View style={styles.content}>
+          <TouchableOpacity onPress={showDatePicker} style={styles.touchable}>
             <View style={styles.datepicker}>
-              <Image
-                source={Icons.date}
-                style={styles.img}
-              />
-             
+              <Image source={Icons.date} style={styles.img} />
             </View>
             <TextInput
-        style={{height: 60,color:Colors.black ,fontSize:16,fontWeight:'600',width:'92%',}}
-        placeholder="Date"
-        placeholderTextColor={Colors.black}
-        editable={false}
-        onFocus={() => setIsFocused(true)} 
-        onBlur={() => setIsFocused(false)} 
-        onChangeText={date => setDate(date)}
-        value={getDate()}
-      />
+              style={{
+                height: 60,
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: '600',
+                width: '92%',
+              }}
+              placeholder="Date"
+              placeholderTextColor={Colors.black}
+              editable={false}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              onChangeText={date => setDate(date)}
+              value={getDate()}
+            />
             {/* <Text
               style={styles.textInput}
             >
@@ -92,10 +92,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     marginVertical: 10,
     paddingLeft: 5,
-    backgroundColor:'#ededed',
-    borderColor:Colors.purple,
+    backgroundColor: '#ededed',
+    borderColor: Colors.purple,
   },
-  touchable: { width: 260, flexDirection: 'row', alignItems: 'center', height: 45,},
+  touchable: {
+    width: 260,
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 45,
+  },
   datepicker: {
     width: 38,
     height: 38,
@@ -107,5 +112,5 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     resizeMode: 'contain',
-  }
+  },
 });

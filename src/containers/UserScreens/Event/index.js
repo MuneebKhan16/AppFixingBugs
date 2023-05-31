@@ -27,19 +27,26 @@ const Event = props => {
   const api_token = useSelector(state => state?.reducer?.user.api_token);
 
   const [cat, Setcat] = useState([]);
-  const id = props?.route?.params;
-  const filters = props?.route?.params?.filtered
-  console.log('jhgfdsa@@@@@',filters)
+  const id = props?.route?.params?.category_id;
+  const selectedDate = props?.route?.params?.selectedDate;
+  const selectedstate = props?.route?.params?.selectedstate;
+  const selectedcity = props?.route?.params?.selectedcity;
+  const filters = props?.route?.params?.filtered;
+  console.log('jhgfdsa@@@@@', filters);
 
   useEffect(() => {
-    categoryevents(api_token, id).then(res => Setcat(res?.Data));
+    categoryevents(
+      api_token,
+      id,
+      selectedDate,
+      selectedstate,
+      selectedcity,
+    ).then(res => Setcat(res?.Data));
   }, []);
 
   return (
-    <AppBackground title={'Events'} home back filter>
-    {
-      filters ? 
-      (
+    <AppBackground title={'Events'} home back>
+      {filters ? (
         <FlatList
           data={filters}
           showsVerticalScrollIndicator={false}
@@ -50,7 +57,9 @@ const Event = props => {
                 <View style={styles.filled}>
                   <Image source={Icons.starFilled} style={styles.icnfilled} />
                   <Text style={styles.review}>
-                    {item.rating_count == null ? 0 + ' ' + 'Reviews' : item.rating_count + ' ' + 'Reviews'}
+                    {item.rating_count == null
+                      ? 0 + ' ' + 'Reviews'
+                      : item.rating_count + ' ' + 'Reviews'}
                   </Text>
                 </View>
               </View>
@@ -129,12 +138,8 @@ const Event = props => {
             </View>
           )}
         />
-      ) 
-      :
-      (
-        cat?.length > 0 ?
-        (
-          <FlatList
+      ) : cat?.length > 0 ? (
+        <FlatList
           data={cat}
           showsVerticalScrollIndicator={false}
           renderItem={({item, index}) => (
@@ -222,19 +227,12 @@ const Event = props => {
               ) : null}
             </View>
           )}
-        />   
-
-        )
-        :
-        (
-          <View style={styles.container1}>
+        />
+      ) : (
+        <View style={styles.container1}>
           <Text style={styles.txtheadersty}>No Events Available</Text>
         </View>
-        )
-      
-      )
-      }
-     
+      )}
     </AppBackground>
   );
 };

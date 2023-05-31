@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import {NavService} from '../../config';
 import Toast from 'react-native-toast-message';
+import moment from 'moment';
 import messaging from '@react-native-firebase/messaging';
 import {store} from '../index';
 import postApi, {fetchApi} from '../RequestTypes/post';
 import getApi from '../RequestTypes/get';
 import * as EmailValidator from 'email-validator';
-import {Alert, Keyboard} from 'react-native';
-import {Platform} from 'react-native';
+import {Platform, Keyboard} from 'react-native';
 import {saveUser, saveToken, addReviews} from '../actions';
 
 var passwordValidator = require('password-validator');
@@ -364,9 +364,22 @@ export async function localevents(api_token) {
   return data;
 }
 
-export async function categoryevents(api_token, category_id) {
-  const params = {category_id};
+export async function categoryevents(
+  api_token,
+  category_id,
+  selectedDate,
+  selectedstate,
+  selectedcity,
+) {
+  const params = {
+    category_id,
+    event_date: moment(selectedDate).format('YYYY-MM-DD'),
+    state: selectedstate,
+    city: selectedcity,
+  };
+  console.log('params', params);
   const data = await postApi('category-events', params);
+  console.log('data', data, 'data');
   return data;
 }
 export async function chatList(senderId) {
